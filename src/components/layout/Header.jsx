@@ -14,7 +14,9 @@ const Header = () => {
             <ul>
               <li className="text-sm">
                 <Link to={'/'}>VR Showroom</Link>
-                <RiArrowDropDownLine className="inline" />
+                <span>
+                  <RiArrowDropDownLine />
+                </span>
               </li>
             </ul>
           </div>
