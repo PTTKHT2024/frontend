@@ -10,7 +10,7 @@ const ServiceIcon = () => {
               backgroundPositionX: '-210px',
               backgroundPositionY: '-10px',
             }}
-            className="bg-[url('src/assets/imgs/global-image.png')] inline-block h-[82px] w-[82px]"
+            className="bg-[url('imgs/global-image.png')] inline-block h-[82px] w-[82px]"
           ></span>
           <span className="text-mainTitleColor text-sm font-semibold mt-4">
             Khuyến mãi
@@ -23,7 +23,7 @@ const ServiceIcon = () => {
               backgroundPositionX: '-210px',
               backgroundPositionY: '-112px',
             }}
-            className="bg-[url('src/assets/imgs/global-image.png')] inline-block h-[82px] w-[82px]"
+            className="bg-[url('imgs/global-image.png')] inline-block h-[82px] w-[82px]"
           ></span>
           <span className="text-mainTitleColor text-sm font-semibold mt-4">
             Bảng giá
@@ -36,7 +36,7 @@ const ServiceIcon = () => {
               backgroundPositionX: '-312px',
               backgroundPositionY: '-10px',
             }}
-            className="bg-[url('src/assets/imgs/global-image.png')] inline-block h-[82px] w-[82px]"
+            className="bg-[url('imgs/global-image.png')] inline-block h-[82px] w-[82px]"
           ></span>
           <span className="text-mainTitleColor text-sm font-semibold mt-4">
             Đăng ký lái thử

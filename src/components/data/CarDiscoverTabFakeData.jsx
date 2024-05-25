@@ -1,5 +1,6 @@
 export const fakeData = [
   {
+    id: 1,
     name: 'Vios',
     price: 458000000,
     capacity: 1.496,
@@ -13,7 +14,8 @@ export const fakeData = [
     class: 'Sedan',
   },
   {
-    name: 'Corrola ALtis',
+    id: 2,
+    name: 'Corrola Altis',
     price: 725000000,
     capacity: 1.798,
     engine: '1.8',
@@ -26,6 +28,7 @@ export const fakeData = [
     class: 'Sedan',
   },
   {
+    id: 3,
     name: 'Camry',
     price: 1105000000,
     capacity: 1.987,
@@ -39,6 +42,7 @@ export const fakeData = [
     class: 'Sedan',
   },
   {
+    id: 4,
     name: 'Wigo',
     price: 360000000,
     capacity: 1.197,
@@ -52,6 +56,7 @@ export const fakeData = [
     class: 'Hatchback',
   },
   {
+    id: 5,
     name: 'Yaris',
     price: 684000000,
     capacity: 1.496,
@@ -65,6 +70,7 @@ export const fakeData = [
     class: 'Hatchback',
   },
   {
+    id: 6,
     name: 'Yaris Cross',
     price: 650000000,
     capacity: 1.496,
@@ -72,12 +78,13 @@ export const fakeData = [
     numberOfSeats: 5,
     license: 'Vô cấp CVT',
     image:
-      '	https://www.toyota.com.vn//Resources/Images/4981621FD47690FBCD93F94BC92A63C8.png',
+      'https://www.toyota.com.vn//Resources/Images/DB64D61952050267C2FFE2272E14007E.png',
     hoverImage:
       'https://www.toyota.com.vn//Resources/Images/4981621FD47690FBCD93F94BC92A63C8.png',
     class: 'SUV',
   },
   {
+    id: 7,
     name: 'Yaris Cross',
     price: 650000000,
     capacity: 1.496,
@@ -85,12 +92,13 @@ export const fakeData = [
     numberOfSeats: 5,
     license: 'Vô cấp CVT',
     image:
-      '	https://www.toyota.com.vn//Resources/Images/4981621FD47690FBCD93F94BC92A63C8.png',
+      'https://www.toyota.com.vn//Resources/Images/DB64D61952050267C2FFE2272E14007E.png',
     hoverImage:
       'https://www.toyota.com.vn//Resources/Images/4981621FD47690FBCD93F94BC92A63C8.png',
     class: 'SUV',
   },
   {
+    id: 8,
     name: 'Yaris Cross',
     price: 650000000,
     capacity: 1.496,
@@ -98,12 +106,13 @@ export const fakeData = [
     numberOfSeats: 5,
     license: 'Vô cấp CVT',
     image:
-      '	https://www.toyota.com.vn//Resources/Images/4981621FD47690FBCD93F94BC92A63C8.png',
+      'https://www.toyota.com.vn//Resources/Images/DB64D61952050267C2FFE2272E14007E.png',
     hoverImage:
       'https://www.toyota.com.vn//Resources/Images/4981621FD47690FBCD93F94BC92A63C8.png',
     class: 'SUV',
   },
   {
+    id: 9,
     name: 'Yaris Cross',
     price: 650000000,
     capacity: 1.496,
@@ -111,12 +120,13 @@ export const fakeData = [
     numberOfSeats: 5,
     license: 'Vô cấp CVT',
     image:
-      '	https://www.toyota.com.vn//Resources/Images/4981621FD47690FBCD93F94BC92A63C8.png',
+      'https://www.toyota.com.vn//Resources/Images/DB64D61952050267C2FFE2272E14007E.png',
     hoverImage:
       'https://www.toyota.com.vn//Resources/Images/4981621FD47690FBCD93F94BC92A63C8.png',
     class: 'SUV',
   },
   {
+    id: 10,
     name: 'Yaris Cross',
     price: 650000000,
     capacity: 1.496,
@@ -124,12 +134,14 @@ export const fakeData = [
     numberOfSeats: 5,
     license: 'Vô cấp CVT',
     image:
-      '	https://www.toyota.com.vn//Resources/Images/4981621FD47690FBCD93F94BC92A63C8.png',
+      'https://www.toyota.com.vn//Resources/Images/DB64D61952050267C2FFE2272E14007E.png',
     hoverImage:
       'https://www.toyota.com.vn//Resources/Images/4981621FD47690FBCD93F94BC92A63C8.png',
     class: 'SUV',
   },
+
   {
+    id: 11,
     name: 'Yaris Cross',
     price: 650000000,
     capacity: 1.496,
@@ -137,12 +149,13 @@ export const fakeData = [
     numberOfSeats: 5,
     license: 'Vô cấp CVT',
     image:
-      '	https://www.toyota.com.vn//Resources/Images/4981621FD47690FBCD93F94BC92A63C8.png',
+      'https://www.toyota.com.vn//Resources/Images/DB64D61952050267C2FFE2272E14007E.png',
     hoverImage:
       'https://www.toyota.com.vn//Resources/Images/4981621FD47690FBCD93F94BC92A63C8.png',
     class: 'Đa dụng',
   },
   {
+    id: 12,
     name: 'Yaris Cross',
     price: 650000000,
     capacity: 1.496,
@@ -150,7 +163,7 @@ export const fakeData = [
     numberOfSeats: 5,
     license: 'Vô cấp CVT',
     image:
-      '	https://www.toyota.com.vn//Resources/Images/4981621FD47690FBCD93F94BC92A63C8.png',
+      'https://www.toyota.com.vn//Resources/Images/DB64D61952050267C2FFE2272E14007E.png',
     hoverImage:
       'https://www.toyota.com.vn//Resources/Images/4981621FD47690FBCD93F94BC92A63C8.png',
     class: 'Bán tải',

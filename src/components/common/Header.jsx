@@ -10,7 +10,7 @@ const Header = () => {
       <div className="container">
         <div className="flex justify-between">
           <div className="py-3">
-            <img src="src\assets\imgs\logo-toyota.jpg" alt="" />
+            <img src="imgs\logo-toyota.jpg" alt="" />
           </div>
           <div>
             <div className="flex my-1.5 h-8 justify-end">
@@ -39,7 +39,7 @@ const Header = () => {
                       backgroundPositionX: '-54px',
                       backgroundPositionY: '-295px',
                     }}
-                    className="bg-[url('src/assets/imgs/global-image.png')] inline-block w-6 h-6 mr-1"
+                    className="bg-[url('imgs/global-image.png')] inline-block w-6 h-6 mr-1"
                   ></span>
                   <Link to={'/'}>Toyota toàn cầu</Link>
                 </li>
@@ -55,13 +55,19 @@ const Header = () => {
                 </li>
 
                 <li className="text-sm mr-5 flex items-center">
-                  <a href="/">
+                  <a
+                    href="https://www.facebook.com/ToyotaVietnam/?utm_source=SOCIAL&utm_medium=FANPAGE&utm_content=FBICON_PRODUCT_WEBSITE_4NOV2016&utm_campaign=FANPAGE"
+                    target="_blank"
+                  >
                     <FaFacebook className="h-6 w-6 text-facebookColor" />
                   </a>
                 </li>
 
                 <li className="text-sm mr-5 flex items-center">
-                  <a href="/">
+                  <a
+                    href="https://www.youtube.com/user/ToyotaMotorVietnam"
+                    target="_blank"
+                  >
                     <FaYoutube className="h-6 w-7 text-youtubeColor" />
                   </a>
                 </li>

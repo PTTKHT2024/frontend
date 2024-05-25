@@ -12,7 +12,7 @@ const DiscoverTabSelect = ({ tabs, handleChangeTab, currentTab, width }) => {
             tab !== currentTab ? (
               <li
                 key={index}
-                className="flex-1 text-center text-lg pb-2.5 hover:border-b-tabAction cursor-pointer"
+                className="flex-1 text-center text-lg pb-2.5 hover:border-b-tabAction hover:font-bold cursor-pointer"
                 onClick={(e) => handleChangeTab(e.target.dataset.tab)}
                 data-tab={tab}
               >
@@ -22,7 +22,7 @@ const DiscoverTabSelect = ({ tabs, handleChangeTab, currentTab, width }) => {
               <li
                 key={index}
                 className="flex-1 text-center text-lg pb-2.5 font-bold border-b-tabAction cursor-pointer"
-                onClick={(e) => console.log(e.target.datasetset.tab)}
+                onClick={(e) => handleChangeTab(e.target.dataset.tab)}
                 data-tab={tab}
               >
                 {tab}

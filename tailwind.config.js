@@ -45,7 +45,7 @@ export default {
     },
     fontFamily: {
       sans: [
-        '"Poppins", sans-serif',
+        '"tahoma", "Poppins", Arial',
         {
           fontFeatureSettings: '"cv11", "ss01"',
           fontVariationSettings: '"opsz" 32',

@@ -13,6 +13,7 @@ const Home = () => {
       <MainTitle title="KHÁM PHÁ CÁC DÒNG XE TOYOTA" />
       <CarDiscoverTab />
       <ServiceIcon />
+      <MainTitle title="DỊCH VỤ" />
     </>
   );
 };
