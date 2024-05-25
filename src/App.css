@@ -1,3 +1,24 @@
-* {
-  font-family: 'Poppins', sans-serif;
+.button-navigation::after {
+  font-size: 14px !important;
+  font-weight: 800 !important;
+}
+
+.swiper-pagination-bullet {
+  width: 20px !important;
+  display: inline-block !important;
+  border-radius: unset !important;
+  margin: 0 !important;
+  height: 2px !important;
+  background: #ccc !important;
+  opacity: 100 !important;
+}
+
+.swiper-pagination-bullet-active {
+  height: 8px !important;
+  background-color: #eb0a1e !important;
+}
+
+.tab-swiper > .swiper-pagination {
+  position: absolute;
+  bottom: -70px !important;
 }
