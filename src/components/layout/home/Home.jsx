@@ -5,6 +5,7 @@ import MainTitle from '../../common/MainTitle';
 import CarDiscoverTab from '../../car/CarDiscoverTab';
 import ServiceIcon from './ServiceIcon';
 import CarServiceDiscoverTab from '../../car/CarServiceDiscoverTab';
+import CarTechnologyDiscoverTab from '../../car/CarTechnologyDiscoverTab';
 
 const Home = () => {
   return (
@@ -16,6 +17,8 @@ const Home = () => {
       <MainTitle title="DỊCH VỤ" />
       <CarServiceDiscoverTab />
       <MainTitle title="CÔNG NGHỆ" mt={180} />
+      <CarTechnologyDiscoverTab />
+      <MainTitle title={'TIN TỨC & KHUYẾN MÃI'} />
     </>
   );
 };
