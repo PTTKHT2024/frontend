@@ -45,7 +45,7 @@ export default {
     },
     fontFamily: {
       sans: [
-        '"tahoma", "Poppins", Arial',
+        'system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
         {
           fontFeatureSettings: '"cv11", "ss01"',
           fontVariationSettings: '"opsz" 32',

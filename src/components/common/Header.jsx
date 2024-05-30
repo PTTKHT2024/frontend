@@ -10,7 +10,9 @@ const Header = () => {
       <div className="container">
         <div className="flex justify-between">
           <div className="py-3">
-            <img src="imgs\logo-toyota.jpg" alt="" />
+            <Link to={'/'}>
+              <img src="/imgs/logo-toyota.jpg" alt="logo" />
+            </Link>
           </div>
           <div>
             <div className="flex my-1.5 h-8 justify-end">
