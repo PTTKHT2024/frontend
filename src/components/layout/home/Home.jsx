@@ -6,6 +6,7 @@ import CarDiscoverTab from '../../car/CarDiscoverTab';
 import ServiceIcon from './ServiceIcon';
 import CarServiceDiscoverTab from '../../car/CarServiceDiscoverTab';
 import CarTechnologyDiscoverTab from '../../car/CarTechnologyDiscoverTab';
+import ContactForm from './ContactForm';
 
 const Home = () => {
   return (
@@ -19,6 +20,7 @@ const Home = () => {
       <MainTitle title="CÔNG NGHỆ" mt={180} />
       <CarTechnologyDiscoverTab />
       <MainTitle title={'TIN TỨC & KHUYẾN MÃI'} />
+      <ContactForm />
     </>
   );
 };
