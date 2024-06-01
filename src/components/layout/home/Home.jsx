@@ -7,6 +7,7 @@ import ServiceIcon from './ServiceIcon';
 import CarServiceDiscoverTab from '../../car/CarServiceDiscoverTab';
 import CarTechnologyDiscoverTab from '../../car/CarTechnologyDiscoverTab';
 import ContactForm from './ContactForm';
+import Tool from '../../common/Tool';
 
 const Home = () => {
   return (
@@ -21,6 +22,7 @@ const Home = () => {
       <CarTechnologyDiscoverTab />
       <MainTitle title={'TIN TỨC & KHUYẾN MÃI'} />
       <ContactForm />
+      <Tool />
     </>
   );
 };
