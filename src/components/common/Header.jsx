@@ -18,17 +18,23 @@ const Header = () => {
             <div className="flex my-1.5 h-8 justify-end">
               <ul className="flex items-center">
                 <li className="text-sm mr-5 flex items-center relative group">
-                  <Link to={'/'}>VR Showroom</Link>
+                  <Link to={'/show-rooms'}>VR Showroom</Link>
                   <MdOutlineKeyboardArrowDown className="inline h-5 w-5 transition-transform duration-300 group-hover:rotate-180" />
 
                   <ul className="absolute top-full left-0 bg-white border py-1 opacity-0 invisible transform -translate-y-2 transition duration-500 group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible z-10">
                     <li className="p-2.5">
-                      <Link className="text-base text-nowrap hover:text-primaryColor transition-colors duration-200">
+                      <Link
+                        className="text-base text-nowrap hover:text-primaryColor transition-colors duration-200"
+                        to={'/vr-suv'}
+                      >
                         SUV - MPV
                       </Link>
                     </li>
                     <li className="p-2.5">
-                      <Link className="text-base text-nowrap hover:text-primaryColor transition-colors duration-200">
+                      <Link
+                        className="text-base text-nowrap hover:text-primaryColor transition-colors duration-200"
+                        to={'/vr-sedan'}
+                      >
                         Sedan - Bán tải
                       </Link>
                     </li>
