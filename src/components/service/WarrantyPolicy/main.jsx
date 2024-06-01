@@ -30,48 +30,48 @@ const Warranty = () => {
             <div
               className={`transition-all mr-10 ease-in-out cursor-pointer ${
                 activeTab === 'warranty'
-                  ? 'text-red-600 border-b-4 border-red-600'
+                  ? 'text-primaryColor border-b-[3px] border-primaryColor'
                   : 'text-black'
               }`}
               onClick={() => handleTabClick('warranty')}
             >
-              <h2 className="m-0 text-base leading-5 text-center whitespace-nowrap font-semibold">
+              <h2 className="m-0 text-base leading-5 text-center whitespace-nowrap font-medium">
                 Những gì được bảo hành
               </h2>
             </div>
             <div
               className={`transition-all mr-10 ease-in-out cursor-pointer ${
                 activeTab === 'notWarranty'
-                  ? 'text-red-600 border-b-4 border-red-600'
+                  ? 'text-primaryColor border-b-[3px] border-primaryColor'
                   : 'text-black'
               }`}
               onClick={() => handleTabClick('notWarranty')}
             >
-              <h2 className="m-0 text-base leading-5 text-center whitespace-nowrap font-semibold">
+              <h2 className="m-0 text-base leading-5 text-center whitespace-nowrap font-medium">
                 Những gì không được bảo hành
               </h2>
             </div>
             <div
               className={`transition-all mr-10 ease-in-out cursor-pointer ${
                 activeTab === 'responsibility'
-                  ? 'text-red-600 border-b-4 border-red-600'
+                  ? 'text-primaryColor border-b-[3px] border-primaryColor'
                   : 'text-black'
               }`}
               onClick={() => handleTabClick('responsibility')}
             >
-              <h2 className="m-0 text-base leading-5 text-center whitespace-nowrap font-semibold">
+              <h2 className="m-0 text-base leading-5 text-center whitespace-nowrap font-medium">
                 Trách nhiệm của chủ xe
               </h2>
             </div>
             <div
               className={`transition-all mr-10 ease-in-out cursor-pointer ${
                 activeTab === 'info'
-                  ? 'text-red-600 border-b-4 border-red-600'
+                  ? 'text-primaryColor border-b-[3px] border-primaryColor'
                   : 'text-black'
               }`}
               onClick={() => handleTabClick('info')}
             >
-              <h2 className="m-0 text-base leading-5 text-center whitespace-nowrap font-semibold">
+              <h2 className="m-0 text-base leading-5 text-center whitespace-nowrap font-medium">
                 Những thông tin cần thiết
               </h2>
             </div>
@@ -81,8 +81,8 @@ const Warranty = () => {
           {activeTab === 'responsibility' && <Responsive />}
           {activeTab === 'info' && <Information />}
           <div
-            className="bg-red-600 h-10 w-52 text-center align-middle m-auto text-xs 
-              leading-4 py-3 px-5 font-semibold tracking-widest text-white"
+            className="bg-primaryColor h-10 w-52 text-center align-middle m-auto text-xs 
+              leading-4 py-3 px-5 font-medium tracking-widest text-white"
           >
             <a href="">Đặt lịch hẹn dịch vụ</a>
           </div>
