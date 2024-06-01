@@ -6,7 +6,7 @@ import { IoSearch } from 'react-icons/io5';
 
 const Header = () => {
   return (
-    <header className="border-b-4 border-primaryColor fixed top-0 z-10 w-full bg-white">
+    <header className="border-b-4 border-primaryColor fixed top-0 z-50 w-full bg-white">
       <div className="container">
         <div className="flex justify-between">
           <div className="py-3">
