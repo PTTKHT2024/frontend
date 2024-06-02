@@ -12,7 +12,7 @@ const DiscoverTabSelect = ({ tabs, handleChangeTab, currentTab, width }) => {
             tab !== currentTab ? (
               <li
                 key={index}
-                className="flex-1 text-center text-lg pb-2.5 hover:border-b-tabAction hover:font-bold cursor-pointer"
+                className="flex-1 text-center text-lg pb-2.5 hover:border-b-tabAction hover:font-bold cursor-pointer font-semibold"
                 onClick={(e) => handleChangeTab(e.target.dataset.tab)}
                 data-tab={tab}
               >
