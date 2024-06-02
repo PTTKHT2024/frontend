@@ -23,7 +23,7 @@ function App() {
 
           <Route path="/service" element={<ServiceLayout />}>
             <Route path="maintain" element={<MaintainService />} />
-            <Route path="/warranty" element={<Warranty />} />
+            <Route path="warranty" element={<Warranty />} />
           </Route>
         </Routes>
         <Footer />
