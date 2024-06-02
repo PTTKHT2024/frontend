@@ -8,6 +8,7 @@ import SUVShowroom from './components/layout/showroom/SUVShowroom';
 import VRShowroom from './components/layout/showroom/VRShowroom';
 import SedanShowroom from './components/layout/showroom/SedanShowroom';
 import Warranty from './components/service/WarrantyPolicy/main';
+import RepairService from './components/service/RepairService/RepairService';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/service" element={<ServiceLayout />}>
             <Route path="maintain" element={<MaintainService />} />
             <Route path="warranty" element={<Warranty />} />
+            <Route path="repair" element={<RepairService />} />
           </Route>
         </Routes>
         <Footer />
