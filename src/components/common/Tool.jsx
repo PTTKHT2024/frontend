@@ -35,7 +35,7 @@ const Tool = () => {
                   backgroundPositionX: '-89px',
                   backgroundPositionY: '-339px',
                 }}
-                className="bg-[url('imgs/global-image.png')] w-[17px] h-6 bg-center"
+                className="bg-[url('/imgs/global-image.png')] w-[17px] h-6 bg-center"
               ></span>
             </Link>
           </li>
@@ -50,7 +50,7 @@ const Tool = () => {
                   backgroundPositionX: '-10px',
                   backgroundPositionY: '-339px',
                 }}
-                className="bg-[url('imgs/global-image.png')] w-[21px] h-6 bg-center"
+                className="bg-[url('/imgs/global-image.png')] w-[21px] h-6 bg-center"
               ></span>
             </Link>
           </li>
@@ -65,7 +65,7 @@ const Tool = () => {
                   backgroundPositionX: '-364px',
                   backgroundPositionY: '-219px',
                 }}
-                className="bg-[url('imgs/global-image.png')] w-6 h-6 bg-center"
+                className="bg-[url('/imgs/global-image.png')] w-6 h-6 bg-center"
               ></span>
             </Link>
           </li>
@@ -80,7 +80,7 @@ const Tool = () => {
                   backgroundPositionX: '-232px',
                   backgroundPositionY: '-219px',
                 }}
-                className="bg-[url('imgs/global-image.png')] w-6 h-6 bg-center"
+                className="bg-[url('/imgs/global-image.png')] w-6 h-6 bg-center"
               ></span>
             </Link>
           </li>
@@ -95,7 +95,7 @@ const Tool = () => {
                   backgroundPositionX: '-52px',
                   backgroundPositionY: '-339px',
                 }}
-                className="bg-[url('imgs/global-image.png')] w-[18px] h-6 bg-center"
+                className="bg-[url('/imgs/global-image.png')] w-[18px] h-6 bg-center"
               ></span>
             </Link>
           </li>
@@ -110,7 +110,7 @@ const Tool = () => {
                   backgroundPositionX: '-126px',
                   backgroundPositionY: '-339px',
                 }}
-                className="bg-[url('imgs/global-image.png')] w-[17px] h-6 bg-center"
+                className="bg-[url('/imgs/global-image.png')] w-[17px] h-6 bg-center"
               ></span>
             </Link>
           </li>

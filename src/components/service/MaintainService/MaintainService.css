@@ -1,0 +1,91 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.tab-link {
+  background-color: inherit;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+.tab-link:hover {
+  text-decoration: underline; 
+  color: red;
+  border: none;
+}
+
+.tab-link.active {
+  color: red; 
+  border: none;
+  text-decoration: underline;
+}
+
+.tab-header {
+  display: flex;
+  justify-content: center; 
+  background-color: #ffffff;
+  padding: 10px 0;
+}
+
+.tab-header .tab-link {
+  background-color: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  margin: 0 10px; 
+  transition: 0.3s;
+}
+
+.tab-header .tab-link:hover {
+  background-color: #ffffff;
+}
+
+.tab-header .tab-link.active {
+  background-color: #ffffff;
+}
+
+.tab {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+  text-align: center; 
+}
+
+.tab.active {
+  display: block;
+}
+
+.img-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  margin-top: 20px; 
+  margin-bottom: 20px; 
+}
+.tab img {
+  width: 838px; 
+  height: auto; 
+}
+.tab p {
+  display: flex;
+  justify-content: center; 
+  text-align: center; 
+  padding: 0 210px; 
+  box-sizing: border-box;
+}
+.vertical-img {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
+.vertical-img img {
+  width: 360px;
+  margin-top: 45px; 
+  margin-bottom: 50px; 
+}
