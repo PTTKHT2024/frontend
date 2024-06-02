@@ -7,6 +7,7 @@ import Footer from './components/common/Footer';
 import SUVShowroom from './components/layout/showroom/SUVShowroom';
 import VRShowroom from './components/layout/showroom/VRShowroom';
 import SedanShowroom from './components/layout/showroom/SedanShowroom';
+import Warranty from './components/service/WarrantyPolicy/main';
 
 function App() {
   return (
@@ -15,12 +16,14 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
+
           <Route path="/vr-suv" element={<SUVShowroom />} />
           <Route path="/vr-sedan" element={<SedanShowroom />} />
           <Route path="/show-rooms" element={<VRShowroom />} />
 
           <Route path="/service" element={<ServiceLayout />}>
             <Route path="maintain" element={<MaintainService />} />
+            <Route path="/warranty" element={<Warranty />} />
           </Route>
         </Routes>
         <Footer />
