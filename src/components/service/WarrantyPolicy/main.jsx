@@ -4,6 +4,7 @@ import HaveWarranty from './HaveWarranty';
 import NotWarranty from './NotWarranty';
 import Responsive from './Responsive';
 import Information from './Information';
+import { Link } from 'react-router-dom';
 
 const Warranty = () => {
   const [activeTab, setActiveTab] = useState('warranty');
@@ -14,18 +15,8 @@ const Warranty = () => {
 
   return (
     <>
-      <Header />
       <div className="max-w-full m-auto p-0 mt-24 w-full relative">
-        <div className="relative">
-          <div className="w-full h-full object-center">
-            <img
-              className="align-middle border-none"
-              src="public/imgs/banner.jpg"
-              alt=""
-            />
-          </div>
-        </div>
-        <div className="py-20 px-40">
+        <div className="px-40">
           <div className="flex w-full m-auto items-center justify-center">
             <div
               className={`transition-all mr-10 ease-in-out cursor-pointer ${
@@ -80,12 +71,6 @@ const Warranty = () => {
           {activeTab === 'notWarranty' && <NotWarranty />}
           {activeTab === 'responsibility' && <Responsive />}
           {activeTab === 'info' && <Information />}
-          <div
-            className="bg-primaryColor h-10 w-52 text-center align-middle m-auto text-xs 
-              leading-4 py-3 px-5 font-medium tracking-widest text-white"
-          >
-            <a href="">Đặt lịch hẹn dịch vụ</a>
-          </div>
         </div>
       </div>
     </>

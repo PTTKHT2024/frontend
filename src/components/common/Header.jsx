@@ -61,7 +61,7 @@ const Header = () => {
                         backgroundPositionX: '-54px',
                         backgroundPositionY: '-295px',
                       }}
-                      className="bg-[url('imgs/global-image.png')] inline-block w-6 h-6 mr-1"
+                      className="bg-[url('/imgs/global-image.png')] inline-block w-6 h-6 mr-1"
                     ></span>
                     <Link to={'/'}>Toyota toàn cầu</Link>
                   </li>

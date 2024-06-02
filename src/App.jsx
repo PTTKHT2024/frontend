@@ -10,6 +10,11 @@ import SedanShowroom from './components/layout/showroom/SedanShowroom';
 import Warranty from './components/service/WarrantyPolicy/main';
 import RepairService from './components/service/RepairService/RepairService';
 import Login from './components/auth/Login';
+import Navbar from './components/common/Navbar';
+import { datas as serviceNavbarDatas } from './components/data/ServiceNavbarData';
+import OrderButton from './components/service/OrderButton';
+import Tool from './components/common/Tool';
+import { useEffect } from 'react';
 
 function App() {
   return (
@@ -26,6 +31,7 @@ function App() {
 
           <Route path="/service" element={<ServiceLayout />}>
             <Route path="maintain" element={<MaintainService />} />
+            <Route path="beauty" element={<></>} />
             <Route path="warranty" element={<Warranty />} />
             <Route path="repair" element={<RepairService />} />
           </Route>
@@ -37,7 +43,24 @@ function App() {
 }
 
 function ServiceLayout() {
-  return <Outlet />;
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <>
+      <Navbar datas={serviceNavbarDatas} />
+      <div>
+        <img
+          className="mb-sectionMargin_1 h-[60vh] w-full mt-[96px] object-cover"
+          src="https://www.toyota.com.vn/media/hb0bvfz3/008a7694.jpg"
+          alt=""
+        />
+      </div>
+      <Outlet />
+      <Tool />
+      <OrderButton />
+    </>
+  );
 }
 
 export default App;

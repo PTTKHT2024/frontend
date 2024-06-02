@@ -3,19 +3,21 @@
   outline: none;
   cursor: pointer;
   padding: 14px 16px;
-  transition: 0.3s;
+  font-weight: 500;
 }
 
 .tab-link:hover {
   text-decoration: underline;
-  color: red;
-  border: none;
+  color: #eb0a1e;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
 .tab-link.active {
-  color: red;
-  border: none;
+  color: #eb0a1e;
+  text-underline-offset: 4px;
   text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
 
 .tab-header {
@@ -32,7 +34,6 @@
   cursor: pointer;
   padding: 14px 16px;
   margin: 0 10px;
-  transition: 0.3s;
 }
 
 .tab-header .tab-link:hover {
