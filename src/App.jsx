@@ -9,6 +9,7 @@ import VRShowroom from './components/layout/showroom/VRShowroom';
 import SedanShowroom from './components/layout/showroom/SedanShowroom';
 import Warranty from './components/service/WarrantyPolicy/main';
 import RepairService from './components/service/RepairService/RepairService';
+import Login from './components/auth/Login';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
 
           <Route path="/vr-suv" element={<SUVShowroom />} />
           <Route path="/vr-sedan" element={<SedanShowroom />} />
