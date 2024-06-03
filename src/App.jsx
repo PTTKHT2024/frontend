@@ -20,24 +20,41 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Home />} />
+            <Route path="login" element={<Login />} />
+            <Route path="vr-suv" element={<SUVShowroom />} />
+            <Route path="vr-sedan" element={<SedanShowroom />} />
+            <Route path="show-rooms" element={<VRShowroom />} />
 
-          <Route path="/vr-suv" element={<SUVShowroom />} />
-          <Route path="/vr-sedan" element={<SedanShowroom />} />
-          <Route path="/show-rooms" element={<VRShowroom />} />
+            {/* Service route */}
+            <Route path="service" element={<ServiceLayout />}>
+              <Route path="maintain" element={<MaintainService />} />
+              <Route path="beauty" element={<></>} />
+              <Route path="warranty" element={<Warranty />} />
+              <Route path="repair" element={<RepairService />} />
+            </Route>
+          </Route>
 
-          <Route path="/service" element={<ServiceLayout />}>
-            <Route path="maintain" element={<MaintainService />} />
-            <Route path="beauty" element={<></>} />
-            <Route path="warranty" element={<Warranty />} />
-            <Route path="repair" element={<RepairService />} />
+          {/* Admin routes */}
+          <Route path="/admin" element={<AdminLayout />}>
+            {/* <Route path="dashboard" element={<AdminDashboard />} /> */}
+            {/* <Route path="users" element={<AdminUsers />} /> */}
           </Route>
         </Routes>
         <Footer />
       </BrowserRouter>
+    </>
+  );
+}
+
+function MainLayout() {
+  return (
+    <>
+      <Header />
+      <Outlet />
+      <Footer />
     </>
   );
 }
@@ -59,6 +76,17 @@ function ServiceLayout() {
       <Outlet />
       <Tool />
       <OrderButton />
+    </>
+  );
+}
+
+function AdminLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <>
+      <Outlet />
     </>
   );
 }

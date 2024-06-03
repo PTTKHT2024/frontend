@@ -63,7 +63,7 @@ const Header = () => {
                       }}
                       className="bg-[url('/imgs/global-image.png')] inline-block w-6 h-6 mr-1"
                     ></span>
-                    <Link to={'/'}>Toyota toàn cầu</Link>
+                    <a href="https://global.toyota/en">Toyota toàn cầu</a>
                   </li>
 
                   <li className="text-sm mr-5 flex items-center">
