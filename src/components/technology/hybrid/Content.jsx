@@ -15,7 +15,7 @@ const Content = () => {
     setVideoId(id);
     setOpen(true);
   };
-  
+
   const imageItems = [
     {
       id: 0,
@@ -394,7 +394,13 @@ const Content = () => {
               {/*item*/}
               {selectedOption === 'video' ? (
                 <div className="grid flex-wrap grid-cols-3 gap-8">
-                  <ModalVideo channel='youtube' autoplay isOpen={isOpen} videoId={videoId} onClose={() => setOpen(false)} />
+                  <ModalVideo
+                    channel="youtube"
+                    autoplay
+                    isOpen={isOpen}
+                    videoId={videoId}
+                    onClose={() => setOpen(false)}
+                  />
                   <div className="relative w-[100%] mx-20 cursor-pointer">
                     <div id="1" className="relative mb-4">
                       <img
@@ -429,8 +435,8 @@ const Content = () => {
                       />
                     </div>
                     <h3 className="text-base leading-7 text-black hover:font-bold">
-                      Hệ thống Toyota Hybrid của động cơ 1.8 cấu tạo và hoạt động
-                      như thế nào?
+                      Hệ thống Toyota Hybrid của động cơ 1.8 cấu tạo và hoạt
+                      động như thế nào?
                     </h3>
                   </div>
                   <div className="relative w-[100%] mx-20 cursor-pointer">
@@ -448,7 +454,7 @@ const Content = () => {
                       />
                     </div>
                     <h3 className="text-base leading-7 text-black hover:font-bold">
-                      Giới thiệu về Công nghệ Hybrid 
+                      Giới thiệu về Công nghệ Hybrid
                     </h3>
                   </div>
                 </div>
@@ -458,7 +464,10 @@ const Content = () => {
                   className="flex flex-wrap justify-between px-[110px] -mx-[32px]"
                 >
                   {/*loading*/}
-                  <div style={{ display: 'none' }} className="bg-gray-900 rounded-lg border-rose-200 text-rose-200 h-[200px] w-[300px] absolute left-1/2 top-1/2 -ml-60 -mt-32 z-50 flex justify-center items-center">
+                  <div
+                    style={{ display: 'none' }}
+                    className="bg-gray-900 rounded-lg border-rose-200 text-rose-200 h-[200px] w-[300px] absolute left-1/2 top-1/2 -ml-60 -mt-32 z-50 flex justify-center items-center"
+                  >
                     <div className="w-[120px] h-[120px] border-t-4 border-red-600 rounded-full animate-spin"></div>
                   </div>
                   <div className="grid grid-cols-3 gap-8">
