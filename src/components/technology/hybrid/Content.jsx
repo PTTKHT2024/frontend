@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './Animation.css';
+import ModalVideo from 'react-modal-video';
+import 'react-modal-video/scss/modal-video.scss';
 
 const Content = () => {
   const [selectedOption, setSelectedOption] = useState('video'); // State variable to track the selected option
@@ -7,6 +9,14 @@ const Content = () => {
   const handleSelectionChange = (event) => {
     setSelectedOption(event.target.value);
   };
+  const [isOpen, setOpen] = useState(false);
+  const [videoId, setVideoId] = useState('');
+
+  const handlePlayVideo = (id) => {
+    setVideoId(id);
+    setOpen(true);
+  };
+  
   const imageItems = [
     {
       id: 0,
@@ -85,7 +95,7 @@ const Content = () => {
     },
   ];
   return (
-    <div className="mt-16 container">
+    <div className="mt-40 container">
       <h1 className="h-[40px] flex items-center pl-3 border-l-4 border-red-600 text-2xl leading-4 text-black mb-4">
         VỀ HYBRID
       </h1>
@@ -290,7 +300,7 @@ const Content = () => {
         <div className="flex justify-between items-center">
           <p
             style={{ margin: 0 }}
-            className="h-10 flex items-center pl-3 border-l-4 border-[#EB0A1E] text-2xl leading-8 text-black mb-4"
+            className="h-12 flex items-center pl-3 border-l-4 border-[#EB0A1E] text-2xl leading-8 text-black mb-4"
           >
             TÌM HIỂU THÊM
           </p>
@@ -385,6 +395,7 @@ const Content = () => {
               {/*item*/}
               {selectedOption === 'video' ? (
                 <div className="grid flex-wrap grid-cols-3 gap-8">
+                  <ModalVideo channel='youtube' autoplay isOpen={isOpen} videoId={videoId} onClose={() => setOpen(false)} />
                   <div className="relative w-[100%] mx-20 cursor-pointer">
                     <div id="1" className="relative mb-4">
                       <img
@@ -393,12 +404,13 @@ const Content = () => {
                         alt=""
                       />
                       <img
+                        onClick={() => handlePlayVideo('uhAF8W6jml0')}
                         className="absolute flex items-center z-2 w-30 h-30 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                         src="https://www.toyota.com.vn/Content/Images/technology/button-play.png"
                         alt=""
                       />
                     </div>
-                    <h3 className="text-base leading-7 text-black">
+                    <h3 className="text-base leading-7 text-black hover:font-bold">
                       Hệ thống Toyota Hybrid với công nghệ tự sạc điện hoạt động
                       như thế nào?
                     </h3>
@@ -407,17 +419,18 @@ const Content = () => {
                     <div id="2" className="relative mb-4">
                       <img
                         className="mx-auto filter brightness-70 w-full h-181 object-cover"
-                        src="https://img.youtube.com/vi/uhAF8W6jml0/0.jpg"
+                        src="https://img.youtube.com/vi/e-LbRfjz2Nc/0.jpg"
                         alt=""
                       />
                       <img
+                        onClick={() => handlePlayVideo('e-LbRfjz2Nc')}
                         className="absolute flex items-center z-2 w-30 h-30 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                         src="https://www.toyota.com.vn/Content/Images/technology/button-play.png"
                         alt=""
                       />
                     </div>
-                    <h3 className="text-base leading-7 text-black">
-                      Hệ thống Toyota Hybrid với công nghệ tự sạc điện hoạt động
+                    <h3 className="text-base leading-7 text-black hover:font-bold">
+                      Hệ thống Toyota Hybrid của động cơ 1.8 cấu tạo và hoạt động
                       như thế nào?
                     </h3>
                   </div>
@@ -425,18 +438,18 @@ const Content = () => {
                     <div id="3" className="relative mb-4">
                       <img
                         className="mx-auto filter brightness-70 w-full h-181 object-cover"
-                        src="https://img.youtube.com/vi/uhAF8W6jml0/0.jpg"
+                        src="https://img.youtube.com/vi/zzLSAjOkwe0/0.jpg"
                         alt=""
                       />
                       <img
+                        onClick={() => handlePlayVideo('zzLSAjOkwe0')}
                         className="absolute flex items-center z-2 w-30 h-30 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                         src="https://www.toyota.com.vn/Content/Images/technology/button-play.png"
                         alt=""
                       />
                     </div>
-                    <h3 className="text-base leading-7 text-black">
-                      Hệ thống Toyota Hybrid với công nghệ tự sạc điện hoạt động
-                      như thế nào?
+                    <h3 className="text-base leading-7 text-black hover:font-bold">
+                      Giới thiệu về Công nghệ Hybrid 
                     </h3>
                   </div>
                 </div>
@@ -446,8 +459,8 @@ const Content = () => {
                   className="flex flex-wrap justify-between px-[110px] -mx-[32px]"
                 >
                   {/*loading*/}
-                  <div style={{ display: 'none' }} className="loading-window">
-                    <div className="spiner"></div>
+                  <div style={{ display: 'none' }} className="bg-gray-900 rounded-lg border-rose-200 text-rose-200 h-[200px] w-[300px] absolute left-1/2 top-1/2 -ml-60 -mt-32 z-50 flex justify-center items-center">
+                    <div className="w-[120px] h-[120px] border-t-4 border-red-600 rounded-full animate-spin"></div>
                   </div>
                   <div className="grid grid-cols-3 gap-8">
                     {imageItems.map((item) => (
