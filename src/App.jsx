@@ -9,6 +9,7 @@ import VRShowroom from './components/layout/showroom/VRShowroom';
 import SedanShowroom from './components/layout/showroom/SedanShowroom';
 import Warranty from './components/service/WarrantyPolicy/main';
 import RepairService from './components/service/RepairService/RepairService';
+import HybridTechnology from './components/technology/hybrid/HybridTechnology';
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
             <Route path="warranty" element={<Warranty />} />
             <Route path="repair" element={<RepairService />} />
           </Route>
+          <Route path="/technology" element={<TechnologyLayout />}>
+            <Route path="hybrid" element={<HybridTechnology />} />
+          </Route>
         </Routes>
         <Footer />
       </BrowserRouter>
@@ -35,6 +39,10 @@ function App() {
 }
 
 function ServiceLayout() {
+  return <Outlet />;
+}
+
+function TechnologyLayout() {
   return <Outlet />;
 }
 
