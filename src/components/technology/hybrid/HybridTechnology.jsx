@@ -6,15 +6,12 @@ import Tool from '../../common/Tool';
 import Banner from './Banner';
 import Content from './Content';
 const HybridTechnology = () => {
-    return (
-        <>
-            <Header/>
-            <Nav/>
-            <Banner/>
-            <Content/>
-            <Tool/>
-            <Footer/>
-        </>
-    )
-}
+  return (
+    <>
+      <Nav />
+      <Banner />
+      <Content />
+    </>
+  );
+};
 export default HybridTechnology;

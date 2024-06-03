@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './components/layout/home/Home';
-import HybridTechnology from './components/service/HybridTechnology/HybridTechnology';
+import HybridTechnology from './components/technology/hybrid/HybridTechnology';
 
 function App() {
   return (
