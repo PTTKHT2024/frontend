@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './Animation.css';
 import ModalVideo from 'react-modal-video';
 import 'react-modal-video/scss/modal-video.scss';
 
