@@ -20,7 +20,7 @@ const Content = () => {
           <div>
             <p className="mt-0 mb-4">
               <img
-                src="public/imgs/technology/tss_2.jpg"
+                src="/imgs/technology/tss_2.jpg"
                 alt=""
                 className="block max-w-full h-auto my-[60px] mx-auto align-middle border-none"
               />
@@ -30,7 +30,7 @@ const Content = () => {
             </p>
             <p className="mt-0 mb-4">
               <img
-                src="public/imgs/technology/tss_5.jpg"
+                src="/imgs/technology/tss_5.jpg"
                 alt=""
                 className="block max-w-full h-auto my-[60px] mx-auto align-middle border-none"
               />
@@ -56,7 +56,7 @@ const Content = () => {
                   HỆ THỐNG ĐÈN PHA TỰ ĐỘNG THÍCH ỨNG (AHB)
                 </p>
                 <img
-                  src="public/imgs/technology/tss_6.jpg"
+                  src="/imgs/technology/tss_6.jpg"
                   alt=""
                   className="w-full h-80 object-cover object-center block mb-8 align-middle border-none"
                 />
@@ -80,7 +80,7 @@ const Content = () => {
                 </p>
                 <p className="font-bold text-lg leading-[150%] text-black mb-8 text-center">
                   <img
-                    src="public/imgs/technology/tss_7.jpg"
+                    src="/imgs/technology/tss_7.jpg"
                     alt=""
                     className="w-full h-80 object-cover object-center block mb-8 align-middle border-none"
                   />
@@ -103,7 +103,7 @@ const Content = () => {
                   HỆ THỐNG CẢNH BÁO CHỆCH LÀN ĐƯỜNG (LDA)
                 </p>
                 <img
-                  src="public/imgs/technology/tss_8.jpg"
+                  src="/imgs/technology/tss_8.jpg"
                   alt=""
                   className="w-full h-80 object-cover object-center block mb-8 align-middle border-none"
                 />
@@ -128,7 +128,7 @@ const Content = () => {
                   HỆ THỐNG CẢNH BÁO TIỀN VA CHẠM (PCS)
                 </p>
                 <img
-                  src="public/imgs/technology/tss_9.jpg"
+                  src="/imgs/technology/tss_9.jpg"
                   alt=""
                   className="w-full h-80 object-cover object-center block mb-8 align-middle border-none"
                 />
@@ -152,7 +152,7 @@ const Content = () => {
                   HỆ THỐNG KIỂM SOÁT HÀNH TRÌNH CHỦ ĐỘNG (DRCC)
                 </p>
                 <img
-                  src="public/imgs/technology/tss_10.jpg"
+                  src="/imgs/technology/tss_10.jpg"
                   alt=""
                   className="w-full h-80 object-cover object-center block mb-8 align-middle border-none"
                 />
@@ -185,7 +185,7 @@ const Content = () => {
                   CẢNH BÁO PHƯƠNG TIỆN PHÍA TRƯỚC KHỞI HÀNH (FDA)
                 </p>
                 <img
-                  src="public/imgs/technology/tss_10.jpg"
+                  src="/imgs/technology/tss_10.jpg"
                   alt=""
                   className="w-full h-80 object-cover object-center block mb-8 align-middle border-none"
                 />
@@ -210,7 +210,7 @@ const Content = () => {
                   KIỂM SOÁT VẬN HÀNH CHÂN GA (PMC)
                 </p>
                 <img
-                  src="public/imgs/technology/tss_11.jpg"
+                  src="/imgs/technology/tss_11.jpg"
                   alt=""
                   className="w-full h-80 object-cover object-center block mb-8 align-middle border-none"
                 />

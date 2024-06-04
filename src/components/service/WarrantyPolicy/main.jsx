@@ -20,7 +20,7 @@ const Warranty = () => {
           <div className="w-full h-full object-center">
             <img
               className="align-middle border-none"
-              src="public/imgs/banner.jpg"
+              src="/imgs/banner.jpg"
               alt=""
             />
           </div>

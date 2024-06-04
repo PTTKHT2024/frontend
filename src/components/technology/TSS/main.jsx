@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import YoutubeEmbed from '/src/components/common/YoutubeEmbed';
+import YoutubeEmbed from '../../common/YoutubeEmbed';
 import Content from "./content";
 import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 
@@ -19,7 +19,7 @@ const TSS = ({title, src}) => {
         <div className="relative pt-16 ">
           <div className="h-96 w-full max-w-full">
             <img
-              src="public/imgs/technology/tss_1.jpg"
+              src="/imgs/technology/tss_1.jpg"
               alt=""
               className="w-full h-full object-center align-middle border-none"
             />
@@ -75,7 +75,7 @@ const TSS = ({title, src}) => {
                 ) : (
                   <div>
                     <img
-                      src="public/imgs/technology/tss_12.jpg"
+                      src="/imgs/technology/tss_12.jpg"
                       alt=""
                       className="w-80 h-44"
                     />
