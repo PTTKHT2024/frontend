@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Tools from '/VScode/frontend/src/components/common/Tool';
-import YoutubeEmbed from '/VScode/frontend/src/components/common/YoutubeEmbed';
+import YoutubeEmbed from '/src/components/common/YoutubeEmbed';
 import Content from "./content";
 import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 
@@ -16,7 +15,6 @@ const TSS = ({title, src}) => {
   };
   return (
     <>
-      <Tools />
       <div className="mt-24 max-w-[1600px] m-auto p-0 relative w-full">
         <div className="relative pt-16 ">
           <div className="h-96 w-full max-w-full">
