@@ -10,7 +10,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { Link } from 'react-router-dom';
 
-const CarDiscoverTab = () => {
+const CarDiscoverTab = ({ carTabsWidth = 80, all = false }) => {
   const [cars, setCars] = useState([
     {
       id: '',
@@ -27,6 +27,8 @@ const CarDiscoverTab = () => {
   ]);
   const [isLoading, setIsLoading] = useState(true);
   const [carClass, setCarClass] = useState('Sedan');
+
+  console.log(all);
 
   useEffect(() => {
     setCars(fakeData);
@@ -53,7 +55,8 @@ const CarDiscoverTab = () => {
             tabs={tabs()}
             handleChangeTab={setCarClass}
             currentTab={carClass}
-            width={80}
+            width={carTabsWidth}
+            all={all}
           />
 
           <Swiper
@@ -64,9 +67,7 @@ const CarDiscoverTab = () => {
               nextEl: '.swiper-button-next',
               prevEl: '.swiper-button-prev',
             }}
-            pagination={{
-              clickable: true,
-            }}
+            pagination={all ? false : { clickable: true }}
             loop
             onSwiper={(swiper) => {
               swiper.pagination.update();

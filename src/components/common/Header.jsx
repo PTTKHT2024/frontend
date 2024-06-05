@@ -6,11 +6,23 @@ import { IoSearch } from 'react-icons/io5';
 import { AiOutlineUser } from 'react-icons/ai';
 import Login from '../auth/Login';
 import Register from '../auth/Register';
-import Overlay from '../car/Overlay';
+import Overlay from '../common/Overlay';
+import HeaderDropdown from './HeaderDropdown';
+import CarDiscoverTab from '../car/CarDiscoverTab';
+import { CarDiscoverTabHeaderContext } from '../context/ContextItnit';
+import HeaderDropDownFooter from './HeaderDropDownFooter';
 
 const Header = () => {
   const [isLoginOpend, setIsLoginOpened] = useState(false);
   const [isRegisterOpened, setIsRegisterOpened] = useState(false);
+  const [dropdownState, setDropDownState] = useState({
+    product: false,
+    technology: false,
+    service: false,
+    blog: false,
+    electric: false,
+    information: false,
+  });
 
   const handleClickLogin = () => {
     setIsRegisterOpened(false);
@@ -20,6 +32,19 @@ const Header = () => {
   const handleClickRegister = () => {
     setIsLoginOpened(false);
     setIsRegisterOpened(!isRegisterOpened);
+  };
+
+  const handleClickDropDown = (e) => {
+    const value = e.currentTarget.dataset.value;
+    setDropDownState({
+      product: false,
+      technology: false,
+      service: false,
+      blog: false,
+      electric: false,
+      information: false,
+      [value]: !dropdownState[value],
+    });
   };
 
   return (
@@ -139,34 +164,94 @@ const Header = () => {
 
               <div className="h-12 flex  border-t border-[#ccc]">
                 <ul className="flex items-center">
-                  <li className="text-base mr-5 flex items-center h-full cursor-pointer">
+                  <li
+                    className={`text-base flex items-center h-full cursor-pointer px-3 ${
+                      dropdownState.product && 'bg-[#f5f5f5]/[.7]'
+                    }`}
+                    onClick={handleClickDropDown}
+                    data-value="product"
+                  >
                     <span className="mr-1">Sản phẩm</span>
-                    <MdOutlineKeyboardArrowDown className="inline h-5 w-5 text-[#6b6b6b] justify-end" />
+                    <MdOutlineKeyboardArrowDown
+                      className={`inline h-5 w-5 text-[#6b6b6b] transition-all duration-[300ms] justify-end rotate-0 ${
+                        dropdownState.product && 'rotate-180'
+                      }`}
+                    />
                   </li>
 
-                  <li className="text-base mr-5 flex items-center h-full cursor-pointer">
+                  <li
+                    className={`text-base flex items-center h-full cursor-pointer px-3 ${
+                      dropdownState.technology && 'bg-[#f5f5f5]/[.7]'
+                    }`}
+                    onClick={handleClickDropDown}
+                    data-value="technology"
+                  >
                     <span className="mr-1">Công nghệ</span>
-                    <MdOutlineKeyboardArrowDown className="inline h-5 w-5 text-[#6b6b6b] justify-end" />
+                    <MdOutlineKeyboardArrowDown
+                      className={`inline h-5 w-5 text-[#6b6b6b] transition-all duration-[300ms] justify-end rotate-0 ${
+                        dropdownState.technology && 'rotate-180'
+                      }`}
+                    />
                   </li>
 
-                  <li className="text-base mr-5 flex items-center h-full cursor-pointer">
+                  <li
+                    className={`text-base flex items-center h-full cursor-pointer px-3 ${
+                      dropdownState.service && 'bg-[#f5f5f5]/[.7]'
+                    }`}
+                    onClick={handleClickDropDown}
+                    data-value="service"
+                  >
                     <span className="mr-1">Dịch vụ</span>
-                    <MdOutlineKeyboardArrowDown className="inline h-5 w-5 text-[#6b6b6b] justify-end" />
+                    <MdOutlineKeyboardArrowDown
+                      className={`inline h-5 w-5 text-[#6b6b6b] transition-all duration-[300ms] justify-end rotate-0 ${
+                        dropdownState.service && 'rotate-180'
+                      }`}
+                    />
                   </li>
 
-                  <li className="text-base mr-5 flex items-center h-full cursor-pointer">
+                  <li
+                    className={`text-base flex items-center h-full cursor-pointer px-3 ${
+                      dropdownState.blog && 'bg-[#f5f5f5]/[.7]'
+                    }`}
+                    onClick={handleClickDropDown}
+                    data-value="blog"
+                  >
                     <span className="mr-1">Tin tức & Khuyến mãi</span>
-                    <MdOutlineKeyboardArrowDown className="inline h-5 w-5 text-[#6b6b6b] justify-end" />
+                    <MdOutlineKeyboardArrowDown
+                      className={`inline h-5 w-5 text-[#6b6b6b] transition-all duration-[300ms] justify-end rotate-0 ${
+                        dropdownState.blog && 'rotate-180'
+                      }`}
+                    />
                   </li>
 
-                  <li className="text-base mr-5 flex items-center h-full cursor-pointer">
+                  <li
+                    className={`text-base flex items-center h-full cursor-pointer px-3 ${
+                      dropdownState.electric && 'bg-[#f5f5f5]/[.7]'
+                    }`}
+                    onClick={handleClickDropDown}
+                    data-value="electric"
+                  >
                     <span className="mr-1">Điện hóa</span>
-                    <MdOutlineKeyboardArrowDown className="inline h-5 w-5 text-[#6b6b6b] justify-end" />
+                    <MdOutlineKeyboardArrowDown
+                      className={`inline h-5 w-5 text-[#6b6b6b] transition-all duration-[300ms] justify-end rotate-0 ${
+                        dropdownState.electric && 'rotate-180'
+                      }`}
+                    />
                   </li>
 
-                  <li className="text-base mr-5 flex items-center h-full cursor-pointer">
+                  <li
+                    className={`text-base flex items-center h-full cursor-pointer px-3 ${
+                      dropdownState.information && 'bg-[#f5f5f5]/[.7]'
+                    }`}
+                    onClick={handleClickDropDown}
+                    data-value="information"
+                  >
                     <span className="mr-1">Về Toyota Việt Nam</span>
-                    <MdOutlineKeyboardArrowDown className="inline h-5 w-5 text-[#6b6b6b] justify-end" />
+                    <MdOutlineKeyboardArrowDown
+                      className={`inline h-5 w-5 text-[#6b6b6b] transition-all duration-[300ms] justify-end rotate-0 ${
+                        dropdownState.information && 'rotate-180'
+                      }`}
+                    />
                   </li>
                 </ul>
               </div>
@@ -174,6 +259,76 @@ const Header = () => {
           </div>
         </div>
       </header>
+      <div
+        className={`transition-all duration-[400ms] h-max w-full fixed top-[96px] py-5 bg-white z-30 ${
+          dropdownState.product
+            ? 'opacity-100 visible translate-y-0'
+            : 'opacity-0 invisible -translate-y-[96px]'
+        }`}
+      >
+        <HeaderDropdown onClick={handleClickDropDown}>
+          <CarDiscoverTab carTabsWidth={100} all={true} />
+          <div className="mb-7"></div>
+          <HeaderDropDownFooter />
+        </HeaderDropdown>
+      </div>
+
+      <div
+        className={`transition-all duration-[400ms] h-max w-full fixed top-[96px] z-20 ${
+          dropdownState.technology
+            ? 'opacity-100 visible translate-y-0'
+            : 'opacity-0 invisible -translate-y-[96px]'
+        }`}
+      >
+        <HeaderDropdown onClick={handleClickDropDown}>
+          <div className="grid grid-cols-4 gap-x-1.5">
+            <Link
+              className="col-span-1 relative overflow-hidden group block"
+              to={'/technology/hybrid'}
+            >
+              <img
+                src="/imgs/technology/poster/hybrid_poster.jpg"
+                alt="technology_img"
+                className="object-cover scale-[1.08] group-hover:scale-[1.18] transition-all duration-[600ms] linear"
+              />
+              <div className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.1] via-[#000]/[.1] to-[#000]/[.4] top-0"></div>
+              <p className="absolute bottom-[10%] left-[10%] text-white font-semibold text-xl uppercase">
+                HYBRID
+              </p>
+            </Link>
+
+            <Link
+              className="col-span-1 relative overflow-hidden group block"
+              to={'/technology/tss'}
+            >
+              <img
+                src="/imgs/technology/poster/tss_poster.png"
+                alt="technology_img"
+                className="object-cover scale-[1.08] group-hover:scale-[1.18] transition-all duration-[600ms] linear"
+              />
+              <div className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.14] via-[#000]/[.1] to-[#000]/[.4] top-0"></div>
+              <p className="absolute bottom-[10%] left-[10%] text-white font-semibold text-xl uppercase">
+                HYBRID
+              </p>
+            </Link>
+
+            <Link
+              className="col-span-1 relative overflow-hidden group block"
+              to={'/technology/tnga'}
+            >
+              <img
+                src="/imgs/technology/poster/tnga_poster.png"
+                alt="technology_img"
+                className="object-cover scale-[1.08] group-hover:scale-[1.18] transition-all duration-[600ms] linear"
+              />
+              <div className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.14] via-[#000]/[.1] to-[#000]/[.4] top-0"></div>
+              <p className="absolute bottom-[10%] left-[10%] text-white font-semibold text-xl uppercase">
+                HYBRID
+              </p>
+            </Link>
+          </div>
+        </HeaderDropdown>
+      </div>
     </>
   );
 };
