@@ -5,21 +5,38 @@ import { FaFacebook, FaYoutube } from 'react-icons/fa';
 import { IoSearch } from 'react-icons/io5';
 import { AiOutlineUser } from 'react-icons/ai';
 import Login from '../auth/Login';
+import Register from '../auth/Register';
+import Overlay from '../car/Overlay';
 
 const Header = () => {
   const [isLoginOpend, setIsLoginOpened] = useState(false);
+  const [isRegisterOpened, setIsRegisterOpened] = useState(false);
 
-  const handleClickLogin = (e) => {
-    if (e.target.id == 'overlay') {
-      setIsLoginOpened(false);
-    } else {
-      setIsLoginOpened(true);
-    }
+  const handleClickLogin = () => {
+    setIsRegisterOpened(false);
+    setIsLoginOpened(!isLoginOpend);
+  };
+
+  const handleClickRegister = () => {
+    setIsLoginOpened(false);
+    setIsRegisterOpened(!isRegisterOpened);
   };
 
   return (
     <>
-      {isLoginOpend && <Login handleToggleLogin={handleClickLogin} />}
+      {isLoginOpend && (
+        <>
+          <Overlay onClick={handleClickLogin} />
+          <Login handleClickRegister={handleClickRegister} />
+        </>
+      )}
+
+      {isRegisterOpened && (
+        <>
+          <Overlay onClick={handleClickRegister} />
+          <Register handleClickLogin={handleClickLogin} />
+        </>
+      )}
       <header className="border-b-4 border-primaryColor fixed top-0 z-50 w-full bg-white">
         <div className="container">
           <div className="flex justify-between">
@@ -104,6 +121,15 @@ const Header = () => {
                           onClick={handleClickLogin}
                         >
                           Đăng nhập
+                        </span>
+                      </li>
+
+                      <li className="p-2.5">
+                        <span
+                          className="text-base text-nowrap hover:text-primaryColor transition-colors duration-200 cursor-pointer"
+                          onClick={handleClickRegister}
+                        >
+                          Đăng ký
                         </span>
                       </li>
                     </ul>

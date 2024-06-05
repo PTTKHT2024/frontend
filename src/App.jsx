@@ -1,5 +1,11 @@
 import './App.css';
-import { BrowserRouter, Route, Routes, Outlet } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Outlet,
+  HashRouter,
+} from 'react-router-dom';
 import Home from './components/layout/home/Home';
 import MaintainService from './components/service/MaintainService/MaintainService';
 import Header from './components/common/Header';
@@ -43,7 +49,6 @@ function App() {
             {/* <Route path="users" element={<AdminUsers />} /> */}
           </Route>
         </Routes>
-        <Footer />
       </BrowserRouter>
     </>
   );

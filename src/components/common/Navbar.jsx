@@ -7,7 +7,7 @@ const Navbar = ({ datas }) => {
 
   return (
     <>
-      <nav className="sticky bg-black top-[96px] w-full z-[50]">
+      <nav className="sticky bg-black top-[96px] w-full z-[10]">
         <ul className="flex container">
           {datas.map((data) => (
             <li key={data.id}>
