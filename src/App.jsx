@@ -10,6 +10,7 @@ import SedanShowroom from './components/layout/showroom/SedanShowroom';
 import Warranty from './components/service/WarrantyPolicy/main';
 import RepairService from './components/service/RepairService/RepairService';
 import HybridTechnology from './components/technology/hybrid/HybridTechnology';
+import Community from './components/information/community/Community';
 
 function App() {
   return (
@@ -31,6 +32,9 @@ function App() {
           <Route path="/technology" element={<TechnologyLayout />}>
             <Route path="hybrid" element={<HybridTechnology />} />
           </Route>
+          <Route path="/information" element={<InformationLayout />}>
+            <Route path="community" element={<Community />} />
+          </Route>
         </Routes>
         <Footer />
       </BrowserRouter>
@@ -46,4 +50,7 @@ function TechnologyLayout() {
   return <Outlet />;
 }
 
+function InformationLayout() {
+  return <Outlet />;
+}
 export default App;
