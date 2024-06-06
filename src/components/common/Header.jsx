@@ -77,8 +77,8 @@ const Header = () => {
                     <Link to={'/show-rooms'}>VR Showroom</Link>
                     <MdOutlineKeyboardArrowDown className="inline h-5 w-5 transition-transform duration-300 group-hover:rotate-180" />
 
-                    <ul className="absolute top-full left-0 bg-white border py-1 opacity-0 invisible transform -translate-y-2 transition duration-500 group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible z-10">
-                      <li className="p-2.5">
+                    <ul className="absolute top-full left-0 bg-white border py-1 opacity-0 invisible transform -translate-y-2 transition duration-500 group-hover:opacity-100 group-hover:translate-y-0 bg-transparent group-hover:visible z-10">
+                      <li className="p-2.5" bg-white>
                         <Link
                           className="text-base text-nowrap hover:text-primaryColor transition-colors duration-200"
                           to={'/vr-suv'}
@@ -139,8 +139,8 @@ const Header = () => {
                   <li className="text-sm mr-5 flex items-center relative group">
                     <AiOutlineUser className="inline h-5 w-5 transition-transform duration-300" />
 
-                    <ul className="absolute top-full left-0 bg-white border py-1 opacity-0 invisible transform -translate-y-2 transition duration-500 group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible z-10">
-                      <li className="p-2.5">
+                    <ul className="absolute top-full left-0 bg-white border py-1 opacity-0 invisible transform -translate-y-2 transition duration-500 group-hover:opacity-100 group-hover:translate-y-0 bg-transparent group-hover:visible z-10">
+                      <li className="p-2.5" bg-white>
                         <span
                           className="text-base text-nowrap hover:text-primaryColor transition-colors duration-200 cursor-pointer"
                           onClick={handleClickLogin}
@@ -259,11 +259,12 @@ const Header = () => {
           </div>
         </div>
       </header>
+
       <div
         className={`transition-all duration-[400ms] h-max w-full fixed top-[96px] py-5 bg-white z-30 ${
           dropdownState.product
-            ? 'opacity-100 visible translate-y-0'
-            : 'opacity-0 invisible -translate-y-[96px]'
+            ? 'opacity-100 visible translate-y-0 bg-transparent'
+            : 'opacity-0 invisible -translate-y-[96px] bg-white'
         }`}
       >
         <HeaderDropdown onClick={handleClickDropDown}>
@@ -276,54 +277,274 @@ const Header = () => {
       <div
         className={`transition-all duration-[400ms] h-max w-full fixed top-[96px] z-20 ${
           dropdownState.technology
-            ? 'opacity-100 visible translate-y-0'
-            : 'opacity-0 invisible -translate-y-[96px]'
+            ? 'opacity-100 visible translate-y-0 bg-transparent'
+            : 'opacity-0 invisible -translate-y-[96px] bg-white'
         }`}
       >
         <HeaderDropdown onClick={handleClickDropDown}>
-          <div className="grid grid-cols-4 gap-x-1.5">
+          <div className="grid grid-cols-4 gap-x-1.5 gap-y-1.5">
             <Link
-              className="col-span-1 relative overflow-hidden group block"
+              className="col-span-1 relative overflow-hidden group block h-[38vh]"
               to={'/technology/hybrid'}
             >
               <img
                 src="/imgs/technology/poster/hybrid_poster.jpg"
                 alt="technology_img"
-                className="object-cover scale-[1.08] group-hover:scale-[1.18] transition-all duration-[600ms] linear"
+                className="object-cover scale-[1.01] group-hover:scale-[1.14] transition-all duration-[600ms] linear h-full w-full "
               />
-              <div className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.1] via-[#000]/[.1] to-[#000]/[.4] top-0"></div>
-              <p className="absolute bottom-[10%] left-[10%] text-white font-semibold text-xl uppercase">
+              <div className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.1] via-[#000]/[.1] to-[#000]/[.7] top-0"></div>
+              <p className="absolute bottom-[8%] left-[6%] text-white font-semibold text-lg uppercase">
                 HYBRID
               </p>
             </Link>
 
             <Link
-              className="col-span-1 relative overflow-hidden group block"
+              className="col-span-1 relative overflow-hidden group block h-[38vh]"
               to={'/technology/tss'}
             >
               <img
                 src="/imgs/technology/poster/tss_poster.png"
                 alt="technology_img"
-                className="object-cover scale-[1.08] group-hover:scale-[1.18] transition-all duration-[600ms] linear"
+                className="object-cover scale-[1.01] group-hover:scale-[1.14] transition-all duration-[600ms] linear h-full w-full "
               />
-              <div className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.14] via-[#000]/[.1] to-[#000]/[.4] top-0"></div>
-              <p className="absolute bottom-[10%] left-[10%] text-white font-semibold text-xl uppercase">
-                HYBRID
+              <div className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.14] via-[#000]/[.1] to-[#000]/[.7] top-0"></div>
+              <p className="absolute bottom-[8%] left-[6%] text-white font-semibold text-lg uppercase">
+                TSS
               </p>
             </Link>
 
             <Link
-              className="col-span-1 relative overflow-hidden group block"
+              className="col-span-1 relative overflow-hidden group block h-[38vh]"
               to={'/technology/tnga'}
             >
               <img
                 src="/imgs/technology/poster/tnga_poster.png"
                 alt="technology_img"
-                className="object-cover scale-[1.08] group-hover:scale-[1.18] transition-all duration-[600ms] linear"
+                className="object-cover scale-[1.01] group-hover:scale-[1.14] transition-all duration-[600ms] linear h-full w-full "
               />
-              <div className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.14] via-[#000]/[.1] to-[#000]/[.4] top-0"></div>
-              <p className="absolute bottom-[10%] left-[10%] text-white font-semibold text-xl uppercase">
-                HYBRID
+              <div className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.14] via-[#000]/[.1] to-[#000]/[.7] top-0"></div>
+              <p className="absolute bottom-[8%] left-[6%] text-white font-semibold text-lg uppercase">
+                TNGA
+              </p>
+            </Link>
+          </div>
+        </HeaderDropdown>
+      </div>
+
+      <div
+        className={`transition-all duration-[400ms] h-max w-full fixed top-[96px] z-20 ${
+          dropdownState.blog
+            ? 'opacity-100 visible translate-y-0 bg-transparent'
+            : 'opacity-0 invisible -translate-y-[96px] bg-white'
+        }`}
+      >
+        <HeaderDropdown onClick={handleClickDropDown}>
+          <div className="grid grid-cols-4 gap-x-1.5 gap-y-1.5">
+            <Link
+              className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              to={'/technology/hybrid'}
+            >
+              <img
+                src="/imgs/blog/poster/product_poster.png"
+                alt="blog_img"
+                className="object-cover scale-[1.01] group-hover:scale-[1.14] transition-all duration-[600ms] h-full w-full  linear"
+              />
+              <div className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.1] via-[#000]/[.1] to-[#000]/[.7] top-0"></div>
+              <p className="absolute bottom-[8%] left-[6%] text-white font-semibold text-lg uppercase">
+                sản phẩm
+              </p>
+            </Link>
+
+            <Link
+              className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              to={'/technology/tss'}
+            >
+              <img
+                src="/imgs/blog/poster/promotion_poster.jpg"
+                alt="blog_img"
+                className="object-cover scale-[1.01] group-hover:scale-[1.14] transition-all duration-[600ms] linear h-full w-full "
+              />
+              <div className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.14] via-[#000]/[.1] to-[#000]/[.7] top-0"></div>
+              <p className="absolute bottom-[8%] left-[6%] text-white font-semibold text-lg uppercase">
+                khuyến mãi
+              </p>
+            </Link>
+
+            <Link
+              className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              to={'/technology/tnga'}
+            >
+              <img
+                src="/imgs/blog/poster/community_poster.png"
+                alt="blog_img"
+                className="object-cover scale-[1.01] group-hover:scale-[1.14] transition-all duration-[600ms] linear h-full w-full "
+              />
+              <div className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.14] via-[#000]/[.1] to-[#000]/[74] top-0"></div>
+              <p className="absolute bottom-[8%] left-[6%] text-white font-semibold text-lg uppercase">
+                xã hội
+              </p>
+            </Link>
+
+            <Link
+              className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              to={'/technology/tnga'}
+            >
+              <img
+                src="/imgs/blog/poster/additional_information_poster.png"
+                alt="blog_img"
+                className="object-cover scale-[1.01] group-hover:scale-[1.14] transition-all duration-[600ms] linear"
+              />
+              <div
+                h-full
+                w-full
+                className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.14] via-[#000]/[.1] to-[#000]/[.7] top-0"
+              ></div>
+              <p className="absolute bottom-[8%] left-[6%] text-white font-semibold text-lg uppercase">
+                thông tin khác
+              </p>
+            </Link>
+          </div>
+        </HeaderDropdown>
+      </div>
+
+      <div
+        className={`transition-all duration-[400ms] h-max w-full fixed top-[96px] z-20 ${
+          dropdownState.electric
+            ? 'opacity-100 visible translate-y-0 bg-transparent'
+            : 'opacity-0 invisible -translate-y-[96px] bg-white'
+        }`}
+      >
+        <HeaderDropdown onClick={handleClickDropDown}>
+          <div className="grid grid-cols-4 gap-x-1.5 gap-y-1.5">
+            <Link
+              className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              to={'/technology/hybrid'}
+            >
+              <img
+                src="/imgs/electric/poster/electric_poster_1.jpg"
+                alt="electric_img"
+                className="object-cover scale-[1.01] group-hover:scale-[1.14] transition-all duration-[600ms] linear h-full w-full "
+              />
+              <div className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.1] via-[#000]/[.1] to-[#000]/[.7] top-0"></div>
+              <p className="absolute bottom-[8%] left-[6%] text-white font-semibold text-lg uppercase">
+                điện hóa ô tô
+              </p>
+            </Link>
+
+            <Link
+              className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              to={'/technology/tss'}
+            >
+              <img
+                src="/imgs/electric/poster/electric_poster_2.jpg"
+                alt="electric_img"
+                className="object-cover scale-[1.01] group-hover:scale-[1.14] transition-all duration-[600ms] linear h-full w-full "
+              />
+              <div className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.14] via-[#000]/[.1] to-[#000]/[74] top-0"></div>
+              <p className="absolute bottom-[8%] left-[6%] text-white font-semibold text-lg uppercase">
+                công nghệ hybrid
+              </p>
+            </Link>
+
+            <Link
+              className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              to={'/technology/tnga'}
+            >
+              <img
+                src="/imgs/electric/poster/electric_poster_3.jpg"
+                alt="electric_img"
+                className="object-cover scale-[1.01] group-hover:scale-[1.14] transition-all duration-[600ms] linear h-full w-full "
+              />
+              <div className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.14] via-[#000]/[.1] to-[#000]/[74] top-0"></div>
+              <p className="absolute bottom-[8%] left-[6%] text-white font-semibold text-lg uppercase">
+                công nghệ thuần điện
+              </p>
+            </Link>
+          </div>
+        </HeaderDropdown>
+      </div>
+
+      <div
+        className={`transition-all duration-[400ms] h-max w-full fixed top-[96px] z-20 ${
+          dropdownState.information
+            ? 'opacity-100 visible translate-y-0 bg-transparent'
+            : 'opacity-0 invisible -translate-y-[96px] bg-white'
+        }`}
+      >
+        <HeaderDropdown onClick={handleClickDropDown}>
+          <div className="grid grid-cols-4 gap-x-1.5 gap-y-1.5">
+            <Link
+              className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              to={'/technology/hybrid'}
+            >
+              <img
+                src="/imgs/information/poster/information_poster_1.png"
+                alt="information_img"
+                className="object-cover scale-[1.01] group-hover:scale-[1.14] transition-all duration-[600ms] linear h-full w-full "
+              />
+              <div className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.1] via-[#000]/[.1] to-[#000]/[.7] top-0"></div>
+              <p className="absolute bottom-[8%] left-[6%] text-white font-semibold text-lg uppercase">
+                tuyển dụng
+              </p>
+            </Link>
+
+            <Link
+              className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              to={'/technology/tss'}
+            >
+              <img
+                src="/imgs/information/poster/information_poster_2.png"
+                alt="information_img"
+                className="object-cover scale-[1.01] group-hover:scale-[1.14] transition-all duration-[600ms] linear h-full w-full "
+              />
+              <div className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.14] via-[#000]/[.1] to-[#000]/[74] top-0"></div>
+              <p className="absolute bottom-[8%] left-[6%] text-white font-semibold text-lg uppercase">
+                giới thiệu công ty
+              </p>
+            </Link>
+
+            <Link
+              className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              to={'/technology/tnga'}
+            >
+              <img
+                src="/imgs/information/poster/information_poster_3.png"
+                alt="information_img"
+                className="object-cover scale-[1.01] group-hover:scale-[1.14] transition-all duration-[600ms] linear h-full w-full "
+              />
+              <div className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.14] via-[#000]/[.1] to-[#000]/[74] top-0"></div>
+              <p className="absolute bottom-[8%] left-[6%] text-white font-semibold text-lg uppercase">
+                cộng đồng
+              </p>
+            </Link>
+
+            <Link
+              className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              to={'/technology/tnga'}
+            >
+              <img
+                src="/imgs/information/poster/information_poster_4.png"
+                alt="information_img"
+                className="object-cover scale-[1.01] group-hover:scale-[1.14] transition-all duration-[600ms] linear h-full w-full "
+              />
+              <div className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.14] via-[#000]/[.1] to-[#000]/[74] top-0"></div>
+              <p className="absolute bottom-[8%] left-[6%] text-white font-semibold text-lg uppercase">
+                nội địa hóa
+              </p>
+            </Link>
+
+            <Link
+              className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              to={'/technology/tnga'}
+            >
+              <img
+                src="/imgs/information/poster/information_poster_5.png"
+                alt="information_img"
+                className="object-cover scale-[1.01] group-hover:scale-[1.14] transition-all duration-[600ms] linear h-full w-full "
+              />
+              <div className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.14] via-[#000]/[.1] to-[#000]/[74] top-0"></div>
+              <p className="absolute bottom-[8%] left-[6%] text-white font-semibold text-lg uppercase">
+                tạp chí toyota
               </p>
             </Link>
           </div>

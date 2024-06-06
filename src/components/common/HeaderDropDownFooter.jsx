@@ -13,7 +13,7 @@ const HeaderDropDownFooter = () => {
             }}
             className="bg-[url('/imgs/global-image.png')] w-[17px] h-6 bg-center block mr-2 inline-block"
           ></span>{' '}
-          <p className="text-subInformationColor font-medium text-base">
+          <p className="text-subInformationColor/[.9] font-medium text-base">
             Tải về Catalogue
           </p>
         </Link>
@@ -26,7 +26,7 @@ const HeaderDropDownFooter = () => {
             }}
             className="bg-[url('/imgs/global-image.png')] w-[21px] h-6 bg-center block mr-2 inline-block"
           ></span>{' '}
-          <p className="text-subInformationColor font-medium text-base">
+          <p className="text-subInformationColor/[.9] font-medium text-base">
             Dự toán tài chính
           </p>
         </Link>
@@ -39,7 +39,7 @@ const HeaderDropDownFooter = () => {
             }}
             className="bg-[url('/imgs/global-image.png')] w-6 h-6 bg-center block mr-2 inline-block"
           ></span>{' '}
-          <p className="text-subInformationColor font-medium text-base">
+          <p className="text-subInformationColor/[.9] font-medium text-base">
             Đăng ký lái thử
           </p>
         </Link>
