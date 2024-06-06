@@ -23,95 +23,130 @@ const Tool = () => {
           <FaList className="m-auto w-5 h-5" />
         )}
       </button>
+
       {isOpened && (
-        <ul className="">
+        <ul>
           <li
-            className="w-full h-[48px] bg-white"
+            className="w-max h-[48px] bg-white transition-all duration-[.35s] ease hover:-translate-x-[calc(100%-48px)] pr-[16px] group"
             style={{ boxShadow: 'inset 0 0 1px 1px rgba(192, 192, 192, 0.6)' }}
           >
-            <Link className="h-full w-full flex justify-center items-center">
-              <span
-                style={{
-                  backgroundPositionX: '-89px',
-                  backgroundPositionY: '-339px',
-                }}
-                className="bg-[url('/imgs/global-image.png')] w-[17px] h-6 bg-center"
-              ></span>
+            <Link className="h-full w-max flex justify-center items-center">
+              <div className="h-full w-[48px] flex items-center justify-center">
+                <span
+                  style={{
+                    backgroundPositionX: '-89px',
+                    backgroundPositionY: '-339px',
+                  }}
+                  className="bg-[url('/imgs/global-image.png')] w-[17px] h-6 bg-center block"
+                ></span>
+              </div>
+              <p className="text-base text-mainTitleColor font-medium group-hover:text-primaryColor">
+                So sánh xe
+              </p>
             </Link>
           </li>
 
           <li
-            className="w-full h-[48px] bg-white"
+            className="w-max h-[48px] bg-white transition-all duration-[.35s] ease hover:-translate-x-[calc(100%-48px)] pr-[16px] group"
             style={{ boxShadow: 'inset 0 0 1px 1px rgba(192, 192, 192, 0.6)' }}
           >
             <Link className="h-full w-full flex justify-center items-center">
-              <span
-                style={{
-                  backgroundPositionX: '-10px',
-                  backgroundPositionY: '-339px',
-                }}
-                className="bg-[url('/imgs/global-image.png')] w-[21px] h-6 bg-center"
-              ></span>
+              <div className="h-full w-[48px] flex items-center justify-center">
+                <span
+                  style={{
+                    backgroundPositionX: '-10px',
+                    backgroundPositionY: '-339px',
+                  }}
+                  className="bg-[url('/imgs/global-image.png')] w-[21px] h-6 bg-center"
+                ></span>
+              </div>
+              <p className="text-base text-mainTitleColor font-medium group-hover:text-primaryColor">
+                Dự toán chi phí
+              </p>
             </Link>
           </li>
 
           <li
-            className="w-full h-[48px] bg-white"
+            className="w-max h-[48px] bg-white transition-all duration-[.35s] ease hover:-translate-x-[calc(100%-48px)] pr-[16px] group"
             style={{ boxShadow: 'inset 0 0 1px 1px rgba(192, 192, 192, 0.6)' }}
           >
             <Link className="h-full w-full flex justify-center items-center">
-              <span
-                style={{
-                  backgroundPositionX: '-364px',
-                  backgroundPositionY: '-219px',
-                }}
-                className="bg-[url('/imgs/global-image.png')] w-6 h-6 bg-center"
-              ></span>
+              <div className="h-full w-[48px] flex items-center justify-center">
+                <span
+                  style={{
+                    backgroundPositionX: '-364px',
+                    backgroundPositionY: '-219px',
+                  }}
+                  className="bg-[url('/imgs/global-image.png')] w-6 h-6 bg-center"
+                ></span>
+              </div>
+              <p className="text-base text-mainTitleColor font-medium group-hover:text-primaryColor">
+                Đăng ký lái thử
+              </p>
             </Link>
           </li>
 
           <li
-            className="w-full h-[48px] bg-white"
+            className="w-max h-[48px] bg-white transition-all duration-[.35s] ease hover:-translate-x-[calc(100%-48px)] pr-[16px] group"
             style={{ boxShadow: 'inset 0 0 1px 1px rgba(192, 192, 192, 0.6)' }}
           >
             <Link className="h-full w-full flex justify-center items-center">
-              <span
-                style={{
-                  backgroundPositionX: '-232px',
-                  backgroundPositionY: '-219px',
-                }}
-                className="bg-[url('/imgs/global-image.png')] w-6 h-6 bg-center"
-              ></span>
+              <div className="h-full w-[48px] flex items-center justify-center">
+                <span
+                  style={{
+                    backgroundPositionX: '-232px',
+                    backgroundPositionY: '-219px',
+                  }}
+                  className="bg-[url('/imgs/global-image.png')] w-6 h-6 bg-center"
+                ></span>
+              </div>
+              <p className="text-base text-mainTitleColor font-medium group-hover:text-primaryColor">
+                Đặt hẹn dịch vụ
+              </p>
             </Link>
           </li>
 
           <li
-            className="w-full h-[48px] bg-white"
+            className="w-max h-[48px] bg-white transition-all duration-[.35s] ease hover:-translate-x-[calc(100%-48px)] pr-[16px] group"
             style={{ boxShadow: 'inset 0 0 1px 1px rgba(192, 192, 192, 0.6)' }}
           >
-            <Link className="h-full w-full flex justify-center items-center">
-              <span
-                style={{
-                  backgroundPositionX: '-52px',
-                  backgroundPositionY: '-339px',
-                }}
-                className="bg-[url('/imgs/global-image.png')] w-[18px] h-6 bg-center"
-              ></span>
-            </Link>
+            <a
+              className="h-full w-full flex justify-center items-center"
+              href="/files/price-table.pdf"
+              target="_blank"
+            >
+              <div className="h-full w-[48px] flex items-center justify-center">
+                <span
+                  style={{
+                    backgroundPositionX: '-52px',
+                    backgroundPositionY: '-339px',
+                  }}
+                  className="bg-[url('/imgs/global-image.png')] w-[18px] h-6 bg-center"
+                ></span>
+              </div>
+              <p className="text-base text-mainTitleColor font-medium group-hover:text-primaryColor">
+                Tải dịch vụ
+              </p>
+            </a>
           </li>
 
           <li
-            className="w-full h-[48px] bg-white"
+            className="w-max h-[48px] bg-white transition-all duration-[.35s] ease hover:-translate-x-[calc(100%-48px)] pr-[16px] group"
             style={{ boxShadow: 'inset 0 0 1px 1px rgba(192, 192, 192, 0.6)' }}
           >
             <Link className="h-full w-full flex justify-center items-center">
-              <span
-                style={{
-                  backgroundPositionX: '-126px',
-                  backgroundPositionY: '-339px',
-                }}
-                className="bg-[url('/imgs/global-image.png')] w-[17px] h-6 bg-center"
-              ></span>
+              <div className="h-full w-[48px] flex items-center justify-center">
+                <span
+                  style={{
+                    backgroundPositionX: '-126px',
+                    backgroundPositionY: '-339px',
+                  }}
+                  className="bg-[url('/imgs/global-image.png')] w-[17px] h-6 bg-center"
+                ></span>
+              </div>
+              <p className="text-base text-mainTitleColor font-medium group-hover:text-primaryColor">
+                Tải catalogue
+              </p>
             </Link>
           </li>
         </ul>
