@@ -27,6 +27,7 @@ import TSS from './components/technology/TSS/main';
 import Community from './components/information/community/Community';
 import TngaTechnology from './components/technology/tnga/TngaTechnology';
 
+import Appointment from './components/form/appointment';
 function App() {
   return (
     <>
@@ -38,6 +39,7 @@ function App() {
             <Route path="vr-suv" element={<SUVShowroom />} />
             <Route path="vr-sedan" element={<SedanShowroom />} />
             <Route path="show-rooms" element={<VRShowroom />} />
+            <Route path="appointment" element={<Appointment />} />
 
             {/* Service route */}
             <Route path="service" element={<ServiceLayout />}>
