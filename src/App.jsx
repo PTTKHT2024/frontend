@@ -15,16 +15,13 @@ import VRShowroom from './components/layout/showroom/VRShowroom';
 import SedanShowroom from './components/layout/showroom/SedanShowroom';
 import Warranty from './components/service/WarrantyPolicy/main';
 import RepairService from './components/service/RepairService/RepairService';
-<<<<<<< HEAD
 import HybridTechnology from './components/technology/hybrid/HybridTechnology';
-=======
 import Login from './components/auth/Login';
 import Navbar from './components/common/Navbar';
 import { datas as serviceNavbarDatas } from './components/data/ServiceNavbarData';
 import OrderButton from './components/service/OrderButton';
 import Tool from './components/common/Tool';
 import { useEffect } from 'react';
->>>>>>> feature/10-update-create-Login.jsx-Logout.jsx
 
 function App() {
   return (
