@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './MaintainService.css';
-import Header from './headerService';
+import { Link } from 'react-router-dom';
 
 const MaintainService = () => {
   const [activeTab, setActiveTab] = useState('Tab1');
@@ -11,28 +11,35 @@ const MaintainService = () => {
 
   return (
     <div>
-      <Header />
       <div className="tab-header">
         <h4
-          className={`tab-link ${activeTab === 'Tab1' ? 'active' : ''}`}
+          className={`tab-link text-base ${
+            activeTab === 'Tab1' ? 'active' : ''
+          }`}
           onClick={() => handleTabClick('Tab1')}
         >
           Lợi ích của việc bảo dưỡng định kỳ
         </h4>
         <h4
-          className={`tab-link ${activeTab === 'Tab2' ? 'active' : ''}`}
+          className={`tab-link text-base ${
+            activeTab === 'Tab2' ? 'active' : ''
+          }`}
           onClick={() => handleTabClick('Tab2')}
         >
           Tiêu chuẩn bảo dưỡng định kỳ
         </h4>
         <h4
-          className={`tab-link ${activeTab === 'Tab3' ? 'active' : ''}`}
+          className={`tab-link text-base ${
+            activeTab === 'Tab3' ? 'active' : ''
+          }`}
           onClick={() => handleTabClick('Tab3')}
         >
           Dịch vụ bảo dưỡng nhanh (EM60)
         </h4>
         <h4
-          className={`tab-link ${activeTab === 'Tab4' ? 'active' : ''}`}
+          className={`tab-link text-base ${
+            activeTab === 'Tab4' ? 'active' : ''
+          }`}
           onClick={() => handleTabClick('Tab4')}
         >
           Gói dịch vụ bảo dưỡng trả trước

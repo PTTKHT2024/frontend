@@ -22,3 +22,29 @@
   position: absolute;
   bottom: -70px !important;
 }
+
+@keyframes slide-down {
+  0% {
+    opacity: 0;
+    height: 0;
+    /* transform: translateY(-5%); */
+  }
+  100% {
+    opacity: 1;
+    height: max-content;
+    /* transform: translateY(0); */
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 1;
+    height: max-content;
+    /* transform: translateY(0); */
+  }
+  100% {
+    opacity: 0;
+    height: 0;
+    /* transform: translateY(-100%); */
+  }
+}
