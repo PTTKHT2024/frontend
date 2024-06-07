@@ -19,6 +19,7 @@ import HybridTechnology from './components/technology/hybrid/HybridTechnology';
 import Login from './components/auth/Login';
 import Navbar from './components/common/Navbar';
 import { datas as serviceNavbarDatas } from './components/data/ServiceNavbarData';
+import { datas as technologyNavbarDatas } from './components/data/TechnologyNavbarData';
 import OrderButton from './components/service/OrderButton';
 import Tool from './components/common/Tool';
 import { useEffect } from 'react';
@@ -58,7 +59,7 @@ function App() {
   );
 }
 
-function MainLayout() {
+function MainLayout({ children }) {
   return (
     <>
       <Header />
@@ -74,6 +75,7 @@ function ServiceLayout() {
   }, []);
   return (
     <>
+      <Header />
       <Navbar datas={serviceNavbarDatas} />
       <div>
         <img
@@ -85,6 +87,7 @@ function ServiceLayout() {
       <Outlet />
       <Tool />
       <OrderButton />
+      <Footer />
     </>
   );
 }
@@ -101,7 +104,18 @@ function AdminLayout() {
 }
 
 function TechnologyLayout() {
-  return <Outlet />;
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <>
+      <Header />
+      <Navbar datas={technologyNavbarDatas} />
+      <Outlet />;
+      <Tool />
+      <Footer />
+    </>
+  );
 }
 
 export default App;
