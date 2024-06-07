@@ -23,6 +23,7 @@ import { datas as technologyNavbarDatas } from './components/data/TechnologyNavb
 import OrderButton from './components/service/OrderButton';
 import Tool from './components/common/Tool';
 import { useEffect } from 'react';
+import TSS from './components/technology/TSS/main';
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
           </Route>
           <Route path="/technology" element={<TechnologyLayout />}>
             <Route path="hybrid" element={<HybridTechnology />} />
+            <Route path="tss" element={<TSS />} />
           </Route>
         </Routes>
       </BrowserRouter>

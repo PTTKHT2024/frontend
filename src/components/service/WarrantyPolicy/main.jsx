@@ -16,7 +16,16 @@ const Warranty = () => {
   return (
     <>
       <div className="max-w-full m-auto p-0 mt-24 w-full relative">
-        <div className="px-40">
+        <div className="relative">
+          <div className="w-full h-full object-center">
+            <img
+              className="align-middle border-none"
+              src="/imgs/banner.jpg"
+              alt=""
+            />
+          </div>
+        </div>
+        <div className="py-20 px-40">
           <div className="flex w-full m-auto items-center justify-center">
             <div
               className={`transition-all mr-10 ease-in-out cursor-pointer ${
