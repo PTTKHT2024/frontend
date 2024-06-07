@@ -10,6 +10,7 @@ import SedanShowroom from './components/layout/showroom/SedanShowroom';
 import Warranty from './components/service/WarrantyPolicy/main';
 import RepairService from './components/service/RepairService/RepairService';
 import HybridTechnology from './components/technology/hybrid/HybridTechnology';
+import TngaTechnology from './components/technology/tnga/TngaTechnology';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           </Route>
           <Route path="/technology" element={<TechnologyLayout />}>
             <Route path="hybrid" element={<HybridTechnology />} />
+            <Route path="tnga" element={<TngaTechnology />} />
           </Route>
         </Routes>
         <Footer />
