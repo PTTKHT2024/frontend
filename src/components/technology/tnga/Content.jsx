@@ -238,12 +238,12 @@ const Content = () => {
           </h2>
           <div className="flex border border-gray-300 px-[16px] h-[40px]">
             <select
-              className="max-w-full w-[200px]"
+              className="max-w-full w-[200px] outline-0"
               id="list"
               onChange={handleSelectChange}
             >
               <option value="video">Video</option>
-              <option value="image">Picture</option>
+              <option value="image">Hỉnh ảnh</option>
             </select>
           </div>
         </div>
