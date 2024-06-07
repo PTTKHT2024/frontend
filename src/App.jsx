@@ -47,6 +47,7 @@ function App() {
               <Route path="beauty" element={<></>} />
               <Route path="warranty" element={<Warranty />} />
               <Route path="repair" element={<RepairService />} />
+              <Route path="inspect" element={<RepairService />} />
             </Route>
           </Route>
 

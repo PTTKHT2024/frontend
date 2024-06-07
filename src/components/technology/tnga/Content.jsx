@@ -51,11 +51,11 @@ const Content = () => {
 
   return (
     <>
-      <div className="mt-[160px] mb-[60px]">
+      <div className="h-96 w-full max-w-full mt-16 mb-9">
         <img
-          className=" w-full h-[400px]"
-          src="/imgs/technology/banner-tnga.jpg"
-          alt="anh banner"
+          src="/imgs/technology/tss_1.jpg"
+          alt=""
+          className="w-full h-full object-center align-middle border-none"
         />
       </div>
       <div className="container mt-[60px] max-w-[1300px] mt-auto">

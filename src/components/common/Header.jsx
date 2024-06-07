@@ -47,6 +47,17 @@ const Header = () => {
     });
   };
 
+  const resetDropdownState = () => {
+    setDropDownState({
+      product: false,
+      technology: false,
+      service: false,
+      blog: false,
+      electric: false,
+      information: false,
+    });
+  };
+
   return (
     <>
       {isLoginOpend && (
@@ -166,7 +177,7 @@ const Header = () => {
                 <ul className="flex items-center">
                   <li
                     className={`text-base flex items-center h-full cursor-pointer px-3 ${
-                      dropdownState.product && 'bg-[#f5f5f5]/[.7]'
+                      dropdownState.product && 'bg-[#f5f5f5]/[.9]'
                     }`}
                     onClick={handleClickDropDown}
                     data-value="product"
@@ -181,7 +192,7 @@ const Header = () => {
 
                   <li
                     className={`text-base flex items-center h-full cursor-pointer px-3 ${
-                      dropdownState.technology && 'bg-[#f5f5f5]/[.7]'
+                      dropdownState.technology && 'bg-[#f5f5f5]/[.9]'
                     }`}
                     onClick={handleClickDropDown}
                     data-value="technology"
@@ -196,7 +207,7 @@ const Header = () => {
 
                   <li
                     className={`text-base flex items-center h-full cursor-pointer px-3 ${
-                      dropdownState.service && 'bg-[#f5f5f5]/[.7]'
+                      dropdownState.service && 'bg-[#f5f5f5]/[.9]'
                     }`}
                     onClick={handleClickDropDown}
                     data-value="service"
@@ -211,7 +222,7 @@ const Header = () => {
 
                   <li
                     className={`text-base flex items-center h-full cursor-pointer px-3 ${
-                      dropdownState.blog && 'bg-[#f5f5f5]/[.7]'
+                      dropdownState.blog && 'bg-[#f5f5f5]/[.9]'
                     }`}
                     onClick={handleClickDropDown}
                     data-value="blog"
@@ -226,7 +237,7 @@ const Header = () => {
 
                   <li
                     className={`text-base flex items-center h-full cursor-pointer px-3 ${
-                      dropdownState.electric && 'bg-[#f5f5f5]/[.7]'
+                      dropdownState.electric && 'bg-[#f5f5f5]/[.9]'
                     }`}
                     onClick={handleClickDropDown}
                     data-value="electric"
@@ -241,7 +252,7 @@ const Header = () => {
 
                   <li
                     className={`text-base flex items-center h-full cursor-pointer px-3 ${
-                      dropdownState.information && 'bg-[#f5f5f5]/[.7]'
+                      dropdownState.information && 'bg-[#f5f5f5]/[.9]'
                     }`}
                     onClick={handleClickDropDown}
                     data-value="information"
@@ -328,6 +339,166 @@ const Header = () => {
               </p>
             </Link>
           </div>
+        </HeaderDropdown>
+      </div>
+
+      <div
+        className={`transition-all duration-[400ms] h-max w-full fixed top-[96px] bg-white z-30 ${
+          dropdownState.service
+            ? 'opacity-100 visible translate-y-0 bg-transparent'
+            : 'opacity-0 invisible -translate-y-[96px] bg-white'
+        }`}
+      >
+        <HeaderDropdown onClick={handleClickDropDown}>
+          <div className="grid grid-cols-12">
+            <div className="col-span-6">
+              <div className="grid grid-cols-12 mt-[8vh] ml-[8vw]">
+                <div className="col-span-6">
+                  <ul>
+                    <li className="uppercase text-lg text-[#212529] font-bold mb-4">
+                      dịch vụ bảo dưỡng
+                    </li>
+                    <li
+                      className="h-9 group w-full"
+                      onClick={resetDropdownState}
+                    >
+                      <Link
+                        to="/service/maintain"
+                        className="text-base text-subInformationColor group-hover:font-bold group-hover:text-lg group-hover:text-primaryColor"
+                      >
+                        Bảo dưỡng định kỳ
+                      </Link>
+                    </li>
+                    <li
+                      className="h-9 group w-full"
+                      onClick={resetDropdownState}
+                    >
+                      <Link
+                        to="/service/repair"
+                        className="text-base text-subInformationColor group-hover:font-bold group-hover:text-lg group-hover:text-primaryColor"
+                      >
+                        Dịch vụ sửa chữa
+                      </Link>
+                    </li>
+                    <li
+                      className="h-9 group w-full"
+                      onClick={resetDropdownState}
+                    >
+                      <Link
+                        to="/service/beauty"
+                        className="text-base text-subInformationColor group-hover:font-bold group-hover:text-lg group-hover:text-primaryColor"
+                      >
+                        Dịch vụ chăm sóc làm đẹp xe
+                      </Link>
+                    </li>
+                    <li
+                      className="h-9 group w-full"
+                      onClick={resetDropdownState}
+                    >
+                      <Link
+                        to="/service/warranty"
+                        className="text-base text-subInformationColor group-hover:font-bold group-hover:text-lg group-hover:text-primaryColor"
+                      >
+                        Chính sách bảo hành
+                      </Link>
+                    </li>
+                    <li
+                      className="h-9 group w-full"
+                      onClick={resetDropdownState}
+                    >
+                      <Link
+                        to="/service/inspect"
+                        className="text-base text-subInformationColor group-hover:font-bold group-hover:text-lg group-hover:text-primaryColor"
+                      >
+                        Kiểm tra & Triệu hồi
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="col-span-6">
+                  <ul>
+                    <li className="uppercase text-lg text-[#212529] font-bold mb-4">
+                      dịch vụ sau bán hàng
+                    </li>
+                    <li
+                      className="h-9 group w-full"
+                      onClick={resetDropdownState}
+                    >
+                      <a
+                        href="https://www.tfsvn.com.vn/"
+                        target="_blank"
+                        className="text-base text-subInformationColor group-hover:font-bold group-hover:text-lg group-hover:text-primaryColor"
+                      >
+                        Dịch vụ tài chính Toyota
+                      </a>
+                    </li>
+                    <li
+                      className="h-9 group w-full"
+                      onClick={resetDropdownState}
+                    >
+                      <Link
+                        to="/service"
+                        className="text-base text-subInformationColor group-hover:font-bold group-hover:text-lg group-hover:text-primaryColor"
+                      >
+                        Bảo hiểm Toyota
+                      </Link>
+                    </li>
+                    <li
+                      className="h-9 group w-full"
+                      onClick={resetDropdownState}
+                    >
+                      <a
+                        href="https://toyotasure.vn/"
+                        target="_blank"
+                        className="text-base text-subInformationColor group-hover:font-bold group-hover:text-lg group-hover:text-primaryColor"
+                      >
+                        Xe đã qua sử dụng
+                      </a>
+                    </li>
+                    <li
+                      className="h-9 group w-full"
+                      onClick={resetDropdownState}
+                    >
+                      <Link
+                        to="/service"
+                        className="text-base text-subInformationColor group-hover:font-bold group-hover:text-lg group-hover:text-primaryColor"
+                      >
+                        Gia hạn bảo hành
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="col-span-6 mt-5">
+                  <ul>
+                    <li className="uppercase text-lg text-[#212529] font-bold mb-4">
+                      sản phẩm chính hãng
+                    </li>
+                    <li
+                      className="h-9 group w-full"
+                      onClick={resetDropdownState}
+                    >
+                      <Link
+                        to="/service"
+                        className="text-base text-subInformationColor group-hover:font-bold group-hover:text-lg group-hover:text-primaryColor"
+                      >
+                        Phụ kiện chính hãng
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div className="col-span-6">
+              <img
+                src="/imgs/toyota-touch.jpg"
+                alt="toyota-touch"
+                className="object-cover"
+              />
+            </div>
+          </div>
+          <HeaderDropDownFooter />
         </HeaderDropdown>
       </div>
 
