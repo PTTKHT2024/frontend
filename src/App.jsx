@@ -24,6 +24,7 @@ import OrderButton from './components/service/OrderButton';
 import Tool from './components/common/Tool';
 import { useEffect } from 'react';
 import TSS from './components/technology/TSS/main';
+import Community from './components/information/community/Community';
 
 function App() {
   return (
@@ -55,13 +56,16 @@ function App() {
             <Route path="hybrid" element={<HybridTechnology />} />
             <Route path="tss" element={<TSS />} />
           </Route>
+          <Route path="/information" element={<InformationLayout />}>
+            <Route path="community" element={<Community />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
   );
 }
 
-function MainLayout({ children }) {
+function MainLayout() {
   return (
     <>
       <Header />
@@ -120,4 +124,13 @@ function TechnologyLayout() {
   );
 }
 
+function InformationLayout() {
+  return (
+    <>
+      <Header />
+      <Outlet />
+      <Footer />
+    </>
+  );
+}
 export default App;
