@@ -10,7 +10,7 @@ const Banner = () => {
           className="w-full h-[50vh] object-cover"
           alt=""
         />
-        <div className="h-full flex items-center absolute left-[130px] top-24 mt-0">
+        <div className="h-full flex items-center absolute left-[130px] top-28 mt-0">
           <div className="flex py-3.5 mt-18 px-5 bg-primaryColor text-white text-xs mr-5 font-semibold tracking-widest">
             <Link to="#">TÌM HIỂU THÊM</Link>
           </div>
