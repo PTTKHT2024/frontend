@@ -10,7 +10,7 @@ import SedanShowroom from './components/layout/showroom/SedanShowroom';
 import Warranty from './components/service/WarrantyPolicy/main';
 import RepairService from './components/service/RepairService/RepairService';
 import HybridTechnology from './components/technology/hybrid/HybridTechnology';
-
+import Appointment from './components/form/appointment';
 function App() {
   return (
     <>
@@ -31,6 +31,7 @@ function App() {
           <Route path="/technology" element={<TechnologyLayout />}>
             <Route path="hybrid" element={<HybridTechnology />} />
           </Route>
+          <Route path="/appointment" element={<Appointment />} />
         </Routes>
         <Footer />
       </BrowserRouter>
