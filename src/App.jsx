@@ -25,6 +25,7 @@ import Tool from './components/common/Tool';
 import { useEffect } from 'react';
 import TSS from './components/technology/TSS/main';
 import Community from './components/information/community/Community';
+import TngaTechnology from './components/technology/tnga/TngaTechnology';
 
 function App() {
   return (
@@ -55,7 +56,9 @@ function App() {
           <Route path="/technology" element={<TechnologyLayout />}>
             <Route path="hybrid" element={<HybridTechnology />} />
             <Route path="tss" element={<TSS />} />
+            <Route path="tnga" element={<TngaTechnology />} />
           </Route>
+
           <Route path="/information" element={<InformationLayout />}>
             <Route path="community" element={<Community />} />
           </Route>
