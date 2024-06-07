@@ -11,7 +11,7 @@ const Tool = () => {
   };
 
   return (
-    <section className="fixed right-0 w-[48px] h-3/6 z-10 top-0 bottom-0 mt-auto mb-auto">
+    <section className="fixed right-0 w-[48px] h-3/6 z-10 top-0 bottom-0 mt-auto mb-auto z-[15]">
       <button
         className="w-full h-[48px] bg-white"
         onClick={handleToggleToolList}

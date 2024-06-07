@@ -23,28 +23,14 @@
   bottom: -70px !important;
 }
 
-@keyframes slide-down {
-  0% {
-    opacity: 0;
-    height: 0;
-    /* transform: translateY(-5%); */
-  }
-  100% {
-    opacity: 1;
-    height: max-content;
-    /* transform: translateY(0); */
-  }
+body::-webkit-scrollbar {
+  width: 9px;
 }
 
-@keyframes slide-up {
-  0% {
-    opacity: 1;
-    height: max-content;
-    /* transform: translateY(0); */
-  }
-  100% {
-    opacity: 0;
-    height: 0;
-    /* transform: translateY(-100%); */
-  }
+body::-webkit-scrollbar-track {
+  background-color: rgb(245, 245, 245);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #eb0a1e;
 }

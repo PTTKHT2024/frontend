@@ -16,7 +16,6 @@ const Home = () => {
       <MainTitle title="KHÁM PHÁ CÁC DÒNG XE TOYOTA" />
       <CarDiscoverTab />
       <ServiceIcon />
-      <Tool />
       <MainTitle title="DỊCH VỤ" />
       <CarServiceDiscoverTab />
       <MainTitle title="CÔNG NGHỆ" mt={180} />
