@@ -505,7 +505,7 @@ const Header = () => {
 
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
-              to={'/technology/tnga'}
+              to={'/information/community'}
             >
               <img
                 src="/imgs/information/poster/information_poster_3.png"
