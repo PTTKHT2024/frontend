@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from '../../common/Header';
 import Footer from '../../common/Footer';
 import Tool from '../../common/Tool';
+import { Link } from 'react-router-dom';
 
 const RepairService = () => {
   const [activeSubTab, setActiveSubTab] = useState('sua-chua-than');
@@ -12,47 +13,11 @@ const RepairService = () => {
 
   return (
     <>
-      <Header />
-      <Tool />
-
-      {/* Menu */}
-      {/* <!-- Tab links --> */}
-      <div className="tabs p-6 sticky top-0 w-full mt-sectionMargin_1 bg-black space-x-6 text-white text-xs font-bold text-subTitleColor-100">
-        <button
-          // active
-          className="tablinks ml-sectionMargin_1"
-          data-electronic="bao-duong"
-        >
-          BẢO DƯỠNG ĐỊNH KỲ
-        </button>
-        <button className="tablinks" data-electronic="sua-chua">
-          DỊCH VỤ SỬA CHỮA
-        </button>
-        <button className="tablinks" data-electronic="cham-soc">
-          DỊCH VỤ CHĂM SÓC LÀM ĐẸP XE
-        </button>
-        <button className="tablinks" data-electronic="bao-hanh">
-          CHÍNH SÁCH BẢO HÀNH
-        </button>
-        <button className="tablinks" data-electronic="kiem-tra">
-          KIỂM TRA & TRIỆU HỒI
-        </button>
-      </div>
-
-      <div>
-        <img
-          className="mb-sectionMargin_1"
-          src="https://www.toyota.com.vn/media/hb0bvfz3/008a7694.jpg"
-          alt=""
-        />
-      </div>
-
-      {/* Sub- Tab links */}
       <div className="sub-tabs mb-[70px] space-x-12 flex justify-center ml-[-30px]">
         <button
-          className={`tab-item px-4 py-2 font-bold text-sm ${
+          className={`tab-item px-4 py-2 font-bold text-base ${
             activeSubTab === 'sua-chua-than'
-              ? 'text-primaryColor underline'
+              ? 'text-primaryColor underline-offset-4 underline decoration-[2px]'
               : 'text-black'
           }`}
           onClick={() => handleSubTabClick('sua-chua-than')}
@@ -61,9 +26,9 @@ const RepairService = () => {
           Sửa chữa thân xe & sơn
         </button>
         <button
-          className={`tab-item px-4 py-2 font-bold text-sm ${
+          className={`tab-item px-4 py-2 font-bold text-base ${
             activeSubTab === 'sua-chua-chung'
-              ? 'text-primaryColor underline'
+              ? 'text-primaryColor underline-offset-4 underline decoration-[2px]'
               : 'text-black'
           }`}
           onClick={() => handleSubTabClick('sua-chua-chung')}
@@ -73,7 +38,6 @@ const RepairService = () => {
         </button>
       </div>
 
-      {/* Tab content */}
       <div className="wrapper_tabcontent text-subInformationColor mr-[200px] ml-[200px] ">
         <div
           id="sua-chua-than"
@@ -163,18 +127,6 @@ const RepairService = () => {
           </p>
         </div>
       </div>
-
-      {/*Bottom */}
-      <div className=" flex justify-center items-center">
-        <button className="mt-[36px] mb-[-40px] inline-block min-w-[98px] py-[11px] px-[20px] text-center bg-primaryColor text-[12px] font-bold ">
-          <a href="#!" className="text-white">
-            Đặt lịch hẹn dịch vụ
-          </a>
-        </button>
-      </div>
-
-      {/* Footer  */}
-      <Footer />
     </>
   );
 };

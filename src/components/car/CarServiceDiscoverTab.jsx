@@ -60,7 +60,7 @@ const CarServiceDiscoverTab = () => {
               </h3>
               <p className="line-clamp-3 mb-6">{service.description}</p>
               <Link
-                to={'/'}
+                to={`${service.route}`}
                 className="uppercase text-primaryColor text-base font-bold group"
               >
                 xem thêm{' '}
