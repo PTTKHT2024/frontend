@@ -125,7 +125,7 @@ const Tool = () => {
                 ></span>
               </div>
               <p className="text-base text-mainTitleColor font-medium group-hover:text-primaryColor">
-                Tải dịch vụ
+                Tải bảng giá
               </p>
             </a>
           </li>
