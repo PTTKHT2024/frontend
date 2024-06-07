@@ -25,7 +25,9 @@ import Tool from './components/common/Tool';
 import { useEffect } from 'react';
 import TSS from './components/technology/TSS/main';
 import Community from './components/information/community/Community';
+import TngaTechnology from './components/technology/tnga/TngaTechnology';
 
+import Appointment from './components/form/appointment';
 function App() {
   return (
     <>
@@ -37,6 +39,7 @@ function App() {
             <Route path="vr-suv" element={<SUVShowroom />} />
             <Route path="vr-sedan" element={<SedanShowroom />} />
             <Route path="show-rooms" element={<VRShowroom />} />
+            <Route path="appointment" element={<Appointment />} />
 
             {/* Service route */}
             <Route path="service" element={<ServiceLayout />}>
@@ -55,7 +58,9 @@ function App() {
           <Route path="/technology" element={<TechnologyLayout />}>
             <Route path="hybrid" element={<HybridTechnology />} />
             <Route path="tss" element={<TSS />} />
+            <Route path="tnga" element={<TngaTechnology />} />
           </Route>
+
           <Route path="/information" element={<InformationLayout />}>
             <Route path="community" element={<Community />} />
           </Route>
