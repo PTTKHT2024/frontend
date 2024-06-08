@@ -387,7 +387,7 @@ const Content = () => {
                     alt={video.title}
                     className="object-cover h-72 w-full"
                   />
-                  <BsPlayCircle className="absolute top-0 bottom-0 left-0 right-0 m-auto h-2/5 w-2/5 text-primaryColor" />
+                  <BsPlayCircle className="absolute top-0 bottom-12 left-0 right-0 m-auto h-20 w-20 text-primaryColor" />
                   <h3 className="text-base mt-1 leading-7 text-black hover:font-bold">
                     {video.title}
                   </h3>
