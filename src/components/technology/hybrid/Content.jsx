@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ModalVideo from 'react-modal-video';
-import 'react-modal-video/scss/modal-video.scss';
+import { BsPlayCircle } from 'react-icons/bs';
+import YoutubeEmbed from '../../common/YoutubeEmbed';
 
 const Content = () => {
   const [selectedOption, setSelectedOption] = useState('video'); // State variable to track the selected option
@@ -16,6 +16,15 @@ const Content = () => {
     setOpen(true);
   };
 
+  const [selectedVideo, setSelectedVideo] = useState(null);
+
+  const handleClickReview = (id) => {
+    setSelectedVideo(id);
+  };
+
+  const handleClickOutside = () => {
+    setSelectedVideo(null);
+  };
   const imageItems = [
     {
       id: 0,
@@ -93,6 +102,33 @@ const Content = () => {
       title: 'Hybrid 15',
     },
   ];
+
+  const videos = [
+    {
+      id: 1,
+      videoId: 'uhAF8W6jml0',
+      src_img: 'https://img.youtube.com/vi/uhAF8W6jml0/0.jpg',
+      src: 'https://www.youtube.com/embed/uhAF8W6jml0',
+      title:
+        'Hệ thống Toyota Hybrid với công nghệ tự sạc điện hoạt động như thế nào?',
+    },
+    {
+      id: 2,
+      videoId: 'e-LbRfjz2Nc',
+      src_img: 'https://img.youtube.com/vi/e-LbRfjz2Nc/0.jpg',
+      src: 'https://www.youtube.com/embed/e-LbRfjz2Nc',
+      title:
+        'Hệ thống Toyota Hybrid của động cơ 1.8 cấu tạo và hoạt động như thế nào?',
+    },
+    {
+      id: 3,
+      videoId: 'zzLSAjOkwe0',
+      src_img: 'https://img.youtube.com/vi/zzLSAjOkwe0/0.jpg',
+      src: 'https://www.youtube.com/embed/zzLSAjOkwe0',
+      title: 'Giới thiệu về Công nghệ Hybrid',
+    },
+  ];
+
   return (
     <div className="mt-40 container">
       <h1 className="h-[40px] flex items-center pl-3 border-l-4 border-red-600 text-2xl leading-4 text-black mb-4">
@@ -343,200 +379,148 @@ const Content = () => {
             </span>
           </div>
         </div>
-        {/* page content video */}
-        <div
-          style={{ marginTop: '40px' }}
-          className="flex w-xl overflow-hidden p-0"
-        >
-          <div className="block">
-            {/*video*/}
-            <div
-              id="video"
-              className="flex justify-between flex-wrap px-[110px] -ml-40 items-center"
-            >
-              {/* loading */}
-              <div
-                className="relative w-full min-h-[350px] text-[100px]justify-center items-center"
-                style={{ display: 'none' }}
-              >
-                <div className="bg-gray-800 rounded-lg border-3 border-pink-100 text-pink-100 h-[200px] left-1/2 -ml-[150px] -mt-[100px] absolute top-1/2 w-[300px] z-5 flex justify-center items-center">
-                  <div className="border-16 border-gray-100 border-t-16 border-red-600 rounded-full w-30 h-30 "></div>
-                </div>
-              </div>
-              <div
-                style={{ opacity: 0, height: '0px' }}
-                className="w-full max-w-[980px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-1/2 h-full"
-              >
-                <div style={{ display: 'none' }}>
-                  <iframe
-                    id="iframe1"
-                    width="100%"
-                    height="600"
-                    data-src="https://www.youtube.com/embed/uhAF8W6jml0"
-                    title="YouTube video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen=""
-                    src="https://www.youtube.com/embed/uhAF8W6jml0"
-                  ></iframe>
-                </div>
-                <div style={{ display: 'none' }}>
-                  <iframe
-                    id="iframe3"
-                    width="100%"
-                    height="600"
-                    data-src="https://www.youtube.com/embed/zzLSAjOkwe0"
-                    title="YouTube video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen=""
-                  ></iframe>
-                </div>
-              </div>
-              {/*item*/}
-              {selectedOption === 'video' ? (
-                <div className="grid flex-wrap grid-cols-3 gap-8">
-                  <ModalVideo
-                    channel="youtube"
-                    autoplay
-                    isOpen={isOpen}
-                    videoId={videoId}
-                    onClose={() => setOpen(false)}
-                  />
-                  <div className="relative w-[100%] mx-20 cursor-pointer">
-                    <div id="1" className="relative mb-4">
-                      <img
-                        className="mx-auto filter brightness-70 w-full h-181 object-cover"
-                        src="https://img.youtube.com/vi/uhAF8W6jml0/0.jpg"
-                        alt=""
-                      />
-                      <img
-                        onClick={() => handlePlayVideo('uhAF8W6jml0')}
-                        className="absolute flex items-center z-2 w-30 h-30 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                        src="https://www.toyota.com.vn/Content/Images/technology/button-play.png"
-                        alt=""
-                      />
-                    </div>
-                    <h3 className="text-base leading-7 text-black hover:font-bold">
-                      Hệ thống Toyota Hybrid với công nghệ tự sạc điện hoạt động
-                      như thế nào?
-                    </h3>
-                  </div>
-                  <div className="relative w-[100%] mx-20 cursor-pointer">
-                    <div id="2" className="relative mb-4">
-                      <img
-                        className="mx-auto filter brightness-70 w-full h-181 object-cover"
-                        src="https://img.youtube.com/vi/e-LbRfjz2Nc/0.jpg"
-                        alt=""
-                      />
-                      <img
-                        onClick={() => handlePlayVideo('e-LbRfjz2Nc')}
-                        className="absolute flex items-center z-2 w-30 h-30 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                        src="https://www.toyota.com.vn/Content/Images/technology/button-play.png"
-                        alt=""
-                      />
-                    </div>
-                    <h3 className="text-base leading-7 text-black hover:font-bold">
-                      Hệ thống Toyota Hybrid của động cơ 1.8 cấu tạo và hoạt
-                      động như thế nào?
-                    </h3>
-                  </div>
-                  <div className="relative w-[100%] mx-20 cursor-pointer">
-                    <div id="3" className="relative mb-4">
-                      <img
-                        className="mx-auto filter brightness-70 w-full h-181 object-cover"
-                        src="https://img.youtube.com/vi/zzLSAjOkwe0/0.jpg"
-                        alt=""
-                      />
-                      <img
-                        onClick={() => handlePlayVideo('zzLSAjOkwe0')}
-                        className="absolute flex items-center z-2 w-30 h-30 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                        src="https://www.toyota.com.vn/Content/Images/technology/button-play.png"
-                        alt=""
-                      />
-                    </div>
-                    <h3 className="text-base leading-7 text-black hover:font-bold">
-                      Giới thiệu về Công nghệ Hybrid
-                    </h3>
-                  </div>
-                </div>
-              ) : (
+      </div>
+      {/* page content video and img */}
+      <div className="container mb-16">
+        <div className="grid grid-cols-3 gap-4 mt-5">
+          {selectedOption === 'video' ? (
+            <>
+              {videos.map((video) => (
                 <div
-                  id="image"
-                  className="flex flex-wrap justify-between px-[110px] -mx-[32px]"
+                  key={video.id}
+                  className="relative cursor-pointer"
+                  onClick={() => handleClickReview(video.id)}
                 >
-                  {/*loading*/}
-                  <div
-                    style={{ display: 'none' }}
-                    className="bg-gray-900 rounded-lg border-rose-200 text-rose-200 h-[200px] w-[300px] absolute left-1/2 top-1/2 -ml-60 -mt-32 z-50 flex justify-center items-center"
-                  >
-                    <div className="w-[120px] h-[120px] border-t-4 border-red-600 rounded-full animate-spin"></div>
-                  </div>
-                  <div className="grid grid-cols-3 gap-8">
-                    {imageItems.map((item) => (
-                      <div
-                        className="w-full ml-10 mb-8 cursor-pointer"
-                        key={item.id}
-                      >
-                        <div className="relative mb-[16px]" id="0">
-                          <img
-                            className="m-auto filter-brightness-70 w-full h-181 object-cover align-middle border-none"
-                            src={item.src}
-                            alt={item.title}
-                          />
-                        </div>
-                        <h3>{item.title}</h3>
-                      </div>
-                    ))}
+                  <img
+                    src={video.src_img}
+                    alt={video.title}
+                    className="object-cover h-72 w-full"
+                  />
+                  <BsPlayCircle className="absolute top-0 bottom-0 left-0 right-0 m-auto h-2/5 w-2/5 text-primaryColor" />
+                  <h3 className="text-base mt-1 leading-7 text-black hover:font-bold">
+                    {video.title}
+                  </h3>
+                </div>
+              ))}
+
+              {selectedVideo && (
+                <div
+                  className="fixed top-0 left-0 right-0 bottom-0 z-10 bg-[#333333]/70"
+                  id="overlay"
+                  onClick={handleClickOutside}
+                >
+                  <div className="bg-black absolute w-2/3 h-4/5 top-0 bottom-0 left-0 right-0 m-auto">
+                    <YoutubeEmbed
+                      src={videos[selectedVideo - 1].src}
+                      title="YouTube video player"
+                      className=""
+                    />
                   </div>
                 </div>
               )}
-            </div>
-            {/*pagelisst- video*/}
-            <div className="px-auto flex items-center justify-center mt-[32px] mx-auto ml-neg-16">
-              <div className="order-0 h-[40px] w-[40px] mx-[16px] my-[12px] flex-wrap border border-solid border-gray-300 text-center leading-40 uppercase text-sm text-gray-300 cursor-pointer">
-                <span className="font-normal antialiased block">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className="text-300 font-900 w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="evenodd"
-                      d="M7.293 11.293a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414l-3.293-3.293a1 1 0 010-1.414l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 010 1.414z"
-                      strokeLinejoin="evenodd"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div className="order-2 h-[40px] w-[40px] mx-[16px] my-[12px] flex-wrap border border-solid border-gray-300 text-center leading-40 uppercase text-sm text-gray-300 cursor-pointer">
-                <span className="font-normal antialiased block">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className="text-300 font-900 w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="evenodd"
-                      d="M12.707 9.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4z"
-                      strokeLinejoin="evenodd"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <input
-                className="text-300 text-white bg-primaryColor h-[40px] w-[40px] flex flex-wrap border border-solid border-gray-300 justify-center items-center text-center uppercase text-md cursor-pointer "
-                id="1"
-                value="1"
-              ></input>
-            </div>
-            {/*pagelisst- img*/}
-            <div
-              style={{ display: 'none' }}
-              className="pb-[25px] flex items-center mx-auto justify-center -ml-4"
-            ></div>
-          </div>
+            </>
+          ) : (
+            <>
+              {imageItems.map((item) => (
+                <div key={item.id} className="relative cursor-pointer">
+                  <img
+                    src={item.src}
+                    alt={item.title}
+                    className="object-cover h-72 w-full"
+                  />
+                  <h3 className="text-base mt-1 leading-7 text-black hover:font-bold">
+                    {item.title}
+                  </h3>
+                </div>
+              ))}
+            </>
+          )}
         </div>
+      </div>
+
+      {/*pagelisst- video*/}
+      <div className="container">
+        {selectedOption === 'video' ? (
+          <div className="flex justify-center">
+            <div className="order-0 h-[40px] w-[40px] mx-[16px] my-[12px] flex-wrap border border-solid border-gray-300 text-center leading-40 uppercase text-sm text-gray-300 cursor-pointer">
+              <span className="font-normal antialiased block">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="text-300 font-900 w-6 h-6 mx-[4px] my-[4px]"
+                >
+                  <path
+                    strokeLinecap="evenodd"
+                    d="M7.293 11.293a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414l-3.293-3.293a1 1 0 010-1.414l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 010 1.414z"
+                    strokeLinejoin="evenodd"
+                  />
+                </svg>
+              </span>
+            </div>
+            <div className="order-2 h-[40px] w-[40px] mx-[16px] my-[12px] flex-wrap border border-solid border-gray-300 text-center leading-40 uppercase text-sm text-gray-300 cursor-pointer">
+              <span className="font-normal antialiased block">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="text-300 font-900 w-6 h-6 mx-[4px] my-[4px]"
+                >
+                  <path
+                    strokeLinecap="evenodd"
+                    d="M12.707 9.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4z"
+                    strokeLinejoin="evenodd"
+                  />
+                </svg>
+              </span>
+            </div>
+            <input
+              className="text-300 text-white bg-primaryColor my-[12px] h-[40px] w-[40px] flex flex-wrap border border-solid border-gray-300 justify-center items-center text-center uppercase text-md cursor-pointer "
+              id="1"
+              value="1"
+            ></input>
+          </div>
+        ) : (
+          <div className="flex justify-center">
+            <div className="order-0 h-[40px] w-[40px] mx-[16px] my-[12px] flex-wrap border border-solid border-gray-300 text-center leading-40 uppercase text-sm text-gray-300 cursor-pointer">
+              <span className="font-normal antialiased block">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="text-300 font-900 w-6 h-6 mx-[4px] my-[4px]"
+                >
+                  <path
+                    strokeLinecap="evenodd"
+                    d="M7.293 11.293a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414l-3.293-3.293a1 1 0 010-1.414l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 010 1.414z"
+                    strokeLinejoin="evenodd"
+                  />
+                </svg>
+              </span>
+            </div>
+            <div className="order-2 h-[40px] w-[40px] mx-[16px] my-[12px] flex-wrap border border-solid border-gray-300 text-center leading-40 uppercase text-sm text-gray-300 cursor-pointer">
+              <span className="font-normal antialiased block">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="text-300 font-900 w-6 h-6 mx-[4px] my-[4px]"
+                >
+                  <path
+                    strokeLinecap="evenodd"
+                    d="M12.707 9.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4z"
+                    strokeLinejoin="evenodd"
+                  />
+                </svg>
+              </span>
+            </div>
+            <input
+              className="text-300 text-white bg-primaryColor my-[12px] h-[40px] w-[40px] flex flex-wrap border border-solid border-gray-300 justify-center items-center text-center uppercase text-md cursor-pointer "
+              id="1"
+              value="1"
+            ></input>
+          </div>
+        )}
       </div>
     </div>
   );
