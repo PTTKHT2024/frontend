@@ -3,6 +3,7 @@ import { AiFillFacebook, AiOutlineUser } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { MdArrowBackIos } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { login } from '../utils/AuthApi';
 
 const Login = ({ handleClickRegister }) => {
   const [emailLogin, setEmailLogin] = useState(false);
@@ -18,6 +19,19 @@ const Login = ({ handleClickRegister }) => {
 
   const handleClickEmailLogin = () => {
     setEmailLogin(!emailLogin);
+  };
+
+  const handleLogin = async () => {
+    e.preventDefault();
+
+    try {
+      const res = await login(loginForm);
+
+      if (res.status === 201) {
+        // localStorage.setItem('access_token', res.data);
+        console.log(res.data);
+      }
+    } catch (err) {}
   };
 
   return (
@@ -47,7 +61,7 @@ const Login = ({ handleClickRegister }) => {
           >
             <MdArrowBackIos className="inline-block h-5 w-5 " /> Quay lại
           </span>
-          <form action="">
+          <form onSubmit={handleLogin}>
             <ul className="w-4/6 mx-auto">
               <li className="bg-white cursor-pointer mb-3">
                 <label className="font-sm w-full font-medium block mb-3">
@@ -75,7 +89,10 @@ const Login = ({ handleClickRegister }) => {
               </li>
 
               <li className="bg-white cursor-pointer mb-3">
-                <button className="w-full px-5 py-2.5 rounded-3xl outline-0 text-white font-medium bg-[#1dbfaf]/[.6]">
+                <button
+                  className="w-full px-5 py-2.5 rounded-3xl outline-0 text-white font-medium bg-[#1dbfaf]/[.6]"
+                  type="submit"
+                >
                   Đăng nhập
                 </button>
               </li>

@@ -3,16 +3,21 @@ import { AiFillFacebook, AiOutlineUser } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { MdArrowBackIos } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { register } from '../utils/AuthApi';
+import { CgDanger } from 'react-icons/cg';
 
 const Register = ({ handleClickLogin }) => {
   const [emailRegister, setEmailRegister] = useState(false);
   const nameInputRef = useRef(null);
   const [registerForm, setRegisterForm] = useState({
-    name: '',
+    fullName: '',
     phone: '',
     email: '',
     password: '',
   });
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [countdown, setCountdown] = useState(3);
 
   useEffect(() => {
     nameInputRef.current?.focus();
@@ -25,6 +30,36 @@ const Register = ({ handleClickLogin }) => {
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
     setRegisterForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await register(registerForm);
+      if (response.status === 201) {
+        setSuccessMessage('Bạn đã đăng kí thành công');
+
+        const interval = setInterval(() => {
+          setCountdown((prevCountdown) => {
+            if (prevCountdown <= 1) {
+              clearInterval(interval);
+              handleClickLogin();
+            }
+            return prevCountdown - 1;
+          });
+        }, 1000);
+      } else {
+        setErrorMessage('Email không hợp lệ hoặc đã được sử dụng');
+      }
+    } catch (err) {
+      console.error('Error registering user:', err);
+      setErrorMessage('Email không hợp lệ hoặc đã được sử dụng');
+    }
+
+    setTimeout(() => {
+      setErrorMessage('');
+    }, countdown * 1000);
   };
 
   return (
@@ -55,15 +90,38 @@ const Register = ({ handleClickLogin }) => {
             >
               <MdArrowBackIos className="inline-block h-5 w-5 " /> Quay lại
             </span>
-            <form action="">
+            <form onSubmit={handleRegister}>
               <ul className="w-4/6 mx-auto">
+                <li className="bg-white cursor-pointer mb-3 mt-3">
+                  {successMessage && (
+                    <div className="w-full px-5 py-2.5 rounded-3xl bg-[#28A745]/[.6] outline-0 text-white flex justify-between items-center">
+                      <p className="font-medium text-sm">{successMessage}</p>
+                      <p className="font-medium text-base rounded-[50%] bg-white text-[#254336] px-3 py-1">
+                        {countdown}
+                      </p>
+                    </div>
+                  )}
+                </li>
+
+                <li className="bg-white cursor-pointer mb-3 mt-3">
+                  {errorMessage && (
+                    <div className="w-full px-5 py-2.5 rounded-3xl bg-[#DC3545]/[.6] outline-0 text-white flex justify-between items-center">
+                      <p className="font-medium text-sm">{errorMessage}</p>
+                      <p className="font-medium text-base rounded-[50%] text-[#254336] bg-white px-1 py-1">
+                        <CgDanger className="h-5 w-5 text-[#DC3545]" />
+                      </p>
+                    </div>
+                  )}
+                </li>
+
                 <li className="bg-white cursor-pointer mb-3">
                   <label className="font-sm w-full font-medium block mb-3">
                     Tên của bạn?
                   </label>
                   <input
-                    name="name"
-                    value={registerForm.name}
+                    required
+                    name="fullName"
+                    value={registerForm.fullName}
                     onChange={handleChangeInput}
                     ref={nameInputRef}
                     type="text"
@@ -77,6 +135,7 @@ const Register = ({ handleClickLogin }) => {
                     Số điện thoại của bạn?
                   </label>
                   <input
+                    required
                     name="phone"
                     value={registerForm.phone}
                     onChange={handleChangeInput}
@@ -91,6 +150,7 @@ const Register = ({ handleClickLogin }) => {
                     Email của bạn
                   </label>
                   <input
+                    required
                     name="email"
                     value={registerForm.email}
                     onChange={handleChangeInput}
@@ -102,6 +162,7 @@ const Register = ({ handleClickLogin }) => {
 
                 <li className="bg-white cursor-pointer mb-3">
                   <input
+                    required
                     name="password"
                     value={registerForm.password}
                     onChange={handleChangeInput}
@@ -112,7 +173,10 @@ const Register = ({ handleClickLogin }) => {
                 </li>
 
                 <li className="bg-white cursor-pointer mb-3">
-                  <button className="w-full px-5 py-2.5 rounded-3xl outline-0 text-white font-medium bg-[#1dbfaf]/[.6]">
+                  <button
+                    className="w-full px-5 py-2.5 rounded-3xl outline-0 text-white font-medium bg-[#1dbfaf]/[.6]"
+                    type="submit"
+                  >
                     Đăng ký
                   </button>
                 </li>
