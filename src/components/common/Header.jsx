@@ -165,14 +165,14 @@ const Header = () => {
                           </span>
                         </li>
 
-                        {/* <li className="p-2.5">
+                        <li className="p-2.5">
                           <span
                             className="text-base text-nowrap hover:text-primaryColor transition-colors duration-200 cursor-pointer"
                             onClick={handleClickRegister}
                           >
-                            Đăng ký
+                            Đăng xuất
                           </span>
-                        </li> */}
+                        </li>
                       </ul>
                     ) : (
                       <ul className="absolute top-full left-0 bg-white border py-1 opacity-0 invisible transform -translate-y-2 transition duration-500 group-hover:opacity-100 group-hover:translate-y-0 bg-transparent group-hover:visible z-10">
