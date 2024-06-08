@@ -2,15 +2,19 @@ import React, { useState } from 'react';
 import { AiFillFacebook, AiOutlineUser } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { MdArrowBackIos } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../utils/AuthApi';
+import { CgDanger } from 'react-icons/cg';
 
-const Login = ({ handleClickRegister }) => {
+const Login = ({ handleClickRegister, handleClickLogin }) => {
   const [emailLogin, setEmailLogin] = useState(false);
   const [loginForm, setLoginForm] = useState({
-    email: '',
+    username: '',
     password: '',
   });
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
+  const countdown = 5;
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
@@ -21,17 +25,28 @@ const Login = ({ handleClickRegister }) => {
     setEmailLogin(!emailLogin);
   };
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
       const res = await login(loginForm);
 
       if (res.status === 201) {
-        // localStorage.setItem('access_token', res.data);
-        console.log(res.data);
+        localStorage.setItem('data', JSON.stringify(res.data.data));
+        navigate('/');
+        handleClickLogin();
+        // console.log(res.data.data);
+      } else {
+        setErrorMessage('Email hoặc mật khẩu không hợp lệ');
       }
-    } catch (err) {}
+    } catch (err) {
+      console.error('Error registering user:', err);
+      setErrorMessage('Email hoặc mật khẩu không hợp lệ');
+    }
+
+    setTimeout(() => {
+      setErrorMessage('');
+    }, countdown * 1000);
   };
 
   return (
@@ -63,13 +78,24 @@ const Login = ({ handleClickRegister }) => {
           </span>
           <form onSubmit={handleLogin}>
             <ul className="w-4/6 mx-auto">
+              <li className="bg-white cursor-pointer mb-3 mt-3">
+                {errorMessage && (
+                  <div className="w-full px-5 py-2.5 rounded-3xl bg-[#DC3545]/[.6] outline-0 text-white flex justify-between items-center">
+                    <p className="font-medium text-sm">{errorMessage}</p>
+                    <p className="font-medium text-base rounded-[50%] text-[#254336] bg-white px-1 py-1">
+                      <CgDanger className="h-5 w-5 text-[#DC3545]" />
+                    </p>
+                  </div>
+                )}
+              </li>
+
               <li className="bg-white cursor-pointer mb-3">
                 <label className="font-sm w-full font-medium block mb-3">
                   Email của bạn?
                 </label>
                 <input
-                  name="email"
-                  value={loginForm.email}
+                  name="username"
+                  value={loginForm.username}
                   onChange={handleChangeInput}
                   type="email"
                   placeholder="Địa chỉ email"

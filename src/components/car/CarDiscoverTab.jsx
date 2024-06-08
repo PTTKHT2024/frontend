@@ -28,8 +28,6 @@ const CarDiscoverTab = ({ carTabsWidth = 80, all = false }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [carClass, setCarClass] = useState('Sedan');
 
-  console.log(all);
-
   useEffect(() => {
     setCars(fakeData);
     setTimeout(() => {

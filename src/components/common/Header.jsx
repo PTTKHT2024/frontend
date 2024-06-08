@@ -9,12 +9,13 @@ import Register from '../auth/Register';
 import Overlay from '../common/Overlay';
 import HeaderDropdown from './HeaderDropdown';
 import CarDiscoverTab from '../car/CarDiscoverTab';
-import { CarDiscoverTabHeaderContext } from '../context/ContextItnit';
 import HeaderDropDownFooter from './HeaderDropDownFooter';
+import useIsActive from '../hooks/useIsActive';
 
 const Header = () => {
   const [isLoginOpend, setIsLoginOpened] = useState(false);
   const [isRegisterOpened, setIsRegisterOpened] = useState(false);
+  const isActive = useIsActive();
   const [dropdownState, setDropDownState] = useState({
     product: false,
     technology: false,
@@ -63,7 +64,10 @@ const Header = () => {
       {isLoginOpend && (
         <>
           <Overlay onClick={handleClickLogin} />
-          <Login handleClickRegister={handleClickRegister} />
+          <Login
+            handleClickRegister={handleClickRegister}
+            handleClickLogin={handleClickLogin}
+          />
         </>
       )}
 
@@ -89,7 +93,7 @@ const Header = () => {
                     <MdOutlineKeyboardArrowDown className="inline h-5 w-5 transition-transform duration-300 group-hover:rotate-180" />
 
                     <ul className="absolute top-full left-0 bg-white border py-1 opacity-0 invisible transform -translate-y-2 transition duration-500 group-hover:opacity-100 group-hover:translate-y-0 bg-transparent group-hover:visible z-10">
-                      <li className="p-2.5" bg-white>
+                      <li className="p-2.5">
                         <Link
                           className="text-base text-nowrap hover:text-primaryColor transition-colors duration-200"
                           to={'/vr-suv'}
@@ -150,25 +154,47 @@ const Header = () => {
                   <li className="text-sm mr-5 flex items-center relative group">
                     <AiOutlineUser className="inline h-5 w-5 transition-transform duration-300" />
 
-                    <ul className="absolute top-full left-0 bg-white border py-1 opacity-0 invisible transform -translate-y-2 transition duration-500 group-hover:opacity-100 group-hover:translate-y-0 bg-transparent group-hover:visible z-10">
-                      <li className="p-2.5" bg-white>
-                        <span
-                          className="text-base text-nowrap hover:text-primaryColor transition-colors duration-200 cursor-pointer"
-                          onClick={handleClickLogin}
-                        >
-                          Đăng nhập
-                        </span>
-                      </li>
+                    {isActive ? (
+                      <ul className="absolute top-full left-0 bg-white border py-1 opacity-0 invisible transform -translate-y-2 transition duration-500 group-hover:opacity-100 group-hover:translate-y-0 bg-transparent group-hover:visible z-10">
+                        <li className="p-2.5">
+                          <span
+                            className="text-base text-nowrap hover:text-primaryColor transition-colors duration-200 cursor-pointer"
+                            onClick={handleClickLogin}
+                          >
+                            Trang thông tin
+                          </span>
+                        </li>
 
-                      <li className="p-2.5">
-                        <span
-                          className="text-base text-nowrap hover:text-primaryColor transition-colors duration-200 cursor-pointer"
-                          onClick={handleClickRegister}
-                        >
-                          Đăng ký
-                        </span>
-                      </li>
-                    </ul>
+                        {/* <li className="p-2.5">
+                          <span
+                            className="text-base text-nowrap hover:text-primaryColor transition-colors duration-200 cursor-pointer"
+                            onClick={handleClickRegister}
+                          >
+                            Đăng ký
+                          </span>
+                        </li> */}
+                      </ul>
+                    ) : (
+                      <ul className="absolute top-full left-0 bg-white border py-1 opacity-0 invisible transform -translate-y-2 transition duration-500 group-hover:opacity-100 group-hover:translate-y-0 bg-transparent group-hover:visible z-10">
+                        <li className="p-2.5">
+                          <span
+                            className="text-base text-nowrap hover:text-primaryColor transition-colors duration-200 cursor-pointer"
+                            onClick={handleClickLogin}
+                          >
+                            Đăng nhập
+                          </span>
+                        </li>
+
+                        <li className="p-2.5">
+                          <span
+                            className="text-base text-nowrap hover:text-primaryColor transition-colors duration-200 cursor-pointer"
+                            onClick={handleClickRegister}
+                          >
+                            Đăng ký
+                          </span>
+                        </li>
+                      </ul>
+                    )}
                   </li>
                 </ul>
               </div>

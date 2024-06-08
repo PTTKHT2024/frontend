@@ -29,3 +29,16 @@ export async function login(loginForm) {
     }
   }
 }
+
+export async function checkTokenExpire(accessToken) {
+  try {
+    const res = await api.get('/auth/account', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return { status: res.status, data: res.data };
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}
