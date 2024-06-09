@@ -42,3 +42,16 @@ export async function checkTokenExpire(accessToken) {
     throw new Error(err.message);
   }
 }
+
+export async function logout(accessToken) {
+  try {
+    const res = await api.post('/auth/logout', null, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return { status: res.status, data: res.data };
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}

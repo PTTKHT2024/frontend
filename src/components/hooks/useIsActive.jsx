@@ -19,12 +19,10 @@ const useIsActive = () => {
         setIsActive(false);
         return;
       }
-      console.log(data);
 
       try {
         const res = await checkTokenExpire(accessToken);
         setIsActive(res.status === 200);
-        console.log(res);
       } catch (error) {
         setIsActive(false);
       }
@@ -33,8 +31,10 @@ const useIsActive = () => {
     checkActiveStatus();
 
     window.addEventListener('storage', checkActiveStatus);
+    window.addEventListener('localStorageChanged', checkActiveStatus);
     return () => {
       window.removeEventListener('storage', checkActiveStatus);
+      window.removeEventListener('localStorageChanged', checkActiveStatus);
     };
   }, []);
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaFacebook, FaYoutube } from 'react-icons/fa';
 import { IoSearch } from 'react-icons/io5';
 import { AiOutlineUser } from 'react-icons/ai';
@@ -11,11 +11,13 @@ import HeaderDropdown from './HeaderDropdown';
 import CarDiscoverTab from '../car/CarDiscoverTab';
 import HeaderDropDownFooter from './HeaderDropDownFooter';
 import useIsActive from '../hooks/useIsActive';
+import { logout } from '../utils/AuthApi';
 
 const Header = () => {
   const [isLoginOpend, setIsLoginOpened] = useState(false);
   const [isRegisterOpened, setIsRegisterOpened] = useState(false);
   const isActive = useIsActive();
+  const navigate = useNavigate();
   const [dropdownState, setDropDownState] = useState({
     product: false,
     technology: false,
@@ -34,6 +36,8 @@ const Header = () => {
     setIsLoginOpened(false);
     setIsRegisterOpened(!isRegisterOpened);
   };
+
+  console.log('active : ', isActive);
 
   const handleClickDropDown = (e) => {
     const value = e.currentTarget.dataset.value;
@@ -57,6 +61,25 @@ const Header = () => {
       electric: false,
       information: false,
     });
+  };
+
+  const handleLogout = async () => {
+    const dataJSON = localStorage.getItem('data');
+    const data = JSON.parse(dataJSON);
+    const accessToken = data.access_token;
+
+    try {
+      const res = await logout(accessToken);
+      if (res.status == 201) {
+        localStorage.removeItem('data');
+
+        window.dispatchEvent(new CustomEvent('localStorageChanged'));
+
+        navigate('/');
+      }
+    } catch (err) {
+      console.log('Err logout : ', err);
+    }
   };
 
   return (
@@ -156,40 +179,40 @@ const Header = () => {
 
                     {isActive ? (
                       <ul className="absolute top-full left-0 bg-white border py-1 opacity-0 invisible transform -translate-y-2 transition duration-500 group-hover:opacity-100 group-hover:translate-y-0 bg-transparent group-hover:visible z-10">
-                        <li className="p-2.5">
-                          <span
-                            className="text-base text-nowrap hover:text-primaryColor transition-colors duration-200 cursor-pointer"
-                            onClick={handleClickLogin}
-                          >
+                        <li
+                          className="p-2.5 cursor-pointer peer"
+                          onClick={handleClickLogin}
+                        >
+                          <span className="text-base text-nowrap peer-hover:text-primaryColor transition-colors duration-200 ">
                             Trang thông tin
                           </span>
                         </li>
 
-                        <li className="p-2.5">
-                          <span
-                            className="text-base text-nowrap hover:text-primaryColor transition-colors duration-200 cursor-pointer"
-                            onClick={handleClickRegister}
-                          >
+                        <li
+                          className="p-2.5 cursor-pointer peer"
+                          onClick={handleLogout}
+                        >
+                          <span className="text-base text-nowrap peer-hover:text-primaryColor transition-colors duration-200">
                             Đăng xuất
                           </span>
                         </li>
                       </ul>
                     ) : (
                       <ul className="absolute top-full left-0 bg-white border py-1 opacity-0 invisible transform -translate-y-2 transition duration-500 group-hover:opacity-100 group-hover:translate-y-0 bg-transparent group-hover:visible z-10">
-                        <li className="p-2.5">
-                          <span
-                            className="text-base text-nowrap hover:text-primaryColor transition-colors duration-200 cursor-pointer"
-                            onClick={handleClickLogin}
-                          >
+                        <li
+                          className="p-2.5 cursor-pointer peer"
+                          onClick={handleClickLogin}
+                        >
+                          <span className="text-base text-nowrap peer-hover:text-primaryColor transition-colors duration-200">
                             Đăng nhập
                           </span>
                         </li>
 
-                        <li className="p-2.5">
-                          <span
-                            className="text-base text-nowrap hover:text-primaryColor transition-colors duration-200 cursor-pointer"
-                            onClick={handleClickRegister}
-                          >
+                        <li
+                          className="p-2.5 cursor-pointer peer"
+                          onClick={handleClickRegister}
+                        >
+                          <span className="text-base text-nowrap peer-hover:text-primaryColor transition-colors duration-200">
                             Đăng ký
                           </span>
                         </li>
@@ -591,11 +614,7 @@ const Header = () => {
                 alt="blog_img"
                 className="object-cover scale-[1.01] group-hover:scale-[1.14] transition-all duration-[600ms] linear"
               />
-              <div
-                h-full
-                w-full
-                className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.14] via-[#000]/[.1] to-[#000]/[.7] top-0"
-              ></div>
+              <div className="absolute h-full w-full bg-gradient-to-b from-[#a9aaa800]/[.14] via-[#000]/[.1] to-[#000]/[.7] top-0"></div>
               <p className="absolute bottom-[8%] left-[6%] text-white font-semibold text-lg uppercase">
                 thông tin khác
               </p>

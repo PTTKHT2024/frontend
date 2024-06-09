@@ -33,6 +33,7 @@ const Login = ({ handleClickRegister, handleClickLogin }) => {
 
       if (res.status === 201) {
         localStorage.setItem('data', JSON.stringify(res.data.data));
+        window.dispatchEvent(new CustomEvent('localStorageChanged'));
         navigate('/');
         handleClickLogin();
         // console.log(res.data.data);
@@ -78,12 +79,12 @@ const Login = ({ handleClickRegister, handleClickLogin }) => {
           </span>
           <form onSubmit={handleLogin}>
             <ul className="w-4/6 mx-auto">
-              <li className="bg-white cursor-pointer mb-3 mt-3">
+              <li className="bg-white mb-3 mt-3">
                 {errorMessage && (
                   <div className="w-full px-5 py-2.5 rounded-3xl bg-[#DC3545]/[.6] outline-0 text-white flex justify-between items-center">
                     <p className="font-medium text-sm">{errorMessage}</p>
-                    <p className="font-medium text-base rounded-[50%] text-[#254336] bg-white px-1 py-1">
-                      <CgDanger className="h-5 w-5 text-[#DC3545]" />
+                    <p className="font-bold text-base rounded-[50%] bg-white text-[#28A745] px-[6px] py-[5px] drop-shadow-md h-max w-max flex items-center">
+                      <CgDanger className="text-[#DC3545] inline h-5 w-5 rounded-[50%]" />
                     </p>
                   </div>
                 )}
