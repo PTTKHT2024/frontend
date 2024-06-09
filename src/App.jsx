@@ -28,6 +28,7 @@ import Community from './components/information/community/Community';
 import TngaTechnology from './components/technology/tnga/TngaTechnology';
 
 import Appointment from './components/form/appointment';
+import Philosophy from './components/information/philosophy/Philosophy';
 function App() {
   return (
     <>
@@ -63,6 +64,7 @@ function App() {
 
           <Route path="/information" element={<InformationLayout />}>
             <Route path="community" element={<Community />} />
+            <Route path="philosophy" element={<Philosophy />} />
           </Route>
         </Routes>
       </BrowserRouter>
