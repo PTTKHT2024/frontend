@@ -26,6 +26,8 @@ import { useEffect } from 'react';
 import TSS from './components/technology/TSS/main';
 import Community from './components/information/community/Community';
 import TngaTechnology from './components/technology/tnga/TngaTechnology';
+import CommunityContribution from './components/information/community/CommunityContribution';
+import ToyotaFund from './components/information/community/ToyotaFund';
 
 import Appointment from './components/form/appointment';
 function App() {
@@ -63,6 +65,8 @@ function App() {
 
           <Route path="/information" element={<InformationLayout />}>
             <Route path="community" element={<Community />} />
+            <Route path="contribution" element={<CommunityContribution />} />
+            <Route path="fund" element={<ToyotaFund />} />
           </Route>
         </Routes>
       </BrowserRouter>
