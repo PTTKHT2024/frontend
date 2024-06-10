@@ -18,16 +18,28 @@ import RepairService from './components/service/RepairService/RepairService';
 import HybridTechnology from './components/technology/hybrid/HybridTechnology';
 import Login from './components/auth/Login';
 import Navbar from './components/common/Navbar';
+
 import { datas as serviceNavbarDatas } from './components/data/ServiceNavbarData';
 import { datas as technologyNavbarDatas } from './components/data/TechnologyNavbarData';
+import { datas as introductionNavbarDatas } from './components/data/IntroductionNavbarData';
+import { datas as localNavbarDatas } from './components/data/LocalNavbarData';
+
 import OrderButton from './components/service/OrderButton';
 import Tool from './components/common/Tool';
 import { useEffect } from 'react';
 import TSS from './components/technology/TSS/main';
 import Community from './components/information/community/Community';
 import TngaTechnology from './components/technology/tnga/TngaTechnology';
+import CommunityContribution from './components/information/community/CommunityContribution';
+import ToyotaFund from './components/information/community/ToyotaFund';
 
 import Appointment from './components/form/appointment';
+import Philosophy from './components/information/philosophy/Philosophy';
+import Cooperate from './components/information/localization/Cooperate';
+import Conduct from './components/information/localization/Conduct';
+import ScrollToTopButton from './components/common/ScrollToTopButton';
+import ElectrificationCar from './components/electrification/ElectrificationCar';
+import Introduction from './components/information/Introduction/main';
 function App() {
   return (
     <>
@@ -40,14 +52,18 @@ function App() {
             <Route path="vr-sedan" element={<SedanShowroom />} />
             <Route path="show-rooms" element={<VRShowroom />} />
             <Route path="appointment" element={<Appointment />} />
+          </Route>
 
-            {/* Service route */}
-            <Route path="service" element={<ServiceLayout />}>
-              <Route path="maintain" element={<MaintainService />} />
-              <Route path="beauty" element={<></>} />
-              <Route path="warranty" element={<Warranty />} />
-              <Route path="repair" element={<RepairService />} />
-            </Route>
+          <Route path="/service" element={<ServiceLayout />}>
+            <Route path="maintain" element={<MaintainService />} />
+            <Route path="beauty" element={<></>} />
+            <Route path="warranty" element={<Warranty />} />
+            <Route path="repair" element={<RepairService />} />
+            <Route path="inspect" element={<RepairService />} />
+          </Route>
+
+          <Route path="/electrification" element={<ElectrificationLayout />}>
+            <Route path="electrified-car" element={<ElectrificationCar />} />
           </Route>
 
           {/* Admin routes */}
@@ -55,6 +71,7 @@ function App() {
             {/* <Route path="dashboard" element={<AdminDashboard />} /> */}
             {/* <Route path="users" element={<AdminUsers />} /> */}
           </Route>
+
           <Route path="/technology" element={<TechnologyLayout />}>
             <Route path="hybrid" element={<HybridTechnology />} />
             <Route path="tss" element={<TSS />} />
@@ -62,7 +79,21 @@ function App() {
           </Route>
 
           <Route path="/information" element={<InformationLayout />}>
-            <Route path="community" element={<Community />} />
+            <Route path="community" element={<CommonLayout />}>
+              <Route index element={<Community />} />
+              <Route path="contribution" element={<CommunityContribution />} />
+              <Route path="fund" element={<ToyotaFund />} />
+            </Route>
+
+            <Route path="company" element={<IntroductionLayout />}>
+              <Route path="introduction" element={<Introduction />} />
+              <Route path="philosophy" element={<Philosophy />} />
+            </Route>
+
+            <Route path="local" element={<LocalLayout />}>
+              <Route path="cooperate" element={<Cooperate />} />
+              <Route path="conduct" element={<Conduct />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>
@@ -74,10 +105,43 @@ function MainLayout() {
   return (
     <>
       <Header />
+      <Tool />
+      <ScrollToTopButton />
       <Outlet />
       <Footer />
     </>
   );
+}
+
+function LocalLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <>
+      <Navbar datas={localNavbarDatas} />
+      <Outlet />
+    </>
+  );
+}
+
+function IntroductionLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <>
+      <Navbar datas={introductionNavbarDatas} />
+      <Outlet />
+    </>
+  );
+}
+
+function CommonLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return <Outlet />;
 }
 
 function ServiceLayout() {
@@ -98,6 +162,7 @@ function ServiceLayout() {
       <Outlet />
       <Tool />
       <OrderButton />
+      <ScrollToTopButton />
       <Footer />
     </>
   );
@@ -123,6 +188,7 @@ function TechnologyLayout() {
       <Header />
       <Navbar datas={technologyNavbarDatas} />
       <Outlet />;
+      <ScrollToTopButton />
       <Tool />
       <Footer />
     </>
@@ -130,10 +196,28 @@ function TechnologyLayout() {
 }
 
 function InformationLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <Header />
       <Outlet />
+      <ScrollToTopButton />
+      <Footer />
+    </>
+  );
+}
+
+function ElectrificationLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <>
+      <Header />
+      <Outlet />
+      <ScrollToTopButton />
       <Footer />
     </>
   );
