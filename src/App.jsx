@@ -66,12 +66,9 @@ function App() {
 
           <Route path="/information" element={<InformationLayout />}>
             <Route path="community" element={<Community />} />
-<<<<<<< HEAD
             <Route path="contribution" element={<CommunityContribution />} />
             <Route path="fund" element={<ToyotaFund />} />
-=======
             <Route path="philosophy" element={<Philosophy />} />
->>>>>>> feature/12_philosophy
           </Route>
         </Routes>
       </BrowserRouter>
