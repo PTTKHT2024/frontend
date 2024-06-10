@@ -405,7 +405,7 @@ const Content = () => {
 
               {selectedVideo && (
                 <div
-                  className="fixed top-0 left-0 right-0 bottom-0 z-10 bg-[#333333]/70"
+                  className="fixed top-0 left-0 right-0 bottom-0 z-[50] bg-[#333333]/70"
                   id="overlay"
                   onClick={handleClickOutside}
                 >
