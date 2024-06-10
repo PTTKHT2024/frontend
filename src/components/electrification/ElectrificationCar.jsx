@@ -75,7 +75,7 @@ const ElectrificationCar = () => {
       <section className="w-full h-max mt-[94px] relative bg-black">
         <div className="">
           <video
-            auto="autoplay"
+            autoPLay="autoplay"
             preload="metadata"
             loop="loop"
             muted="muted"
