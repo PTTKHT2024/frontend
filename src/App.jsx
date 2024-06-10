@@ -141,6 +141,9 @@ function TechnologyLayout() {
 }
 
 function InformationLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <Header />
@@ -152,10 +155,14 @@ function InformationLayout() {
 }
 
 function ElectrificationLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <Header />
       <Outlet />
+      <ScrollToTopButton />
       <Footer />
     </>
   );

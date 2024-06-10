@@ -634,7 +634,7 @@ const Header = () => {
           <div className="grid grid-cols-4 gap-x-1.5 gap-y-1.5">
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
-              to={'/technology/hybrid'}
+              to={'/electrification/electrified-car'}
             >
               <img
                 src="/imgs/electric/poster/electric_poster_1.jpg"

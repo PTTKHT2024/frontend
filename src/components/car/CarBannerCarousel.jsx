@@ -51,7 +51,12 @@ const CarBannerCarousel = () => {
         >
           {banners.map((banner, index) => (
             <SwiperSlide className="w-screen" key={index}>
-              <img src={banner} alt={`banner ${index}`} className="w-screen" />
+              <img
+                src={banner}
+                alt={`banner ${index}`}
+                className="w-screen"
+                loading="lazy"
+              />
               <div className="h-full flex items-center absolute left-[130px] top-0 mt-7">
                 <div
                   className="flex py-3.5 px-5 bg-primaryColor text-white text-xs mr-5 font-semibold tracking-widest"

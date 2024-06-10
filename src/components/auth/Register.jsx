@@ -20,8 +20,9 @@ const Register = ({ handleClickLogin }) => {
   const [countdown, setCountdown] = useState(5);
 
   useEffect(() => {
+    console.log(nameInputRef.current);
     nameInputRef.current?.focus();
-  }, []);
+  }, [emailRegister]);
 
   const handleClickEmailRegister = () => {
     setEmailRegister(!emailRegister);
@@ -122,11 +123,11 @@ const Register = ({ handleClickLogin }) => {
                     Tên của bạn?
                   </label>
                   <input
+                    ref={nameInputRef}
                     required
                     name="fullName"
                     value={registerForm.fullName}
                     onChange={handleChangeInput}
-                    ref={nameInputRef}
                     type="text"
                     placeholder="Họ và tên của bạn"
                     className="w-full px-5 py-2.5 rounded-3xl border-[2px] border-[#1dbfaf]/[.6] outline-0"

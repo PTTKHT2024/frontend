@@ -90,6 +90,7 @@ const CarDiscoverTab = ({ carTabsWidth = 80, all = false }) => {
                       <img
                         src={car.image}
                         className="object-cover w-full absolute top-0 h-[105px] object-center opacity-100 transition-opacity duration-200 ease-out group-hover:opacity-0 will-change-[opacity]"
+                        loading="lazy"
                       />
                       <img
                         src={car.hoverImage}

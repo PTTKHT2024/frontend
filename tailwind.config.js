@@ -13,6 +13,20 @@ export default {
       },
     },
     extend: {
+      animation: {
+        'slide-in': 'slideIn 2s ease-out forwards',
+        'sweep-to-bottom': 'sweepToBottom 1.2s ease-in forwards infinite',
+      },
+      keyframes: {
+        slideIn: {
+          '0%': { transform: 'translateX(20%)', opacity: 0 },
+          '100%': { transform: 'translateX(0)', opacity: 1 },
+        },
+        sweepToBottom: {
+          '0%': { top: '20%', opacity: 0 },
+          '100%': { top: '70%', opacity: 1 },
+        },
+      },
       colors: {
         facebookColor: '#395196',
         youtubeColor: '#d40c18',
