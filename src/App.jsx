@@ -30,6 +30,7 @@ import CommunityContribution from './components/information/community/CommunityC
 import ToyotaFund from './components/information/community/ToyotaFund';
 
 import Appointment from './components/form/appointment';
+import Philosophy from './components/information/philosophy/Philosophy';
 function App() {
   return (
     <>
@@ -65,8 +66,12 @@ function App() {
 
           <Route path="/information" element={<InformationLayout />}>
             <Route path="community" element={<Community />} />
+<<<<<<< HEAD
             <Route path="contribution" element={<CommunityContribution />} />
             <Route path="fund" element={<ToyotaFund />} />
+=======
+            <Route path="philosophy" element={<Philosophy />} />
+>>>>>>> feature/12_philosophy
           </Route>
         </Routes>
       </BrowserRouter>
