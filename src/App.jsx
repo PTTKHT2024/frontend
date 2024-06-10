@@ -26,9 +26,10 @@ import { useEffect } from 'react';
 import TSS from './components/technology/TSS/main';
 import Community from './components/information/community/Community';
 import TngaTechnology from './components/technology/tnga/TngaTechnology';
-
-import Appointment from './components/form/appointment';
-function App() {
+import Appointment from './components/form/Appointment';
+import Cooperate from './components/information/localization/Cooperate';
+import Conduct from './components/information/localization/Conduct';
+function App() {  
   return (
     <>
       <BrowserRouter>
@@ -63,6 +64,8 @@ function App() {
 
           <Route path="/information" element={<InformationLayout />}>
             <Route path="community" element={<Community />} />
+            <Route path="cooperate" element={<Cooperate />} />
+            <Route path="conduct" element={<Conduct />} />
           </Route>
         </Routes>
       </BrowserRouter>
