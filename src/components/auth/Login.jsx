@@ -2,14 +2,19 @@ import React, { useState } from 'react';
 import { AiFillFacebook, AiOutlineUser } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { MdArrowBackIos } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { login } from '../utils/AuthApi';
+import { CgDanger } from 'react-icons/cg';
 
-const Login = ({ handleClickRegister }) => {
+const Login = ({ handleClickRegister, handleClickLogin }) => {
   const [emailLogin, setEmailLogin] = useState(false);
   const [loginForm, setLoginForm] = useState({
-    email: '',
+    username: '',
     password: '',
   });
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
+  const countdown = 5;
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
@@ -18,6 +23,31 @@ const Login = ({ handleClickRegister }) => {
 
   const handleClickEmailLogin = () => {
     setEmailLogin(!emailLogin);
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await login(loginForm);
+
+      if (res.status === 201) {
+        localStorage.setItem('data', JSON.stringify(res.data.data));
+        window.dispatchEvent(new CustomEvent('localStorageChanged'));
+        navigate('/');
+        handleClickLogin();
+        // console.log(res.data.data);
+      } else {
+        setErrorMessage('Email hoặc mật khẩu không hợp lệ');
+      }
+    } catch (err) {
+      console.error('Error registering user:', err);
+      setErrorMessage('Email hoặc mật khẩu không hợp lệ');
+    }
+
+    setTimeout(() => {
+      setErrorMessage('');
+    }, countdown * 1000);
   };
 
   return (
@@ -47,15 +77,26 @@ const Login = ({ handleClickRegister }) => {
           >
             <MdArrowBackIos className="inline-block h-5 w-5 " /> Quay lại
           </span>
-          <form action="">
+          <form onSubmit={handleLogin}>
             <ul className="w-4/6 mx-auto">
+              <li className="bg-white mb-3 mt-3">
+                {errorMessage && (
+                  <div className="w-full px-5 py-2.5 rounded-3xl bg-[#DC3545]/[.6] outline-0 text-white flex justify-between items-center">
+                    <p className="font-medium text-sm">{errorMessage}</p>
+                    <p className="font-bold text-base rounded-[50%] bg-white text-[#28A745] px-[6px] py-[5px] drop-shadow-md h-max w-max flex items-center">
+                      <CgDanger className="text-[#DC3545] inline h-5 w-5 rounded-[50%]" />
+                    </p>
+                  </div>
+                )}
+              </li>
+
               <li className="bg-white cursor-pointer mb-3">
                 <label className="font-sm w-full font-medium block mb-3">
                   Email của bạn?
                 </label>
                 <input
-                  name="email"
-                  value={loginForm.email}
+                  name="username"
+                  value={loginForm.username}
                   onChange={handleChangeInput}
                   type="email"
                   placeholder="Địa chỉ email"
@@ -75,7 +116,10 @@ const Login = ({ handleClickRegister }) => {
               </li>
 
               <li className="bg-white cursor-pointer mb-3">
-                <button className="w-full px-5 py-2.5 rounded-3xl outline-0 text-white font-medium bg-[#1dbfaf]/[.6]">
+                <button
+                  className="w-full px-5 py-2.5 rounded-3xl outline-0 text-white font-medium bg-[#1dbfaf]/[.6]"
+                  type="submit"
+                >
                   Đăng nhập
                 </button>
               </li>

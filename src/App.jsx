@@ -33,6 +33,8 @@ import Appointment from './components/form/appointment';
 import Philosophy from './components/information/philosophy/Philosophy';
 import Cooperate from './components/information/localization/Cooperate';
 import Conduct from './components/information/localization/Conduct';
+import ScrollToTopButton from './components/common/ScrollToTopButton';
+import ElectrificationCar from './components/electrification/ElectrificationCar';
 function App() {
   return (
     <>
@@ -45,14 +47,18 @@ function App() {
             <Route path="vr-sedan" element={<SedanShowroom />} />
             <Route path="show-rooms" element={<VRShowroom />} />
             <Route path="appointment" element={<Appointment />} />
+          </Route>
 
-            {/* Service route */}
-            <Route path="service" element={<ServiceLayout />}>
-              <Route path="maintain" element={<MaintainService />} />
-              <Route path="beauty" element={<></>} />
-              <Route path="warranty" element={<Warranty />} />
-              <Route path="repair" element={<RepairService />} />
-            </Route>
+          <Route path="/service" element={<ServiceLayout />}>
+            <Route path="maintain" element={<MaintainService />} />
+            <Route path="beauty" element={<></>} />
+            <Route path="warranty" element={<Warranty />} />
+            <Route path="repair" element={<RepairService />} />
+            <Route path="inspect" element={<RepairService />} />
+          </Route>
+
+          <Route path="/electrification" element={<ElectrificationLayout />}>
+            <Route path="electrified-car" element={<ElectrificationCar />} />
           </Route>
 
           {/* Admin routes */}
@@ -60,6 +66,7 @@ function App() {
             {/* <Route path="dashboard" element={<AdminDashboard />} /> */}
             {/* <Route path="users" element={<AdminUsers />} /> */}
           </Route>
+
           <Route path="/technology" element={<TechnologyLayout />}>
             <Route path="hybrid" element={<HybridTechnology />} />
             <Route path="tss" element={<TSS />} />
@@ -84,6 +91,8 @@ function MainLayout() {
   return (
     <>
       <Header />
+      <Tool />
+      <ScrollToTopButton />
       <Outlet />
       <Footer />
     </>
@@ -108,6 +117,7 @@ function ServiceLayout() {
       <Outlet />
       <Tool />
       <OrderButton />
+      <ScrollToTopButton />
       <Footer />
     </>
   );
@@ -133,6 +143,7 @@ function TechnologyLayout() {
       <Header />
       <Navbar datas={technologyNavbarDatas} />
       <Outlet />;
+      <ScrollToTopButton />
       <Tool />
       <Footer />
     </>
@@ -140,10 +151,28 @@ function TechnologyLayout() {
 }
 
 function InformationLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <Header />
       <Outlet />
+      <ScrollToTopButton />
+      <Footer />
+    </>
+  );
+}
+
+function ElectrificationLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <>
+      <Header />
+      <Outlet />
+      <ScrollToTopButton />
       <Footer />
     </>
   );

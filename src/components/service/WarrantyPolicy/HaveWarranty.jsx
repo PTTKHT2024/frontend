@@ -85,16 +85,14 @@ const HaveWarranty = () => {
         <p className="mb-8">
           <strong>Xin quý khách hàng lưu ý:</strong>
         </p>
-        <ul className="font-light mb-7 indent-5">
+        <ul className="mb-7 indent-5 text-subInformationColor">
           <li>
             Chính sách bảo hành tại Website này là những thông tin cơ bản nhất
             về việc bảo hành xe nói chung.
           </li>
-          <li>
-            Chính sách bảo hành có thể có sự khác nhau giữa các dòng xe.
-          </li>
+          <li>Chính sách bảo hành có thể có sự khác nhau giữa các dòng xe.</li>
         </ul>
-        <p className="mb-8 font-light">
+        <p className="mb-8 text-subInformationColor">
           Vì vậy, mời quý khách hàng tham khảo tại Sổ bảo hành đi kèm sản phẩm
           để biết thêm các thông tin bảo hành chi tiết và chính sách bảo hành
           đặc biệt hơn cho từng dòng xe.

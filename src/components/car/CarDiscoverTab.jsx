@@ -28,8 +28,6 @@ const CarDiscoverTab = ({ carTabsWidth = 80, all = false }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [carClass, setCarClass] = useState('Sedan');
 
-  console.log(all);
-
   useEffect(() => {
     setCars(fakeData);
     setTimeout(() => {
@@ -92,6 +90,7 @@ const CarDiscoverTab = ({ carTabsWidth = 80, all = false }) => {
                       <img
                         src={car.image}
                         className="object-cover w-full absolute top-0 h-[105px] object-center opacity-100 transition-opacity duration-200 ease-out group-hover:opacity-0 will-change-[opacity]"
+                        loading="lazy"
                       />
                       <img
                         src={car.hoverImage}
