@@ -345,6 +345,7 @@ const Header = () => {
           <div className="grid grid-cols-4 gap-x-1.5 gap-y-1.5">
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              onClick={resetDropdownState}
               to={'/technology/hybrid'}
             >
               <img
@@ -360,6 +361,7 @@ const Header = () => {
 
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              onClick={resetDropdownState}
               to={'/technology/tss'}
             >
               <img
@@ -375,6 +377,7 @@ const Header = () => {
 
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              onClick={resetDropdownState}
               to={'/technology/tnga'}
             >
               <img
@@ -562,6 +565,7 @@ const Header = () => {
           <div className="grid grid-cols-4 gap-x-1.5 gap-y-1.5">
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              onClick={resetDropdownState}
               to={'/technology/hybrid'}
             >
               <img
@@ -577,6 +581,7 @@ const Header = () => {
 
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              onClick={resetDropdownState}
               to={'/technology/tss'}
             >
               <img
@@ -592,6 +597,7 @@ const Header = () => {
 
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              onClick={resetDropdownState}
               to={'/technology/tnga'}
             >
               <img
@@ -607,6 +613,7 @@ const Header = () => {
 
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              onClick={resetDropdownState}
               to={'/technology/tnga'}
             >
               <img
@@ -634,6 +641,7 @@ const Header = () => {
           <div className="grid grid-cols-4 gap-x-1.5 gap-y-1.5">
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              onClick={resetDropdownState}
               to={'/electrification/electrified-car'}
             >
               <img
@@ -649,6 +657,7 @@ const Header = () => {
 
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              onClick={resetDropdownState}
               to={'/technology/tss'}
             >
               <img
@@ -664,6 +673,7 @@ const Header = () => {
 
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              onClick={resetDropdownState}
               to={'/technology/tnga'}
             >
               <img
@@ -691,6 +701,7 @@ const Header = () => {
           <div className="grid grid-cols-4 gap-x-1.5 gap-y-1.5">
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              onClick={resetDropdownState}
               to={'/technology/hybrid'}
             >
               <img
@@ -706,7 +717,8 @@ const Header = () => {
 
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
-              to={'/technology/tss'}
+              onClick={resetDropdownState}
+              to={'/information/company/introduction'}
             >
               <img
                 src="/imgs/information/poster/information_poster_2.png"
@@ -721,6 +733,7 @@ const Header = () => {
 
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              onClick={resetDropdownState}
               to={'/information/community'}
             >
               <img
@@ -736,7 +749,8 @@ const Header = () => {
 
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
-              to={'/technology/tnga'}
+              onClick={resetDropdownState}
+              to={'/information/local/conduct'}
             >
               <img
                 src="/imgs/information/poster/information_poster_4.png"
@@ -751,6 +765,7 @@ const Header = () => {
 
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
+              onClick={resetDropdownState}
               to={'/technology/tnga'}
             >
               <img

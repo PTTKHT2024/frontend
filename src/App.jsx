@@ -18,8 +18,12 @@ import RepairService from './components/service/RepairService/RepairService';
 import HybridTechnology from './components/technology/hybrid/HybridTechnology';
 import Login from './components/auth/Login';
 import Navbar from './components/common/Navbar';
+
 import { datas as serviceNavbarDatas } from './components/data/ServiceNavbarData';
 import { datas as technologyNavbarDatas } from './components/data/TechnologyNavbarData';
+import { datas as introductionNavbarDatas } from './components/data/IntroductionNavbarData';
+import { datas as localNavbarDatas } from './components/data/LocalNavbarData';
+
 import OrderButton from './components/service/OrderButton';
 import Tool from './components/common/Tool';
 import { useEffect } from 'react';
@@ -35,6 +39,7 @@ import Cooperate from './components/information/localization/Cooperate';
 import Conduct from './components/information/localization/Conduct';
 import ScrollToTopButton from './components/common/ScrollToTopButton';
 import ElectrificationCar from './components/electrification/ElectrificationCar';
+import Introduction from './components/information/Introduction/main';
 function App() {
   return (
     <>
@@ -74,12 +79,21 @@ function App() {
           </Route>
 
           <Route path="/information" element={<InformationLayout />}>
-            <Route path="community" element={<Community />} />
-            <Route path="contribution" element={<CommunityContribution />} />
-            <Route path="fund" element={<ToyotaFund />} />
-            <Route path="philosophy" element={<Philosophy />} />
-            <Route path="cooperate" element={<Cooperate />} />
-            <Route path="conduct" element={<Conduct />} />
+            <Route path="community" element={<CommonLayout />}>
+              <Route index element={<Community />} />
+              <Route path="contribution" element={<CommunityContribution />} />
+              <Route path="fund" element={<ToyotaFund />} />
+            </Route>
+
+            <Route path="company" element={<IntroductionLayout />}>
+              <Route path="introduction" element={<Introduction />} />
+              <Route path="philosophy" element={<Philosophy />} />
+            </Route>
+
+            <Route path="local" element={<LocalLayout />}>
+              <Route path="cooperate" element={<Cooperate />} />
+              <Route path="conduct" element={<Conduct />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>
@@ -97,6 +111,37 @@ function MainLayout() {
       <Footer />
     </>
   );
+}
+
+function LocalLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <>
+      <Navbar datas={localNavbarDatas} />
+      <Outlet />
+    </>
+  );
+}
+
+function IntroductionLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <>
+      <Navbar datas={introductionNavbarDatas} />
+      <Outlet />
+    </>
+  );
+}
+
+function CommonLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return <Outlet />;
 }
 
 function ServiceLayout() {

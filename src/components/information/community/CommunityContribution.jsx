@@ -54,7 +54,7 @@ function CommunityContribution() {
           <CommunityComponent key={item.id} data={item} />
         ))}
       </div>
-      <div className='px-28 py-8'>
+      <div className="px-28 pt-8">
         <RelatedPosts />
       </div>
     </>

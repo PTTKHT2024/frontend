@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import YoutubeEmbed from '../../common/YoutubeEmbed';
 import Content from './content';
-import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
+import ThreeButton from './Threebutton';
+import { AiFillCaretRight } from 'react-icons/ai';
 
 const TSS = ({ title, src }) => {
   const [selection, setSelection] = useState('video');
+  const [videoIndex, setVideoIndex] = useState(null); // Define videoIndex state
+  const videoRef = useRef(null); // Reference to the video container
 
   useEffect(() => {
     setSelection('video');
@@ -13,6 +16,42 @@ const TSS = ({ title, src }) => {
   const handleSelectionChange = (event) => {
     setSelection(event.target.value);
   };
+
+  const handleClick = (index) => {
+    setVideoIndex(index);
+    if (videoRef.current) {
+      if (videoRef.current.requestFullscreen) {
+        videoRef.current.requestFullscreen();
+      } else if (videoRef.current.mozRequestFullScreen) {
+        videoRef.current.mozRequestFullScreen();
+      } else if (videoRef.current.webkitRequestFullscreen) {
+        videoRef.current.webkitRequestFullscreen();
+      } else if (videoRef.current.msRequestFullscreen) {
+        videoRef.current.msRequestFullscreen();
+      }
+    }
+  };
+
+  const handleClose = () => {
+    setVideoIndex(null);
+    if (
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.mozFullScreenElement ||
+      document.msFullscreenElement
+    ) {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+    }
+  };
+
   return (
     <>
       <div className="max-w-[1600px] m-auto p-0 relative w-full">
@@ -39,7 +78,7 @@ const TSS = ({ title, src }) => {
                 <select
                   name=""
                   id=""
-                  className="py-0 px-4 w-full h-10 flex items-center border border-solid border-gray-400 cursor-pointer "
+                  className="py-0 px-4 w-full h-10 flex items-center border border-solid border-gray-400 cursor-pointer"
                   value={selection}
                   onChange={handleSelectionChange}
                 >
@@ -51,27 +90,45 @@ const TSS = ({ title, src }) => {
             <div className="p-0">
               <div className="flex flex-wrap pt-10 px-28 ml-[-40px]">
                 {selection === 'video' ? (
-                  <>
-                    <div className="pr-10 w-80 h-44">
-                      <YoutubeEmbed
-                        src="https://www.youtube.com/embed/_2sBbzICjsg"
-                        title="Hệ thống an toàn Toyota Safety Sense hỗ trợ người lái như thế nào | Toyota Việt Nam"
+                  <div className="flex">
+                    <div>
+                      <img
+                        src="/imgs/technology/tss_13.jpg"
+                        alt="hình ảnh công nghệ 1"
+                        className="w-80 h-44 cursor-pointer mr-10"
+                        onClick={() => handleClick(0)}
                       />
-                      <h3 className="text-base leading-[120%] text-black pt-5">
+                      <AiFillCaretRight
+                        className="absolute w-10 h-10 z-[2] left-[373px] bottom-[334px] text-white cursor-pointer"
+                        onClick={() => handleClick(0)}
+                      />
+                      <h3
+                        className="text-black text-base mt-5 hover:font-semibold cursor-pointer"
+                        onClick={() => handleClick(0)}
+                      >
                         Giới thiệu về Công nghệ TSS
                       </h3>
                     </div>
-                    <div className="w-80 h-44">
-                      <YoutubeEmbed
-                        src="https://www.youtube.com/embed/SL3otKUZd64"
-                        title="Hệ thống an toàn Toyota Safety Sense hỗ trợ người lái như thế nào | Toyota Việt Nam"
+                    <div>
+                      <img
+                        src="/imgs/technology/tss_14.jpg"
+                        alt="hình ảnh công nghệ 2"
+                        className="w-80 h-44 cursor-pointer"
+                        onClick={() => handleClick(1)}
                       />
-                      <h3 className="text-base leading-[120%] text-black pt-5">
-                        Hệ thống an toàn Toyota Safety Sense hỗ trợ người lái
-                        như thế nào?
+                      <AiFillCaretRight
+                        className="absolute w-10 h-10 z-[2] left-[725px] bottom-[334px] text-white cursor-pointer"
+                        onClick={() => handleClick(1)}
+                      />
+                      <h3
+                        className="text-black text-base mt-5 hover:font-semibold cursor-pointer"
+                        onClick={() => handleClick(1)}
+                      >
+                        Hệ thống an toàn Toyota Safety Sense hỗ trợ
+                        <br /> người lái như thế nào?
                       </h3>
                     </div>
-                  </>
+                  </div>
                 ) : (
                   <div>
                     <img
@@ -79,32 +136,44 @@ const TSS = ({ title, src }) => {
                       alt=""
                       className="w-80 h-44"
                     />
+                    <h3 className="text-black text-base mt-5 hover:font-semibold cursor-pointer">
+                      Cross2
+                    </h3>
                   </div>
                 )}
               </div>
-              <div className="pt-40 flex items-center m-auto justify-center ml-[-16px]">
-                <div
-                  className="h-10 w-10 ml-4 border-2 border-solid border-gray-500 text-center leading-10 
-                    uppercase text-base text-gray-500 cursor-pointer"
-                >
-                  <VscChevronLeft className="inline-block" />
-                </div>
-                <input
-                  readOnly
-                  className="ml-4 text-white bg-primaryColor h-10 w-10 text-center"
-                  value={1}
-                />
-                <div
-                  className="h-10 w-10 ml-4 border-2 border-solid border-gray-500 text-center leading-10 uppercase 
-                    text-base text-gray-500 cursor-pointer "
-                >
-                  <VscChevronRight className="inline-block" />
-                </div>
-              </div>
+              <ThreeButton />
             </div>
           </div>
         </div>
       </div>
+
+      {videoIndex !== null && (
+        <div
+          ref={videoRef}
+          className="fixed top-0 left-0 right-0 bottom-0 z-[50] bg-gray-900 bg-opacity-75 flex justify-center items-center"
+          onClick={handleClose}
+        >
+          <div
+            className="relative bg-black w-[980px] h-[600px] transition duration-300 ease-in-out"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <YoutubeEmbed
+              src={
+                videoIndex === 0
+                  ? 'https://www.youtube.com/embed/_2sBbzICjsg'
+                  : 'https://www.youtube.com/embed/SL3otKUZd64'
+              }
+              title={
+                videoIndex === 0
+                  ? 'Giới thiệu về Công nghệ TSS'
+                  : 'Hệ thống an toàn Toyota Safety Sense hỗ trợ người lái như thế nào?'
+              }
+              className="h-full w-full"
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 };

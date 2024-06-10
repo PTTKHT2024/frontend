@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 import ContactUs from '../../common/ContactUs';
 import Content from './Content';
-import historyData from '../../data/Introduction'; 
+import historyData from '../../data/Introduction';
 
 const Introduction = () => {
   const [selectedYear, setSelectedYear] = useState(2023);
-  const [startYearIndex, setStartYearIndex] = useState(21); 
+  const [startYearIndex, setStartYearIndex] = useState(21);
   const [transition, setTransition] = useState(false);
   const [direction, setDirection] = useState('');
   const years = Object.keys(historyData);
-  const visibleYearsCount = 4; 
-  const transitionDuration = 500; 
+  const visibleYearsCount = 4;
+  const transitionDuration = 500;
 
   const handleYearClick = (year) => {
     setSelectedYear(parseInt(year));
@@ -50,7 +50,7 @@ const Introduction = () => {
   };
 
   return (
-    <div className="mt-24 relative min-h-full">
+    <div className="mt-24 min-h-full">
       <Content />
       <section className="max-w-[840px] my-0 mx-auto mt-16 mb-24">
         <p className="font-bold text-3xl leading-[115%] text-center text-mainTitleColor mb-16">
@@ -114,7 +114,7 @@ const Introduction = () => {
           </div>
         </div>
         {selectedYear && (
-          <div className="mt-7">
+          <div className="h-max">
             <p className="mt-0 mb-4 font-medium">
               <span>{historyData[selectedYear].content1}</span>
             </p>

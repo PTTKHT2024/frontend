@@ -4,7 +4,7 @@ export const community = [
     side: 'left',
     image: '/imgs/information/community_1.png',
     title: 'Đóng góp xã hội',
-    route: '/information/contribution',
+    route: '/information/community/contribution',
     icon: '/imgs/information/white_icon.png',
     description:
       'Nhằm góp phần xây dựng, phát triển bền vững và kiến tạo một tương lai tươi đẹp cho đất nước Việt Nam, Toyota Việt Nam luôn tích cực đóng góp cho cộng đồng thông qua nhiều hoạt động có ý nghĩa có quy mô rộng khắp trong các lĩnh vực: An toàn giao thông, Bảo vệ môi...',
@@ -14,7 +14,7 @@ export const community = [
     side: 'right',
     image: '/imgs/information/community_2.png',
     title: 'Quỹ Toyota Việt Nam',
-    route: '/information/fund',
+    route: '/information/community/fund',
     icon: '/imgs/information/white_icon.png',
     description:
       'Toyota Việt Nam luôn không ngừng nỗ lực để trở thành một “doanh nghiệp xanh” thông qua việc thực hiện nhiều hoạt động như: đầu tư và ứng dụng các công nghệ thân thiện với môi trường, hỗ trợ đại lý và các nhà cung cấp cùng thực hiện “chu trình xanh” khép kín, cũng như thực hiện nhiều hoạt động...',
