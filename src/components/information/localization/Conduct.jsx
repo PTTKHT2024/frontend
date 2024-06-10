@@ -1,18 +1,13 @@
 import React from 'react';
-
+import Conduct_banner from '../../common/Conduct_banner';
 const Conduct = () => {
     return (
         <div className="mt-[96px]">
             {/* Section 1 */}
-            <div className="relative">
-                <img className="w-full object-center object-cover h-[600px]" 
-                     src="https://www.toyota.com.vn/media/hb0fqqtx/dc0b5f8b509ea0dd7e103e46ce6f26e9.jpg" 
-                     alt="" />
-                <h1 className="absolute text-orange-900 top-1/2 left-1/2 text-4xl md:text-6xl font-semibold leading-none text-center transform -translate-x-1/2 -translate-y-1/2">
-                    Nội địa hóa
-                </h1>
-            </div>
-
+            <Conduct_banner 
+            src="https://www.toyota.com.vn/media/hb0fqqtx/dc0b5f8b509ea0dd7e103e46ce6f26e9.jpg"
+            title="Nội địa hóa"
+            />
             {/* Section 2 */}
             <div className="relative">
                 <img className="block absolute top-0 left-0 w-full min-h-[1000px] -z-1" 
