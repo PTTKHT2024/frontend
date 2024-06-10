@@ -1,57 +1,52 @@
 import React, { useState } from 'react';
+import { BsPlayCircle } from 'react-icons/bs';
 import YoutubeEmbed from '../../common/YoutubeEmbed';
+
 const Content = () => {
-  const [selectedValue, setSelectedValue] = useState('');
+  const [selectedOption, setSelectedOption] = useState('video'); // State variable to track the selected option
 
-  const handleSelectChange = (event) => {
-    setSelectedValue(event.target.value);
-    console.log(event.target.value);
+  const handleSelectionChange = (event) => {
+    setSelectedOption(event.target.value);
   };
 
-  const renderContent = () => {
-    if (selectedValue === 'image') {
-      return (
-        <div>
-          <div className="flex justify-between mx-[120px]">
-            <img
-              className="w-[300px]"
-              src="/imgs/technology/tnga_003_3_en.png"
-              alt=""
-            />
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
-            <img
-              className="w-[300px]"
-              src="/imgs/technology/tnga_003_04.jpg"
-              alt=""
-            />
-
-            <img
-              className=" w-[300px]"
-              src="/imgs/technology/tnga_003_05.jpg"
-              alt=""
-            />
-          </div>
-        </div>
-      );
-    } else if (selectedValue === 'video') {
-      return (
-        <div className="h-[180px] w-[300px] mt-[40px ml-[120px]">
-          <YoutubeEmbed
-            title="Hệ thống Hybrid của động cơ 1.8 cấu tạo và hoạt động như thế nào?"
-            src="https://www.youtube.com/embed/e-LbRfjz2Nc"
-          />
-
-          <div className="description mt-[12px] hover:font-semibold">
-            Hệ thống Hybrid của động cơ 1.8 cấu tạo và hoạt động như thế nào?
-          </div>
-        </div>
-      );
-    }
+  const handleClickReview = (id) => {
+    setSelectedVideo(id);
   };
+
+  const handleClickOutside = () => {
+    setSelectedVideo(null);
+  };
+  const imageItems = [
+    {
+      id: 0,
+      src: '/imgs/technology/tnga_003_3_en.png',
+    },
+    {
+      id: 1,
+      src: '/imgs/technology/tnga_003_04.jpg',
+    },
+    {
+      id: 2,
+      src: '/imgs/technology/tnga_003_05.jpg',
+    },
+  ];
+
+  const videos = [
+    {
+      id: 1,
+      videoId: 'e-LbRfjz2Nc',
+      src_img: 'https://img.youtube.com/vi/e-LbRfjz2Nc/0.jpg',
+      src: 'https://www.youtube.com/embed/e-LbRfjz2Nc',
+      title:
+        'Hệ thống Hybrid của động cơ 1.8 cấu tạo và hoạt động như thế nào?',
+    },
+  ];
 
   return (
     <>
-      <div className="h-96 w-full max-w-full mt-16 mb-9">
+      <div className="mt-[94px] mb-[60px]">
         <img
           src="/imgs/technology/tss_1.jpg"
           alt=""
@@ -236,18 +231,101 @@ const Content = () => {
           <h2 className="h-[40px] flex items-center pl-3 border-l-4 border-red-600 text-2xl leading-4 text-black mb-4 font-semibold">
             TÌM HIỂU THÊM
           </h2>
-          <div className="flex border border-gray-300 px-[16px] h-[40px]">
+
+          <div className="flex flex-col items-start justify-center w-56 relative">
             <select
-              className="max-w-full w-[200px] outline-0"
-              id="list"
-              onChange={handleSelectChange}
+              className="px-4 w-full h-10 flex items-center border border-gray-300 outline-none appearance-none cursor-pointer"
+              name="technology-learn"
+              id="select-list"
+              onChange={handleSelectionChange}
             >
-              <option value="video">Video</option>
-              <option value="image">Hỉnh ảnh</option>
+              <option
+                value="video"
+                selected
+                className="font-normal block min-h-[1.2em] px-0.5 py-[1px] whitespace-nowrap"
+              >
+                Video
+              </option>
+              <option
+                value="image"
+                className="font-normal block min-h-[1.2em] px-2 py-1 whitespace-nowrap"
+              >
+                Hình ảnh
+              </option>
             </select>
+            <span className="absolute right-0 top-0 h-full w-10 text-center text-primaryColor-600 pointer-events-none flex items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                className="h-4 w-4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </span>
           </div>
         </div>
-        {renderContent()}
+      </div>
+      {/* page content video and img */}
+      <div className="container mb-16 w-[1300px]">
+        {/* grid grid-cols-3 gap-4 mt-5 */}
+        <div className="flex justify-between mx-[120px] mt-[40px]">
+          {selectedOption === 'video' ? (
+            <>
+              {videos.map((video) => (
+                <div
+                  key={video.id}
+                  className="relative cursor-pointer"
+                  onClick={() => handleClickReview(video.id)}
+                >
+                  <img
+                    src={video.src_img}
+                    alt={video.title}
+                    className="relative object-cover  h-[181px] w-[300px] "
+                  />
+                  <BsPlayCircle className="absolute top-0 bottom-5 left-0 right-0 m-auto h-1/5 w-1/5 text-primaryColor" />
+                  <h3 className="text-base mt-1 leading-5 mt-[12px] hover:font-semibold w-[300px]">
+                    {video.title}
+                  </h3>
+                </div>
+              ))}
+
+              {selectedVideo && (
+                <div
+                  className="fixed top-0 left-0 right-0 bottom-0 z-10 bg-[#333333]/70 z-[50]"
+                  id="overlay"
+                  onClick={handleClickOutside}
+                >
+                  <div className="bg-black absolute w-2/3 h-4/5 top-0 bottom-0 left-0 right-0 m-auto">
+                    <YoutubeEmbed
+                      src={videos[selectedVideo - 1].src}
+                      title="YouTube video player"
+                      className=""
+                    />
+                  </div>
+                </div>
+              )}
+            </>
+          ) : (
+            <>
+              {imageItems.map((item) => (
+                <div key={item.id} className="relative cursor-pointer ">
+                  <img
+                    src={item.src}
+                    alt={item.title}
+                    className="h-[181px] w-[300px] mx-[auto] "
+                  />
+                </div>
+              ))}
+            </>
+          )}
+        </div>
       </div>
     </>
   );
