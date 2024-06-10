@@ -31,6 +31,8 @@ import ToyotaFund from './components/information/community/ToyotaFund';
 
 import Appointment from './components/form/appointment';
 import Philosophy from './components/information/philosophy/Philosophy';
+import Cooperate from './components/information/localization/Cooperate';
+import Conduct from './components/information/localization/Conduct';
 function App() {
   return (
     <>
@@ -69,6 +71,8 @@ function App() {
             <Route path="contribution" element={<CommunityContribution />} />
             <Route path="fund" element={<ToyotaFund />} />
             <Route path="philosophy" element={<Philosophy />} />
+            <Route path="cooperate" element={<Cooperate />} />
+            <Route path="conduct" element={<Conduct />} />
           </Route>
         </Routes>
       </BrowserRouter>
