@@ -37,6 +37,7 @@ import Appointment from './components/form/appointment';
 import Philosophy from './components/information/philosophy/Philosophy';
 import Cooperate from './components/information/localization/Cooperate';
 import Conduct from './components/information/localization/Conduct';
+import Support from './components/information/localization/Support';
 import ScrollToTopButton from './components/common/ScrollToTopButton';
 import ElectrificationCar from './components/electrification/ElectrificationCar';
 import Introduction from './components/information/Introduction/main';
@@ -93,6 +94,7 @@ function App() {
             <Route path="local" element={<LocalLayout />}>
               <Route path="cooperate" element={<Cooperate />} />
               <Route path="conduct" element={<Conduct />} />
+              <Route path="support" element={<Support />} />
             </Route>
           </Route>
         </Routes>
