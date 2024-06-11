@@ -40,6 +40,7 @@ import Conduct from './components/information/localization/Conduct';
 import ScrollToTopButton from './components/common/ScrollToTopButton';
 import ElectrificationCar from './components/electrification/ElectrificationCar';
 import Introduction from './components/information/Introduction/main';
+import Feedback from './components/information/localization/feedback';
 function App() {
   return (
     <>
@@ -83,6 +84,7 @@ function App() {
               <Route index element={<Community />} />
               <Route path="contribution" element={<CommunityContribution />} />
               <Route path="fund" element={<ToyotaFund />} />
+              <Route path="feedback" element={<Feedback />} />
             </Route>
 
             <Route path="company" element={<IntroductionLayout />}>
