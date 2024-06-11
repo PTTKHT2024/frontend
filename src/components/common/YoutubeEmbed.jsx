@@ -1,12 +1,12 @@
 import React from 'react';
 
 const YoutubeEmbed = ({ title, src }) => {
+  const updatedSrc = `${src}?autoplay=1`;
+
   return (
     <iframe
-      // width="980"
-      // height="580"
       className="h-full w-full"
-      src={src}
+      src={updatedSrc}
       title={title}
       frameBorder="0"
       allowFullScreen

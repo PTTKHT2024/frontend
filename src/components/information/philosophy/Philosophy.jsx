@@ -5,8 +5,8 @@ const Philosophy = () => {
   return (
     <>
       {/* Triết lý Toyota toàn cầu */}
-      <div className="max-w-full mx-auto h-[calc(100vh-160px)]">
-        <div className="flex items-center mt-16  h-full">
+      <div className="max-w-full mx-auto h-[calc(100vh-94px-59.5px)] mt-[94px]">
+        <div className="flex items-center h-full">
           {/* Image 1 */}
           <div className="w-1/2 overflow-hidden h-full ">
             <img
@@ -51,7 +51,7 @@ const Philosophy = () => {
       </div>
 
       {/* Tầm nhìn Toyota toàn cầu */}
-      <div className="max-w-full mx-auto h-[calc(100vh-160px)]">
+      <div className="max-w-full mx-auto h-[calc(100vh-94px-59.5px)]">
         <div className="flex items-center h-full">
           {/* Text 2 */}
           <div className="w-1/2 px-[72px]">
@@ -65,7 +65,7 @@ const Philosophy = () => {
               </div>
               <div className=" inline-block p-2 border-b-[3px] border-black w-[90px] mb-[28px]"></div>
               <h2 className="font-bold text-3xl leading-9 mb-[32px]">
-                Triết lý Toyota toàn cầu
+                Tầm nhìn Toyota toàn cầu
               </h2>
               <p className="text-subInformationColor text-sm font-medium mb-[32px]">
                 Toyota sẽ dẫn đầu tương lai của chuyển động, nâng tầm cuộc sống
@@ -101,7 +101,7 @@ const Philosophy = () => {
 
       {/* ////////////////// */}
       {/* Tầm nhìn & Triết lý Toyota Việt Nam */}
-      <div className="max-w-full mx-auto h-[calc(100vh-160px)]">
+      <div className="max-w-full mx-auto h-[calc(100vh-94px-59.5px)]">
         <div className="flex items-center h-full">
           {/* Image 3 */}
           <div className="w-1/2 overflow-hidden h-full ">
@@ -147,7 +147,7 @@ const Philosophy = () => {
       </div>
 
       {/* Phương Thức Toyota 2020 */}
-      <div className="max-w-full mx-auto h-[calc(100vh-160px)] mb-[-122px]">
+      <div className="max-w-full mx-auto h-[calc(100vh-94px-59.5px)] mb-[-122px]">
         <div className="flex items-center h-full">
           {/* Text 4 */}
           <div className="w-1/2 px-[72px]">

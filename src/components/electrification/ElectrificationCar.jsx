@@ -7,30 +7,18 @@ import { carElectrification as data } from '../data/ElectricficationVideoReviewD
 const ElectrificationCar = () => {
   const textRef = useRef(null);
   const [scrollYValue, setScrollYValue] = useState(0);
-  const [isTimelineVisible, setIsTimelineVisible] = useState(
-    new Array(timeline.length).fill(false)
-  );
+  const [isTimelineVisible, setIsTimelineVisible] = useState(false);
   const timelineRef = useRef(null);
 
-  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  // const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      async ([entry]) => {
-        for (let i = 0; i < timeline.length; i++) {
-          await delay(1000);
-          if (!entry.intersectionRatio) {
-            break;
-          }
-          setIsTimelineVisible((prev) => {
-            const newVisible = [...prev];
-            newVisible[i] = true;
-            return newVisible;
-          });
-        }
+      ([entry]) => {
+        setIsTimelineVisible(entry.isIntersecting);
       },
       {
-        threshold: 1,
+        threshold: 0.5,
       }
     );
 
@@ -45,12 +33,6 @@ const ElectrificationCar = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (window.scrollY == 0) {
-      setIsTimelineVisible(new Array(6).fill(false));
-    }
-  }, [scrollYValue]);
-
   const handleScroll = () => {
     setScrollYValue(window.scrollY);
   };
@@ -62,6 +44,12 @@ const ElectrificationCar = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    if (scrollYValue === 0) {
+      setIsTimelineVisible(false);
+    }
+  }, [scrollYValue]);
 
   const handleClickScrollMouse = () => {
     const element = document.getElementById('banner-description');
@@ -75,7 +63,7 @@ const ElectrificationCar = () => {
       <section className="w-full h-max mt-[94px] relative bg-black">
         <div className="">
           <video
-            autoPLay="autoplay"
+            autoPlay="autoplay"
             preload="metadata"
             loop="loop"
             muted="muted"
@@ -95,7 +83,7 @@ const ElectrificationCar = () => {
             </p>
             <span
               className={`${
-                scrollYValue == 0
+                scrollYValue === 0
                   ? 'opacity-1 translate-y-0'
                   : 'opacity-0 translate-y-10'
               } transition-all duration-[500ms] w-[30px] h-[50px] border-[2px] border-white ml-auto mr-auto rounded-3xl relative cursor-pointer after:absolute after:right-0 after:left-0 after:top-[0%]  after:content-[''] after:animate-sweep-to-bottom after:mx-auto after:rounded-full after:block after:w-1.5 after:bg-white after:h-1.5`}
@@ -150,19 +138,50 @@ const ElectrificationCar = () => {
             {timeline.map((time, index) => (
               <div key={time.id} className="col-span-2">
                 <div className="flex items-center">
-                  <span className="block h-[10px] w-[10px] bg-[#ccc]"></span>
+                  <span
+                    className={`block h-[10px] w-[10px] transition-all ease-out ${
+                      isTimelineVisible ? 'bg-[#EB0A1E]' : 'bg-[#ccc]'
+                    }`}
+                    style={{
+                      willChange: 'background-color',
+                      transitionDelay: isTimelineVisible
+                        ? `${index * 0.4}s`
+                        : '0s',
+                      transitionDuration: isTimelineVisible ? '2s' : '0s',
+                    }}
+                  ></span>
 
                   {time.nextTarget && (
-                    <hr className="border-[#ccc] h-[1px] w-full" />
+                    <hr
+                      className={`h-[1px] w-full ease-out ${
+                        isTimelineVisible
+                          ? 'border-[#EB0A1E] w-full'
+                          : 'border-[#ccc] w-0'
+                      }`}
+                      style={{
+                        willChange: 'border',
+                        transitionDelay: isTimelineVisible
+                          ? `${index * 0.5}s`
+                          : '0s',
+                        transitionDuration: isTimelineVisible ? '1.8s' : '0s',
+                      }}
+                    />
                   )}
                 </div>
 
                 <div
-                  className={`pt-[30px] pr-[25px] transition-all duration-[300ms] ${
-                    isTimelineVisible[index]
-                      ? 'text-mainTitleColor'
-                      : 'text-mainTitleColor/[.3]'
+                  className={`pt-[30px] pr-[25px] transition-all ease-in ${
+                    isTimelineVisible
+                      ? 'text-mainTitleColor translate-y-0'
+                      : 'text-mainTitleColor/[.1] -translate-y-[15px]'
                   }`}
+                  style={{
+                    willChange: 'opacity, transform',
+                    transitionDelay: isTimelineVisible
+                      ? `${index * 0.4}s`
+                      : '0s',
+                    transitionDuration: isTimelineVisible ? '3s' : '0s',
+                  }}
                 >
                   <span className="text-[22px] font-semibold">{time.year}</span>
                   <p className="font-light text-base">{time.description}</p>
@@ -174,6 +193,26 @@ const ElectrificationCar = () => {
       </section>
 
       <ElectrificationVideoReview data={data} />
+
+      <section className="bg-electrification_1 h-max w-full">
+        <div className="container">
+          <div className="py-[40px]">
+            <Jumping>
+              <h1 className="uppercase text-mainTitleColor font-bold text-mainTitle">
+                TƯƠNG LAI BỀN VỮNG CHO MỌI PHONG CÁCH SỐNG
+              </h1>
+            </Jumping>
+            <Jumping>
+              <p className="text-mainTitleColor text-base mt-[20px]">
+                Với tham vọng đạt được Trung hoà Carbon tới năm 2050, chúng tôi
+                đang phát triển dòng xe điện hoá thông qua những cách tiếp cận
+                đa chiều. Điều này đồng nghĩa với việc bạn có thể chọn chiếc xe
+                phù hợp nhất với phong cách sống của mình.
+              </p>
+            </Jumping>
+          </div>
+        </div>
+      </section>
     </>
   );
 };
