@@ -101,6 +101,10 @@ function App() {
   );
 }
 
+function UserLayout() {
+  return <></>;
+}
+
 function MainLayout() {
   return (
     <>

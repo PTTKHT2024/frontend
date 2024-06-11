@@ -3,11 +3,14 @@ import Jumping from '../common/Jumping';
 import { timeline } from '../data/ElectrificationTimeline';
 import ElectrificationVideoReview from './ElectricficationVideoReview';
 import { carElectrification as data } from '../data/ElectricficationVideoReviewData';
+import { cars } from '../data/ElectrificationCarData';
+import ElectrificationCarItem from './ElectrificationCarItem';
 
 const ElectrificationCar = () => {
   const textRef = useRef(null);
   const [scrollYValue, setScrollYValue] = useState(0);
   const [isTimelineVisible, setIsTimelineVisible] = useState(false);
+  const [carDetailIndex, setCarDetailIndex] = useState(1);
   const timelineRef = useRef(null);
 
   // const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -145,25 +148,25 @@ const ElectrificationCar = () => {
                     style={{
                       willChange: 'background-color',
                       transitionDelay: isTimelineVisible
-                        ? `${index * 0.4}s`
+                        ? `${index * 1}s`
                         : '0s',
-                      transitionDuration: isTimelineVisible ? '2s' : '0s',
+                      transitionDuration: isTimelineVisible ? '1.1s' : '0s',
                     }}
                   ></span>
 
                   {time.nextTarget && (
                     <hr
-                      className={`h-[1px] w-full ease-out ${
+                      className={`h-[1px] ease-linear ${
                         isTimelineVisible
                           ? 'border-[#EB0A1E] w-full'
                           : 'border-[#ccc] w-0'
                       }`}
                       style={{
-                        willChange: 'border',
+                        willChange: 'border, width',
                         transitionDelay: isTimelineVisible
-                          ? `${index * 0.5}s`
+                          ? `${index * 1}s`
                           : '0s',
-                        transitionDuration: isTimelineVisible ? '1.8s' : '0s',
+                        transitionDuration: isTimelineVisible ? '1.1s' : '0s',
                       }}
                     />
                   )}
@@ -178,9 +181,9 @@ const ElectrificationCar = () => {
                   style={{
                     willChange: 'opacity, transform',
                     transitionDelay: isTimelineVisible
-                      ? `${index * 0.4}s`
+                      ? `${index * 0.6}s`
                       : '0s',
-                    transitionDuration: isTimelineVisible ? '3s' : '0s',
+                    transitionDuration: isTimelineVisible ? '2s' : '0s',
                   }}
                 >
                   <span className="text-[22px] font-semibold">{time.year}</span>
@@ -210,6 +213,16 @@ const ElectrificationCar = () => {
                 phù hợp nhất với phong cách sống của mình.
               </p>
             </Jumping>
+          </div>
+
+          <div className="grid grid-cols-12 gap-2.5 mt-[30px]">
+            {cars.map((car) => (
+              <div className="col-span-6 h-max">
+                <Jumping>
+                  <ElectrificationCarItem data={car} />
+                </Jumping>
+              </div>
+            ))}
           </div>
         </div>
       </section>

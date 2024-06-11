@@ -763,10 +763,11 @@ const Header = () => {
               </p>
             </Link>
 
-            <Link
+            <a
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
               onClick={resetDropdownState}
-              to={'/technology/tnga'}
+              href="https://tapchi.toyota.com.vn/vi"
+              target="_blank"
             >
               <img
                 src="/imgs/information/poster/information_poster_5.png"
@@ -777,7 +778,7 @@ const Header = () => {
               <p className="absolute bottom-[8%] left-[6%] text-white font-semibold text-lg uppercase">
                 tạp chí toyota
               </p>
-            </Link>
+            </a>
           </div>
         </HeaderDropdown>
       </div>
