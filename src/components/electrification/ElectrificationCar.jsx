@@ -8,6 +8,7 @@ import ElectrificationCarItem from './ElectrificationCarItem';
 import { TfiClose } from 'react-icons/tfi';
 import { Link } from 'react-router-dom';
 import { MdKeyboardArrowRight } from 'react-icons/md';
+import CarSearch from './CarSearch';
 
 const ElectrificationCar = () => {
   const textRef = useRef(null);
@@ -303,17 +304,7 @@ const ElectrificationCar = () => {
         </div>
       </section>
 
-      <section>
-        <div className="container">
-          <div className="py-[40px]">
-            <Jumping>
-              <h1 className="uppercase text-mainTitleColor font-bold text-mainTitle">
-                TƯƠNG LAI BỀN VỮNG CHO MỌI PHONG CÁCH SỐNG
-              </h1>
-            </Jumping>
-          </div>
-        </div>
-      </section>
+      <CarSearch />
     </>
   );
 };
