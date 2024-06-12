@@ -8,7 +8,7 @@ export const cars = [
     pros_1: 'Cải thiện hiệu suất nhiên liệu',
     pros_2: 'Tự sạc khi xe đang di chuyển',
     pros_3: 'Thuận tiện khi tiếp nhiên liệu',
-    route: '',
+    route: 'as',
   },
   {
     id: 2,

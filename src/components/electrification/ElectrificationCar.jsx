@@ -5,6 +5,9 @@ import ElectrificationVideoReview from './ElectricficationVideoReview';
 import { carElectrification as data } from '../data/ElectricficationVideoReviewData';
 import { cars } from '../data/ElectrificationCarData';
 import ElectrificationCarItem from './ElectrificationCarItem';
+import { TfiClose } from 'react-icons/tfi';
+import { Link } from 'react-router-dom';
+import { MdKeyboardArrowRight } from 'react-icons/md';
 
 const ElectrificationCar = () => {
   const textRef = useRef(null);
@@ -59,6 +62,15 @@ const ElectrificationCar = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleClickCarItem = (id) => {
+    setCarDetailIndex(id);
+    console.log(id);
+  };
+
+  const handleCLoseCarItem = () => {
+    setCarDetailIndex(null);
   };
 
   return (
@@ -197,7 +209,7 @@ const ElectrificationCar = () => {
 
       <ElectrificationVideoReview data={data} />
 
-      <section className="bg-electrification_1 h-max w-full">
+      <section className="bg-electrification_1 h-max w-full pt-10 pb-20 ">
         <div className="container">
           <div className="py-[40px]">
             <Jumping>
@@ -217,12 +229,88 @@ const ElectrificationCar = () => {
 
           <div className="grid grid-cols-12 gap-2.5 mt-[30px]">
             {cars.map((car) => (
-              <div className="col-span-6 h-max">
-                <Jumping>
-                  <ElectrificationCarItem data={car} />
-                </Jumping>
-              </div>
+              <React.Fragment key={car.id}>
+                <div className="col-span-6 h-max">
+                  <Jumping>
+                    <ElectrificationCarItem
+                      data={car}
+                      onClick={() => handleClickCarItem(car.id)}
+                    />
+                  </Jumping>
+                </div>
+
+                <div
+                  className={`fixed z-10 inset-0 m-auto container h-max transition-all transform duration-200 ${
+                    car.id === carDetailIndex
+                      ? 'opacity-1 left-0 visible'
+                      : 'opacity-0 -left-full invisible'
+                  }`}
+                >
+                  <div className="bg-white grid grid-cols-12 h-full">
+                    <div className="col-span-8 h-full overflow-hidden">
+                      <img
+                        src={`${car.image}`}
+                        alt="car-image"
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+
+                    <div className="col-span-4 px-8 pt-10 relative overflow-y-scroll max-h-[65vh] py-5">
+                      <h3 className=" text-subTitleColor text-[22px] font-bold">
+                        {car.name}
+                      </h3>
+                      <p
+                        className="mt-2"
+                        dangerouslySetInnerHTML={{ __html: car.description }}
+                      ></p>
+
+                      <TfiClose
+                        className="absolute right-5 top-5 my-auto h-6 w-6 text-subTitleColor cursor-pointer"
+                        onClick={handleCLoseCarItem}
+                      />
+
+                      <br />
+                      <ul className="font-medium">
+                        <li className="text-base text-subTitleColor flex items-center my-1">
+                          <span className="h-[5px] w-[5px] bg-[#eb0a1e] mx-4"></span>
+                          {car.pros_1}
+                        </li>
+                        <li className="text-base text-subTitleColor flex items-center my-1">
+                          <span className="h-[5px] w-[5px] bg-[#eb0a1e] mx-4"></span>
+                          {car.pros_2}
+                        </li>
+                        <li className="text-base text-subTitleColor flex items-center my-1">
+                          <span className="h-[5px] w-[5px] bg-[#eb0a1e] mx-4"></span>
+                          {car.pros_3}
+                        </li>
+                      </ul>
+
+                      {car.route && (
+                        <Link
+                          to={`${car.route}`}
+                          className="uppercase text-primaryColor text-base font-bold group mt-5 mb-7 block w-max relative after:absolute after:bottom-0 after:content-[''] after:w-0 after:h-[1px] after:transition-all after:ease-in after:duration-200 after:hover:w-full after:block after:bg-[#eb0a1e]"
+                        >
+                          xem thêm{' '}
+                          <MdKeyboardArrowRight className="inline-block h-6 w-6 mb-0.5 transition" />
+                        </Link>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </React.Fragment>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="container">
+          <div className="py-[40px]">
+            <Jumping>
+              <h1 className="uppercase text-mainTitleColor font-bold text-mainTitle">
+                TƯƠNG LAI BỀN VỮNG CHO MỌI PHONG CÁCH SỐNG
+              </h1>
+            </Jumping>
           </div>
         </div>
       </section>

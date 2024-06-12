@@ -1,11 +1,5 @@
 import './App.css';
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  Outlet,
-  HashRouter,
-} from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Outlet } from 'react-router-dom';
 import Home from './components/layout/home/Home';
 import MaintainService from './components/service/MaintainService/MaintainService';
 import Header from './components/common/Header';
@@ -40,6 +34,7 @@ import Conduct from './components/information/localization/Conduct';
 import ScrollToTopButton from './components/common/ScrollToTopButton';
 import ElectrificationCar from './components/electrification/ElectrificationCar';
 import Introduction from './components/information/Introduction/main';
+
 function App() {
   return (
     <>

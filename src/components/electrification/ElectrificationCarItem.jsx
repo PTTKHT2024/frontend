@@ -1,9 +1,9 @@
 import React from 'react';
 
-const ElectrificationCarItem = ({ data }) => {
+const ElectrificationCarItem = ({ data, onClick }) => {
   return (
     <>
-      <section className="w-full">
+      <section className="w-full" onClick={onClick}>
         <div className="relative h-full w-full cursor-pointer group overflow-hidden">
           <img
             src={`${data.image}`}
