@@ -5,23 +5,23 @@ const relatedPosts = [
   {
     title: 'TRAO TẶNG TRUYỆN TRANH NHẬT BẢN EHON CHO TRẺ EM VIỆT',
     date: '28/11/2021',
-    image: '/imgs/information/related_post_1.png',
+    image: '/imgs/information/community/related_post_1.png',
   },
   {
     title: 'Chiến dịch tuyên truyền An toàn giao thông',
     date: '20/08/2021',
-    image: '/imgs/information/related_post_2.png',
+    image: '/imgs/information/community/related_post_2.png',
   },
   {
     title: 'Toyota cùng em học an toàn giao thông',
     date: '24/08/2021',
-    image: '/imgs/information/related_post_3.png',
+    image: '/imgs/information/community/related_post_3.png',
   },
   {
     title:
       'TRẠI HÈ BÓNG ĐÁ THIẾU NIÊN TOYOTA – LAN TỎA NIỀM ĐAM MÊ VÀ CHẮP CÁNH ƯỚC MƠ BÓNG ĐÁ CHO TRẺ EM VIỆT',
     date: '30/11/2021',
-    image: '/imgs/information/related_post_4.png',
+    image: '/imgs/information/community/related_post_4.png',
   },
 ];
 

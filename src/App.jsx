@@ -40,6 +40,10 @@ import Conduct from './components/information/localization/Conduct';
 import ScrollToTopButton from './components/common/ScrollToTopButton';
 import ElectrificationCar from './components/electrification/ElectrificationCar';
 import Introduction from './components/information/Introduction/main';
+import TrafficSafety from './components/information/community/TrafficSafety';
+import EnvironmentalProtection from './components/information/community/EnvironmentalProtection';
+import HRDevelopment from './components/information/community/HRDevelopment';
+import SocialCulture from './components/information/community/SocialCulture';
 function App() {
   return (
     <>
@@ -81,7 +85,22 @@ function App() {
           <Route path="/information" element={<InformationLayout />}>
             <Route path="community" element={<CommonLayout />}>
               <Route index element={<Community />} />
-              <Route path="contribution" element={<CommunityContribution />} />
+              <Route path="contribution" element={<CommonLayout />}>
+                <Route index element={<CommunityContribution />} />
+                <Route path="traffic-safety" element={<TrafficSafety />} />
+                <Route
+                  path="environmental-protection"
+                  element={<EnvironmentalProtection />}
+                />
+                <Route
+                  path="human-resource-development"
+                  element={<HRDevelopment />}
+                />
+                <Route
+                  path="social-culture"
+                  element={<SocialCulture />}
+                />
+              </Route>
               <Route path="fund" element={<ToyotaFund />} />
             </Route>
 

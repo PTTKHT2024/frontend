@@ -1,6 +1,6 @@
 // CommunityContribution.jsx
 import React from 'react';
-import { fund } from '../../data/ToyotaFundData';
+import { fund } from '../../data/information/community/ToyotaFundData';
 import CommunityComponent from './CommunityCompoment';
 
 function ToyotaFund() {
@@ -9,15 +9,15 @@ function ToyotaFund() {
       <div className="mt-[94px]">
         <img
           className="mb-12 w-full"
-          src="/imgs/information/fund_head.png"
+          src="/imgs/information/community/fund_head.png"
           alt=""
         />
       </div>
-      <div className="bg-white px-28 py-12">
+      <div className="bg-white px-auto py-12">
         <h1 className="text-mainTitleColor text-mainTitle font-bold text-center mb-6">
           QUỸ TOYOTA
         </h1>
-        <p className="text-center text-subInformationColor text-base mb-8 leading-6">
+        <p className="container text-center text-subInformationColor text-base mb-8 leading-6">
           Quỹ Toyota Việt Nam (TVF) được thành lập vào năm 2006 với số vốn ban
           đầu là 4 triệu đô la Mỹ. 14 năm qua, cùng với Bộ Giáo dục và Đào tạo,
           Bộ Văn Hoá, Thể thao và Du lịch, TVF đã thực hiện nhiều hoạt động cộng

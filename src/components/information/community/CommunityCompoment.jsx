@@ -2,27 +2,27 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 const ConmmunityComponent = ({ data }) => {
   return (
-    <div className="max-w-full h-[calc(100vh-94px)]">
-      <div className="flex items-center h-full">
+    <div className="max-w-full h-[637]]">
+      <div className="flex items-center h-[637]">
         {data.side === 'left' ? (
           <>
-            <div className="w-1/2 overflow-hidden h-full">
+            <div className="w-1/2 overflow-hidden h-[637]">
               <Link to={data.route} smooth>
                 <img
                   src={data.image}
                   alt=""
-                  className="w-full h-full object-cover"
+                  className="w-full h-[637] object-cover"
                 />
               </Link>
             </div>
-            <div className="w-1/2 flex flex-col justify-center items-center text-center h-full">
+            <div className="w-1/2 flex flex-col justify-center items-center text-center h-[637]">
               <img
                 src={data.icon}
                 alt=""
                 className="w-[90px] h-[90px] object-cover"
               />
               <Link to={data.route} smooth>
-                <h2 className="text-mainTitleColor text-3xl font-bold hover:text-[#007bff]">
+                <h2 className="container text-mainTitleColor text-3xl font-bold hover:text-[#007bff] px-4">
                   {data.title}
                 </h2>
               </Link>
@@ -38,14 +38,14 @@ const ConmmunityComponent = ({ data }) => {
           </>
         ) : (
           <>
-            <div className="w-1/2 flex flex-col justify-center items-center text-center h-full">
+            <div className="w-1/2 flex flex-col justify-center items-center text-center h-[637]">
               <img
                 src={data.icon}
                 alt=""
                 className="w-[90px] h-[90px] object-cover"
               />
               <Link to={data.route} smooth>
-                <h2 className="text-mainTitleColor text-3xl font-bold hover:text-[#007bff]">
+                <h2 className="container text-mainTitleColor text-3xl font-bold hover:text-[#007bff] px-4">
                   {data.title}
                 </h2>
               </Link>
@@ -58,12 +58,12 @@ const ConmmunityComponent = ({ data }) => {
                 </button>
               </Link>
             </div>
-            <div className="w-1/2 overflow-hidden h-full">
+            <div className="w-1/2 overflow-hidden h-[637]">
               <Link to={data.route} smooth>
                 <img
                   src={data.image}
                   alt=""
-                  className="w-full h-full object-cover"
+                  className="w-full h-[637] object-cover"
                 />
               </Link>
             </div>
