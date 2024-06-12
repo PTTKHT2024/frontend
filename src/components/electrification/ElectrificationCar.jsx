@@ -13,7 +13,7 @@ const ElectrificationCar = () => {
   const textRef = useRef(null);
   const [scrollYValue, setScrollYValue] = useState(0);
   const [isTimelineVisible, setIsTimelineVisible] = useState(false);
-  const [carDetailIndex, setCarDetailIndex] = useState(1);
+  const [carDetailIndex, setCarDetailIndex] = useState(null);
   const timelineRef = useRef(null);
 
   // const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));

@@ -34,6 +34,8 @@ import Conduct from './components/information/localization/Conduct';
 import ScrollToTopButton from './components/common/ScrollToTopButton';
 import ElectrificationCar from './components/electrification/ElectrificationCar';
 import Introduction from './components/information/Introduction/main';
+import AdminLayout from './components/admin/AdminLayout';
+import BlogManagement from './components/admin/blog/BlogManagement';
 
 function App() {
   return (
@@ -61,10 +63,8 @@ function App() {
             <Route path="electrified-car" element={<ElectrificationCar />} />
           </Route>
 
-          {/* Admin routes */}
           <Route path="/admin" element={<AdminLayout />}>
-            {/* <Route path="dashboard" element={<AdminDashboard />} /> */}
-            {/* <Route path="users" element={<AdminUsers />} /> */}
+            <Route path="blog" element={<BlogManagement />} />
           </Route>
 
           <Route path="/technology" element={<TechnologyLayout />}>
@@ -94,10 +94,6 @@ function App() {
       </BrowserRouter>
     </>
   );
-}
-
-function UserLayout() {
-  return <></>;
 }
 
 function MainLayout() {
@@ -163,17 +159,6 @@ function ServiceLayout() {
       <OrderButton />
       <ScrollToTopButton />
       <Footer />
-    </>
-  );
-}
-
-function AdminLayout() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  return (
-    <>
-      <Outlet />
     </>
   );
 }

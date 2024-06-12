@@ -12,11 +12,13 @@ import CarDiscoverTab from '../car/CarDiscoverTab';
 import HeaderDropDownFooter from './HeaderDropDownFooter';
 import useIsActive from '../hooks/useIsActive';
 import { logout } from '../utils/AuthApi';
+import useCheckRole from '../hooks/useCheckRole';
 
 const Header = () => {
   const [isLoginOpend, setIsLoginOpened] = useState(false);
   const [isRegisterOpened, setIsRegisterOpened] = useState(false);
   const isActive = useIsActive();
+  const role = useCheckRole();
   const navigate = useNavigate();
   const [dropdownState, setDropDownState] = useState({
     product: false,
@@ -27,6 +29,8 @@ const Header = () => {
     information: false,
   });
 
+  console.log(role);
+
   const handleClickLogin = () => {
     setIsRegisterOpened(false);
     setIsLoginOpened(!isLoginOpend);
@@ -36,8 +40,6 @@ const Header = () => {
     setIsLoginOpened(false);
     setIsRegisterOpened(!isRegisterOpened);
   };
-
-  console.log('active : ', isActive);
 
   const handleClickDropDown = (e) => {
     const value = e.currentTarget.dataset.value;
@@ -179,14 +181,30 @@ const Header = () => {
 
                     {isActive ? (
                       <ul className="absolute top-full left-0 bg-white border py-1 opacity-0 invisible transform -translate-y-2 transition duration-500 group-hover:opacity-100 group-hover:translate-y-0 bg-transparent group-hover:visible z-10">
-                        <li
-                          className="p-2.5 cursor-pointer peer"
-                          onClick={handleClickLogin}
-                        >
-                          <span className="text-base text-nowrap peer-hover:text-primaryColor transition-colors duration-200 ">
-                            Trang thông tin
-                          </span>
-                        </li>
+                        {role == 'USER' && (
+                          <li
+                            className="p-2.5 cursor-pointer peer"
+                            onClick={handleClickLogin}
+                          >
+                            <span className="text-base text-nowrap peer-hover:text-primaryColor transition-colors duration-200 ">
+                              Trang thông tin
+                            </span>
+                          </li>
+                        )}
+
+                        {role == 'ADMIN' && (
+                          <li
+                            className="p-2.5 cursor-pointer peer"
+                            onClick={handleClickLogin}
+                          >
+                            <Link
+                              className="text-base text-nowrap peer-hover:text-primaryColor transition-colors duration-200"
+                              to={'/admin'}
+                            >
+                              Trang Admin
+                            </Link>
+                          </li>
+                        )}
 
                         <li
                           className="p-2.5 cursor-pointer peer"
