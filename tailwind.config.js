@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin');
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
@@ -34,6 +35,8 @@ export default {
         mainTitleColor: '#1A1A1A',
         subTitleColor: '#101010',
         subInformationColor: '#3A3A3A',
+        electrification_1: '#F5F5F5',
+        bodyBgColor: '#4379EE',
       },
       fontSize: {
         mainTitle: [
@@ -67,5 +70,16 @@ export default {
       ],
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      const newUtilities = {
+        '.clip-polygon-custom': {
+          'clip-path':
+            'polygon(85% 0, 100% 50%, 85% 100%, 8% 100%, 23% 50%, 8% 0)',
+        },
+      };
+
+      addUtilities(newUtilities, ['responsive', 'hover']);
+    }),
+  ],
 };

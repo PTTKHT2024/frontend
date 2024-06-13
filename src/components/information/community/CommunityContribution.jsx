@@ -1,6 +1,6 @@
 // CommunityContribution.jsx
 import React from 'react';
-import { contributions } from '../../data/CommunityContributionData';
+import { contributions } from '../../data/information/community/CommunityContributionData';
 import CommunityComponent from './CommunityCompoment';
 import RelatedPosts from './RelatedPost';
 
@@ -10,15 +10,15 @@ function CommunityContribution() {
       <div className="mt-[94px]">
         <img
           className="mb-12 w-full"
-          src="/imgs/information/contribution_head.png"
+          src="/imgs/information/community/contribution_head.png"
           alt=""
         />
       </div>
-      <div className="bg-white px-28 py-12">
+      <div className="bg-white px-auto py-12">
         <h1 className="text-mainTitleColor text-mainTitle font-bold text-center mb-6">
           ĐÓNG GÓP XÃ HỘI
         </h1>
-        <p className="text-center text-subInformationColor text-base mb-8 leading-6">
+        <p className="container text-center text-subInformationColor text-base mb-8 leading-6">
           Nhằm góp phần xây dựng, phát triển bền vững và kiến tạo một tương lai
           tươi đẹp cho đất nước Việt Nam, Toyota Việt Nam luôn tích cực đóng góp
           cho cộng đồng thông qua nhiều hoạt động ý nghĩa có quy mô rộng khắp

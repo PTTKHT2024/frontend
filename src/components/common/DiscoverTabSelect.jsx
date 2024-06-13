@@ -16,7 +16,7 @@ const DiscoverTabSelect = ({
           style={{ width: `${width}%` }}
         >
           {all && (
-            <li className="flex-1 text-center text-lg pb-2.5 hover:border-b-tabAction hover:font-bold cursor-pointer font-medium">
+            <li className="flex-1 text-center text-lg pb-2.5 hover:border-b-tabAction hover:font-bold cursor-pointer font-medium -translate-y-[0.8px]">
               <Link>TẤT CẢ</Link>
             </li>
           )}

@@ -1,11 +1,5 @@
 import './App.css';
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  Outlet,
-  HashRouter,
-} from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Outlet } from 'react-router-dom';
 import Home from './components/layout/home/Home';
 import MaintainService from './components/service/MaintainService/MaintainService';
 import Header from './components/common/Header';
@@ -23,6 +17,7 @@ import { datas as serviceNavbarDatas } from './components/data/ServiceNavbarData
 import { datas as technologyNavbarDatas } from './components/data/TechnologyNavbarData';
 import { datas as introductionNavbarDatas } from './components/data/IntroductionNavbarData';
 import { datas as localNavbarDatas } from './components/data/LocalNavbarData';
+import { datas as contributrionNavbarDatas } from './components/data/ContributionNavbarData';
 
 import OrderButton from './components/service/OrderButton';
 import Tool from './components/common/Tool';
@@ -35,11 +30,25 @@ import ToyotaFund from './components/information/community/ToyotaFund';
 
 import Appointment from './components/form/appointment';
 import Philosophy from './components/information/philosophy/Philosophy';
+import GlobalPhilosophy from './components/information/philosophy/GlobalPhilosophy';
+import Vision from './components/information/philosophy/Vision';
+import VisionPhilosophy from './components/information/philosophy/VisionPhilosophy';
+import Way from './components/information/philosophy/Way';
 import Cooperate from './components/information/localization/Cooperate';
 import Conduct from './components/information/localization/Conduct';
+import Support from './components/information/localization/Support';
 import ScrollToTopButton from './components/common/ScrollToTopButton';
 import ElectrificationCar from './components/electrification/ElectrificationCar';
 import Introduction from './components/information/Introduction/main';
+import TrafficSafety from './components/information/community/TrafficSafety';
+import EnvironmentalProtection from './components/information/community/EnvironmentalProtection';
+import HRDevelopment from './components/information/community/HRDevelopment';
+import SocialCulture from './components/information/community/SocialCulture';
+import AdminLayout from './components/admin/AdminLayout';
+import BlogManagement from './components/admin/blog/BlogManagement';
+import AddBlog from './components/admin/blog/AddBlog';
+import Feedback from './components/information/localization/feedback';
+
 function App() {
   return (
     <>
@@ -66,10 +75,10 @@ function App() {
             <Route path="electrified-car" element={<ElectrificationCar />} />
           </Route>
 
-          {/* Admin routes */}
           <Route path="/admin" element={<AdminLayout />}>
-            {/* <Route path="dashboard" element={<AdminDashboard />} /> */}
-            {/* <Route path="users" element={<AdminUsers />} /> */}
+            <Route path="blog">
+              <Route path="add" element={<AddBlog />} />
+            </Route>
           </Route>
 
           <Route path="/technology" element={<TechnologyLayout />}>
@@ -81,18 +90,46 @@ function App() {
           <Route path="/information" element={<InformationLayout />}>
             <Route path="community" element={<CommonLayout />}>
               <Route index element={<Community />} />
-              <Route path="contribution" element={<CommunityContribution />} />
+              <Route path="contribution" element={<ContributionLayout />}>
+                <Route index element={<CommunityContribution />} />
+                <Route path="traffic-safety" element={<TrafficSafety />} />
+                <Route
+                  path="environmental-protection"
+                  element={<EnvironmentalProtection />}
+                />
+                <Route
+                  path="human-resource-development"
+                  element={<HRDevelopment />}
+                />
+                <Route path="social-culture" element={<SocialCulture />} />
+              </Route>
               <Route path="fund" element={<ToyotaFund />} />
             </Route>
 
             <Route path="company" element={<IntroductionLayout />}>
               <Route path="introduction" element={<Introduction />} />
-              <Route path="philosophy" element={<Philosophy />} />
+              <Route path="philosophy">
+                <Route index element={<Philosophy />} />
+
+                <Route
+                  path="global-philosophy"
+                  element={<GlobalPhilosophy />}
+                />
+                <Route path="vision" element={<Vision />} />
+
+                <Route
+                  path="vision-philosophy"
+                  element={<VisionPhilosophy />}
+                />
+                <Route path="way" element={<Way />} />
+              </Route>
             </Route>
 
             <Route path="local" element={<LocalLayout />}>
               <Route path="cooperate" element={<Cooperate />} />
               <Route path="conduct" element={<Conduct />} />
+              <Route path="support" element={<Support />} />
+              <Route path="feedback" element={<Feedback />} />
             </Route>
           </Route>
         </Routes>
@@ -120,6 +157,18 @@ function LocalLayout() {
   return (
     <>
       <Navbar datas={localNavbarDatas} />
+      <Outlet />
+    </>
+  );
+}
+
+function ContributionLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <>
+      <Navbar datas={contributrionNavbarDatas} />
       <Outlet />
     </>
   );
@@ -164,17 +213,6 @@ function ServiceLayout() {
       <OrderButton />
       <ScrollToTopButton />
       <Footer />
-    </>
-  );
-}
-
-function AdminLayout() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  return (
-    <>
-      <Outlet />
     </>
   );
 }

@@ -17,7 +17,7 @@ export const datas = [
   {
     id: 4,
     name: 'tiêu chuẩn đánh giá',
-    route: '/information/local/standard',
+    route: '/information/local/feedback',
   },
   {
     id: 5,

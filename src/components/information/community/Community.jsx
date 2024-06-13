@@ -1,15 +1,15 @@
 // Community.jsx
 import React from 'react';
-import { community } from '../../data/CommunityData';
+import { community } from '../../data/information/community/CommunityData';
 import CommunityComponent from './CommunityCompoment';
 
 function Community() {
   return (
     <>
-      <div className="mt-[94px]">
+      <div className="mt-[94px] mb-4 ">
         <img
-          className="mb-sectionMargin_1 w-full"
-          src="/imgs/information/community_head.png"
+          className="w-full"
+          src="/imgs/information/community/community_head.png"
           alt=""
         />
       </div>

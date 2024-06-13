@@ -10,7 +10,7 @@ const Jumping = ({ children }) => {
         setIsVisible(entry.isIntersecting);
       },
       {
-        threshold: 0.5,
+        threshold: 0.1,
       }
     );
 
