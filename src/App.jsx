@@ -17,6 +17,7 @@ import { datas as serviceNavbarDatas } from './components/data/ServiceNavbarData
 import { datas as technologyNavbarDatas } from './components/data/TechnologyNavbarData';
 import { datas as introductionNavbarDatas } from './components/data/IntroductionNavbarData';
 import { datas as localNavbarDatas } from './components/data/LocalNavbarData';
+import { datas as contributrionNavbarDatas } from './components/data/ContributionNavbarData';
 
 import OrderButton from './components/service/OrderButton';
 import Tool from './components/common/Tool';
@@ -46,6 +47,7 @@ import SocialCulture from './components/information/community/SocialCulture';
 import AdminLayout from './components/admin/AdminLayout';
 import BlogManagement from './components/admin/blog/BlogManagement';
 import AddBlog from './components/admin/blog/AddBlog';
+import Feedback from './components/information/localization/feedback';
 
 function App() {
   return (
@@ -88,7 +90,7 @@ function App() {
           <Route path="/information" element={<InformationLayout />}>
             <Route path="community" element={<CommonLayout />}>
               <Route index element={<Community />} />
-              <Route path="contribution" element={<CommonLayout />}>
+              <Route path="contribution" element={<ContributionLayout />}>
                 <Route index element={<CommunityContribution />} />
                 <Route path="traffic-safety" element={<TrafficSafety />} />
                 <Route
@@ -108,11 +110,13 @@ function App() {
               <Route path="introduction" element={<Introduction />} />
               <Route path="philosophy">
                 <Route index element={<Philosophy />} />
+
                 <Route
                   path="global-philosophy"
                   element={<GlobalPhilosophy />}
                 />
                 <Route path="vision" element={<Vision />} />
+
                 <Route
                   path="vision-philosophy"
                   element={<VisionPhilosophy />}
@@ -125,6 +129,7 @@ function App() {
               <Route path="cooperate" element={<Cooperate />} />
               <Route path="conduct" element={<Conduct />} />
               <Route path="support" element={<Support />} />
+              <Route path="feedback" element={<Feedback />} />
             </Route>
           </Route>
         </Routes>
@@ -152,6 +157,18 @@ function LocalLayout() {
   return (
     <>
       <Navbar datas={localNavbarDatas} />
+      <Outlet />
+    </>
+  );
+}
+
+function ContributionLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <>
+      <Navbar datas={contributrionNavbarDatas} />
       <Outlet />
     </>
   );
