@@ -36,6 +36,7 @@ import ElectrificationCar from './components/electrification/ElectrificationCar'
 import Introduction from './components/information/Introduction/main';
 import AdminLayout from './components/admin/AdminLayout';
 import BlogManagement from './components/admin/blog/BlogManagement';
+import AddBlog from './components/admin/blog/AddBlog';
 
 function App() {
   return (
@@ -64,7 +65,9 @@ function App() {
           </Route>
 
           <Route path="/admin" element={<AdminLayout />}>
-            <Route path="blog" element={<BlogManagement />} />
+            <Route path="blog">
+              <Route path="add" element={<AddBlog />} />
+            </Route>
           </Route>
 
           <Route path="/technology" element={<TechnologyLayout />}>

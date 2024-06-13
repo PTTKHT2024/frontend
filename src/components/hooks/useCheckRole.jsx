@@ -1,23 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { checkTokenExpire } from '../utils/AuthApi';
 
 const useCheckRole = () => {
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState('ANONYMOUS');
 
-  const dataJSON = localStorage.getItem('data');
-  const data = JSON.parse(dataJSON);
-  const accessToken = data.access_token;
+  useEffect(() => {
+    const dataJSON = localStorage.getItem('data');
 
-  try {
+    // if (!dataJSON) {
+    //   setRole('ANONYMOUS');
+    //   return;
+    // }
+
+    const data = JSON.parse(dataJSON);
+    const accessToken = data.access_token;
+
     const checkRole = async () => {
-      const res = await checkTokenExpire(accessToken);
-      setRole(res.data.data.user.role.name);
+      try {
+        const res = await checkTokenExpire(accessToken);
+        setRole(res.data.data.user.role.name);
+      } catch (err) {
+        console.log(err);
+        setRole('ANONYMOUS');
+      }
     };
 
     checkRole();
-  } catch (err) {
-    console.log(err);
-  }
+  }, []);
+
   return role;
 };
 
