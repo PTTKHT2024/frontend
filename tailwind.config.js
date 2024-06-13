@@ -35,6 +35,8 @@ export default {
         mainTitleColor: '#1A1A1A',
         subTitleColor: '#101010',
         subInformationColor: '#3A3A3A',
+        electrification_1: '#F5F5F5',
+        bodyBgColor: '#4379EE',
       },
       fontSize: {
         mainTitle: [

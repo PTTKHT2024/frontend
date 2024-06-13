@@ -1,11 +1,5 @@
 import './App.css';
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  Outlet,
-  HashRouter,
-} from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Outlet } from 'react-router-dom';
 import Home from './components/layout/home/Home';
 import MaintainService from './components/service/MaintainService/MaintainService';
 import Header from './components/common/Header';
@@ -49,6 +43,9 @@ import TrafficSafety from './components/information/community/TrafficSafety';
 import EnvironmentalProtection from './components/information/community/EnvironmentalProtection';
 import HRDevelopment from './components/information/community/HRDevelopment';
 import SocialCulture from './components/information/community/SocialCulture';
+import AdminLayout from './components/admin/AdminLayout';
+import BlogManagement from './components/admin/blog/BlogManagement';
+import AddBlog from './components/admin/blog/AddBlog';
 
 function App() {
   return (
@@ -76,10 +73,10 @@ function App() {
             <Route path="electrified-car" element={<ElectrificationCar />} />
           </Route>
 
-          {/* Admin routes */}
           <Route path="/admin" element={<AdminLayout />}>
-            {/* <Route path="dashboard" element={<AdminDashboard />} /> */}
-            {/* <Route path="users" element={<AdminUsers />} /> */}
+            <Route path="blog">
+              <Route path="add" element={<AddBlog />} />
+            </Route>
           </Route>
 
           <Route path="/technology" element={<TechnologyLayout />}>
@@ -199,17 +196,6 @@ function ServiceLayout() {
       <OrderButton />
       <ScrollToTopButton />
       <Footer />
-    </>
-  );
-}
-
-function AdminLayout() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  return (
-    <>
-      <Outlet />
     </>
   );
 }
