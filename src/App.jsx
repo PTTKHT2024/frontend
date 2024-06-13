@@ -35,15 +35,23 @@ import ToyotaFund from './components/information/community/ToyotaFund';
 
 import Appointment from './components/form/appointment';
 import Philosophy from './components/information/philosophy/Philosophy';
+import GlobalPhilosophy from './components/information/philosophy/GlobalPhilosophy';
+import Vision from './components/information/philosophy/Vision';
+import VisionPhilosophy from './components/information/philosophy/VisionPhilosophy';
+import Way from './components/information/philosophy/Way';
 import Cooperate from './components/information/localization/Cooperate';
 import Conduct from './components/information/localization/Conduct';
 import ScrollToTopButton from './components/common/ScrollToTopButton';
 import ElectrificationCar from './components/electrification/ElectrificationCar';
 import Introduction from './components/information/Introduction/main';
+<<<<<<< HEAD
 import TrafficSafety from './components/information/community/TrafficSafety';
 import EnvironmentalProtection from './components/information/community/EnvironmentalProtection';
 import HRDevelopment from './components/information/community/HRDevelopment';
 import SocialCulture from './components/information/community/SocialCulture';
+=======
+
+>>>>>>> feature/17-update-philosophy
 function App() {
   return (
     <>
@@ -106,7 +114,19 @@ function App() {
 
             <Route path="company" element={<IntroductionLayout />}>
               <Route path="introduction" element={<Introduction />} />
-              <Route path="philosophy" element={<Philosophy />} />
+              <Route path="philosophy">
+                <Route index element={<Philosophy />} />
+                <Route
+                  path="global-philosophy"
+                  element={<GlobalPhilosophy />}
+                />
+                <Route path="vision" element={<Vision />} />
+                <Route
+                  path="vision-philosophy"
+                  element={<VisionPhilosophy />}
+                />
+                <Route path="way" element={<Way />} />
+              </Route>
             </Route>
 
             <Route path="local" element={<LocalLayout />}>
