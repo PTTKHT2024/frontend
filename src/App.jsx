@@ -44,14 +44,11 @@ import Conduct from './components/information/localization/Conduct';
 import ScrollToTopButton from './components/common/ScrollToTopButton';
 import ElectrificationCar from './components/electrification/ElectrificationCar';
 import Introduction from './components/information/Introduction/main';
-<<<<<<< HEAD
 import TrafficSafety from './components/information/community/TrafficSafety';
 import EnvironmentalProtection from './components/information/community/EnvironmentalProtection';
 import HRDevelopment from './components/information/community/HRDevelopment';
 import SocialCulture from './components/information/community/SocialCulture';
-=======
 
->>>>>>> feature/17-update-philosophy
 function App() {
   return (
     <>
@@ -104,10 +101,7 @@ function App() {
                   path="human-resource-development"
                   element={<HRDevelopment />}
                 />
-                <Route
-                  path="social-culture"
-                  element={<SocialCulture />}
-                />
+                <Route path="social-culture" element={<SocialCulture />} />
               </Route>
               <Route path="fund" element={<ToyotaFund />} />
             </Route>
