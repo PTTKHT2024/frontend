@@ -5,28 +5,44 @@ import { ContentState, EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import {
+  createMarkup,
+  fileUploadRegex,
+  uploadFile,
+} from '../../utils/UtilsFunction';
+import { createANewBlog } from '../../utils/BlogApi';
+import Toast from '../../common/Toast';
 import { convertToHTML } from 'draft-convert';
-import { createMarkup } from '../../utils/UtilsFunction';
 
 const AddBlog = () => {
   const [blog, setBlog] = useState({
     title: '',
-    content: '',
+    content: null,
     image: null,
-    blogCategory: 'Chọn',
+    blogCategory: {
+      name: '',
+    },
   });
   const [isSelected, setIsSelected] = useState(false);
   const [imagePreview, setImagePreview] = useState('');
   const dropdownRef = useRef(null);
   const [review, setReview] = useState(false);
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState('');
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
-  const [convertedContent, setConvertedContent] = useState(null);
 
   useEffect(() => {
-    let html = convertToHTML(editorState.getCurrentContent());
-    setConvertedContent(html);
+    let html = convertToHTML({
+      entityToHTML: (entity) => {
+        if (entity.type === 'IMAGE') {
+          const { src } = entity.data;
+          return `<div style="text-align: center;"><img src="${src}" alt="Image" style="display: inline-block; max-width: 100%; margin: 10px 0;" /></div>`;
+        }
+      },
+    })(editorState.getCurrentContent());
+    setBlog({ ...blog, content: html });
   }, [editorState]);
 
   useEffect(() => {
@@ -43,8 +59,6 @@ const AddBlog = () => {
     };
   }, []);
 
-  console.log(convertedContent);
-
   const handleToggleInput = () => {
     setIsSelected(!isSelected);
   };
@@ -56,7 +70,12 @@ const AddBlog = () => {
 
   const handleChangeBlogCategory = (e) => {
     const selectedCategory = e.target.innerText;
-    setBlog((prevInput) => ({ ...prevInput, blogCategory: selectedCategory }));
+    setBlog((prevInput) => ({
+      ...prevInput,
+      blogCategory: {
+        name: selectedCategory,
+      },
+    }));
     setIsSelected(false);
   };
 
@@ -66,13 +85,82 @@ const AddBlog = () => {
     setImagePreview(URL.createObjectURL(selectedImage));
   };
 
+  const handleCloseToast = () => {
+    setMessage('');
+    setStatus('');
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const dataJSON = localStorage.getItem('data');
+    const data = JSON.parse(dataJSON);
+
+    if (!blog.blogCategory.name || !blog.content) {
+      setMessage('Chưa nhập đầy đủ thông tin.');
+      setStatus('danger');
+
+      setTimeout(() => {
+        handleCloseToast();
+      }, 3000);
+      return;
+    }
+
+    try {
+      const saveImage = await uploadFile(blog.image, data.access_token);
+      const saveFileName = saveImage.data.match(fileUploadRegex);
+      const tmpBlog = {
+        ...blog,
+        image: saveFileName[0],
+      };
+
+      const res = await createANewBlog(tmpBlog, data.access_token);
+      if (res.status == 201) {
+        setMessage('Đăng bài thành công.');
+        setStatus('success');
+        setBlog({
+          title: '',
+          content: null,
+          image: null,
+          blogCategory: {
+            name: '',
+          },
+        });
+      }
+
+      console.log(res);
+    } catch (err) {
+      setMessage('Đăng bài thất bại.');
+      setStatus('danger');
+      console.log(err);
+    }
+
+    setTimeout(() => {
+      handleCloseToast();
+    }, 5000);
+  };
+
   return (
     <section className="">
-      <p className="text-mainTitleColor text-mainTitle uppercase">
-        Thêm bài viết
-      </p>
+      <Toast
+        message={message}
+        status={status}
+        handleCloseToast={handleCloseToast}
+      />
 
-      <form>
+      <form onSubmit={handleSubmit}>
+        <div className="flex justify-between">
+          <p className="text-mainTitleColor text-mainTitle uppercase">
+            Thêm bài viết
+          </p>
+
+          <button
+            type="submit"
+            className="uppercase px-5 py-2 rounded-md bg-[#604CC3] hover:bg-[#604CC3]/[.8] transition-all duration-200 ease-in font-bold text-white text-[15px] tracking-wider"
+          >
+            xuất bản
+          </button>
+        </div>
+
         <div className="bg-white mt-5 p-5 grid grid-cols-12 gap-10 rounded-2xl">
           <div className="col-span-4">
             <div className="">
@@ -96,17 +184,17 @@ const AddBlog = () => {
                 Phân loại <span className="text-primaryColor">*</span>
               </label>
 
-              <div className="relative border-b border-[#ccc] pb-2 mt-3">
+              <div className="relative border-b border-[#ccc] pb-2 mt-3 z-20">
                 <div
                   className="flex justify-between cursor-pointer"
                   onClick={handleToggleInput}
                 >
                   <p
                     className={
-                      blog.blogCategory === 'Chọn' ? 'text-gray-400' : ''
+                      blog.blogCategory.name === 'Chọn' ? 'text-gray-400' : ''
                     }
                   >
-                    {blog.blogCategory}
+                    {blog.blogCategory.name}
                   </p>
                   <MdOutlineKeyboardArrowDown className="h-6 w-6 text-black/[.4]" />
                 </div>
@@ -120,7 +208,7 @@ const AddBlog = () => {
                       <li
                         key={index}
                         className={`text-base text-mainTitleColor p-1.5 hover:bg-[#5897FB] hover:text-white uppercase ${
-                          option === blog.blogCategory
+                          option === blog.blogCategory.name
                             ? 'bg-[#5897FB] text-white'
                             : ''
                         }`}
@@ -196,7 +284,7 @@ const AddBlog = () => {
           {review ? (
             <div
               className="text-base text-[15px]"
-              dangerouslySetInnerHTML={createMarkup(convertedContent)}
+              dangerouslySetInnerHTML={createMarkup(blog.content)}
             ></div>
           ) : (
             <div className="h-max w-full border py-3 px-4 rounded-xl">
@@ -204,7 +292,7 @@ const AddBlog = () => {
                 editorState={editorState}
                 onEditorStateChange={setEditorState}
                 placeholder="Nội dung"
-                toolbarClassName="border-tabNavigate/[.4] rounded-sm sticky top-[40px] bg-[#f5f5f5] z-10"
+                toolbarClassName="border-tabNavigate/[.4] rounded-sm sticky top-[10px] bg-[#f5f5f5] z-10"
                 editorClassName=""
               />
             </div>
