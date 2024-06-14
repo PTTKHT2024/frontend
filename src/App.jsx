@@ -77,6 +77,7 @@ function App() {
 
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="blog">
+              <Route index element={<BlogManagement />} />
               <Route path="add" element={<AddBlog />} />
             </Route>
           </Route>

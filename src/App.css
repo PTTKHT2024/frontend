@@ -23,19 +23,32 @@
   bottom: -70px !important;
 }
 
-*::-webkit-scrollbar {
+body::-webkit-scrollbar {
   width: 10px;
 }
 
-*::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track {
   background-color: rgb(245, 245, 245);
 }
 
-*::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb {
   background-color: #eb0a1e;
 }
 
 .public-DraftStyleDefault-block {
   margin-top: 0px !important;
   margin-bottom: 0px !important;
+}
+
+.admin-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.admin-scrollbar::-webkit-scrollbar-track {
+  background-color: unset;
+}
+
+.admin-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 30px;
 }

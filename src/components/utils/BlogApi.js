@@ -1,3 +1,4 @@
+import { data } from 'autoprefixer';
 import { api } from './AuthApi';
 
 export async function createANewBlog(blog, accessToken) {
@@ -9,6 +10,21 @@ export async function createANewBlog(blog, accessToken) {
     });
     return { status: res.status };
   } catch (err) {
+    throw new Error(err.message);
+  }
+}
+
+export async function getAllBlogs(current, pageSize) {
+  try {
+    const res = await api.get('/blogs', {
+      params: {
+        current: current,
+        pageSize: pageSize,
+      },
+    });
+    return { status: res.status, data: res.data };
+  } catch (err) {
+    console.error('Error fetching blogs:', err);
     throw new Error(err.message);
   }
 }

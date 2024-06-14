@@ -3,6 +3,8 @@ import { blogCategoryDatas as options } from '../../data/admin/blogCategoryData'
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { ContentState, EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
+import { FaLongArrowAltLeft } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import {
@@ -20,7 +22,7 @@ const AddBlog = () => {
     content: null,
     image: null,
     blogCategory: {
-      name: '',
+      name: 'Chọn',
     },
   });
   const [isSelected, setIsSelected] = useState(false);
@@ -140,7 +142,14 @@ const AddBlog = () => {
   };
 
   return (
-    <section className="">
+    <section className="container">
+      <Link
+        className="fixed top-[100px] left-[90px] block h-max p-2 bg-[#f5f5f5] shadow hover:bg-slate-600 hover:text-white rounded-lg"
+        to="/admin/blog"
+      >
+        <FaLongArrowAltLeft className="h-5 w-5" />
+      </Link>
+
       <Toast
         message={message}
         status={status}
@@ -155,13 +164,13 @@ const AddBlog = () => {
 
           <button
             type="submit"
-            className="uppercase px-5 py-2 rounded-md bg-[#604CC3] hover:bg-[#604CC3]/[.8] transition-all duration-200 ease-in font-bold text-white text-[15px] tracking-wider"
+            className="uppercase px-5 py-2 rounded-md bg-[#604CC3] hover:bg-[#604CC3]/[.8] transition-all duration-200 ease-in font-bold text-white text-[15px] tracking-wider shadow-slate-400 shadow"
           >
             xuất bản
           </button>
         </div>
 
-        <div className="bg-white mt-5 p-5 grid grid-cols-12 gap-10 rounded-2xl">
+        <div className="bg-white mt-5 p-5 grid grid-cols-12 gap-10 rounded-2xl shadow-md">
           <div className="col-span-4">
             <div className="">
               <label className="text-base block font-medium" htmlFor="title">
@@ -179,12 +188,12 @@ const AddBlog = () => {
               />
             </div>
 
-            <div className="mt-8">
+            <div className="mt-8 ">
               <label className="text-base block font-medium" htmlFor="category">
                 Phân loại <span className="text-primaryColor">*</span>
               </label>
 
-              <div className="relative border-b border-[#ccc] pb-2 mt-3 z-20">
+              <div className="relative border-[1px] border-[#3A3A3A]/[.4] px-5 py-2 mt-3 z-20 rounded-3xl">
                 <div
                   className="flex justify-between cursor-pointer"
                   onClick={handleToggleInput}
@@ -202,7 +211,7 @@ const AddBlog = () => {
                 {isSelected && (
                   <ul
                     ref={dropdownRef}
-                    className="py-1.5 border border-[#aaa] absolute right-0 left-0 border-t-0 bg-white"
+                    className="py-1.5 border border-[#3A3A3A]/[.4] absolute right-0 left-0 top-[0] bg-white rounded-3xl overflow-hidden"
                   >
                     {options.map((option, index) => (
                       <li
@@ -245,7 +254,7 @@ const AddBlog = () => {
             <div className="mt-8">
               <div className="flex h-full items-end">
                 <p
-                  className={`px-6 py-3 text-white text-sm font-medium rounded-md text-center cursor-pointer transition-all duration-75 mr-5 ${
+                  className={`px-6 py-3 text-white text-sm font-medium rounded-md text-center cursor-pointer transition-all duration-75 mr-5 shadow-slate-400 shadow ${
                     !review
                       ? 'bg-[#17A2B8] hover:bg-[#17A2B8]/[.8]'
                       : 'bg-[#6C757D] hover:bg-[#6C757D]/[.8]'
@@ -255,7 +264,7 @@ const AddBlog = () => {
                   Nội dung
                 </p>
                 <p
-                  className={`px-6 py-3 text-white text-sm font-medium rounded-md text-center cursor-pointer transition-all duration-75 ${
+                  className={`px-6 py-3 text-white text-sm font-medium rounded-md text-center cursor-pointer transition-all duration-75 shadow-slate-400 shadow ${
                     review
                       ? 'bg-[#17A2B8] hover:bg-[#17A2B8]/[.8]'
                       : 'bg-[#6C757D] hover:bg-[#6C757D]/[.8]'
@@ -280,7 +289,7 @@ const AddBlog = () => {
         </div>
 
         {/* edit nội dung */}
-        <div className="bg-white w-full mt-5 p-5 rounded-2xl relative">
+        <div className="bg-white w-full mt-5 p-5 rounded-2xl relative shadow-md">
           {review ? (
             <div
               className="text-base text-[15px]"
