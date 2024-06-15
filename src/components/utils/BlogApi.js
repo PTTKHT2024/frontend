@@ -28,3 +28,25 @@ export async function getAllBlogs(current, pageSize) {
     throw new Error(err.message);
   }
 }
+
+export async function getBlogById(id) {
+  try {
+    const res = await api.get(`/blogs/${id}`);
+    return { status: res.status, data: res.data };
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}
+
+export async function deleteBlogById(id, accessToken) {
+  try {
+    const res = await api.delete(`/blogs/${id}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return { status: res.status };
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}

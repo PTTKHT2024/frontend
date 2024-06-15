@@ -48,6 +48,7 @@ import AdminLayout from './components/admin/AdminLayout';
 import BlogManagement from './components/admin/blog/BlogManagement';
 import AddBlog from './components/admin/blog/AddBlog';
 import Feedback from './components/information/localization/feedback';
+import ViewBlog from './components/admin/blog/ViewBlog';
 
 function App() {
   return (
@@ -79,6 +80,7 @@ function App() {
             <Route path="blog">
               <Route index element={<BlogManagement />} />
               <Route path="add" element={<AddBlog />} />
+              <Route path="view/:id" element={<ViewBlog />} />
             </Route>
           </Route>
 

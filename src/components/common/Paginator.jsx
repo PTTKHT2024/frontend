@@ -9,7 +9,7 @@ const Paginator = ({ currentPage, totalPages, onPageChange }) => {
           <li
             key={pageNumber}
             onClick={() => onPageChange(pageNumber)}
-            className={`px-2.5 py-1.5 rounded-md cursor-pointer mx-0.5 ${
+            className={`px-2.5 py-1.5 rounded-md cursor-pointer mx-0.5 shadow-sm ${
               currentPage === pageNumber ? 'bg-[#f5f5f5]' : 'hover:bg-[#f5f5f5]'
             }`}
           >
