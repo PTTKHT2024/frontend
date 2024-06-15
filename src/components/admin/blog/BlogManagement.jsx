@@ -332,7 +332,10 @@ const BlogManagement = () => {
                     >
                       <FaRegEye className="h-5 w-5" />
                     </Link>
-                    <Link className="text-orange-600 hover:text-orange-900 p-2 rounded-lg bg-orange-200 inline-block">
+                    <Link
+                      className="text-orange-600 hover:text-orange-900 p-2 rounded-lg bg-orange-200 inline-block"
+                      to={`/admin/blog/edit/${blog.id}`}
+                    >
                       <BsPencilSquare className="h-5 w-5" />
                     </Link>
                     <span

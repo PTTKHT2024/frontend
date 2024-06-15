@@ -37,73 +37,79 @@ const Appointment = () => {
   const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
 
   const optionServices = ['Bảo hành', 'Bảo dưỡng', 'Kiểm tra'];
-  const optionPlaces= [
-    "Hồ Chí Minh",
-    "Hà Nội",
-    "An Giang",
-    "Bà Rịa - Vũng Tàu",
-    "Bắc Giang",
-    "Bắc Kạn",
-    "Bạc Liêu",
-    "Bắc Ninh",
-    "Bến Tre",
-    "Bình Định",
-    "Bình Dương",
-    "Bình Phước",
-    "Bình Thuận",
-    "Cà Mau",
-    "Cần Thơ",
-    "Cao Bằng",
-    "Đà Nẵng",
-    "Đắk Lắk",
-    "Đắk Nông",
-    "Điện Biên",
-    "Đồng Nai",
-    "Đồng Tháp",
-    "Gia Lai",
-    "Hà Giang",
-    "Hà Nam",
-    "Hà Tĩnh",
-    "Hải Dương",
-    "Hải Phòng",
-    "Hậu Giang",
-    "Hòa Bình",
-    "Hưng Yên",
-    "Khánh Hòa",
-    "Kiên Giang",
-    "Kon Tum",
-    "Lai Châu",
-    "Lâm Đồng",
-    "Lạng Sơn",
-    "Lào Cai",
-    "Long An",
-    "Nam Định",
-    "Nghệ An",
-    "Ninh Bình",
-    "Ninh Thuận",
-    "Phú Thọ",
-    "Phú Yên",
-    "Quảng Bình",
-    "Quảng Nam",
-    "Quảng Ngãi",
-    "Quảng Ninh",
-    "Quảng Trị",
-    "Sóc Trăng",
-    "Sơn La",
-    "Tây Ninh",
-    "Thái Bình",
-    "Thái Nguyên",
-    "Thanh Hóa",
-    "Thừa Thiên - Huế",
-    "Tiền Giang",
-    "Trà Vinh",
-    "Tuyên Quang",
-    "Vĩnh Long",
-    "Vĩnh Phúc",
-    "Nha Trang",
-    "Yên Bái"
+  const optionPlaces = [
+    'Hồ Chí Minh',
+    'Hà Nội',
+    'An Giang',
+    'Bà Rịa - Vũng Tàu',
+    'Bắc Giang',
+    'Bắc Kạn',
+    'Bạc Liêu',
+    'Bắc Ninh',
+    'Bến Tre',
+    'Bình Định',
+    'Bình Dương',
+    'Bình Phước',
+    'Bình Thuận',
+    'Cà Mau',
+    'Cần Thơ',
+    'Cao Bằng',
+    'Đà Nẵng',
+    'Đắk Lắk',
+    'Đắk Nông',
+    'Điện Biên',
+    'Đồng Nai',
+    'Đồng Tháp',
+    'Gia Lai',
+    'Hà Giang',
+    'Hà Nam',
+    'Hà Tĩnh',
+    'Hải Dương',
+    'Hải Phòng',
+    'Hậu Giang',
+    'Hòa Bình',
+    'Hưng Yên',
+    'Khánh Hòa',
+    'Kiên Giang',
+    'Kon Tum',
+    'Lai Châu',
+    'Lâm Đồng',
+    'Lạng Sơn',
+    'Lào Cai',
+    'Long An',
+    'Nam Định',
+    'Nghệ An',
+    'Ninh Bình',
+    'Ninh Thuận',
+    'Phú Thọ',
+    'Phú Yên',
+    'Quảng Bình',
+    'Quảng Nam',
+    'Quảng Ngãi',
+    'Quảng Ninh',
+    'Quảng Trị',
+    'Sóc Trăng',
+    'Sơn La',
+    'Tây Ninh',
+    'Thái Bình',
+    'Thái Nguyên',
+    'Thanh Hóa',
+    'Thừa Thiên - Huế',
+    'Tiền Giang',
+    'Trà Vinh',
+    'Tuyên Quang',
+    'Vĩnh Long',
+    'Vĩnh Phúc',
+    'Nha Trang',
+    'Yên Bái',
   ];
-  const optionAgents = ['Đại lý 1', 'Đại lý 2', 'Đại lý 3', 'Đại lý 4', 'Đại lý 5'];
+  const optionAgents = [
+    'Đại lý 1',
+    'Đại lý 2',
+    'Đại lý 3',
+    'Đại lý 4',
+    'Đại lý 5',
+  ];
 
   const [selectedDate, setSelectedDate] = useState('');
 
@@ -116,7 +122,7 @@ const Appointment = () => {
         '11:00 - 12:00',
         '13:00 - 14:00',
         '14:00 - 15:00',
-        '15:00 - 16:00'
+        '15:00 - 16:00',
       ];
       setAvailableTimeSlots(timeSlots);
     }
@@ -181,8 +187,17 @@ const Appointment = () => {
   const renderDropdown = (type, options) => (
     <>
       <div className="relative border-b border-[#ccc] pb-2 cursor-pointer">
-        <div className="flex justify-between" onClick={() => toggleDropdown(type)}>
-          <p className={formData[type] === 'Chọn' || formData[type] === 'Chọn khung giờ' ? 'text-gray-400' : ''}>
+        <div
+          className="flex justify-between"
+          onClick={() => toggleDropdown(type)}
+        >
+          <p
+            className={
+              formData[type] === 'Chọn' || formData[type] === 'Chọn khung giờ'
+                ? 'text-gray-400'
+                : ''
+            }
+          >
             {formData[type]}
           </p>
           <MdOutlineKeyboardArrowDown className="h-6 w-6 text-black/[.4]" />
@@ -206,7 +221,9 @@ const Appointment = () => {
                 <li
                   onClick={() => handleDropdownSelect(type, option)}
                   key={index}
-                  className={`text-base text-[#212529] p-1.5 hover:bg-[#5897FB] hover:text-white ${option === formData[type] ? 'bg-[#5897FB] text-white' : ''}`}
+                  className={`text-base text-[#212529] p-1.5 hover:bg-[#5897FB] hover:text-white ${
+                    option === formData[type] ? 'bg-[#5897FB] text-white' : ''
+                  }`}
                 >
                   {option}
                 </li>
@@ -218,12 +235,14 @@ const Appointment = () => {
   );
 
   return (
-    <div className="mx-[40px] mt-[94px] pt-[60px] bg-[url('./imgs/appointment-background.png')] bg-no-repeat bg-top bg-center bg-fixed bg-cover min-h-screen">
+    <div className="mx-[40px] mt-[94px] pt-[60px] bg-[url('/imgs/appointment-background.png')] bg-no-repeat bg-top bg-center bg-fixed bg-cover min-h-screen">
       <form className="h-[1300px] w-[1000px] bg-[#fff] p-[120px] left-0">
         <div className="block mb-[32px]">
-          <h1 className="font-bold text-4xl text-[#1a1a1a] leading-[120%]">ĐẶT LỊCH HẸN DỊCH VỤ</h1>
+          <h1 className="font-bold text-4xl text-[#1a1a1a] leading-[120%]">
+            ĐẶT LỊCH HẸN DỊCH VỤ
+          </h1>
         </div>
-        
+
         {/* dịch vụ */}
         <div className="mb-8">
           <div className="mb-4">
@@ -334,21 +353,21 @@ const Appointment = () => {
               className="absolute inset-0 cursor-pointer flex items-center justify-end"
               onClick={handleDateClick}
             >
-              <img src="./imgs/calendar.png" className="right-0 w-6 h-6 z-10"/>
+              <img src="/imgs/calendar.png" className="right-0 w-6 h-6 z-10" />
             </div>
           </div>
         </div>
-        
+
         {/* Chọn khung giờ */}
         {selectedDate && (
-        <div className="mb-8">
-          <div className="mb-4">
-            <label className="text-lg font-bold">
-              Chọn giờ <span className="text-primaryColor">*</span>
-            </label>
+          <div className="mb-8">
+            <div className="mb-4">
+              <label className="text-lg font-bold">
+                Chọn giờ <span className="text-primaryColor">*</span>
+              </label>
+            </div>
+            {renderDropdown('timeSlot', availableTimeSlots)}
           </div>
-          {renderDropdown('timeSlot', availableTimeSlots)}
-        </div>
         )}
 
         {/* Điều khoản */}
@@ -365,8 +384,8 @@ const Appointment = () => {
             className="line-clamp-1 text-base text-[#212529]"
             htmlFor="agreement1"
           >
-            Tôi xác nhận rằng các đại lý Toyota có thể gửi cho tôi thêm
-            thông tin về các sản phẩm hoặc dịch vụ của Toyota.
+            Tôi xác nhận rằng các đại lý Toyota có thể gửi cho tôi thêm thông
+            tin về các sản phẩm hoặc dịch vụ của Toyota.
           </label>
         </div>
         <div className="flex mb-2">
@@ -395,7 +414,9 @@ const Appointment = () => {
           <button
             type="submit"
             disabled={!isFormValid}
-            className={`${isFormValid ? 'opacity-100' : 'opacity-55'} bg-primaryColor text-lg uppercase px-[44px] py-[15px] border-[#ccc] border font-bold tracking-widest mt-[30px] text-[#fff]`}
+            className={`${
+              isFormValid ? 'opacity-100' : 'opacity-55'
+            } bg-primaryColor text-lg uppercase px-[44px] py-[15px] border-[#ccc] border font-bold tracking-widest mt-[30px] text-[#fff]`}
             onClick={handleSubmit}
           >
             Xác nhận đặt lịch hẹn
