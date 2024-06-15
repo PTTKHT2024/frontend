@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getAllBlogs } from '../../utils/BlogApi';
 import { createMarkup, fileURL } from '../../utils/UtilsFunction';
 import { BsPencilSquare } from 'react-icons/bs';
-import { FaTrashAlt } from 'react-icons/fa';
+import { FaRegEye, FaTrashAlt } from 'react-icons/fa';
 import { Tooltip } from 'react-tooltip';
+import Paginator from '../../common/Paginator';
 
 const BlogManagement = () => {
   const [blogs, setBlogs] = useState([
@@ -25,9 +26,33 @@ const BlogManagement = () => {
   const [blogCategory, setBlogCategory] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [blogsPerPage, setBlogsPerPage] = useState(10);
-  const [blogGroup, setBlogGroup] = useState({
-    'SẢN PHẨM': 0,
-  });
+  const [blogGroup, setBlogGroup] = useState([
+    {
+      id: 1,
+      name: 'SẢN PHẨM',
+      count: 0,
+    },
+    {
+      id: 2,
+      name: 'KHUYẾN MÃI',
+      count: 0,
+    },
+    {
+      id: 3,
+      name: 'XÃ HỘI',
+      count: 0,
+    },
+    {
+      id: 4,
+      name: 'THÔNG TIN KHÁC',
+      count: 0,
+    },
+    {
+      id: 5,
+      name: 'THÔNG TIN BỔ TRỢ',
+      count: 0,
+    },
+  ]);
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -45,8 +70,6 @@ const BlogManagement = () => {
     fetchBlogs();
   }, []);
 
-  useEffect(() => {}, []);
-
   useEffect(() => {
     if (!blogCategory) {
       setFilteredBlogs(blogs);
@@ -57,7 +80,26 @@ const BlogManagement = () => {
       setFilteredBlogs(filtered);
     }
     setCurrentPage(1);
-  });
+  }, [blogCategory, blogs]);
+
+  const handleChangeCategory = (e) => {
+    const category = e.currentTarget.dataset.category;
+    if (category == blogCategory) {
+      setBlogCategory('');
+    } else {
+      setBlogCategory(category);
+    }
+    console.log('blog category', blogCategory);
+  };
+
+  useEffect(() => {
+    const newBlogGroup = blogGroup.map((group) => ({
+      ...group,
+      count: blogs.filter((blog) => blog.blogCategory.name === group.name)
+        .length,
+    }));
+    setBlogGroup(newBlogGroup);
+  }, [blogs]);
 
   const calculateTotalPages = (filteredBlogs, blogsPerPage, blogs) => {
     const totalBlogs =
@@ -69,7 +111,6 @@ const BlogManagement = () => {
   const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
   const currentBlogs = filteredBlogs.slice(indexOfFirstBlog, indexOfLastBlog);
 
-  console.log(blogs);
   return (
     <section>
       <div className="container">
@@ -88,18 +129,49 @@ const BlogManagement = () => {
         </div>
 
         <div className="mt-5 grid grid-cols-10 gap-5">
-          <div className="col-span-2 p-5 h-max bg-white h-10 w-full shadow-md rounded-2xl">
-            <p className="text-xs">
-              <span className="uppercase ml-1 text-sm">sản phẩm</span>
-            </p>
-          </div>
+          {blogGroup.map((blog, index) => (
+            <div
+              className={`col-span-2 p-5 h-max w-full shadow-md rounded-2xl hover:bg-[#17A2B8]/[.7] group cursor-pointer ${
+                blogCategory == blog.name ? 'bg-[#17A2B8]/[.7]' : 'bg-white'
+              }`}
+              key={blog.id}
+              data-category={blog.name}
+              onClick={handleChangeCategory}
+            >
+              <div className="flex items-center justify-evenly">
+                <p
+                  className={`text-sm uppercase font-medium group-hover:text-white ${
+                    blogCategory == blog.name
+                      ? 'text-white'
+                      : 'text-mainTitleColor'
+                  }`}
+                >
+                  {blog.name}
+                </p>
+                {isLoading ? (
+                  <span className="block h-5 w-5 animate-spin border-[3px] border-t-[#000]/[.7] rounded-full"></span>
+                ) : (
+                  <p className="text-2xl text-primaryColor font-medium">
+                    {blog.count}
+                  </p>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
       <div className="mt-5 bg-white rounded-2xl h-max py-5 shadow-md ml-[64px] mr-[8px] shadow-md overflow-x-auto">
-        <p className="text-mainTitleColor font-semibold text-[18px] px-5">
-          Chi tiết bài viết
-        </p>
+        <div className="flex items-center">
+          <p className="text-mainTitleColor font-semibold text-[18px] px-5 mr-8">
+            Chi tiết bài viết
+          </p>
+          <Paginator
+            currentPage={currentPage}
+            totalPages={calculateTotalPages(filteredBlogs, blogsPerPage, blogs)}
+            onPageChange={setCurrentPage}
+          />
+        </div>
 
         <table className="divide-y divide-gray-200 mt-5 w-full">
           <thead className="bg-[#f5f5f5]">
@@ -151,7 +223,7 @@ const BlogManagement = () => {
                     </>
                   )}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="px-6 py-4 line-clamp-2 whitespace-nowrap">
                   {isLoading ? (
                     <span className="animate-pulse block w-full rounded-2xl h-5 bg-slate-400"></span>
                   ) : (
@@ -164,7 +236,7 @@ const BlogManagement = () => {
                   ) : (
                     <>
                       <p
-                        className="text-sm text-gray-900 w-full italic"
+                        className="text-sm w-full italic text-[#007bff] underline underline-offset-2"
                         data-tooltip-id={`blog-content-tooltip-${blog.id}`}
                       >
                         xem trước...
@@ -213,10 +285,13 @@ const BlogManagement = () => {
                   )}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  <button className="text-indigo-600 hover:text-indigo-900">
+                  <button className="text-indigo-600 hover:text-indigo-900 p-2 rounded-lg bg-indigo-200">
+                    <FaRegEye className="h-5 w-5" />
+                  </button>
+                  <button className="text-orange-600 hover:text-orange-900 p-2 rounded-lg bg-orange-200">
                     <BsPencilSquare className="h-5 w-5" />
                   </button>
-                  <button className="text-red-600 hover:text-red-900">
+                  <button className="text-red-600 hover:text-red-900 p-2 rounded-lg bg-red-200">
                     <FaTrashAlt className="h-5 w-5" />
                   </button>
                 </td>
