@@ -660,7 +660,7 @@ const Header = () => {
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
               onClick={resetDropdownState}
-              to={'/electrification/electrified-car'}
+              to={'electrified-car'}
             >
               <img
                 src="/imgs/electric/poster/electric_poster_1.jpg"
@@ -692,7 +692,7 @@ const Header = () => {
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
               onClick={resetDropdownState}
-              to={'/technology/tnga'}
+              to={'/electrification/pure-electric-technology'}
             >
               <img
                 src="/imgs/electric/poster/electric_poster_3.jpg"

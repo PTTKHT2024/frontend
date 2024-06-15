@@ -208,7 +208,7 @@ const ElectrificationCar = () => {
         </div>
       </section>
 
-      <ElectrificationVideoReview data={data} />
+      <ElectrificationVideoReview data={data} id={1}/>
 
       <section className="bg-electrification_1 h-max w-full pt-10 pb-20 ">
         <div className="container">
