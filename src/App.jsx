@@ -48,6 +48,7 @@ import AdminLayout from './components/admin/AdminLayout';
 import BlogManagement from './components/admin/blog/BlogManagement';
 import AddBlog from './components/admin/blog/AddBlog';
 import Feedback from './components/information/localization/feedback';
+import TechHybrid from './components/electrification/tech-hybrid/main';
 
 function App() {
   return (
@@ -73,6 +74,7 @@ function App() {
 
           <Route path="/electrification" element={<ElectrificationLayout />}>
             <Route path="electrified-car" element={<ElectrificationCar />} />
+            <Route path="techhybrid" element={<TechHybrid />} />
           </Route>
 
           <Route path="/admin" element={<AdminLayout />}>
