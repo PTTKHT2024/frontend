@@ -4,7 +4,7 @@ import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { ContentState, EditorState, convertToRaw } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import { FaLongArrowAltLeft } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import {
@@ -12,11 +12,11 @@ import {
   fileUploadRegex,
   uploadFile,
 } from '../../utils/UtilsFunction';
-import { createANewBlog } from '../../utils/BlogApi';
+import { createANewBlog, getBlogById } from '../../utils/BlogApi';
 import Toast from '../../common/Toast';
-import { convertToHTML } from 'draft-convert';
+import { convertFromHTML, convertToHTML } from 'draft-convert';
 
-const AddBlog = () => {
+const EditBlog = () => {
   const [blog, setBlog] = useState({
     title: '',
     content: null,
@@ -34,6 +34,7 @@ const AddBlog = () => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
+  const params = useParams();
 
   useEffect(() => {
     let html = convertToHTML({
@@ -46,6 +47,29 @@ const AddBlog = () => {
     })(editorState.getCurrentContent());
     setBlog({ ...blog, content: html });
   }, [editorState]);
+
+  useEffect(() => {
+    const fetchBlog = async () => {
+      try {
+        const res = await getBlogById(params.id);
+        if (res.status === 200) {
+          setBlog(res.data.data);
+          const contentState = convertFromHTML({
+            htmlToEntity: (nodeName, node, createEntity) => {
+              if (nodeName === 'img') {
+                return createEntity('IMAGE', 'IMMUTABLE', { src: node.src });
+              }
+            },
+          })(blog.content);
+          setEditorState(EditorState.createWithContent(contentState));
+        }
+      } catch (err) {
+        console.error('Error fetching blog:', err);
+      }
+    };
+
+    fetchBlog();
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -159,14 +183,14 @@ const AddBlog = () => {
       <form onSubmit={handleSubmit}>
         <div className="flex justify-between">
           <p className="text-mainTitleColor text-mainTitle uppercase">
-            Thêm bài viết
+            Cập nhập
           </p>
 
           <button
             type="submit"
             className="uppercase px-5 py-2 rounded-md bg-[#604CC3] hover:bg-[#604CC3]/[.8] transition-all duration-200 ease-in font-bold text-white text-[15px] tracking-wider shadow-slate-400 shadow"
           >
-            xuất bản
+            lưu
           </button>
         </div>
 
@@ -312,4 +336,4 @@ const AddBlog = () => {
   );
 };
 
-export default AddBlog;
+export default EditBlog;

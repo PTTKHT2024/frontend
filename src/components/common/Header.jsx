@@ -29,7 +29,7 @@ const Header = () => {
     information: false,
   });
 
-  console.log(role);
+  // console.log(role);
 
   const handleClickLogin = () => {
     setIsRegisterOpened(false);

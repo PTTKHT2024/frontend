@@ -53,6 +53,12 @@ import PureElectricTechnology from './components/electrification/PureElectricTec
 import Policy from './components/common/Policy';
 import TechHybrid from './components/electrification/tech-hybrid/main';
 import CarList from './components/car/CarList';
+import ViewBlog from './components/admin/blog/ViewBlog';
+import EditBlog from './components/admin/blog/EditBlog';
+import AddCar from './components/admin/car/AddCar';
+import CarManagement from './components/admin/car/CarManagement';
+import UserLayout from './components/user/UserLayout';
+import Profile from './components/user/Profile';
 
 function App() {
   return (
@@ -90,8 +96,25 @@ function App() {
 
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="blog">
+              <Route index element={<BlogManagement />} />
               <Route path="add" element={<AddBlog />} />
+              <Route path="view/:id" element={<ViewBlog />} />
+              <Route path="edit/:id" element={<EditBlog />} />
             </Route>
+            <Route path="car">
+              <Route index element={<CarManagement />} />
+              <Route path="add" element={<AddCar />} />
+              <Route path="view/:id" element={<ViewBlog />} />
+              <Route path="edit/:id" element={<EditBlog />} />
+            </Route>
+            <Route path="user">
+              <Route index element={<></>} />
+            </Route>
+          </Route>
+
+          <Route path="/user" element={<UserLayout />}>
+            <Route path="profile" element={<Profile />} />
+            <Route path="appointment" element={<Appointment />} />
           </Route>
 
           <Route path="/technology" element={<TechnologyLayout />}>
