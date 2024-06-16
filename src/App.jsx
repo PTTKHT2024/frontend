@@ -29,6 +29,7 @@ import CommunityContribution from './components/information/community/CommunityC
 import ToyotaFund from './components/information/community/ToyotaFund';
 
 import Appointment from './components/form/appointment';
+import Testdrive from './components/form/testdrive';
 import Philosophy from './components/information/philosophy/Philosophy';
 import GlobalPhilosophy from './components/information/philosophy/GlobalPhilosophy';
 import Vision from './components/information/philosophy/Vision';
@@ -48,6 +49,16 @@ import AdminLayout from './components/admin/AdminLayout';
 import BlogManagement from './components/admin/blog/BlogManagement';
 import AddBlog from './components/admin/blog/AddBlog';
 import Feedback from './components/information/localization/feedback';
+import PureElectricTechnology from './components/electrification/PureElectricTech';
+import Policy from './components/common/Policy';
+import TechHybrid from './components/electrification/tech-hybrid/main';
+import CarList from './components/car/CarList';
+import ViewBlog from './components/admin/blog/ViewBlog';
+import EditBlog from './components/admin/blog/EditBlog';
+import AddCar from './components/admin/car/AddCar';
+import CarManagement from './components/admin/car/CarManagement';
+import UserLayout from './components/user/UserLayout';
+import Profile from './components/user/Profile';
 
 function App() {
   return (
@@ -61,6 +72,9 @@ function App() {
             <Route path="vr-sedan" element={<SedanShowroom />} />
             <Route path="show-rooms" element={<VRShowroom />} />
             <Route path="appointment" element={<Appointment />} />
+            <Route path="policy" element={<Policy />} />
+            <Route path="test-drive" element={<Testdrive />} />
+            <Route path="car-list" element={<CarList />} />
           </Route>
 
           <Route path="/service" element={<ServiceLayout />}>
@@ -73,12 +87,34 @@ function App() {
 
           <Route path="/electrification" element={<ElectrificationLayout />}>
             <Route path="electrified-car" element={<ElectrificationCar />} />
+            <Route
+              path="pure-electric-technology"
+              element={<PureElectricTechnology />}
+            />
+            <Route path="techhybrid" element={<TechHybrid />} />
           </Route>
 
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="blog">
+              <Route index element={<BlogManagement />} />
               <Route path="add" element={<AddBlog />} />
+              <Route path="view/:id" element={<ViewBlog />} />
+              <Route path="edit/:id" element={<EditBlog />} />
             </Route>
+            <Route path="car">
+              <Route index element={<CarManagement />} />
+              <Route path="add" element={<AddCar />} />
+              <Route path="view/:id" element={<ViewBlog />} />
+              <Route path="edit/:id" element={<EditBlog />} />
+            </Route>
+            <Route path="user">
+              <Route index element={<></>} />
+            </Route>
+          </Route>
+
+          <Route path="/user" element={<UserLayout />}>
+            <Route path="profile" element={<Profile />} />
+            <Route path="appointment" element={<Appointment />} />
           </Route>
 
           <Route path="/technology" element={<TechnologyLayout />}>

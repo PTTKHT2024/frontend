@@ -29,7 +29,7 @@ const Header = () => {
     information: false,
   });
 
-  console.log(role);
+  // console.log(role);
 
   const handleClickLogin = () => {
     setIsRegisterOpened(false);
@@ -346,7 +346,11 @@ const Header = () => {
         }`}
       >
         <HeaderDropdown onClick={handleClickDropDown}>
-          <CarDiscoverTab carTabsWidth={100} all={true} />
+          <CarDiscoverTab
+            carTabsWidth={100}
+            all={true}
+            resetDropdownState={resetDropdownState}
+          />
           <div className="mb-7"></div>
           <HeaderDropDownFooter />
         </HeaderDropdown>
@@ -660,7 +664,7 @@ const Header = () => {
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
               onClick={resetDropdownState}
-              to={'/electrification/electrified-car'}
+              to={'electrified-car'}
             >
               <img
                 src="/imgs/electric/poster/electric_poster_1.jpg"
@@ -676,7 +680,7 @@ const Header = () => {
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
               onClick={resetDropdownState}
-              to={'/technology/tss'}
+              to={'/electrification/techhybrid'}
             >
               <img
                 src="/imgs/electric/poster/electric_poster_2.jpg"
@@ -692,7 +696,7 @@ const Header = () => {
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
               onClick={resetDropdownState}
-              to={'/technology/tnga'}
+              to={'/electrification/pure-electric-technology'}
             >
               <img
                 src="/imgs/electric/poster/electric_poster_3.jpg"

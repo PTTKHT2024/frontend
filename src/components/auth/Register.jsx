@@ -229,8 +229,10 @@ const Register = ({ handleClickLogin }) => {
 
         <p className="text-center mt-5 mx-12 text-xs text-[#000]/[.6]">
           Việc bạn tiếp tục sử dụng trang web này đồng nghĩa bạn đồng ý với{' '}
-          <Link className="text-[#007bff]">quy định và chính sách</Link> của
-          chúng tôi.
+          <Link className="text-[#007bff]" to="/policy">
+            quy định và chính sách
+          </Link>{' '}
+          của chúng tôi.
         </p>
       </div>
     </div>

@@ -203,7 +203,7 @@ const ContactForm = () => {
                 htmlFor="checkbox-2"
               >
                 Tôi đã đọc và đồng ý với các{' '}
-                <Link to={'/'} className="text-[#007bff]">
+                <Link to={'/policy'} className="text-[#007bff]">
                   quy định và chính sách
                 </Link>{' '}
                 của Toyota Việt Nam.

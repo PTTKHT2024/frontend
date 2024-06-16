@@ -4,7 +4,8 @@ import YoutubeEmbed from '../common/YoutubeEmbed';
 import Jumping from '../common/Jumping';
 import { TfiClose } from 'react-icons/tfi';
 
-const ElectricficationVideoReview = ({ data }) => {
+const ElectricficationVideoReview = ({ data, id }) => {
+  const selectedVid = data.find((item) => item.id === id);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   useEffect(() => {
@@ -27,19 +28,19 @@ const ElectricficationVideoReview = ({ data }) => {
       <section className="min-h-[110vh] w-full relative">
         <img
           className="absolute h-full w-full"
-          src={`${data.background_blur}`}
+          src={`${selectedVid.background_blur}`}
         />
 
         <div className="container pt-[20px] pb-[40px] h-full relative z-10">
           <div className="py-[40px]">
             <Jumping>
               <h1 className="uppercase text-white font-bold text-mainTitle">
-                {data.title}
+                {selectedVid.title}
               </h1>
             </Jumping>
             <Jumping>
               <p className="text-white text-base mt-[20px]">
-                {data.description}
+                {selectedVid.description}
               </p>
             </Jumping>
           </div>
@@ -50,7 +51,7 @@ const ElectricficationVideoReview = ({ data }) => {
               onClick={handleToggleVideo}
             >
               <img
-                src={`${data.image}`}
+                src={`${selectedVid.image}`}
                 alt=""
                 className="h-full object-cover transition-all ease-in group-hover:scale-[1.05]"
               />
@@ -64,7 +65,7 @@ const ElectricficationVideoReview = ({ data }) => {
 
       {isVideoOpen && (
         <div className="h-screen w-full fixed top-0 bottom-0 right-0 left-0 z-[51]">
-          <YoutubeEmbed src={data.video_src} title={data.video_title} />
+          <YoutubeEmbed src={selectedVid.video_src} title={selectedVid.video_title} />
           <TfiClose
             className="absolute right-5 top-0 bottom-0 my-auto h-9 w-9 text-white cursor-pointer"
             onClick={handleToggleVideo}

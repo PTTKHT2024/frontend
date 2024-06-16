@@ -11,7 +11,7 @@ const Tool = () => {
   };
 
   return (
-    <section className="fixed right-0 w-[48px] h-3/6 z-10 top-0 bottom-0 mt-auto mb-auto z-[15]">
+    <section className="fixed right-0 w-[48px] h-3/6 top-0 bottom-0 mt-auto mb-auto z-[15]">
       <button
         className="w-full h-[48px] bg-white"
         onClick={handleToggleToolList}
@@ -70,7 +70,10 @@ const Tool = () => {
             className="w-max h-[48px] bg-white transition-all duration-[.35s] ease hover:-translate-x-[calc(100%-48px)] pr-[16px] group"
             style={{ boxShadow: 'inset 0 0 1px 1px rgba(192, 192, 192, 0.6)' }}
           >
-            <Link className="h-full w-full flex justify-center items-center">
+            <Link
+              className="h-full w-full flex justify-center items-center"
+              to={'/test-drive'}
+            >
               <div className="h-full w-[48px] flex items-center justify-center">
                 <span
                   style={{
@@ -90,7 +93,10 @@ const Tool = () => {
             className="w-max h-[48px] bg-white transition-all duration-[.35s] ease hover:-translate-x-[calc(100%-48px)] pr-[16px] group"
             style={{ boxShadow: 'inset 0 0 1px 1px rgba(192, 192, 192, 0.6)' }}
           >
-            <Link className="h-full w-full flex justify-center items-center">
+            <Link
+              className="h-full w-full flex justify-center items-center"
+              to={'/user/appointment'}
+            >
               <div className="h-full w-[48px] flex items-center justify-center">
                 <span
                   style={{
