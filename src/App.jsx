@@ -49,6 +49,7 @@ import BlogManagement from './components/admin/blog/BlogManagement';
 import AddBlog from './components/admin/blog/AddBlog';
 import Feedback from './components/information/localization/feedback';
 import PureElectricTechnology from './components/electrification/PureElectricTech';
+import Policy from './components/common/Policy';
 
 function App() {
   return (
@@ -62,6 +63,7 @@ function App() {
             <Route path="vr-sedan" element={<SedanShowroom />} />
             <Route path="show-rooms" element={<VRShowroom />} />
             <Route path="appointment" element={<Appointment />} />
+            <Route path="policy" element={<Policy />} />
           </Route>
 
           <Route path="/service" element={<ServiceLayout />}>
