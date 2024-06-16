@@ -50,6 +50,7 @@ import AddBlog from './components/admin/blog/AddBlog';
 import Feedback from './components/information/localization/feedback';
 import PureElectricTechnology from './components/electrification/PureElectricTech';
 import Policy from './components/common/Policy';
+import TechHybrid from './components/electrification/tech-hybrid/main';
 
 function App() {
   return (
@@ -80,6 +81,7 @@ function App() {
               path="pure-electric-technology"
               element={<PureElectricTechnology />}
             />
+            <Route path="techhybrid" element={<TechHybrid />} />
           </Route>
 
           <Route path="/admin" element={<AdminLayout />}>
