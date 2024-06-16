@@ -29,6 +29,7 @@ import CommunityContribution from './components/information/community/CommunityC
 import ToyotaFund from './components/information/community/ToyotaFund';
 
 import Appointment from './components/form/appointment';
+import Testdrive from './components/form/testdrive';
 import Philosophy from './components/information/philosophy/Philosophy';
 import GlobalPhilosophy from './components/information/philosophy/GlobalPhilosophy';
 import Vision from './components/information/philosophy/Vision';
@@ -51,6 +52,7 @@ import Feedback from './components/information/localization/feedback';
 import PureElectricTechnology from './components/electrification/PureElectricTech';
 import Policy from './components/common/Policy';
 import TechHybrid from './components/electrification/tech-hybrid/main';
+import CarList from './components/car/CarList';
 
 function App() {
   return (
@@ -65,6 +67,8 @@ function App() {
             <Route path="show-rooms" element={<VRShowroom />} />
             <Route path="appointment" element={<Appointment />} />
             <Route path="policy" element={<Policy />} />
+            <Route path="test-drive" element={<Testdrive />} />
+            <Route path="car-list" element={<CarList />} />
           </Route>
 
           <Route path="/service" element={<ServiceLayout />}>
