@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Jumping from '../../common/Jumping';
 import { cartimeline } from '../../data/techhybrid/CarTimeline';
 import CarSearch from '../CarSearch';
+import LearnMore from '../LearnMore';
 
 const TechHybrid = () => {
   const textRef = useRef(null);
@@ -702,6 +703,7 @@ const TechHybrid = () => {
       </section>
 
       <CarSearch />
+      <LearnMore />
     </>
   );
 };

@@ -7,6 +7,7 @@ const DiscoverTabSelect = ({
   currentTab,
   width = 80,
   all = false,
+  resetDropdownState,
 }) => {
   return (
     <div className="relative">
@@ -16,8 +17,14 @@ const DiscoverTabSelect = ({
           style={{ width: `${width}%` }}
         >
           {all && (
-            <li className="flex-1 text-center text-lg pb-2.5 hover:border-b-tabAction hover:font-bold cursor-pointer font-medium -translate-y-[0.8px]">
-              <Link>TẤT CẢ</Link>
+            <li className="flex-1 text-center text-lg hover:border-b-tabAction hover:font-bold cursor-pointer font-medium -translate-y-[0.8px]">
+              <Link
+                to="/car-list"
+                className="pb-2.5 w-full block"
+                onClick={resetDropdownState}
+              >
+                TẤT CẢ
+              </Link>
             </li>
           )}
 

@@ -28,7 +28,7 @@ const ToyotaTechnology = () => {
 
               <Jumping>
                 <div className="py-6 text-left">
-                  <Link>
+                  <Link to={'/electrification/electrified-car'}>
                     <h2 className="text-2xl font-sans font-bold underline group-hover:no-underline transition-all duration-500 ease-in-out">
                       ĐIỆN HOÁ Ô TÔ TẠI TOYOTA
                     </h2>
@@ -54,7 +54,7 @@ const ToyotaTechnology = () => {
 
               <Jumping>
                 <div className="py-6 text-left">
-                  <Link>
+                  <Link to={'/electrification/techhybrid'}>
                     <h2 className="text-2xl font-sans font-bold underline group-hover:no-underline transition-all duration-500 ease-in-out">
                       CÔNG NGHỆ TOYOTA HYBRID
                     </h2>
@@ -79,7 +79,7 @@ const ToyotaTechnology = () => {
               </div>
               <Jumping>
                 <div className="py-6 text-left">
-                  <Link>
+                  <Link to={'/technology/tnga'}>
                     <h2 className="text-2xl font-sans font-bold underline group-hover:no-underline transition-all duration-500 ease-in-out">
                       KIẾN TRÚC TOÀN CẦU MỚI TOYOTA
                     </h2>

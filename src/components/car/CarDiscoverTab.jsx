@@ -10,7 +10,11 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { Link } from 'react-router-dom';
 
-const CarDiscoverTab = ({ carTabsWidth = 80, all = false }) => {
+const CarDiscoverTab = ({
+  carTabsWidth = 80,
+  all = false,
+  resetDropdownState,
+}) => {
   const [cars, setCars] = useState([
     {
       id: '',
@@ -55,6 +59,7 @@ const CarDiscoverTab = ({ carTabsWidth = 80, all = false }) => {
             currentTab={carClass}
             width={carTabsWidth}
             all={all}
+            resetDropdownState={resetDropdownState}
           />
 
           <Swiper
