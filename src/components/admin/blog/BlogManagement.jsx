@@ -60,7 +60,7 @@ const BlogManagement = () => {
   const fetchBlogs = async () => {
     setIsLoading(true);
     try {
-      const res = await getAllBlogs(1, 100);
+      const res = await getAllBlogs(1, 1000);
       const reversedBlogs = [...res.data.data.result].reverse();
       setBlogs(reversedBlogs);
     } catch (error) {

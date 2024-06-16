@@ -93,6 +93,9 @@ function App() {
               <Route path="view/:id" element={<ViewBlog />} />
               <Route path="edit/:id" element={<EditBlog />} />
             </Route>
+            <Route path="user">
+              <Route index element={<></>} />
+            </Route>
           </Route>
 
           <Route path="/user" element={<UserLayout />}>
