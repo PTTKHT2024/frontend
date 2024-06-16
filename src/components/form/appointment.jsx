@@ -1,4 +1,4 @@
-import React, { useState, useEffect , useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
@@ -166,7 +166,6 @@ const Appointment = () => {
     setInputFilters((prev) => ({ ...prev, [type]: '' }));
   };
 
-  
   const handleDateClick = () => {
     const dateInput = document.getElementById('date');
     dateInput.showPicker(); // Dùng cho trình duyệt hỗ trợ, nếu không thì dateInput.click()
@@ -207,14 +206,10 @@ const Appointment = () => {
 
   const renderDropdown = (type, options) => (
     <>
-<<<<<<< HEAD
       <div
         className="relative border-b border-[#ccc] pb-2 cursor-pointer"
         ref={(el) => (dropdownRefs.current[type] = el)}
       >
-=======
-      <div className="relative border-b border-[#ccc] pb-2 cursor-pointer">
->>>>>>> feature/25-blog_admin
         <div
           className="flex justify-between"
           onClick={() => toggleDropdown(type)}
@@ -261,7 +256,6 @@ const Appointment = () => {
       </div>
     </>
   );
-
 
   return (
     <div className="mx-[40px] mt-[94px] pt-[60px] bg-[url('/imgs/appointment-background.png')] bg-no-repeat bg-top bg-center bg-fixed bg-cover min-h-screen">
@@ -382,11 +376,7 @@ const Appointment = () => {
               className="absolute inset-0 cursor-pointer flex items-center justify-end"
               onClick={handleDateClick}
             >
-<<<<<<< HEAD
-              <img src="./imgs/calendar.png" className="right-0 w-6 h-6"/>
-=======
               <img src="/imgs/calendar.png" className="right-0 w-6 h-6 z-10" />
->>>>>>> feature/25-blog_admin
             </div>
           </div>
         </div>
