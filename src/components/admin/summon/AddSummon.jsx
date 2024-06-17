@@ -53,7 +53,7 @@ const AddSummon = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!!summonBlog.content) {
+    if (summonBlog.content == '<p></p>') {
       setMessage('Chưa nhập đầy đủ thông tin.');
       setStatus('danger');
 
@@ -82,6 +82,8 @@ const AddSummon = () => {
       handleCloseToast();
     }, 3000);
   };
+
+  console.log(summonBlog.content);
 
   const handleCloseToast = () => {
     setMessage('');

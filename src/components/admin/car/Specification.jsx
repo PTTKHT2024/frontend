@@ -1,6 +1,12 @@
 import React from 'react';
 
 const Specification = () => {
+  const tab = [
+    'THÔNG TIN CHUNG',
+    'ĐỘNG CƠ & KHUNG XE',
+    'NGOẠI THẤT',
+    'NỘI THẤT',
+  ];
   return (
     <section>
       <div className="mt-5">

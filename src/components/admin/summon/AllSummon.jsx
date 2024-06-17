@@ -1,25 +1,55 @@
-import React, { useState } from 'react';
-import { serviceBlogsFakeData as datas } from '../../data/admin/ServiceBlogFakeData';
+import React, { useEffect, useState } from 'react';
 import { createMarkup, fileURL } from '../../utils/UtilsFunction';
 import { BsPencilSquare } from 'react-icons/bs';
 import { FaRegEye, FaTrashAlt } from 'react-icons/fa';
 import { Tooltip } from 'react-tooltip';
 import Paginator from '../../common/Paginator';
 import { Link } from 'react-router-dom';
+import { getAllSummons } from '../../utils/SummonApi';
 
 const AllSummon = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [summons, setSummons] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [summonsPerPage, setSummonsPerPage] = useState(10);
+
+  const fetchSummons = async () => {
+    setIsLoading(true);
+    try {
+      const res = await getAllSummons(1, 1000);
+      const reversedSummon = [...res.data.data.result].reverse();
+      setSummons(reversedSummon);
+    } catch (error) {
+      console.error('Error fetching blogs:', error);
+    }
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    fetchSummons();
+  }, []);
+
+  const calculateTotalPages = (filteredBlogs, blogsPerPage, blogs) => {
+    const totalBlogs =
+      filteredBlogs.length > 0 ? filteredBlogs.length : blogs.length;
+    return Math.ceil(totalBlogs / blogsPerPage);
+  };
+
+  const indexOfLastBlog = currentPage * summonsPerPage;
+  const indexOfFirstBlog = indexOfLastBlog - summonsPerPage;
+  const currentSummons = summons.slice(indexOfFirstBlog, indexOfLastBlog);
+
   return (
     <section>
       <div className="flex items-center">
         <p className="text-mainTitleColor font-semibold text-[18px] mr-8">
           Chi tiết dịch vụ kiểm tra & triệu hồi
         </p>
-        {/* <Paginator
+        <Paginator
           currentPage={currentPage}
-          totalPages={calculateTotalPages(filteredBlogs, blogsPerPage, blogs)}
+          totalPages={calculateTotalPages(summons, summonsPerPage, summons)}
           onPageChange={setCurrentPage}
-        /> */}
+        />
       </div>
 
       <div className="overflow-x-auto">
@@ -41,7 +71,7 @@ const AllSummon = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {datas.map((blog) => (
+            {currentSummons.map((blog) => (
               <tr key={blog.id}>
                 <td className="px-6 py-4 whitespace-nowrap">
                   {isLoading ? (
