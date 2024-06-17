@@ -48,6 +48,7 @@ import AdminLayout from './components/admin/AdminLayout';
 import BlogManagement from './components/admin/blog/BlogManagement';
 import AddBlog from './components/admin/blog/AddBlog';
 import Feedback from './components/information/localization/feedback';
+import ProductInsurance from './components/insurance/productInsurance';
 
 function App() {
   return (
@@ -131,6 +132,10 @@ function App() {
               <Route path="support" element={<Support />} />
               <Route path="feedback" element={<Feedback />} />
             </Route>
+
+          </Route>
+          <Route path="/insurance" element={<InsuranceLayout />}>
+            <Route path="productInsurance" element={<ProductInsurance />} />
           </Route>
         </Routes>
       </BrowserRouter>
@@ -260,4 +265,19 @@ function ElectrificationLayout() {
     </>
   );
 }
+
+function InsuranceLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <>
+      <Header />
+      <Outlet />
+      <ScrollToTopButton />
+      <Footer />
+    </>
+  );
+}
+
 export default App;
