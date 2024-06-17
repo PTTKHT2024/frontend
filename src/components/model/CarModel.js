@@ -1,7 +1,7 @@
 export const carModel = {
   name: '',
-  price: 0,
-  capacity: 0,
+  price: '',
+  capacity: '',
   engine: '',
   image: '',
   poster: '',
@@ -60,6 +60,6 @@ export const carModel = {
     endDate: '',
   },
   inventory: {
-    quantity: 0,
+    quantity: '',
   },
 };

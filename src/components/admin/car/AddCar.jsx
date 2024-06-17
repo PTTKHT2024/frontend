@@ -1,28 +1,41 @@
 import React, { useState } from 'react';
 import { carModel } from '../../model/CarModel';
+import { Tooltip } from 'react-tooltip';
+import Specification from './Specification';
 
 const AddCar = () => {
   const [car, setCar] = useState(carModel);
+  const [imagePreview, setImagePreview] = useState({
+    poster: '',
+    image: '',
+    hover_image: '',
+  });
 
-  //   const handleChangeInput = (e) => {
-  //     const { name, value } = e.target;
-  //     setCar({ ...car, [name]: value });
-  //   };
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
     const keys = name.split('.');
 
-    setCar((prevState) => {
-      let newState = { ...prevState };
-      let tempState = newState;
+    if (['poster', 'image', 'hover_image'].includes(name)) {
+      const selectedFile = e.target.files[0];
+      setCar({ ...car, [name]: selectedFile });
+      setImagePreview({
+        ...imagePreview,
+        [name]: URL.createObjectURL(selectedFile),
+      });
+      console.log(1);
+    } else {
+      setCar((prevState) => {
+        let newState = { ...prevState };
+        let tempState = newState;
 
-      for (let i = 0; i < keys.length - 1; i++) {
-        tempState = tempState[keys[i]];
-      }
-      tempState[keys[keys.length - 1]] = value;
+        for (let i = 0; i < keys.length - 1; i++) {
+          tempState = tempState[keys[i]];
+        }
+        tempState[keys[keys.length - 1]] = value;
 
-      return newState;
-    });
+        return newState;
+      });
+    }
   };
 
   return (
@@ -49,91 +62,244 @@ const AddCar = () => {
           </p>
           <hr />
 
-          <div className="grid grid-cols-12 gap-10 mt-5">
-            <div className="col-span-3">
-              <div>
-                <label className="text-base block font-medium" htmlFor="name">
-                  Tên xe <span className="text-primaryColor">*</span>
+          <div className="grid grid-cols-12 mt-5 gap-3">
+            <div className="col-span-6">
+              <div className="flex w-full border-[2px] border-[#ccc] rounded-md overflow-hidden text-mainTitleColor text-base mb-3">
+                <label
+                  className="w-1/2 pl-2 border-r-[2px] border-[#ccc]"
+                  htmlFor="name"
+                >
+                  Tên <span className="text-primaryColor">*</span>
                 </label>
                 <input
                   type="text"
+                  className="w-1/2 px-2 outline-0"
                   name="name"
-                  required
                   id="name"
-                  className="block outline-0 px-5 py-2 text-mainTitleColor w-full mt-3 rounded-3xl border border-[1px] border-[#3A3A3A]/[.4]"
-                  placeholder="Tên xe"
                   value={car.name}
                   onChange={handleChangeInput}
+                  placeholder="Wigo E"
+                  required
                 />
               </div>
 
-              <div className="mt-3">
-                <label className="text-base block font-medium" htmlFor="price">
+              <div className="flex w-full border-[2px] border-[#ccc] rounded-md overflow-hidden text-mainTitleColor text-base mb-3">
+                <label
+                  className="w-1/2 pl-2 border-r-[2px] border-[#ccc]"
+                  htmlFor="price"
+                >
                   Giá <span className="text-primaryColor">*</span>
                 </label>
                 <input
                   type="number"
+                  className="w-1/2 px-2 outline-0"
                   name="price"
-                  required
                   id="price"
-                  className="block outline-0 px-5 py-2 text-mainTitleColor w-full mt-3 rounded-3xl border border-[1px] border-[#3A3A3A]/[.4]"
-                  placeholder="Tên xe"
                   value={car.price}
                   onChange={handleChangeInput}
-                  min={0}
+                  placeholder="360000000"
+                  required
                 />
               </div>
-            </div>
 
-            {/* dung tích, số lượng */}
-            <div className="col-span-3">
-              <div>
+              <div className="flex w-full border-[2px] border-[#ccc] rounded-md overflow-hidden text-mainTitleColor text-base mb-3">
                 <label
-                  className="text-base block font-medium"
+                  className="w-1/2 pl-2 border-r-[2px] border-[#ccc]"
                   htmlFor="capacity"
                 >
                   Dung tích <span className="text-primaryColor">*</span>
                 </label>
                 <input
-                  type="text"
+                  type="number"
+                  className="w-1/2 px-2 outline-0"
                   name="capacity"
-                  required
                   id="capacity"
-                  className="block outline-0 px-5 py-2 text-mainTitleColor w-full mt-3 rounded-3xl border border-[1px] border-[#3A3A3A]/[.4]"
-                  placeholder="Dung tích"
                   value={car.capacity}
                   onChange={handleChangeInput}
+                  placeholder="2"
+                  required
                 />
               </div>
 
-              <div className="mt-3">
+              <div className="flex w-full border-[2px] border-[#ccc] rounded-md overflow-hidden text-mainTitleColor text-base mb-3">
                 <label
-                  className="text-base block font-medium"
-                  htmlFor="quantity"
+                  className="w-1/2 pl-2 border-r-[2px] border-[#ccc]"
+                  htmlFor="engine"
+                >
+                  Động cơ <span className="text-primaryColor">*</span>
+                </label>
+                <input
+                  type="text"
+                  className="w-1/2 px-2 outline-0"
+                  name="engine"
+                  id="engine"
+                  value={car.engine}
+                  onChange={handleChangeInput}
+                  placeholder="V6"
+                  required
+                />
+              </div>
+
+              <div className="flex w-full border-[2px] border-[#ccc] rounded-md overflow-hidden text-mainTitleColor text-base mb-3">
+                <label
+                  className="w-1/2 pl-2 border-r-[2px] border-[#ccc]"
+                  htmlFor="gearbox"
+                >
+                  Hộp số <span className="text-primaryColor">*</span>
+                </label>
+                <input
+                  type="text"
+                  className="w-1/2 px-2 outline-0"
+                  name="gearbox"
+                  id="gearbox"
+                  value={car.gearbox}
+                  onChange={handleChangeInput}
+                  placeholder="Số sàn 5 cấp"
+                  required
+                />
+              </div>
+            </div>
+
+            {/* ảnh */}
+            <div className="col-span-6">
+              <div className="flex w-full border-[2px] border-[#ccc] rounded-md overflow-hidden text-mainTitleColor text-base mb-3">
+                <label
+                  className="w-1/2 pl-2 border-r-[2px] border-[#ccc]"
+                  htmlFor="inventory.quantity"
                 >
                   Số lượng <span className="text-primaryColor">*</span>
                 </label>
                 <input
                   type="number"
+                  min="1"
+                  className="w-1/2 px-2 outline-0"
                   name="inventory.quantity"
-                  required
-                  id="quantity"
-                  className="block outline-0 px-5 py-2 text-mainTitleColor w-full mt-3 rounded-3xl border border-[1px] border-[#3A3A3A]/[.4]"
-                  placeholder="Tên xe"
+                  id="inventory.quantity"
                   value={car.inventory.quantity}
                   onChange={handleChangeInput}
-                  min={0}
+                  placeholder="1"
+                  required
                 />
+              </div>
+
+              <div>
+                <div
+                  data-tooltip-id="poster"
+                  className="flex w-full border-[2px] border-[#ccc] rounded-md overflow-hidden text-mainTitleColor text-base mb-3 items-center"
+                >
+                  <label className="w-1/2 pl-2 h-full block" htmlFor="poster">
+                    Poster <span className="text-primaryColor">*</span>
+                  </label>
+                  <input
+                    type="file"
+                    className="w-1/2 px-2 outline-0 border-l-[2px] border-r-[2px] border-[#ccc]"
+                    name="poster"
+                    id="poster"
+                    onChange={handleChangeInput}
+                    required
+                  />
+                </div>
+
+                {imagePreview.poster && car.poster && (
+                  <Tooltip id="poster">
+                    <div className="relative w-[300px]">
+                      <img
+                        src={imagePreview.poster}
+                        alt="poster"
+                        className="object-cover object-center w-full"
+                      />
+                      <p
+                        className="absolute bottom-[10px] left-[10px] font-semibold text-2xl"
+                        style={{ textShadow: '0 0 2px rgba(0, 0, 0, 0.9)' }}
+                      >
+                        Poster
+                      </p>
+                    </div>
+                  </Tooltip>
+                )}
+              </div>
+
+              <div>
+                <div
+                  data-tooltip-id="image"
+                  className="flex w-full border-[2px] border-[#ccc] rounded-md overflow-hidden text-mainTitleColor text-base mb-3 items-center"
+                >
+                  <label className="w-1/2 pl-2 h-full block" htmlFor="image">
+                    Ảnh xe ngang <span className="text-primaryColor">*</span>
+                  </label>
+                  <input
+                    type="file"
+                    className="w-1/2 px-2 outline-0 border-l-[2px] border-r-[2px] border-[#ccc]"
+                    name="image"
+                    id="image"
+                    onChange={handleChangeInput}
+                    required
+                  />
+                </div>
+
+                {imagePreview.image && car.image && (
+                  <Tooltip id="image">
+                    <div className="relative w-[300px]">
+                      <img
+                        src={imagePreview.image}
+                        alt="image"
+                        className="object-cover object-center w-full"
+                      />
+                      <p
+                        className="absolute bottom-[10px] left-[10px] font-semibold text-2xl"
+                        style={{ textShadow: '0 0 2px rgba(0, 0, 0, 0.9)' }}
+                      >
+                        Ảnh xe ngang
+                      </p>
+                    </div>
+                  </Tooltip>
+                )}
+              </div>
+
+              <div>
+                <div
+                  data-tooltip-id="hover_image"
+                  className="flex w-full border-[2px] border-[#ccc] rounded-md overflow-hidden text-mainTitleColor text-base mb-3 items-center"
+                >
+                  <label
+                    className="w-1/2 pl-2 h-full block"
+                    htmlFor="hover_image"
+                  >
+                    Ảnh xe nghiêng <span className="text-primaryColor">*</span>
+                  </label>
+                  <input
+                    type="file"
+                    className="w-1/2 px-2 outline-0 border-l-[2px] border-r-[2px] border-[#ccc]"
+                    name="hover_image"
+                    id="hover_image"
+                    onChange={handleChangeInput}
+                    required
+                  />
+                </div>
+
+                {imagePreview.hover_image && car.hover_image && (
+                  <Tooltip id="hover_image">
+                    <div className="relative w-[300px]">
+                      <img
+                        src={imagePreview.hover_image}
+                        alt="hover_image"
+                        className="object-cover object-center w-full"
+                      />
+                      <p
+                        className="absolute bottom-[10px] left-[10px] font-semibold text-2xl"
+                        style={{ textShadow: '0 0 2px rgba(0, 0, 0, 0.9)' }}
+                      >
+                        Ảnh xe nghiêng
+                      </p>
+                    </div>
+                  </Tooltip>
+                )}
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="container mt-5">
-        <div className="grid grid-cols-12 ">
-          <div className="col-span-4 "></div>
-        </div>
+        <Specification />
       </div>
     </section>
   );
