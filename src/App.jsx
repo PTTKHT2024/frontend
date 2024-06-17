@@ -62,6 +62,7 @@ import Profile from './components/user/Profile';
 import SummonManagement from './components/admin/summon/SummonManagement';
 import AddSummon from './components/admin/summon/AddSummon';
 import AllSummon from './components/admin/summon/AllSummon';
+import ViewSummon from './components/admin/summon/ViewSummon';
 
 function App() {
   return (
@@ -106,8 +107,9 @@ function App() {
             </Route>
 
             <Route path="summon" element={<SummonManagement />}>
-              <Route path="add" element={<AddSummon />} />
               <Route index element={<AllSummon />} />
+              <Route path="add" element={<AddSummon />} />
+              <Route path="view/:id" element={<ViewSummon />} />
             </Route>
 
             <Route path="car">

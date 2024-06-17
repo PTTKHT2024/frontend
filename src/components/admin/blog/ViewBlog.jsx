@@ -27,7 +27,6 @@ const ViewBlog = () => {
     fetchBlog();
   }, []);
 
-  console.log(blog);
   return (
     <section className="container">
       <Link

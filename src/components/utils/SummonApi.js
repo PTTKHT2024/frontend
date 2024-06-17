@@ -27,7 +27,17 @@ export async function getAllSummons(current, pageSize) {
     throw new Error(err.message);
   }
 }
-export async function deleteSummonyId(id, accessToken) {
+
+export async function getSummom(id) {
+  try {
+    const res = await api.get(`/services/${id}`);
+    return { status: res.status, data: res.data };
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}
+
+export async function deleteSummonById(id, accessToken) {
   try {
     const res = await api.delete(`/services/${id}`, {
       headers: {

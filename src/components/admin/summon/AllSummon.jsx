@@ -5,13 +5,16 @@ import { FaRegEye, FaTrashAlt } from 'react-icons/fa';
 import { Tooltip } from 'react-tooltip';
 import Paginator from '../../common/Paginator';
 import { Link } from 'react-router-dom';
-import { getAllSummons } from '../../utils/SummonApi';
+import { deleteSummonById, getAllSummons } from '../../utils/SummonApi';
+import Toast from '../../common/Toast';
 
 const AllSummon = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [summons, setSummons] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [summonsPerPage, setSummonsPerPage] = useState(10);
+  const [summonsPerPage, setSummonsPerPage] = useState(15);
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState('');
 
   const fetchSummons = async () => {
     setIsLoading(true);
@@ -20,7 +23,7 @@ const AllSummon = () => {
       const reversedSummon = [...res.data.data.result].reverse();
       setSummons(reversedSummon);
     } catch (error) {
-      console.error('Error fetching blogs:', error);
+      console.error('Error fetching summons:', error);
     }
     setIsLoading(false);
   };
@@ -28,6 +31,34 @@ const AllSummon = () => {
   useEffect(() => {
     fetchSummons();
   }, []);
+
+  const handleDelete = async (id) => {
+    const dataJSON = localStorage.getItem('data');
+    const data = JSON.parse(dataJSON);
+    const accessToken = data.access_token;
+
+    try {
+      const res = await deleteSummonById(id, accessToken);
+      if (res.status == 200) {
+        fetchSummons();
+        setMessage('Xóa bài thành công');
+        setStatus('success');
+      }
+    } catch (err) {
+      setMessage('Xóa bài thất bại');
+      setStatus('danger');
+    }
+
+    setTimeout(() => {
+      setMessage('');
+      setStatus('');
+    }, 5000);
+  };
+
+  const handleCloseToast = () => {
+    setMessage('');
+    setStatus('');
+  };
 
   const calculateTotalPages = (filteredBlogs, blogsPerPage, blogs) => {
     const totalBlogs =
@@ -41,6 +72,11 @@ const AllSummon = () => {
 
   return (
     <section>
+      <Toast
+        handleCloseToast={handleCloseToast}
+        message={message}
+        status={status}
+      />
       <div className="flex items-center">
         <p className="text-mainTitleColor font-semibold text-[18px] mr-8">
           Chi tiết dịch vụ kiểm tra & triệu hồi
@@ -71,13 +107,13 @@ const AllSummon = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {currentSummons.map((blog) => (
-              <tr key={blog.id}>
+            {currentSummons.map((summon) => (
+              <tr key={summon.id}>
                 <td className="px-6 py-4 whitespace-nowrap">
                   {isLoading ? (
                     <span className="animate-pulse block w-full rounded-2xl h-5 bg-slate-400"></span>
                   ) : (
-                    <p className="text-sm text-gray-900">{blog.title}</p>
+                    <p className="text-sm text-gray-900">{summon.title}</p>
                   )}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
@@ -87,12 +123,12 @@ const AllSummon = () => {
                     <>
                       <p
                         className="text-sm w-full italic text-[#007bff] underline underline-offset-2"
-                        data-tooltip-id={`blog-content-tooltip-${blog.id}`}
+                        data-tooltip-id={`summon-content-tooltip-${summon.id}`}
                       >
                         xem trước...
                       </p>
                       <Tooltip
-                        id={`blog-content-tooltip-${blog.id}`}
+                        id={`summon-content-tooltip-${summon.id}`}
                         style={{
                           maxHeight: '70vh',
                           maxWidth: '50vw',
@@ -101,7 +137,7 @@ const AllSummon = () => {
                       >
                         <p
                           className="text-sm text-white h-full w-full"
-                          dangerouslySetInnerHTML={createMarkup(blog.content)}
+                          dangerouslySetInnerHTML={createMarkup(summon.content)}
                         ></p>
                       </Tooltip>
                     </>
@@ -113,7 +149,7 @@ const AllSummon = () => {
                     <span className="animate-pulse block w-full rounded-2xl h-5 bg-slate-400"></span>
                   ) : (
                     <p className="text-sm text-gray-500">
-                      {new Date(blog.createdAt).toLocaleDateString('en-GB')}
+                      {new Date(summon.createdAt).toLocaleDateString('en-GB')}
                     </p>
                   )}
                 </td>
@@ -121,14 +157,14 @@ const AllSummon = () => {
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <Link
                     className="text-indigo-600 hover:text-indigo-900 p-2 rounded-lg bg-indigo-200 inline-block"
-                    to={`/admin/blog/view/${blog.id}`}
+                    to={`/admin/summon/view/${summon.id}`}
                   >
                     <FaRegEye className="h-5 w-5" />
                   </Link>
 
                   <span
                     className="text-red-600 hover:text-red-900 p-2 rounded-lg bg-red-200 inline-block"
-                    onClick={() => handleDeleteBlog(blog.id)}
+                    onClick={() => handleDelete(summon.id)}
                   >
                     <FaTrashAlt className="h-5 w-5" />
                   </span>
