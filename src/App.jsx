@@ -59,6 +59,9 @@ import AddCar from './components/admin/car/AddCar';
 import CarManagement from './components/admin/car/CarManagement';
 import UserLayout from './components/user/UserLayout';
 import Profile from './components/user/Profile';
+import SummonManagement from './components/admin/summon/SummonManagement';
+import AddSummon from './components/admin/summon/AddSummon';
+import AllSummon from './components/admin/summon/AllSummon';
 
 function App() {
   return (
@@ -101,6 +104,12 @@ function App() {
               <Route path="view/:id" element={<ViewBlog />} />
               <Route path="edit/:id" element={<EditBlog />} />
             </Route>
+
+            <Route path="summon" element={<SummonManagement />}>
+              <Route path="add" element={<AddSummon />} />
+              <Route index element={<AllSummon />} />
+            </Route>
+
             <Route path="car">
               <Route index element={<CarManagement />} />
               <Route path="add" element={<AddCar />} />

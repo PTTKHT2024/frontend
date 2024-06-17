@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { checkTokenExpire } from '../utils/AuthApi';
 
 const useCheckRole = () => {
-  const [role, setRole] = useState(null); // Sử dụng null để đại diện cho trạng thái chờ
+  const [role, setRole] = useState(null);
 
   useEffect(() => {
     const dataJSON = localStorage.getItem('data');
@@ -13,7 +13,7 @@ const useCheckRole = () => {
     }
 
     const data = JSON.parse(dataJSON);
-    //const accessToken = data.access_token;
+    const accessToken = data.access_token;
 
     const checkRole = async () => {
       try {
