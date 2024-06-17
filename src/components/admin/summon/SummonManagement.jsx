@@ -32,7 +32,7 @@ const SummonManagement = () => {
                 <NavLink
                   to={'/admin/summon/add'}
                   className={({ isActive }) =>
-                    `w-full py-3 border-b-[1px] border-[#ccc] block ${
+                    `w-full py-3 block ${
                       isActive
                         ? 'bg-[#56BACC] text-white'
                         : 'hover:bg-[#f5f5f5] text-mainTitleColor'
