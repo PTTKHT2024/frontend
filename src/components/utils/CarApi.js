@@ -1,4 +1,5 @@
 import { api } from './AuthApi';
+import { preparePayload } from './UtilsFunction';
 
 export async function getCarList(currentPage, pageSize) {
   try {
@@ -20,7 +21,7 @@ export async function getCarList(currentPage, pageSize) {
 
 export async function createCar(car, accessToken) {
   try {
-    const res = await api.post('/cars', car, {
+    const res = await api.post('/cars', preparePayload(car), {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },

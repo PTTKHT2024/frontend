@@ -197,6 +197,46 @@ const Specification = ({ car, handleChangeInput }) => {
                   <div className="flex w-full border-[2px] border-[#ccc] rounded-md overflow-hidden text-mainTitleColor text-base mb-3">
                     <label
                       className="w-1/2 pl-2 border-r-[2px] border-[#ccc]"
+                      htmlFor="specification.base_front_width"
+                    >
+                      Chiều rộng cơ sở trước (mm){' '}
+                      <span className="text-primaryColor">*</span>
+                    </label>
+                    <input
+                      type="number"
+                      className="w-1/2 px-2 outline-0"
+                      name="specification.base_front_width"
+                      id="specification.base_front_width"
+                      value={car.specification.base_front_width}
+                      onChange={handleChangeInput}
+                      placeholder="1585"
+                      required
+                    />
+                  </div>
+
+                  <div className="flex w-full border-[2px] border-[#ccc] rounded-md overflow-hidden text-mainTitleColor text-base mb-3">
+                    <label
+                      className="w-1/2 pl-2 border-r-[2px] border-[#ccc]"
+                      htmlFor="specification.base_back_width"
+                    >
+                      Chiều rộng cơ sở sau (mm){' '}
+                      <span className="text-primaryColor">*</span>
+                    </label>
+                    <input
+                      type="number"
+                      className="w-1/2 px-2 outline-0"
+                      name="specification.base_back_width"
+                      id="specification.base_back_width"
+                      value={car.specification.base_back_width}
+                      onChange={handleChangeInput}
+                      placeholder="1595"
+                      required
+                    />
+                  </div>
+
+                  <div className="flex w-full border-[2px] border-[#ccc] rounded-md overflow-hidden text-mainTitleColor text-base mb-3">
+                    <label
+                      className="w-1/2 pl-2 border-r-[2px] border-[#ccc]"
                       htmlFor="specification.light_undercarriage"
                     >
                       Khoảng sáng gầm xe (mm){' '}
@@ -669,7 +709,7 @@ const Specification = ({ car, handleChangeInput }) => {
                       Ngoài đô thị <span className="text-primaryColor">*</span>
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       className="w-1/2 px-2 outline-0"
                       name="specification.fuel_consumption"
                       id="specification.fuel_consumption"
@@ -688,7 +728,7 @@ const Specification = ({ car, handleChangeInput }) => {
                       Kết hợp <span className="text-primaryColor">*</span>
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       className="w-1/2 px-2 outline-0"
                       name="specification.combine_fuel_consumption"
                       id="specification.combine_fuel_consumption"
@@ -707,13 +747,57 @@ const Specification = ({ car, handleChangeInput }) => {
                       Trong đô thị <span className="text-primaryColor">*</span>
                     </label>
                     <input
-                      type="text"
+                      type="number"
                       className="w-1/2 px-2 outline-0"
                       name="specification.urban_fuel_consumption"
                       id="specification.urban_fuel_consumption"
                       value={car.specification.urban_fuel_consumption}
                       onChange={handleChangeInput}
                       placeholder="7.70"
+                      required
+                    />
+                  </div>
+
+                  <p className="text-base text-mainTitleColor mb-3 font-semibold">
+                    Trọng lượng
+                  </p>
+
+                  <div className="flex w-full border-[2px] border-[#ccc] rounded-md overflow-hidden text-mainTitleColor text-base mb-3">
+                    <label
+                      className="w-1/2 pl-2 border-r-[2px] border-[#ccc]"
+                      htmlFor="specification.weight"
+                    >
+                      Trọng lượng không tải{' '}
+                      <span className="text-primaryColor">*</span>
+                    </label>
+                    <input
+                      type="number"
+                      className="w-1/2 px-2 outline-0"
+                      name="specification.weight"
+                      id="specification.weight"
+                      value={car.specification.weight}
+                      onChange={handleChangeInput}
+                      placeholder="1530"
+                      required
+                    />
+                  </div>
+
+                  <div className="flex w-full border-[2px] border-[#ccc] rounded-md overflow-hidden text-mainTitleColor text-base mb-3">
+                    <label
+                      className="w-1/2 pl-2 border-r-[2px] border-[#ccc]"
+                      htmlFor="specification.weight_load"
+                    >
+                      Trọng lượng tải tối đa{' '}
+                      <span className="text-primaryColor">*</span>
+                    </label>
+                    <input
+                      type="number"
+                      className="w-1/2 px-2 outline-0"
+                      name="specification.weight_load"
+                      id="specification.weight_load"
+                      value={car.specification.weight_load}
+                      onChange={handleChangeInput}
+                      placeholder="2030"
                       required
                     />
                   </div>

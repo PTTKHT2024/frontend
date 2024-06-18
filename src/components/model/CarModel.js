@@ -53,12 +53,12 @@ export const carModel = {
   carModel: {
     name: '',
   },
-  promotion: {
-    promotionDetails: '',
-    discountPercentage: '',
-    startDate: '',
-    endDate: '',
-  },
+  // promotion: {
+  //   promotionDetails: 'Summer Sales',
+  //   discountPercentage: 1'',
+  //   startDate: '2024-06-13',
+  //   endDate: '2024-07-13',
+  // },
   inventory: {
     quantity: '',
   },

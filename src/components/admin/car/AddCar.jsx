@@ -3,6 +3,9 @@ import { carModel } from '../../model/CarModel';
 import { Tooltip } from 'react-tooltip';
 import Specification from './Specification';
 import { createCar } from '../../utils/CarApi';
+import { fileUploadRegex, uploadFile } from '../../utils/UtilsFunction';
+import Toast from '../../common/Toast';
+import { useNavigate } from 'react-router';
 
 const AddCar = () => {
   const [car, setCar] = useState(carModel);
@@ -13,27 +16,33 @@ const AddCar = () => {
   });
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState('');
+  const navigate = useNavigate();
 
   const handleChangeInput = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
     const keys = name.split('.');
 
     if (['poster', 'image', 'hover_image'].includes(name)) {
       const selectedFile = e.target.files[0];
-      setCar({ ...car, [name]: selectedFile });
-      setImagePreview({
-        ...imagePreview,
+      setCar((prevCar) => ({
+        ...prevCar,
+        [name]: selectedFile,
+      }));
+      setImagePreview((prevImagePreview) => ({
+        ...prevImagePreview,
         [name]: URL.createObjectURL(selectedFile),
-      });
+      }));
     } else {
       setCar((prevState) => {
-        let newState = { ...prevState };
+        const newState = { ...prevState };
         let tempState = newState;
 
         for (let i = 0; i < keys.length - 1; i++) {
           tempState = tempState[keys[i]];
         }
-        tempState[keys[keys.length - 1]] = value;
+
+        tempState[keys[keys.length - 1]] =
+          type === 'number' ? parseFloat(value) : value;
 
         return newState;
       });
@@ -47,18 +56,53 @@ const AddCar = () => {
     const accessToken = data.access_token;
 
     try {
-      const res = await createCar(car, accessToken);
+      const savePoster = await uploadFile(car.poster, accessToken);
+      const saveImage = await uploadFile(car.image, accessToken);
+      const saveHoverImage = await uploadFile(car.hover_image, accessToken);
+
+      const savePosterFileName = savePoster.data.match(fileUploadRegex);
+      const saveImageFileName = saveImage.data.match(fileUploadRegex);
+      const saveHoverImageFileName = saveHoverImage.data.match(fileUploadRegex);
+      const tmpCar = {
+        ...car,
+        poster: savePosterFileName[0],
+        image: saveImageFileName[0],
+        hover_image: saveHoverImageFileName[0],
+      };
+
+      const res = await createCar(tmpCar, accessToken);
       if (res.status == 201) {
         setMessage('Nhập xe mới thành công');
         setStatus('success');
+        setImagePreview({
+          poster: '',
+          image: '',
+          hover_image: '',
+        });
       }
     } catch (err) {
+      setMessage('Nhập xe thất bại');
+      setStatus('danger');
       console.error('Error create car:', err);
     }
+
+    setTimeout(() => {
+      handleCloseToast();
+    }, 5000);
+  };
+
+  const handleCloseToast = () => {
+    setMessage('');
+    setStatus('');
   };
 
   return (
     <section>
+      <Toast
+        handleCloseToast={handleCloseToast}
+        message={message}
+        status={status}
+      />
       <form onSubmit={handleSubmit}>
         <div className="container">
           <div className="flex justify-between">
