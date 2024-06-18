@@ -60,6 +60,9 @@ import CarManagement from './components/admin/car/CarManagement';
 import UserLayout from './components/user/UserLayout';
 import Profile from './components/user/Profile';
 
+import IntroductionInsurance from './components/insurance/Introduction';
+import IndemnifyService from './components/insurance/IndemnifyService';
+
 function App() {
   return (
     <>
@@ -121,6 +124,11 @@ function App() {
             <Route path="hybrid" element={<HybridTechnology />} />
             <Route path="tss" element={<TSS />} />
             <Route path="tnga" element={<TngaTechnology />} />
+          </Route>
+
+          <Route path="insurance">
+            <Route path="introduction-insurance" element={<IntroductionInsurance/>} />
+            <Route path="indemnify-service" element={<IndemnifyService />} />
           </Route>
 
           <Route path="/information" element={<InformationLayout />}>
