@@ -18,6 +18,7 @@ import { datas as technologyNavbarDatas } from './components/data/TechnologyNavb
 import { datas as introductionNavbarDatas } from './components/data/IntroductionNavbarData';
 import { datas as localNavbarDatas } from './components/data/LocalNavbarData';
 import { datas as contributrionNavbarDatas } from './components/data/ContributionNavbarData';
+import { datas as newsNavbarDatas } from './components/data/NewsNavbarData';
 
 import OrderButton from './components/service/OrderButton';
 import Tool from './components/common/Tool';
@@ -62,6 +63,7 @@ import Profile from './components/user/Profile';
 import SummonManagement from './components/admin/summon/SummonManagement';
 import AddSummon from './components/admin/summon/AddSummon';
 import AllSummon from './components/admin/summon/AllSummon';
+import News from './components/news/News.';
 
 function App() {
   return (
@@ -176,6 +178,22 @@ function App() {
               <Route path="support" element={<Support />} />
               <Route path="feedback" element={<Feedback />} />
             </Route>
+          </Route>
+          <Route path="news" element={<NewsLayout />}>
+            <Route
+              path="product"
+              element={<News categoryToShow="SẢN PHẨM" />}
+            />
+            <Route path="deal" element={<News categoryToShow="KHUYẾN MÃI" />} />
+            <Route path="society" element={<News categoryToShow="XÃ HỘI" />} />
+            <Route
+              path="other-information"
+              element={<News categoryToShow="THÔNG TIN KHÁC" />}
+            />
+            <Route
+              path="sup-information"
+              element={<News categoryToShow="THÔNG TIN BỔ TRỢ" />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>
@@ -305,4 +323,19 @@ function ElectrificationLayout() {
     </>
   );
 }
+function NewsLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <>
+      <Navbar datas={newsNavbarDatas} />
+      <Header />
+      <Outlet />
+      <ScrollToTopButton />
+      <Footer />
+    </>
+  );
+}
+
 export default App;

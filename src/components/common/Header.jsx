@@ -588,7 +588,7 @@ const Header = () => {
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
               onClick={resetDropdownState}
-              to={'/technology/hybrid'}
+              to={'/news/product'}
             >
               <img
                 src="/imgs/blog/poster/product_poster.png"
@@ -604,7 +604,7 @@ const Header = () => {
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
               onClick={resetDropdownState}
-              to={'/technology/tss'}
+              to={'/news/deal'}
             >
               <img
                 src="/imgs/blog/poster/promotion_poster.jpg"
@@ -620,7 +620,7 @@ const Header = () => {
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
               onClick={resetDropdownState}
-              to={'/technology/tnga'}
+              to={'/news/society'}
             >
               <img
                 src="/imgs/blog/poster/community_poster.png"
@@ -636,7 +636,7 @@ const Header = () => {
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
               onClick={resetDropdownState}
-              to={'/technology/tnga'}
+              to={'/news/other-information'}
             >
               <img
                 src="/imgs/blog/poster/additional_information_poster.png"
