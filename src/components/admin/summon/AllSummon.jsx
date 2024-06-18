@@ -131,7 +131,7 @@ const AllSummon = () => {
                         id={`summon-content-tooltip-${summon.id}`}
                         style={{
                           maxHeight: '70vh',
-                          maxWidth: '50vw',
+                          maxWidth: '40vw',
                           overflow: 'hidden',
                         }}
                       >
