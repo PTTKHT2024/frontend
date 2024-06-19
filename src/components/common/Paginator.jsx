@@ -8,16 +8,13 @@ const Paginator = ({ currentPage, totalPages, onPageChange }) => {
       <ul className="flex items-center">
         <li
           onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
-          className={`px-2.5 py-1.5 rounded-md cursor-pointer mx-0.5 shadow-sm ${
+          className={`px-4 py-2 border flex items-center cursor-pointer mx-1.5 ${
             currentPage === 1
               ? 'bg-gray-200 cursor-not-allowed'
               : 'hover:bg-[#f5f5f5]'
           }`}
         >
-          <button
-            className="font-medium text-sm h-full w-full"
-            disabled={currentPage === 1}
-          >
+          <button className="text-sm" disabled={currentPage === 1}>
             &laquo;
           </button>
         </li>
@@ -26,8 +23,10 @@ const Paginator = ({ currentPage, totalPages, onPageChange }) => {
           <li
             key={pageNumber}
             onClick={() => onPageChange(pageNumber)}
-            className={`px-2.5 py-1.5 rounded-md cursor-pointer mx-0.5 shadow-sm ${
-              currentPage === pageNumber ? 'bg-[#f5f5f5]' : 'hover:bg-[#f5f5f5]'
+            className={`px-4 py-2 cursor-pointer mx-1.5 ${
+              currentPage === pageNumber
+                ? 'bg-primaryColor text-white'
+                : 'hover:bg-[#f5f5f5] border'
             }`}
           >
             <button className="font-medium text-sm h-full w-full">
@@ -40,7 +39,7 @@ const Paginator = ({ currentPage, totalPages, onPageChange }) => {
           onClick={() =>
             currentPage < totalPages && onPageChange(currentPage + 1)
           }
-          className={`px-2.5 py-1.5 rounded-md cursor-pointer mx-0.5 shadow-sm ${
+          className={`px-4 py-2 border flex items-center cursor-pointer mx-1.5 ${
             currentPage === totalPages
               ? 'bg-gray-200 cursor-not-allowed'
               : 'hover:bg-[#f5f5f5]'

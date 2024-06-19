@@ -19,6 +19,7 @@ import { datas as introductionNavbarDatas } from './components/data/Introduction
 import { datas as localNavbarDatas } from './components/data/LocalNavbarData';
 import { datas as contributrionNavbarDatas } from './components/data/ContributionNavbarData';
 import { datas as newsNavbarDatas } from './components/data/NewsNavbarData';
+import { datas as insuranceNavbarDatas } from './components/data/InsuranceNavbarDatas';
 
 import OrderButton from './components/service/OrderButton';
 import Tool from './components/common/Tool';
@@ -140,7 +141,7 @@ function App() {
             <Route path="tnga" element={<TngaTechnology />} />
           </Route>
 
-          <Route path="insurance">
+          <Route path="/insurance">
             <Route
               path="introduction-insurance"
               element={<IntroductionInsurance />}
@@ -196,6 +197,7 @@ function App() {
           <Route path="/insurance" element={<InsuranceLayout />}>
             <Route path="productInsurance" element={<ProductInsurance />} />
           </Route>
+
           <Route path="news" element={<NewsLayout />}>
             <Route
               path="product"
@@ -347,8 +349,23 @@ function InsuranceLayout() {
   }, []);
   return (
     <>
-      <Navbar datas={newsNavbarDatas} />
       <Header />
+      <Navbar datas={newsNavbarDatas} />
+      <Outlet />
+      <ScrollToTopButton />
+      <Footer />
+    </>
+  );
+}
+
+function NewsLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <>
+      <Header />
+      <Navbar datas={newsNavbarDatas} />
       <Outlet />
       <ScrollToTopButton />
       <Footer />
