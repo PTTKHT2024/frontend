@@ -1,5 +1,6 @@
 import React from 'react';
 import InsuranceBanner from '../common/InsuranceBanner';
+import ContactAgency from '../common/ContactAgency';
 const IntroductionInsurance = () => {
   return (
     <div className="w-full mt-[96px] m-auto p-0">
@@ -8,8 +9,8 @@ const IntroductionInsurance = () => {
         <div>
           <div className="mt-[60px] mx-0 mb-[50px]">
             <h1 className="text-center text-4xl font-semibold leading-tight text-[#1a1a1a] uppercase mb-8 m-0">
-              CHỌN <span className="text-primaryColor">BẢO HIỂM TOYOTA</span>, TRỌN{' '}
-              <span className="text-primaryColor">NIỀM TIN</span>
+              CHỌN <span className="text-primaryColor">BẢO HIỂM TOYOTA</span>,
+              TRỌN <span className="text-primaryColor">NIỀM TIN</span>
             </h1>
             <div className="w-[120px] h-[1px] my-0 mx-auto bg-primaryColor"></div>
           </div>
@@ -33,7 +34,9 @@ const IntroductionInsurance = () => {
                 />
                 <p className="text-[#000] text-base m-0 font-medium">
                   Quy trình bồi thường{' '}
-                  <span className="text-primaryColor">đơn giản, nhanh chóng</span>
+                  <span className="text-primaryColor">
+                    đơn giản, nhanh chóng
+                  </span>
                 </p>
               </div>
               <div className="w-[calc(100%/3)-56px] items-center text-center mx-[24px] mb-[32px]">
@@ -81,8 +84,8 @@ const IntroductionInsurance = () => {
                 />
                 <p className="text-[#000] text-base m-0 font-medium">
                   Dịch vụ vô cùng{' '}
-                  <span className="text-primaryColor">tiện lợi</span>, hạn chế tối
-                  đa việc đi lại của khách hàng
+                  <span className="text-primaryColor">tiện lợi</span>, hạn chế
+                  tối đa việc đi lại của khách hàng
                 </p>
               </div>
               <div className="w-[calc(100%/3)-56px] items-center text-center mx-[24px] mb-[32px]">
@@ -92,8 +95,8 @@ const IntroductionInsurance = () => {
                   alt=""
                 />
                 <p className="text-[#000] text-base m-0 font-medium">
-                  <span className="text-primaryColor">Đồng hành</span> hỗ trợ giải
-                  quyết thoả đáng nhất
+                  <span className="text-primaryColor">Đồng hành</span> hỗ trợ
+                  giải quyết thoả đáng nhất
                 </p>
               </div>
             </div>
@@ -103,46 +106,76 @@ const IntroductionInsurance = () => {
               </h3>
               <div className="mx-auto my-0 max-w-fit">
                 <ul className="m-0 p-0 list-none">
-                  <li className='mb-[40px]'>
+                  <li className="mb-[40px]">
                     <div className="flex items-center">
-                      <img className="w-[32px] h-[32px] object-contain" src="/imgs/icon-choose.png" alt="" />
+                      <img
+                        className="w-[32px] h-[32px] object-contain"
+                        src="/imgs/icon-choose.png"
+                        alt=""
+                      />
                       <p className="ml-6 m-0 font-semibold text-2xl leading-tight">
                         Sữa chữa và thay thế{' '}
-                        <strong className="text-primaryColor">phụ tùng chính hãng</strong>
+                        <strong className="text-primaryColor">
+                          phụ tùng chính hãng
+                        </strong>
                       </p>
                     </div>
                   </li>
-                  <li className='mb-[40px]'>
+                  <li className="mb-[40px]">
                     <div className="flex items-center">
-                      <img className="w-[32px] h-[32px] object-contain" src="/imgs/icon-choose.png" alt="" />
+                      <img
+                        className="w-[32px] h-[32px] object-contain"
+                        src="/imgs/icon-choose.png"
+                        alt=""
+                      />
                       <p className="ml-6 m-0 font-semibold text-2xl leading-tight">
-                        Bồi thường theo 
-                        <strong className="text-primaryColor">giá trị thoả thuận</strong>
+                        Bồi thường theo
+                        <strong className="text-primaryColor">
+                          giá trị thoả thuận
+                        </strong>
                       </p>
                     </div>
                   </li>
-                  <li className='mb-[40px]'>
+                  <li className="mb-[40px]">
                     <div className="flex items-center">
-                      <img className="w-[32px] h-[32px] object-contain" src="/imgs/icon-choose.png" alt="" />
+                      <img
+                        className="w-[32px] h-[32px] object-contain"
+                        src="/imgs/icon-choose.png"
+                        alt=""
+                      />
                       <p className="ml-6 m-0 font-semibold text-2xl leading-tight">
-                        <strong className="text-primaryColor">Hỗ trợ chi phí thuê xe</strong> trong thời gian
-                        sửa chữa*
+                        <strong className="text-primaryColor">
+                          Hỗ trợ chi phí thuê xe
+                        </strong>{' '}
+                        trong thời gian sửa chữa*
                       </p>
                     </div>
                   </li>
-                  <li className='mb-[40px]'>
+                  <li className="mb-[40px]">
                     <div className="flex items-center">
-                      <img className="w-[32px] h-[32px] object-contain" src="/imgs/icon-choose.png" alt="" />
+                      <img
+                        className="w-[32px] h-[32px] object-contain"
+                        src="/imgs/icon-choose.png"
+                        alt=""
+                      />
                       <p className="ml-6 m-0 font-semibold text-2xl leading-tight">
-                        <strong className="text-primaryColor">Thưởng</strong> khi không có tổn thất
+                        <strong className="text-primaryColor">Thưởng</strong>{' '}
+                        khi không có tổn thất
                       </p>
                     </div>
                   </li>
-                  <li className=''>
+                  <li className="">
                     <div className="flex items-center">
-                      <img className="w-[32px] h-[32px] object-contain" src="/imgs/icon-choose.png" alt="" />
+                      <img
+                        className="w-[32px] h-[32px] object-contain"
+                        src="/imgs/icon-choose.png"
+                        alt=""
+                      />
                       <p className="ml-6 m-0 font-semibold text-2xl leading-tight">
-                        Chiết khấu cho <strong className="text-primaryColor">hợp đồng dài hạn</strong>
+                        Chiết khấu cho{' '}
+                        <strong className="text-primaryColor">
+                          hợp đồng dài hạn
+                        </strong>
                       </p>
                     </div>
                     <p className="">*Tuỳ thuộc theo gói sản phẩm</p>
@@ -153,6 +186,7 @@ const IntroductionInsurance = () => {
           </div>
         </div>
       </div>
+      <ContactAgency />
     </div>
   );
 };

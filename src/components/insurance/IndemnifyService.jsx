@@ -1,5 +1,7 @@
 import React from 'react';
 import InsuranceBanner from '../common/InsuranceBanner';
+import PartnerInsurance from '../common/PartnerInsurance';
+import ContactAgency from '../common/ContactAgency';
 const IndemnifyService = () => {
   return (
     <div className="w-full mt-[96px] m-auto p-0">
@@ -337,11 +339,15 @@ const IndemnifyService = () => {
               <h3 className="mb-0 font-semibold text-base text-primaryColor">
                 5. Hỗ trợ chi phí thuê xe
               </h3>
-              <p className="mt-[4px] leading-normal mb-[1rem]">- Hợp đồng thuê xe và Hoá đơn gốc</p>
+              <p className="mt-[4px] leading-normal mb-[1rem]">
+                - Hợp đồng thuê xe và Hoá đơn gốc
+              </p>
             </div>
           </div>
         </div>
       </div>
+      <PartnerInsurance />
+      <ContactAgency />
     </div>
   );
 };

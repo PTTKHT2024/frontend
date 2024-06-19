@@ -512,7 +512,7 @@ const Header = () => {
                       onClick={resetDropdownState}
                     >
                       <Link
-                        to="/service"
+                        to="/insurance/introduction-insurance"
                         className="text-base text-subInformationColor group-hover:font-bold group-hover:text-lg group-hover:text-primaryColor"
                       >
                         Bảo hiểm Toyota

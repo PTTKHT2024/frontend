@@ -141,11 +141,12 @@ function App() {
             <Route path="tnga" element={<TngaTechnology />} />
           </Route>
 
-          <Route path="/insurance">
+          <Route path="/insurance" element={<InsuranceLayout />}>
             <Route
               path="introduction-insurance"
               element={<IntroductionInsurance />}
             />
+            <Route path="product-insurance" element={<ProductInsurance />} />
             <Route path="indemnify-service" element={<IndemnifyService />} />
           </Route>
 
@@ -193,9 +194,6 @@ function App() {
               <Route path="support" element={<Support />} />
               <Route path="feedback" element={<Feedback />} />
             </Route>
-          </Route>
-          <Route path="/insurance" element={<InsuranceLayout />}>
-            <Route path="productInsurance" element={<ProductInsurance />} />
           </Route>
 
           <Route path="news" element={<NewsLayout />}>
@@ -350,7 +348,7 @@ function InsuranceLayout() {
   return (
     <>
       <Header />
-      <Navbar datas={newsNavbarDatas} />
+      <Navbar datas={insuranceNavbarDatas} />
       <Outlet />
       <ScrollToTopButton />
       <Footer />
