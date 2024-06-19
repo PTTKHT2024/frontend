@@ -59,7 +59,9 @@ import AddCar from './components/admin/car/AddCar';
 import CarManagement from './components/admin/car/CarManagement';
 import UserLayout from './components/user/UserLayout';
 import Profile from './components/user/Profile';
-
+import UserManagement from './components/admin/user/UserManagement';
+import AddUser from './components/admin/user/AddUser';
+import EditUser from './components/admin/user/EditUser';
 function App() {
   return (
     <>
@@ -108,7 +110,9 @@ function App() {
               <Route path="edit/:id" element={<EditBlog />} />
             </Route>
             <Route path="user">
-              <Route index element={<></>} />
+              <Route index element={<UserManagement />} />
+              <Route path="add" element={<AddUser />} />
+              <Route path="edit/:id" element={<EditUser />} />
             </Route>
           </Route>
 

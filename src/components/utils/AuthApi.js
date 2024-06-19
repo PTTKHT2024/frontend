@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'http://47.129.30.33/api/v1',
+  baseURL: 'http://18.140.54.30/api/v1',
 });
 
 export async function register(registeredUser) {

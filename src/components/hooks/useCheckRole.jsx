@@ -13,7 +13,7 @@ const useCheckRole = () => {
     }
 
     const data = JSON.parse(dataJSON);
-    //const accessToken = data.access_token;
+    const accessToken = data.access_token;
 
     const checkRole = async () => {
       try {
