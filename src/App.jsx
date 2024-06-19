@@ -71,6 +71,9 @@ import IntroductionInsurance from './components/insurance/Introduction';
 import IndemnifyService from './components/insurance/IndemnifyService';
 import ViewSummon from './components/admin/summon/ViewSummon';
 
+import UserManagement from './components/admin/user/UserManagement';
+import AddUser from './components/admin/user/AddUser';
+import EditUser from './components/admin/user/EditUser';
 function App() {
   return (
     <>
@@ -126,7 +129,9 @@ function App() {
               <Route path="edit/:id" element={<EditBlog />} />
             </Route>
             <Route path="user">
-              <Route index element={<></>} />
+              <Route index element={<UserManagement />} />
+              <Route path="add" element={<AddUser />} />
+              <Route path="edit/:id" element={<EditUser />} />
             </Route>
           </Route>
 
