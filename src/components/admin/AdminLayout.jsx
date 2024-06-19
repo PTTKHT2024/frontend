@@ -93,6 +93,19 @@ const AdminLayout = () => {
           </NavLink>
 
           <NavLink
+            to="/admin/summon"
+            className={({ isActive }) =>
+              `px-[16px] py-[12px] cursor-pointer  ${
+                isActive
+                  ? 'text-[#4379EE] border-l-[4px] border-[#4379EE]'
+                  : 'hover:bg-[#f5f5f5] text-mainTitleColor/[.4] hover:text-mainTitleColor'
+              }`
+            }
+          >
+            <FaScrewdriverWrench className="block h-5 w-5" />
+          </NavLink>
+
+          <NavLink
             to="/admin/user"
             className={({ isActive }) =>
               `px-[16px] py-[12px] cursor-pointer  ${
