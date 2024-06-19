@@ -1,4 +1,5 @@
 import { api } from './AuthApi';
+import { preparePayload } from './UtilsFunction';
 
 export async function getCarList(currentPage, pageSize) {
   try {
@@ -15,5 +16,18 @@ export async function getCarList(currentPage, pageSize) {
     } else {
       throw err;
     }
+  }
+}
+
+export async function createCar(car, accessToken) {
+  try {
+    const res = await api.post('/cars', preparePayload(car), {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return { status: res.status };
+  } catch (err) {
+    throw new Error(err.message);
   }
 }

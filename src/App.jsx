@@ -63,11 +63,15 @@ import Profile from './components/user/Profile';
 import SummonManagement from './components/admin/summon/SummonManagement';
 import AddSummon from './components/admin/summon/AddSummon';
 import AllSummon from './components/admin/summon/AllSummon';
+<<<<<<< HEAD
 import News from './components/news/News.';
 import ProductInsurance from './components/insurance/productInsurance';
 
 import IntroductionInsurance from './components/insurance/Introduction';
 import IndemnifyService from './components/insurance/IndemnifyService';
+=======
+import ViewSummon from './components/admin/summon/ViewSummon';
+>>>>>>> feature/30-car-admin
 
 function App() {
   return (
@@ -112,8 +116,9 @@ function App() {
             </Route>
 
             <Route path="summon" element={<SummonManagement />}>
-              <Route path="add" element={<AddSummon />} />
               <Route index element={<AllSummon />} />
+              <Route path="add" element={<AddSummon />} />
+              <Route path="view/:id" element={<ViewSummon />} />
             </Route>
 
             <Route path="car">

@@ -11,7 +11,7 @@ const SummonManagement = () => {
 
         <div className="grid grid-cols-12 mt-5 gap-10">
           <div className="col-span-2 bg-white rounded-2xl shadow-md overflow-hidden h-max">
-            <ul className="text-center font-semibold w-full py-2">
+            <ul className="text-center font-semibold w-full">
               <li className="uppercase w-full">
                 <NavLink
                   replace
