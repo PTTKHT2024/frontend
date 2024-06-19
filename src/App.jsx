@@ -18,6 +18,8 @@ import { datas as technologyNavbarDatas } from './components/data/TechnologyNavb
 import { datas as introductionNavbarDatas } from './components/data/IntroductionNavbarData';
 import { datas as localNavbarDatas } from './components/data/LocalNavbarData';
 import { datas as contributrionNavbarDatas } from './components/data/ContributionNavbarData';
+import { datas as newsNavbarDatas } from './components/data/NewsNavbarData';
+import { datas as insuranceNavbarDatas } from './components/data/InsuranceNavbarDatas';
 
 import OrderButton from './components/service/OrderButton';
 import Tool from './components/common/Tool';
@@ -59,7 +61,19 @@ import AddCar from './components/admin/car/AddCar';
 import CarManagement from './components/admin/car/CarManagement';
 import UserLayout from './components/user/UserLayout';
 import Profile from './components/user/Profile';
+import SummonManagement from './components/admin/summon/SummonManagement';
+import AddSummon from './components/admin/summon/AddSummon';
+import AllSummon from './components/admin/summon/AllSummon';
+import News from './components/news/News.';
+import ProductInsurance from './components/insurance/productInsurance';
 
+import IntroductionInsurance from './components/insurance/Introduction';
+import IndemnifyService from './components/insurance/IndemnifyService';
+import ViewSummon from './components/admin/summon/ViewSummon';
+
+import UserManagement from './components/admin/user/UserManagement';
+import AddUser from './components/admin/user/AddUser';
+import EditUser from './components/admin/user/EditUser';
 function App() {
   return (
     <>
@@ -101,6 +115,13 @@ function App() {
               <Route path="view/:id" element={<ViewBlog />} />
               <Route path="edit/:id" element={<EditBlog />} />
             </Route>
+
+            <Route path="summon" element={<SummonManagement />}>
+              <Route index element={<AllSummon />} />
+              <Route path="add" element={<AddSummon />} />
+              <Route path="view/:id" element={<ViewSummon />} />
+            </Route>
+
             <Route path="car">
               <Route index element={<CarManagement />} />
               <Route path="add" element={<AddCar />} />
@@ -108,7 +129,9 @@ function App() {
               <Route path="edit/:id" element={<EditBlog />} />
             </Route>
             <Route path="user">
-              <Route index element={<></>} />
+              <Route index element={<UserManagement />} />
+              <Route path="add" element={<AddUser />} />
+              <Route path="edit/:id" element={<EditUser />} />
             </Route>
           </Route>
 
@@ -121,6 +144,15 @@ function App() {
             <Route path="hybrid" element={<HybridTechnology />} />
             <Route path="tss" element={<TSS />} />
             <Route path="tnga" element={<TngaTechnology />} />
+          </Route>
+
+          <Route path="/insurance" element={<InsuranceLayout />}>
+            <Route
+              path="introduction-insurance"
+              element={<IntroductionInsurance />}
+            />
+            <Route path="product-insurance" element={<ProductInsurance />} />
+            <Route path="indemnify-service" element={<IndemnifyService />} />
           </Route>
 
           <Route path="/information" element={<InformationLayout />}>
@@ -167,6 +199,23 @@ function App() {
               <Route path="support" element={<Support />} />
               <Route path="feedback" element={<Feedback />} />
             </Route>
+          </Route>
+
+          <Route path="news" element={<NewsLayout />}>
+            <Route
+              path="product"
+              element={<News categoryToShow="SẢN PHẨM" />}
+            />
+            <Route path="deal" element={<News categoryToShow="KHUYẾN MÃI" />} />
+            <Route path="society" element={<News categoryToShow="XÃ HỘI" />} />
+            <Route
+              path="other-information"
+              element={<News categoryToShow="THÔNG TIN KHÁC" />}
+            />
+            <Route
+              path="sup-information"
+              element={<News categoryToShow="THÔNG TIN BỔ TRỢ" />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>
@@ -296,4 +345,35 @@ function ElectrificationLayout() {
     </>
   );
 }
+
+function InsuranceLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <>
+      <Header />
+      <Navbar datas={insuranceNavbarDatas} />
+      <Outlet />
+      <ScrollToTopButton />
+      <Footer />
+    </>
+  );
+}
+
+function NewsLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <>
+      <Header />
+      <Navbar datas={newsNavbarDatas} />
+      <Outlet />
+      <ScrollToTopButton />
+      <Footer />
+    </>
+  );
+}
+
 export default App;

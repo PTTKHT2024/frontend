@@ -8,6 +8,7 @@ import { PiPowerBold, PiUsersFill } from 'react-icons/pi';
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import useCheckRole from '../hooks/useCheckRole';
 import Loading from '../common/Loading';
+import { FaScrewdriverWrench } from 'react-icons/fa6';
 
 const AdminLayout = () => {
   const role = useCheckRole();
@@ -92,7 +93,7 @@ const AdminLayout = () => {
           </NavLink>
 
           <NavLink
-            to="/"
+            to="/admin/user"
             className={({ isActive }) =>
               `px-[16px] py-[12px] cursor-pointer  ${
                 isActive

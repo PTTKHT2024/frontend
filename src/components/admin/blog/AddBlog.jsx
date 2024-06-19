@@ -97,7 +97,7 @@ const AddBlog = () => {
     const dataJSON = localStorage.getItem('data');
     const data = JSON.parse(dataJSON);
 
-    if (!blog.blogCategory.name || !blog.content) {
+    if (!blog.blogCategory.name || blog.content == '<p></p>') {
       setMessage('Chưa nhập đầy đủ thông tin.');
       setStatus('danger');
 
