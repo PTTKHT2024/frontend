@@ -64,6 +64,7 @@ import SummonManagement from './components/admin/summon/SummonManagement';
 import AddSummon from './components/admin/summon/AddSummon';
 import AllSummon from './components/admin/summon/AllSummon';
 import News from './components/news/News.';
+import ProductInsurance from './components/insurance/productInsurance';
 
 function App() {
   return (
@@ -178,6 +179,9 @@ function App() {
               <Route path="support" element={<Support />} />
               <Route path="feedback" element={<Feedback />} />
             </Route>
+          </Route>
+          <Route path="/insurance" element={<InsuranceLayout />}>
+            <Route path="productInsurance" element={<ProductInsurance />} />
           </Route>
           <Route path="news" element={<NewsLayout />}>
             <Route
@@ -323,7 +327,8 @@ function ElectrificationLayout() {
     </>
   );
 }
-function NewsLayout() {
+
+function InsuranceLayout() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
