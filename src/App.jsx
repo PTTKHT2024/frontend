@@ -74,6 +74,8 @@ import ViewSummon from './components/admin/summon/ViewSummon';
 import UserManagement from './components/admin/user/UserManagement';
 import AddUser from './components/admin/user/AddUser';
 import EditUser from './components/admin/user/EditUser';
+import SpecificationCar from './components/car/specification/main';
+
 function App() {
   return (
     <>
@@ -217,6 +219,9 @@ function App() {
               element={<News categoryToShow="THÔNG TIN BỔ TRỢ" />}
             />
           </Route>
+          <Route path="/specification" element={<SpecificationCarLayout />}>
+            <Route path="specificationcar" element={<SpecificationCar />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
@@ -354,6 +359,20 @@ function InsuranceLayout() {
     <>
       <Header />
       <Navbar datas={insuranceNavbarDatas} />
+      <Outlet />
+      <ScrollToTopButton />
+      <Footer />
+    </>
+  );
+}
+
+function SpecificationCarLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <>
+      <Header />
       <Outlet />
       <ScrollToTopButton />
       <Footer />

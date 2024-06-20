@@ -48,8 +48,8 @@ export async function updateUserById(id, user, accessToken) {
   }
 }
 const data = JSON.parse(localStorage.getItem('data'));
-const accessToken = data.access_token;
-console.log(accessToken);
+//const accessToken = data.access_token;
+//console.log(accessToken);
 
 // export async function getAllUsers() {
 //   try {
