@@ -21,12 +21,10 @@ const UserManagement = () => {
     setIsLoading(true);
     try {
       const res = await getAllUsers(); // fetch all users initially
-      console.log('API response:', res); // Log API response for debugging
       if (res.data && res.data.data && res.data.data.result) {
         const sortedUsers = [...res.data.data.result].sort(
           (a, b) => a.id - b.id
         );
-        console.log('Sorted users:', sortedUsers); // Log sorted users for debugging
         setUsers(sortedUsers);
       } else {
         console.error(
