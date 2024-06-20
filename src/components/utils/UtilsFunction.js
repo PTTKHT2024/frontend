@@ -40,6 +40,11 @@ export const preparePayload = (car) => {
   };
 };
 
+export function getImageFileName(imgaeURL) {
+  const match = imgaeURL.match(fileUploadRegex);
+  return match[0];
+}
+
 export function createMarkup(html) {
   return {
     __html: DOMPurify.sanitize(html),

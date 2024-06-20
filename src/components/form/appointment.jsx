@@ -285,7 +285,7 @@ const Appointment = () => {
           </div>
           <div className="border-b border-[#ccc] pb-2">
             <input
-              placeholder="VD: 59D1-05494"
+              placeholder="59D1-05494"
               type="text"
               className="text-gray-400 w-full h-full outline-0 text-mainTitleColor"
               value={formData.licensePlate}
@@ -305,7 +305,7 @@ const Appointment = () => {
           </div>
           <div className="border-b border-[#ccc] pb-2">
             <input
-              placeholder="VD: Nguyễn Văn A"
+              placeholder="Nguyễn Văn A"
               type="text"
               className="text-gray-400 w-full h-full outline-0 text-mainTitleColor"
               value={formData.name}
@@ -325,7 +325,7 @@ const Appointment = () => {
           </div>
           <div className="border-b border-[#ccc] pb-2">
             <input
-              placeholder="VD: 0325428387"
+              placeholder="0325428387"
               type="text"
               className="text-gray-400 w-full h-full outline-0 text-mainTitleColor"
               value={formData.phone}

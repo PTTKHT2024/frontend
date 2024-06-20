@@ -74,6 +74,8 @@ import ViewSummon from './components/admin/summon/ViewSummon';
 import UserManagement from './components/admin/user/UserManagement';
 import AddUser from './components/admin/user/AddUser';
 import EditUser from './components/admin/user/EditUser';
+import ViewCar from './components/admin/car/ViewCar';
+import CarEdit from './components/admin/car/CarEdit';
 function App() {
   return (
     <>
@@ -113,7 +115,7 @@ function App() {
               <Route index element={<BlogManagement />} />
               <Route path="add" element={<AddBlog />} />
               <Route path="view/:id" element={<ViewBlog />} />
-              <Route path="edit/:id" element={<EditBlog />} />
+              <Route path="edit/:id" element={<CarEdit />} />
             </Route>
 
             <Route path="summon" element={<SummonManagement />}>
@@ -125,9 +127,10 @@ function App() {
             <Route path="car">
               <Route index element={<CarManagement />} />
               <Route path="add" element={<AddCar />} />
-              <Route path="view/:id" element={<ViewBlog />} />
-              <Route path="edit/:id" element={<EditBlog />} />
+              <Route path="view/:id" element={<ViewCar />} />
+              <Route path="edit/:id" element={<CarEdit />} />
             </Route>
+
             <Route path="user">
               <Route index element={<UserManagement />} />
               <Route path="add" element={<AddUser />} />

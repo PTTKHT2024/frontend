@@ -41,15 +41,18 @@ const Testdrive = () => {
       carTypeName: 'Vios',
       cars: [
         {
-          carTypeImage: 'https://www.toyota.com.vn//Resources/Images/EDBF83A9C97849C00B8A6B900CE213A5.png',
+          carTypeImage:
+            'https://www.toyota.com.vn//Resources/Images/EDBF83A9C97849C00B8A6B900CE213A5.png',
           carName: 'vios 1.5E ',
         },
         {
-          carTypeImage: 'https://www.toyota.com.vn//Resources/Images/EDBF83A9C97849C00B8A6B900CE213A5.png',
+          carTypeImage:
+            'https://www.toyota.com.vn//Resources/Images/EDBF83A9C97849C00B8A6B900CE213A5.png',
           carName: 'vios 1.6H ',
         },
         {
-          carTypeImage: 'https://www.toyota.com.vn//Resources/Images/EDBF83A9C97849C00B8A6B900CE213A5.png',
+          carTypeImage:
+            'https://www.toyota.com.vn//Resources/Images/EDBF83A9C97849C00B8A6B900CE213A5.png',
           carName: 'vios 1.8V ',
         },
       ],
@@ -376,25 +379,6 @@ const Testdrive = () => {
           </div>
         </div>
 
-        {/* Số điện thoại */}
-        <div className="mb-8">
-          <div className="mb-4">
-            <label className="text-lg font-bold" htmlFor="phone">
-              Số điện thoại <span className="text-primaryColor">*</span>
-            </label>
-          </div>
-          <div className="border-b border-[#ccc] pb-2">
-            <input
-              placeholder="VD: 0325428387"
-              type="text"
-              className="text-gray-400 w-full h-full outline-0 text-mainTitleColor"
-              value={formData.phone}
-              name="phone"
-              id="phone"
-              onChange={handleInputChange}
-            />
-          </div>
-        </div>
         {/* Tên xe */}
         <div className="mb-8">
           <div className="mb-4">
@@ -404,17 +388,18 @@ const Testdrive = () => {
           </div>
           {renderDropdownCar()}
           {/*tên và hình ảnh xe */}
-            {selectedCar && (
-                <div className="mt-8 items-center mb-[32px] max-h-[250px] w-full">
-                    <div className="uppercase text-2xl font-bold">{selectedCar.carName}</div>
-                    <img
-                        src={selectedCar.carTypeImage}
-                        alt={selectedCar.carTypeName}
-                        className="w-[480px] h-[200px] object-contain"
-                    />
-                </div>
-            )
-            }
+          {selectedCar && (
+            <div className="mt-8 items-center mb-[32px] max-h-[250px] w-full">
+              <div className="uppercase text-2xl font-bold">
+                {selectedCar.carName}
+              </div>
+              <img
+                src={selectedCar.carTypeImage}
+                alt={selectedCar.carTypeName}
+                className="w-[480px] h-[200px] object-contain"
+              />
+            </div>
+          )}
         </div>
 
         {/* Tỉnh/Thành phố */}
@@ -549,4 +534,3 @@ const Testdrive = () => {
 };
 
 export default Testdrive;
-

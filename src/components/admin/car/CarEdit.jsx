@@ -1,24 +1,60 @@
-import React, { useState } from 'react';
-import { carModel } from '../../model/CarModel';
-import { Tooltip } from 'react-tooltip';
-import Specification from './Specification';
-import { createCar } from '../../utils/CarApi';
-import { fileUploadRegex, uploadFile } from '../../utils/UtilsFunction';
-import Toast from '../../common/Toast';
-import { useNavigate } from 'react-router';
-import { FaLongArrowAltLeft } from 'react-icons/fa';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import { getCarById } from '../../utils/CarApi';
 import { Link } from 'react-router-dom';
+import { FaLongArrowAltLeft } from 'react-icons/fa';
+import {
+  fileURL,
+  fileUploadRegex,
+  getImageFileName,
+} from '../../utils/UtilsFunction';
+import { Tooltip } from 'react-tooltip';
 
-const AddCar = () => {
-  const [car, setCar] = useState(carModel);
+const CarEdit = () => {
+  const [car, setCar] = useState({});
+  const params = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+  const [editedCar, setEditedCar] = useState({});
+  const [currentTab, setCurrentTab] = useState('THÔNG TIN CHUNG');
   const [imagePreview, setImagePreview] = useState({
     poster: '',
     image: '',
     hover_image: '',
   });
-  const [message, setMessage] = useState('');
-  const [status, setStatus] = useState('');
-  const navigate = useNavigate();
+  const tabs = [
+    'THÔNG TIN CHUNG',
+    'ĐỘNG CƠ & KHUNG XE',
+    'TIỆN NGHI',
+    'KHUYẾN MÃI',
+  ];
+
+  useEffect(() => {
+    const fetchCar = async () => {
+      try {
+        const res = await getCarById(params.id);
+        if (res.status === 200) {
+          setCar(res.data.data);
+          setEditedCar(res.data.data);
+          setImagePreview({
+            poster: `${fileURL}/${res.data.data.poster}`,
+            image: `${fileURL}/${res.data.data.image}`,
+            hover_image: `${fileURL}/${res.data.data.hover_image}`,
+          });
+        }
+      } catch (err) {
+        console.error('Error fetching car:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCar();
+  }, []);
+
+  const handleChangeTab = (e) => {
+    const tab = e.target.dataset.tab;
+    setCurrentTab(tab);
+  };
 
   const handleChangeInput = (e) => {
     const { name, value, type } = e.target;
@@ -26,7 +62,7 @@ const AddCar = () => {
 
     if (['poster', 'image', 'hover_image'].includes(name)) {
       const selectedFile = e.target.files[0];
-      setCar((prevCar) => ({
+      setEditedCar((prevCar) => ({
         ...prevCar,
         [name]: selectedFile,
       }));
@@ -35,7 +71,7 @@ const AddCar = () => {
         [name]: URL.createObjectURL(selectedFile),
       }));
     } else {
-      setCar((prevState) => {
+      setEditedCar((prevState) => {
         const newState = { ...prevState };
         let tempState = newState;
 
@@ -51,84 +87,37 @@ const AddCar = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const dataJSON = localStorage.getItem('data');
-    const data = JSON.parse(dataJSON);
-    const accessToken = data.access_token;
+  console.log(car);
 
-    try {
-      const savePoster = await uploadFile(car.poster, accessToken);
-      const saveImage = await uploadFile(car.image, accessToken);
-      const saveHoverImage = await uploadFile(car.hover_image, accessToken);
-
-      const savePosterFileName = savePoster.data.match(fileUploadRegex);
-      const saveImageFileName = saveImage.data.match(fileUploadRegex);
-      const saveHoverImageFileName = saveHoverImage.data.match(fileUploadRegex);
-      const tmpCar = {
-        ...car,
-        poster: savePosterFileName[0],
-        image: saveImageFileName[0],
-        hover_image: saveHoverImageFileName[0],
-      };
-
-      const res = await createCar(tmpCar, accessToken);
-      if (res.status == 201) {
-        setMessage('Nhập xe mới thành công');
-        setStatus('success');
-        setImagePreview({
-          poster: '',
-          image: '',
-          hover_image: '',
-        });
-      }
-    } catch (err) {
-      setMessage('Nhập xe thất bại');
-      setStatus('danger');
-      console.error('Error create car:', err);
-    }
-
-    setTimeout(() => {
-      handleCloseToast();
-    }, 5000);
-  };
-
-  const handleCloseToast = () => {
-    setMessage('');
-    setStatus('');
-  };
+  //   console.log(imagePreview.image);
+  //   console.log(getImageFileName(imagePreview.image));
 
   return (
-    <section>
-      <Toast
-        handleCloseToast={handleCloseToast}
-        message={message}
-        status={status}
-      />
+    <section className="container">
       <Link
         className="fixed top-[100px] left-[90px] block h-max p-2 bg-[#f5f5f5] shadow hover:bg-slate-600 hover:text-white rounded-lg"
         to="/admin/car"
       >
         <FaLongArrowAltLeft className="h-5 w-5" />
       </Link>
-      <form onSubmit={handleSubmit}>
-        <div className="container">
+
+      <form action="">
+        <div>
           <div className="flex justify-between">
             <p className="text-mainTitleColor text-mainTitle uppercase">
-              Nhập xe
+              thông tin xe
             </p>
 
-            <button
+            <Link
+              to={'/admin/car/edit'}
               type="submit"
-              className="uppercase px-5 py-2 rounded-md bg-[#604CC3] hover:bg-[#604CC3]/[.8] transition-all duration-200 ease-in font-bold text-white text-[15px] tracking-wider shadow-slate-400 shadow"
+              className="uppercase px-5 py-2 flex items-center rounded-md bg-[#604CC3] hover:bg-[#604CC3]/[.8] transition-all duration-200 ease-in font-bold text-white text-[15px] tracking-wider shadow-slate-400 shadow"
             >
               Lưu
-            </button>
+            </Link>
           </div>
-        </div>
 
-        <div className="container mt-5">
-          <div className="bg-white rounded-2xl shadow-md p-5">
+          <div className="bg-white rounded-2xl shadow-md p-5 mt-5">
             <p className="text-mainTitleColor font-semibold text-[18px] uppercase">
               Thông tin cơ bản
             </p>
@@ -143,16 +132,36 @@ const AddCar = () => {
                   >
                     Tên <span className="text-primaryColor">*</span>
                   </label>
-                  <input
-                    type="text"
-                    className="w-1/2 px-2 outline-0"
-                    name="name"
-                    id="name"
-                    value={car.name}
-                    onChange={handleChangeInput}
-                    placeholder="Wigo E"
-                    required
-                  />
+                  {isLoading ? (
+                    <span className="animate-sweep-to-right block w-full h-6 bg-slate-400"></span>
+                  ) : (
+                    <>
+                      <input
+                        type="text"
+                        className={`w-1/2 px-2 outline-0 ${
+                          editedCar.name != car.name && 'bg-orange-200'
+                        }`}
+                        name="name"
+                        id="name"
+                        value={editedCar.name}
+                        onChange={handleChangeInput}
+                        data-tooltip-id="name"
+                        placeholder="Wigo E"
+                        required
+                      />
+                      {editedCar.name != car.name && (
+                        <Tooltip id="name">
+                          <p className="">
+                            Thuộc tính{' '}
+                            <span className="text-[#4379EE] underline underline-offset-4">
+                              tên
+                            </span>{' '}
+                            sắp bị thay đổi
+                          </p>
+                        </Tooltip>
+                      )}
+                    </>
+                  )}
                 </div>
 
                 <div className="flex w-full border-[2px] border-[#ccc] rounded-md overflow-hidden text-mainTitleColor text-base mb-3">
@@ -162,16 +171,22 @@ const AddCar = () => {
                   >
                     Giá <span className="text-primaryColor">*</span>
                   </label>
-                  <input
-                    type="number"
-                    className="w-1/2 px-2 outline-0"
-                    name="price"
-                    id="price"
-                    value={car.price}
-                    onChange={handleChangeInput}
-                    placeholder="360000000"
-                    required
-                  />
+                  {isLoading ? (
+                    <span className="animate-sweep-to-right block w-full h-6 bg-slate-400"></span>
+                  ) : (
+                    <input
+                      type="number"
+                      className={`w-1/2 px-2 outline-0 ${
+                        editedCar.price != car.price && 'bg-orange-200'
+                      }`}
+                      name="price"
+                      id="price"
+                      value={editedCar.price}
+                      onChange={handleChangeInput}
+                      placeholder="360000000"
+                      required
+                    />
+                  )}
                 </div>
 
                 <div className="flex w-full border-[2px] border-[#ccc] rounded-md overflow-hidden text-mainTitleColor text-base mb-3">
@@ -183,10 +198,12 @@ const AddCar = () => {
                   </label>
                   <input
                     type="number"
-                    className="w-1/2 px-2 outline-0"
+                    className={`w-1/2 px-2 outline-0 ${
+                      editedCar.capacity != car.capacity && 'bg-orange-200'
+                    }`}
                     name="capacity"
                     id="capacity"
-                    value={car.capacity}
+                    value={editedCar.capacity}
                     onChange={handleChangeInput}
                     placeholder="2"
                     required
@@ -200,16 +217,22 @@ const AddCar = () => {
                   >
                     Động cơ <span className="text-primaryColor">*</span>
                   </label>
-                  <input
-                    type="text"
-                    className="w-1/2 px-2 outline-0"
-                    name="engine"
-                    id="engine"
-                    value={car.engine}
-                    onChange={handleChangeInput}
-                    placeholder="V6"
-                    required
-                  />
+                  {isLoading ? (
+                    <span className="animate-sweep-to-right block w-full h-6 bg-slate-400"></span>
+                  ) : (
+                    <input
+                      type="text"
+                      className={`w-1/2 px-2 outline-0 ${
+                        editedCar.engine != car.engine && 'bg-orange-200'
+                      }`}
+                      name="engine"
+                      id="engine"
+                      value={editedCar.engine}
+                      onChange={handleChangeInput}
+                      placeholder="V6"
+                      required
+                    />
+                  )}
                 </div>
 
                 <div className="flex w-full border-[2px] border-[#ccc] rounded-md overflow-hidden text-mainTitleColor text-base mb-3">
@@ -219,16 +242,23 @@ const AddCar = () => {
                   >
                     Mẫu xe <span className="text-primaryColor">*</span>
                   </label>
-                  <input
-                    type="text"
-                    className="w-1/2 px-2 outline-0"
-                    name="carModel.name"
-                    id="carModel.name"
-                    value={car.carModel.name}
-                    onChange={handleChangeInput}
-                    placeholder="Wigo"
-                    required
-                  />
+                  {isLoading ? (
+                    <span className="animate-sweep-to-right block w-full h-6 bg-slate-400"></span>
+                  ) : (
+                    <input
+                      type="text"
+                      className={`w-1/2 px-2 outline-0 ${
+                        editedCar.carModel.name != car.carModel.name &&
+                        'bg-orange-200'
+                      }`}
+                      name="carModel.name"
+                      id="carModel.name"
+                      value={editedCar.carModel.name}
+                      onChange={handleChangeInput}
+                      placeholder="Wigo"
+                      required
+                    />
+                  )}
                 </div>
               </div>
 
@@ -241,17 +271,24 @@ const AddCar = () => {
                   >
                     Số lượng <span className="text-primaryColor">*</span>
                   </label>
-                  <input
-                    type="number"
-                    min="1"
-                    className="w-1/2 px-2 outline-0"
-                    name="inventory.quantity"
-                    id="inventory.quantity"
-                    value={car.inventory.quantity}
-                    onChange={handleChangeInput}
-                    placeholder="1"
-                    required
-                  />
+                  {isLoading ? (
+                    <span className="animate-sweep-to-right block w-full h-6 bg-slate-400"></span>
+                  ) : (
+                    <input
+                      type="number"
+                      min="1"
+                      className={`w-1/2 px-2 outline-0 ${
+                        editedCar.inventory.quantity !=
+                          car.inventory.quantity && 'bg-orange-200'
+                      }`}
+                      name="inventory.quantity"
+                      id="inventory.quantity"
+                      value={editedCar.inventory.quantity}
+                      onChange={handleChangeInput}
+                      placeholder="1"
+                      required
+                    />
+                  )}
                 </div>
 
                 <div>
@@ -262,14 +299,18 @@ const AddCar = () => {
                     <label className="w-1/2 pl-2 h-full block" htmlFor="poster">
                       Poster <span className="text-primaryColor">*</span>
                     </label>
-                    <input
-                      type="file"
-                      className="w-1/2 px-2 outline-0 border-l-[2px] border-[#ccc]"
-                      name="poster"
-                      id="poster"
-                      onChange={handleChangeInput}
-                      required
-                    />
+                    {isLoading ? (
+                      <span className="animate-sweep-to-right block w-full h-6 bg-slate-400"></span>
+                    ) : (
+                      <input
+                        type="file"
+                        className="w-1/2 px-2 outline-0 border-l-[2px] border-[#ccc]"
+                        name="poster"
+                        id="poster"
+                        onChange={handleChangeInput}
+                        required
+                      />
+                    )}
                   </div>
 
                   {imagePreview.poster && car.poster && (
@@ -299,14 +340,18 @@ const AddCar = () => {
                     <label className="w-1/2 pl-2 h-full block" htmlFor="image">
                       Ảnh xe ngang <span className="text-primaryColor">*</span>
                     </label>
-                    <input
-                      type="file"
-                      className="w-1/2 px-2 outline-0 border-l-[2px] border-[#ccc]"
-                      name="image"
-                      id="image"
-                      onChange={handleChangeInput}
-                      required
-                    />
+                    {isLoading ? (
+                      <span className="animate-sweep-to-right block w-full h-6 bg-slate-400"></span>
+                    ) : (
+                      <input
+                        type="file"
+                        className="w-1/2 px-2 outline-0 border-l-[2px] border-[#ccc]"
+                        name="image"
+                        id="image"
+                        onChange={handleChangeInput}
+                        required
+                      />
+                    )}
                   </div>
 
                   {imagePreview.image && car.image && (
@@ -340,14 +385,18 @@ const AddCar = () => {
                       Ảnh xe nghiêng{' '}
                       <span className="text-primaryColor">*</span>
                     </label>
-                    <input
-                      type="file"
-                      className="w-1/2 px-2 outline-0 border-l-[2px] border-[#ccc]"
-                      name="hover_image"
-                      id="hover_image"
-                      onChange={handleChangeInput}
-                      required
-                    />
+                    {isLoading ? (
+                      <span className="animate-sweep-to-right block w-full h-6 bg-slate-400"></span>
+                    ) : (
+                      <input
+                        type="file"
+                        className="w-1/2 px-2 outline-0 border-l-[2px] border-[#ccc]"
+                        name="hover_image"
+                        id="hover_image"
+                        onChange={handleChangeInput}
+                        required
+                      />
+                    )}
                   </div>
 
                   {imagePreview.hover_image && car.hover_image && (
@@ -371,12 +420,10 @@ const AddCar = () => {
               </div>
             </div>
           </div>
-
-          <Specification car={car} handleChangeInput={handleChangeInput} />
         </div>
       </form>
     </section>
   );
 };
 
-export default AddCar;
+export default CarEdit;
