@@ -12,7 +12,7 @@ const CarManagement = () => {
   const [cars, setCars] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [carsPerPage, setcarsPerPage] = useState(10);
+  const [carsPerPage, setcarsPerPage] = useState(20);
   const [filteredCars, setFilteredCars] = useState([]);
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState('');
@@ -117,10 +117,10 @@ const CarManagement = () => {
                   Poster
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                  Ảnh xe ngang
+                  ngang
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                  Ảnh xe nghiêng
+                  nghiêng
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   Tên
@@ -283,9 +283,12 @@ const CarManagement = () => {
                     {isLoading ? (
                       <span className="animate-pulse block w-full rounded-2xl h-5 bg-slate-400"></span>
                     ) : (
-                      <p className="text-sm w-full text-[#007bff] underline underline-offset-2 cursor-pointer">
-                        xem
-                      </p>
+                      <Link
+                        to={`/admin/car/view/${car.id}`}
+                        className="text-sm w-full text-[#007bff] underline underline-offset-2 cursor-pointer uppercase hover:bg-slate-100"
+                      >
+                        xem chi tiết
+                      </Link>
                     )}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">

@@ -19,6 +19,15 @@ export async function getCarList(currentPage, pageSize) {
   }
 }
 
+export async function getCarById(id) {
+  try {
+    const res = await api.get(`/cars/${id}`);
+    return { status: res.status, data: res.data };
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}
+
 export async function createCar(car, accessToken) {
   try {
     const res = await api.post('/cars', preparePayload(car), {
