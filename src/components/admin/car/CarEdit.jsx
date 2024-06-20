@@ -9,6 +9,7 @@ import {
   getImageFileName,
 } from '../../utils/UtilsFunction';
 import { Tooltip } from 'react-tooltip';
+import { TbReload } from 'react-icons/tb';
 
 const CarEdit = () => {
   const [car, setCar] = useState({});
@@ -34,7 +35,7 @@ const CarEdit = () => {
         const res = await getCarById(params.id);
         if (res.status === 200) {
           setCar(res.data.data);
-          setEditedCar(res.data.data);
+          setEditedCar(JSON.parse(JSON.stringify(res.data.data)));
           setImagePreview({
             poster: `${fileURL}/${res.data.data.poster}`,
             image: `${fileURL}/${res.data.data.image}`,
@@ -87,10 +88,41 @@ const CarEdit = () => {
     }
   };
 
-  console.log(car);
+  const handleResetField = (e) => {
+    const { name, type } = e.target.dataset;
+    const keys = name.split('.');
+
+    if (['poster', 'image', 'hover_image'].includes(name)) {
+      setEditedCar((prevCar) => ({
+        ...prevCar,
+        [name]: car.poster,
+      }));
+      setImagePreview((prevImagePreview) => ({
+        ...prevImagePreview,
+        [name]: `${fileURL}/${car[name]}`,
+      }));
+    } else {
+      setEditedCar((prevState) => {
+        const newState = { ...prevState };
+        let tempState = newState;
+
+        for (let i = 0; i < keys.length - 1; i++) {
+          tempState = tempState[keys[i]];
+        }
+
+        tempState[keys[keys.length - 1]] = car[name];
+
+        return newState;
+      });
+    }
+  };
+
+  // console.log(car);
 
   //   console.log(imagePreview.image);
   //   console.log(getImageFileName(imagePreview.image));
+
+  console.log('EditCar', editedCar);
 
   return (
     <section className="container">
@@ -127,10 +159,11 @@ const CarEdit = () => {
               <div className="col-span-6">
                 <div className="flex w-full border-[2px] border-[#ccc] rounded-md overflow-hidden text-mainTitleColor text-base mb-3">
                   <label
-                    className="w-1/2 pl-2 border-r-[2px] border-[#ccc]"
+                    className="w-1/2 pl-2 border-r-[2px] border-[#ccc] flex items-center"
                     htmlFor="name"
                   >
                     Tên <span className="text-primaryColor">*</span>
+                    <TbReload className="inline-block ml-auto mr-2 cursor-pointer" />
                   </label>
                   {isLoading ? (
                     <span className="animate-sweep-to-right block w-full h-6 bg-slate-400"></span>
@@ -139,7 +172,7 @@ const CarEdit = () => {
                       <input
                         type="text"
                         className={`w-1/2 px-2 outline-0 ${
-                          editedCar.name != car.name && 'bg-orange-200'
+                          editedCar.name != car.name && 'bg-[#FFC107]/[.7]'
                         }`}
                         name="name"
                         id="name"
@@ -177,7 +210,7 @@ const CarEdit = () => {
                     <input
                       type="number"
                       className={`w-1/2 px-2 outline-0 ${
-                        editedCar.price != car.price && 'bg-orange-200'
+                        editedCar.price != car.price && 'bg-[#FFC107]/[.7]'
                       }`}
                       name="price"
                       id="price"
@@ -199,7 +232,7 @@ const CarEdit = () => {
                   <input
                     type="number"
                     className={`w-1/2 px-2 outline-0 ${
-                      editedCar.capacity != car.capacity && 'bg-orange-200'
+                      editedCar.capacity != car.capacity && 'bg-[#FFC107]/[.7]'
                     }`}
                     name="capacity"
                     id="capacity"
@@ -223,7 +256,7 @@ const CarEdit = () => {
                     <input
                       type="text"
                       className={`w-1/2 px-2 outline-0 ${
-                        editedCar.engine != car.engine && 'bg-orange-200'
+                        editedCar.engine != car.engine && 'bg-[#FFC107]/[.7]'
                       }`}
                       name="engine"
                       id="engine"
@@ -248,8 +281,8 @@ const CarEdit = () => {
                     <input
                       type="text"
                       className={`w-1/2 px-2 outline-0 ${
-                        editedCar.carModel.name != car.carModel.name &&
-                        'bg-orange-200'
+                        editedCar.carModel.name.toLowerCase() !=
+                          car.carModel.name.toLowerCase() && 'bg-[#FFC107]/[.7]'
                       }`}
                       name="carModel.name"
                       id="carModel.name"
@@ -279,7 +312,7 @@ const CarEdit = () => {
                       min="1"
                       className={`w-1/2 px-2 outline-0 ${
                         editedCar.inventory.quantity !=
-                          car.inventory.quantity && 'bg-orange-200'
+                          car.inventory.quantity && 'bg-[#FFC107]/[.7]'
                       }`}
                       name="inventory.quantity"
                       id="inventory.quantity"
@@ -304,7 +337,9 @@ const CarEdit = () => {
                     ) : (
                       <input
                         type="file"
-                        className="w-1/2 px-2 outline-0 border-l-[2px] border-[#ccc]"
+                        className={`w-1/2 px-2 outline-0 border-l-[2px] border-[#ccc]  ${
+                          editedCar.poster != car.poster && 'bg-[#FFC107]/[.7]'
+                        }`}
                         name="poster"
                         id="poster"
                         onChange={handleChangeInput}
@@ -345,7 +380,9 @@ const CarEdit = () => {
                     ) : (
                       <input
                         type="file"
-                        className="w-1/2 px-2 outline-0 border-l-[2px] border-[#ccc]"
+                        className={`w-1/2 px-2 outline-0 border-l-[2px] border-[#ccc]  ${
+                          editedCar.poster != car.poster && 'bg-[#FFC107]/[.7]'
+                        }`}
                         name="image"
                         id="image"
                         onChange={handleChangeInput}
@@ -390,7 +427,9 @@ const CarEdit = () => {
                     ) : (
                       <input
                         type="file"
-                        className="w-1/2 px-2 outline-0 border-l-[2px] border-[#ccc]"
+                        className={`w-1/2 px-2 outline-0 border-l-[2px] border-[#ccc]  ${
+                          editedCar.poster != car.poster && 'bg-[#FFC107]/[.7]'
+                        }`}
                         name="hover_image"
                         id="hover_image"
                         onChange={handleChangeInput}
