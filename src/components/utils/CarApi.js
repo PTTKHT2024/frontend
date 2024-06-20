@@ -5,8 +5,8 @@ export async function getCarList(currentPage, pageSize) {
   try {
     const res = await api.get('/cars', {
       params: {
-        page: currentPage,
-        size: pageSize,
+        current: currentPage,
+        pageSize: pageSize,
       },
     });
     return { status: res.status, data: res.data };
@@ -22,6 +22,19 @@ export async function getCarList(currentPage, pageSize) {
 export async function createCar(car, accessToken) {
   try {
     const res = await api.post('/cars', preparePayload(car), {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return { status: res.status };
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}
+
+export async function deleteCar(id, accessToken) {
+  try {
+    const res = await api.delete(`/cars/${id}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
