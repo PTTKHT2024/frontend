@@ -60,7 +60,7 @@ function News({ categoryToShow }) {
             {filteredBlogs.length > 0 && (
               <>
                 <div className="col-span-1 lg:col-span-2 bg-white shadow-md relative">
-                  <Link to={`/blog/${filteredBlogs[0].id}`}>
+                  <Link to={`/news/blog/${filteredBlogs[0].id}`}>
                     <div className="relative">
                       <img
                         src={`${fileURL}/${filteredBlogs[0].image}`}
@@ -89,7 +89,7 @@ function News({ categoryToShow }) {
                 </div>
                 <div className="grid grid-rows-2 gap-4">
                   {filteredBlogs.slice(1, 3).map((blog, index) => (
-                    <Link to={`/blog/${blog.id}`} key={blog.id}>
+                    <Link to={`/news/blog/${blog.id}`} key={blog.id}>
                       <div className="bg-white shadow-md relative">
                         <div className="relative">
                           <img
@@ -129,7 +129,7 @@ function News({ categoryToShow }) {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {currentBlogs.map((blog) => (
-              <Link key={blog.id} to={`/blog/${blog.id}`}>
+              <Link key={blog.id} to={`/news/blog/${blog.id}`}>
                 <div className="bg-white shadow-md overflow-hidden h-[350px] group">
                   <div className="overflow-hidden">
                     <img
