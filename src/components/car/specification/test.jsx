@@ -5,7 +5,7 @@ import { useParams } from 'react-router';
 
 
 const api = axios.create({
-  baseURL: 'http://18.140.54.30/api/v1/cars',
+  baseURL: 'http://18.140.54.30/api/v1',
 });
 
 const getCarById = async (id) => {
@@ -58,10 +58,10 @@ const Test = () => {
         </h2>
         {isGeneralInfoExpanded && (
           <div>
-            <p>Make: {selectedCar.make}</p>
+            <p>Make: {selectedCar.name}</p>
             <p>Model: {selectedCar.model}</p>
-            <p>Year: {selectedCar.year}</p>
-            <p>Color: {selectedCar.color}</p>
+            <p>Year: {selectedCar.fuel}</p>
+            <p>Color: {selectedCar.number_of_seats}</p>
           </div>
         )}
       </div>

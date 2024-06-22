@@ -1,11 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaAngleLeft, FaAngleDown, FaAngleUp } from 'react-icons/fa';
-import Test from './test';
+import { api } from '../../utils/AuthApi'; 
+import { useParams } from 'react-router';
+import { createMarkup, fileURL } from '../../utils/UtilsFunction';
+import { Link } from 'react-router-dom';
+
+const getCarById = async (id) => {
+  try {
+    const res = await api.get(`/cars/${id}`);
+    return { status: res.status, data: res.data };
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
 
 const SpecificationCar = () => {
    const [isGeneralInfoExpanded, setIsGeneralInfoExpanded] = useState(false);
    const [isEngineFrameExpanded, setIsEngineFrameExpanded] = useState(false);
    const [isExpanded, setIsExpanded] = useState(false);
+
+   const params = useParams();
+   const [car, setCar] = useState({});
+   const [isLoading, setIsLoading] = useState(true);
+
+   useEffect(() => {
+     const fetchBlog = async () => {
+       try {
+         const res = await getCarById(params.id);
+         if (res.status === 200) {
+           setCar(res.data.data);
+         }
+       } catch (err) {
+         console.error('Error fetching blog:', err);
+       } finally {
+         setIsLoading(false);
+       }
+     };
+
+     fetchBlog();
+   }, []);
 
    const toggleExpand = () => {
      setIsExpanded(!isExpanded);
@@ -19,6 +52,8 @@ const SpecificationCar = () => {
      setIsEngineFrameExpanded(!isEngineFrameExpanded);
    };
 
+
+
   return (
     <>
       <div className="py-16 px-0 w-[1142px] max-w-full mt-24 mx-auto mb-0">
@@ -31,9 +66,13 @@ const SpecificationCar = () => {
           </i>
           DANH SÁCH CÁC MẪU XE
         </a>
-        <h1 className="font-bold text-4xl leading-[120%] my-8 mx-0">
-          THÔNG SỐ KỸ THUẬT INNOVA CROSS
-        </h1>
+        {isLoading ? (
+          <h1 className="font-bold text-4xl leading-[120%] my-8 mx-0"></h1>
+        ) : (
+          <h1 className="font-bold text-4xl leading-[120%] my-8 mx-0">
+            THÔNG SỐ KỸ THUẬT {car.name}
+          </h1>
+        )}
         <p className="text-primaryColor mt-0 mb-4">
           Lưu ý: Công ty Ô tô Toyota Việt Nam được quyền thay đổi bất kỳ đặc
           tính nào mà không báo trước. Một số đặc tính kỹ thuật có thể khác so
@@ -66,9 +105,13 @@ const SpecificationCar = () => {
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Số chỗ
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.near_lamp}
+                          </td>
+                        )}
                       </tr>
                     </tbody>
                   </table>
@@ -85,9 +128,13 @@ const SpecificationCar = () => {
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Kiểu dáng
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.carCategory.name}
+                          </td>
+                        )}
                       </tr>
                     </tbody>
                   </table>
@@ -104,9 +151,13 @@ const SpecificationCar = () => {
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Nhiên liệu
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.fuel}
+                          </td>
+                        )}
                       </tr>
                     </tbody>
                   </table>
@@ -123,9 +174,13 @@ const SpecificationCar = () => {
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Xuất xứ
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.origin}
+                          </td>
+                        )}
                       </tr>
                     </tbody>
                   </table>
@@ -161,57 +216,85 @@ const SpecificationCar = () => {
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Kích thước tổng thể (D x R x C) (mm x mm x mm)
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.dimensions}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Chiều dài cơ sở (mm)
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.base_length}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Chiều rộng cơ sở trước (mm)
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.base_front_width}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Chiều rộng cơ sở sau (mm)
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.base_back_width}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Khoảng sáng gầm xe (mm)
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.light_undercarriage}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Bán kính vòng quay tối thiểu (m)
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.minimum_rev_radius}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Dung tích bình nhiên liệu (L)
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.fuel_capacity}
+                          </td>
+                        )}
                       </tr>
                     </tbody>
                   </table>
@@ -228,65 +311,97 @@ const SpecificationCar = () => {
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Loại động cơ
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.engine_type}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Số xy lanh
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.number_of_xylanh}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Bố trí xy lanh
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.xylanh_layout}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Dung tích xy lanh (cc)
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.xylanh_capacity}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Hệ thống phun nhiên liệu
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.fuel_system}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Loại nhiên liệu
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.fuel_category}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Công suất tối đa ((KW) HP/vòng/phút)
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.power}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Mô men xoắn tối đa (Nm/vòng/phút)
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.momen}
+                          </td>
+                        )}
                       </tr>
                     </tbody>
                   </table>
@@ -303,9 +418,13 @@ const SpecificationCar = () => {
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Hệ thống truyền động
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.driver_type}
+                          </td>
+                        )}
                       </tr>
                     </tbody>
                   </table>
@@ -322,9 +441,13 @@ const SpecificationCar = () => {
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Hộp số
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.gearbox}
+                          </td>
+                        )}
                       </tr>
                     </tbody>
                   </table>
@@ -341,17 +464,25 @@ const SpecificationCar = () => {
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Trước
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.front_hang_system}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Sau
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.back_hang_system}
+                          </td>
+                        )}
                       </tr>
                     </tbody>
                   </table>
@@ -368,9 +499,13 @@ const SpecificationCar = () => {
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Trợ lực tay lái
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.drive_system}
+                          </td>
+                        )}
                       </tr>
                     </tbody>
                   </table>
@@ -387,25 +522,37 @@ const SpecificationCar = () => {
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Loại vành
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.tire_backup}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Kích thước lốp
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.tire_size}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Lốp dự phòng
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.tire_backup}
+                          </td>
+                        )}
                       </tr>
                     </tbody>
                   </table>
@@ -422,9 +569,13 @@ const SpecificationCar = () => {
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Tiêu chuẩn khí thải
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.emissions}
+                          </td>
+                        )}
                       </tr>
                     </tbody>
                   </table>
@@ -441,17 +592,25 @@ const SpecificationCar = () => {
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Trước
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.front_brake}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Sau
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.back_brake}
+                          </td>
+                        )}
                       </tr>
                     </tbody>
                   </table>
@@ -468,25 +627,37 @@ const SpecificationCar = () => {
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Ngoài đô thị
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.fuel_consumption}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Kết hợp
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.combine_fuel_consumption}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Trong đô thị
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.urban_fuel_consumption}
+                          </td>
+                        )}
                       </tr>
                     </tbody>
                   </table>
@@ -503,17 +674,25 @@ const SpecificationCar = () => {
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Trọng lượng không tải
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.weight}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Trọng lượng tải tối đa
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.weight_load}
+                          </td>
+                        )}
                       </tr>
                     </tbody>
                   </table>
@@ -547,33 +726,49 @@ const SpecificationCar = () => {
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Đèn chiếu gần
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.near_lamp}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Đèn chiếu xa
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.far_lamp}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Hệ thống nhắc nhở đèn sáng
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.remind_light_system}
+                          </td>
+                        )}
                       </tr>
                       <tr>
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Đèn sương mù
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.fog_light}
+                          </td>
+                        )}
                       </tr>
                     </tbody>
                   </table>
@@ -590,9 +785,13 @@ const SpecificationCar = () => {
                         <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
                           Khoang hành lý
                         </td>
-                        <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                          8
-                        </td>
+                        {isLoading ? (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
+                        ) : (
+                          <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
+                            {car.specification.luggage_capacity}
+                          </td>
+                        )}
                       </tr>
                     </tbody>
                   </table>
@@ -601,7 +800,6 @@ const SpecificationCar = () => {
             )}
           </div>
         </div>
-        <Test />
       </div>
     </>
   );

@@ -220,7 +220,7 @@ function App() {
             />
           </Route>
           <Route path="/specification" element={<SpecificationCarLayout />}>
-            <Route path="specificationcar" element={<SpecificationCar />} />
+            <Route path="specificationcar/:id" element={<SpecificationCar />} />
           </Route>
         </Routes>
       </BrowserRouter>
