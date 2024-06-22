@@ -61,6 +61,7 @@ import PureElectricTechnology from './components/electrification/PureElectricTec
 import Policy from './components/common/Policy';
 import TechHybrid from './components/electrification/tech-hybrid/main';
 import CarList from './components/car/CarList';
+import ViewCar from './components/car/ViewCar';
 import ViewBlog from './components/admin/blog/ViewBlog';
 import EditBlog from './components/admin/blog/EditBlog';
 import AddCar from './components/admin/car/AddCar';
@@ -108,6 +109,7 @@ function App() {
               <Route index element={<Agency />} />
               <Route path=":id" element={<AgencyDetails />} />
             </Route>
+            <Route path="car-list/:id" element={<ViewCar />} />
           </Route>
 
           <Route path="/service" element={<ServiceLayout />}>

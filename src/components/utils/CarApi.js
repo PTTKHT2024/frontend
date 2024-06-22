@@ -27,6 +27,14 @@ export async function getCarById(id) {
     throw new Error(err.message);
   }
 }
+export async function getCarByName(name) {
+  try {
+    const res = await api.get(`/cars/${name}`);
+    return { status: res.status, data: res.data };
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}
 
 export async function createCar(car, accessToken) {
   try {
