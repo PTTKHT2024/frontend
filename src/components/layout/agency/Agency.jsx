@@ -6,7 +6,6 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 
-// Custom icon for markers
 const customIcon = new L.Icon({
   iconUrl: './imgs/map/icon-location.png',
   iconSize: [32, 32],
