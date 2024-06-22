@@ -40,6 +40,10 @@ export const preparePayload = (car) => {
   };
 };
 
+export const isFile = (file) => {
+  return file instanceof File;
+};
+
 export function getImageFileName(imgaeURL) {
   const match = imgaeURL.match(fileUploadRegex);
   return match[0];

@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { getCarById } from '../../utils/CarApi';
+import { getCarById, updateCar } from '../../utils/CarApi';
 import { Link } from 'react-router-dom';
 import { FaLongArrowAltLeft } from 'react-icons/fa';
 import {
   fileURL,
   fileUploadRegex,
   getImageFileName,
+  isFile,
+  uploadFile,
 } from '../../utils/UtilsFunction';
 import { Tooltip } from 'react-tooltip';
 import { TbReload } from 'react-icons/tb';
 import { carModel, carModelPromotion } from '../../model/CarModel';
+import Toast from '../../common/Toast';
 
 const CarEdit = () => {
   const [car, setCar] = useState(carModelPromotion);
@@ -24,27 +27,29 @@ const CarEdit = () => {
     hover_image: '',
   });
   const tabs = ['THÔNG TIN CHUNG', 'ĐỘNG CƠ & KHUNG XE', 'TIỆN NGHI'];
+  const [status, setStatus] = useState('');
+  const [message, setMessage] = useState('');
+
+  const fetchCar = async () => {
+    try {
+      const res = await getCarById(params.id);
+      if (res.status === 200) {
+        setCar(res.data.data);
+        setEditedCar(JSON.parse(JSON.stringify(res.data.data)));
+        setImagePreview({
+          poster: `${fileURL}/${res.data.data.poster}`,
+          image: `${fileURL}/${res.data.data.image}`,
+          hover_image: `${fileURL}/${res.data.data.hover_image}`,
+        });
+      }
+    } catch (err) {
+      console.error('Error fetching car:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchCar = async () => {
-      try {
-        const res = await getCarById(params.id);
-        if (res.status === 200) {
-          setCar(res.data.data);
-          setEditedCar(JSON.parse(JSON.stringify(res.data.data)));
-          setImagePreview({
-            poster: `${fileURL}/${res.data.data.poster}`,
-            image: `${fileURL}/${res.data.data.image}`,
-            hover_image: `${fileURL}/${res.data.data.hover_image}`,
-          });
-        }
-      } catch (err) {
-        console.error('Error fetching car:', err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     fetchCar();
   }, []);
 
@@ -122,6 +127,64 @@ const CarEdit = () => {
     }
   };
 
+  const handleUpdateCar = async (e) => {
+    e.preventDefault();
+    const dataJSON = localStorage.getItem('data');
+    const data = JSON.parse(dataJSON);
+    const accessToken = data.access_token;
+
+    let tmpCar = { ...editedCar };
+
+    try {
+      if (isFile(editedCar.poster)) {
+        const savePoster = await uploadFile(editedCar.poster, accessToken);
+        const savePosterFileName = savePoster.data.match(fileUploadRegex);
+        tmpCar.poster = savePosterFileName[0];
+      }
+
+      if (isFile(editedCar.image)) {
+        const saveImage = await uploadFile(editedCar.image, accessToken);
+        const saveImageFileName = saveImage.data.match(fileUploadRegex);
+        tmpCar.image = saveImageFileName[0];
+      }
+
+      if (isFile(editedCar.hover_image)) {
+        const saveHoverImage = await uploadFile(
+          editedCar.hover_image,
+          accessToken
+        );
+        const saveHoverImageFileName =
+          saveHoverImage.data.match(fileUploadRegex);
+        tmpCar.hover_image = saveHoverImageFileName[0];
+      }
+
+      const res = await updateCar(params.id, tmpCar, accessToken);
+      if (res.status === 200) {
+        setMessage('Thay đổi thông tin xe thành công');
+        setStatus('success');
+        setImagePreview({
+          poster: '',
+          image: '',
+          hover_image: '',
+        });
+        fetchCar();
+      }
+    } catch (err) {
+      setMessage('Thay đổi thông tin xe thất bại');
+      setStatus('danger');
+      console.error('Error create car:', err);
+    } finally {
+      setTimeout(() => {
+        handleCloseToast();
+      }, 5000);
+    }
+  };
+
+  const handleCloseToast = () => {
+    setMessage('');
+    setStatus('');
+  };
+
   // console.log(car);
 
   //   console.log(imagePreview.image);
@@ -131,6 +194,11 @@ const CarEdit = () => {
 
   return (
     <section className="container">
+      <Toast
+        handleCloseToast={handleCloseToast}
+        message={message}
+        status={status}
+      />
       <Link
         className="fixed top-[100px] left-[90px] block h-max p-2 bg-[#f5f5f5] shadow hover:bg-slate-600 hover:text-white rounded-lg"
         to="/admin/car"
@@ -138,20 +206,19 @@ const CarEdit = () => {
         <FaLongArrowAltLeft className="h-5 w-5" />
       </Link>
 
-      <form action="">
+      <form onSubmit={handleUpdateCar}>
         <div>
           <div className="flex justify-between">
             <p className="text-mainTitleColor text-mainTitle uppercase">
               cập nhập xe
             </p>
 
-            <Link
-              to={'/admin/car/edit'}
+            <button
               type="submit"
               className="uppercase px-5 py-2 flex items-center rounded-md bg-[#604CC3] hover:bg-[#604CC3]/[.8] transition-all duration-200 ease-in font-bold text-white text-[15px] tracking-wider shadow-slate-400 shadow"
             >
               Lưu
-            </Link>
+            </button>
           </div>
 
           <div className="bg-white rounded-2xl shadow-md p-5 mt-5">
@@ -397,7 +464,6 @@ const CarEdit = () => {
                         name="poster"
                         id="poster"
                         onChange={handleChangeInput}
-                        required
                       />
                     )}
                   </div>
@@ -451,7 +517,6 @@ const CarEdit = () => {
                         name="image"
                         id="image"
                         onChange={handleChangeInput}
-                        required
                       />
                     )}
                   </div>
@@ -506,7 +571,6 @@ const CarEdit = () => {
                         name="hover_image"
                         id="hover_image"
                         onChange={handleChangeInput}
-                        required
                       />
                     )}
                   </div>

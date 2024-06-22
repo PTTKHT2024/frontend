@@ -53,3 +53,16 @@ export async function deleteCar(id, accessToken) {
     throw new Error(err.message);
   }
 }
+
+export async function updateCar(id, car, accessToken) {
+  try {
+    const res = await api.patch(`/cars/${id}`, preparePayload(car), {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return { status: res.status };
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}
