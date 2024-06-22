@@ -71,7 +71,7 @@ function BlogDetail() {
 
   return (
     <>
-      <div className="bg-electrification_1 pb-4">
+      <div className="bg-electrification_1 pb-12">
         <div className="container mx-auto px-[20px] pt-[150px]">
           <div className="grid grid-cols-12 gap-8">
             <div className="col-span-8 h-min bg-white py-8 px-4">
@@ -132,7 +132,7 @@ function BlogDetail() {
                     key={relatedBlog.id}
                   >
                     <div className="bg-white shadow-md overflow-hidden group">
-                      <div className="flex items-center justify-center h-[30px] w-[145px] bg-primaryColor text-xs font-semibold mb-8 text-white px-[10px] py-[5px]">
+                      <div className="flex items-center justify-center h-[30px] w-[145px] bg-primaryColor text-xs font-semibold mb-3 text-white px-[10px] py-[5px]">
                         {relatedBlog.blogCategory.name}
                       </div>
                       <div className="p-4 flex flex-col justify-between">
@@ -145,7 +145,7 @@ function BlogDetail() {
                           )}
                         </div>
                       </div>
-                      <hr className='mx-4 '/>
+                      <hr className="mx-4 " />
                       <div className="overflow-hidden mx-4 mt-4 mb-8">
                         <img
                           src={`${fileURL}/${relatedBlog.image}`}

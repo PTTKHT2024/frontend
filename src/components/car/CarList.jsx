@@ -53,24 +53,26 @@ const CarList = () => {
       <div className="pt-[40px] pb-[84px] bg-[#f5f5f5]">
         {/* Khung sort */}
         {/* Phần list */}
-        <div className="relative w-[1400px] mt-[80px] m-auto">
-          <div className="grid grid-cols-3 gap-4 flex-wrap">
+        <div className="relative w-[1400px] mt-[80px] m-auto container">
+          <div className="grid grid-cols-12 gap-5 flex-wrap">
             {cars.length > 0 ? (
               cars.map((car) => (
-                <CarItem
-                  key={car.id}
-                  id={car.id}
-                  img={`${fileURL}/${car.image}`}
-                  imgHover={`${fileURL}/${car.hover_image}`}
-                  name={car.name}
-                  price={car.price}
-                  numberSeats={car.number_of_seats}
-                  uses={car.carCategory.name}
-                  fuel={car.specification.fuel}
-                  origin={car.specification.origin}
-                  gear={car.gearbox}
-                  engine={car.engine}
-                />
+                <div className="col-span-4">
+                  <CarItem
+                    key={car.id}
+                    id={car.id}
+                    img={`${fileURL}/${car.image}`}
+                    imgHover={`${fileURL}/${car.hover_image}`}
+                    name={car.name}
+                    price={car.price}
+                    numberSeats={car.number_of_seats}
+                    uses={car.carCategory.name}
+                    fuel={car.specification.fuel}
+                    origin={car.specification.origin}
+                    gear={car.gearbox}
+                    engine={car.engine}
+                  />
+                </div>
               ))
             ) : (
               <div className="text-center col-span-3">No cars available.</div>

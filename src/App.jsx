@@ -61,7 +61,7 @@ import PureElectricTechnology from './components/electrification/PureElectricTec
 import Policy from './components/common/Policy';
 import TechHybrid from './components/electrification/tech-hybrid/main';
 import CarList from './components/car/CarList';
-import ViewCar from './components/car/ViewCar';
+import ViewCarDetail from './components/car/ViewCarDetail';
 import ViewBlog from './components/admin/blog/ViewBlog';
 import EditBlog from './components/admin/blog/EditBlog';
 import AddCar from './components/admin/car/AddCar';
@@ -109,7 +109,12 @@ function App() {
               <Route index element={<Agency />} />
               <Route path=":id" element={<AgencyDetails />} />
             </Route>
-            <Route path="car-list/:id" element={<ViewCar />} />
+
+            <Route path="car-list/:id" element={<ViewCarDetail />} />
+          </Route>
+
+          <Route path="/specification" element={<SpecificationCarLayout />}>
+            <Route path="specificationcar/:id" element={<SpecificationCar />} />
           </Route>
 
           <Route path="/service" element={<ServiceLayout />}>
@@ -239,9 +244,6 @@ function App() {
               element={<News categoryToShow="THÔNG TIN BỔ TRỢ" />}
             />
             <Route path="blog/:id" element={<BlogDetail />} />
-          </Route>
-          <Route path="/specification" element={<SpecificationCarLayout />}>
-            <Route path="specificationcar/:id" element={<SpecificationCar />} />
           </Route>
         </Routes>
       </BrowserRouter>
@@ -402,6 +404,9 @@ function SpecificationCarLayout() {
 }
 
 function NewsLayout() {
+  const location = useLocation();
+  const isBlogDetailPage = location.pathname.includes('/news/blog/');
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

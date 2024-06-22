@@ -5,8 +5,7 @@ import { getCarById } from '../utils/CarApi';
 import { getCarList } from '../utils/CarApi';
 import { formatPrice } from '../common/ItemListCar';
 
-
-const ViewCar = () => {
+const ViewCarDetail = () => {
   const params = useParams(); // Lấy ID từ URL
   const [carID, setCarID] = useState({});
   const [cars, setCars] = useState([]);
@@ -67,10 +66,12 @@ const ViewCar = () => {
     return <div className="text-center text-red-500">{error}</div>;
   }
 
-  const filterCarsById = cars
-    .filter(car => car.carModel.name === `${carID.carModel.name}` && car.name !== carID.name);
-  
-    return (
+  const filterCarsById = cars.filter(
+    (car) =>
+      car.carModel.name === `${carID.carModel.name}` && car.name !== carID.name
+  );
+
+  return (
     <div className="mt-[96px] w-full max-w-full">
       {/* Banner nền tối */}
       <div className="relative w-full h-[700px]">
@@ -147,7 +148,7 @@ const ViewCar = () => {
 
               <div className="flex items-center">
                 <Link
-                  to="/thong-so-ky-thuat/?modelId=476&amp;gradeId=1651"
+                  to={`/specification/specificationcar/${params.id}`}
                   target="_blank"
                   className="flex items-center text-sm text-primaryColor font-semibold leading-[115%]"
                 >
@@ -299,7 +300,7 @@ const ViewCar = () => {
                           ĐĂNG KÝ LÁI THỬ
                         </Link>
                         <Link
-                          to="/thong-so-ky-thuat/?modelId=501&gradeId=1941"
+                          to={`/specification/specificationcar/${params.id}`}
                           target="_blank"
                           className="mt-[18px] text-primaryColor flex items-center cursor-pointer font-semibold text-[14px]"
                         >
@@ -325,4 +326,4 @@ const ViewCar = () => {
   );
 };
 
-export default ViewCar;
+export default ViewCarDetail;

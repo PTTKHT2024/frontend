@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaAngleLeft, FaAngleDown, FaAngleUp } from 'react-icons/fa';
-import { api } from '../../utils/AuthApi'; 
+import { api } from '../../utils/AuthApi';
 import { useParams } from 'react-router';
 import { createMarkup, fileURL } from '../../utils/UtilsFunction';
 import { Link } from 'react-router-dom';
@@ -15,44 +15,42 @@ const getCarById = async (id) => {
 };
 
 const SpecificationCar = () => {
-   const [isGeneralInfoExpanded, setIsGeneralInfoExpanded] = useState(false);
-   const [isEngineFrameExpanded, setIsEngineFrameExpanded] = useState(false);
-   const [isExpanded, setIsExpanded] = useState(false);
+  const [isGeneralInfoExpanded, setIsGeneralInfoExpanded] = useState(false);
+  const [isEngineFrameExpanded, setIsEngineFrameExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
-   const params = useParams();
-   const [car, setCar] = useState({});
-   const [isLoading, setIsLoading] = useState(true);
+  const params = useParams();
+  const [car, setCar] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
-   useEffect(() => {
-     const fetchBlog = async () => {
-       try {
-         const res = await getCarById(params.id);
-         if (res.status === 200) {
-           setCar(res.data.data);
-         }
-       } catch (err) {
-         console.error('Error fetching blog:', err);
-       } finally {
-         setIsLoading(false);
-       }
-     };
+  useEffect(() => {
+    const fetchBlog = async () => {
+      try {
+        const res = await getCarById(params.id);
+        if (res.status === 200) {
+          setCar(res.data.data);
+        }
+      } catch (err) {
+        console.error('Error fetching blog:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-     fetchBlog();
-   }, []);
+    fetchBlog();
+  }, []);
 
-   const toggleExpand = () => {
-     setIsExpanded(!isExpanded);
-   };
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
 
-   const toggleGeneralInfo = () => {
-     setIsGeneralInfoExpanded(!isGeneralInfoExpanded);
-   };
+  const toggleGeneralInfo = () => {
+    setIsGeneralInfoExpanded(!isGeneralInfoExpanded);
+  };
 
-   const toggleEngineFrame = () => {
-     setIsEngineFrameExpanded(!isEngineFrameExpanded);
-   };
-
-
+  const toggleEngineFrame = () => {
+    setIsEngineFrameExpanded(!isEngineFrameExpanded);
+  };
 
   return (
     <>
@@ -78,10 +76,10 @@ const SpecificationCar = () => {
           tính nào mà không báo trước. Một số đặc tính kỹ thuật có thể khác so
           với thực tế.
         </p>
-        <div className="border border-solid border-1px border-gray-600 ">
+        <div className="border-solid border-[1px] border-mainTitleColor/[.7] my-0.5">
           <div className="">
             <div
-              className="relative flex justify-between font-bold py-6 px-7 items-center cursor-pointer transition duration-300 ease-in-out border border-solid border-1px border-gray-600"
+              className="relative flex justify-between font-bold py-6 px-7 items-center cursor-pointer transition duration-300 ease-in-out"
               onClick={toggleGeneralInfo}
             >
               <h2 className="block text-base mx-0 font-bold">
@@ -109,7 +107,7 @@ const SpecificationCar = () => {
                           <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top"></td>
                         ) : (
                           <td className="w-[50%] border border-solid border-1px border-gray-400 p-3 align-top">
-                            {car.specification.near_lamp}
+                            {car.number_of_seats}
                           </td>
                         )}
                       </tr>
@@ -189,10 +187,10 @@ const SpecificationCar = () => {
             )}
           </div>
         </div>
-        <div className="border border-solid border-1px border-gray-600 ">
+        <div className="border-solid border-[1px] border-mainTitleColor/[.7] my-0.5 ">
           <div className="">
             <div
-              className="relative flex justify-between font-bold py-6 px-7 items-center cursor-pointer transition duration-300 ease-in-out border border-solid border-1px border-gray-600"
+              className="relative flex justify-between font-bold py-6 px-7 items-center cursor-pointer transition duration-300 ease-in-out"
               onClick={toggleEngineFrame}
             >
               <h2 className="block text-base mx-0 font-bold">
@@ -701,10 +699,10 @@ const SpecificationCar = () => {
             )}
           </div>
         </div>
-        <div className="border border-solid border-1px border-gray-600 ">
+        <div className="border-solid border-[1px] border-mainTitleColor/[.7] my-0.5">
           <div className="">
             <div
-              className="relative flex justify-between font-bold py-6 px-7 items-center cursor-pointer transition duration-300 ease-in-out border border-solid border-1px border-gray-600"
+              className="relative flex justify-between font-bold py-6 px-7 items-center cursor-pointer transition duration-300 ease-in-out"
               onClick={toggleExpand}
             >
               <h2 className="block text-base mx-0 font-bold">TIỆN NGHI</h2>

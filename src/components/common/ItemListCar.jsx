@@ -5,7 +5,6 @@ function formatPrice(price) {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
 
-
 const CarItem = ({
   id,
   img,
@@ -20,7 +19,7 @@ const CarItem = ({
   engine,
 }) => {
   return (
-    <div className="relative mt-[32px] cursor-pointer border rounded-lg overflow-hidden transition-all transform hover:shadow-xl min-w-[400px]">
+    <div className="relative mt-[32px] cursor-pointer border overflow-hidden transition-all transform hover:shadow-xl w-full">
       <div className="bg-white h-48 relative group z-2 w-full border-solid">
         <Link
           className="flex items-center justify-center w-full h-full"
@@ -99,4 +98,4 @@ const CarItem = ({
 };
 
 export default CarItem;
-export {formatPrice};
+export { formatPrice };

@@ -149,7 +149,7 @@ const Header = () => {
                   </li>
 
                   <li className="text-sm mr-5 flex items-center">
-                    <Link to={'/'}>Tìm Đại lý</Link>
+                    <Link to={'/agency'}>Tìm Đại lý</Link>
                   </li>
 
                   <li className="text-sm mr-5 flex items-center">
