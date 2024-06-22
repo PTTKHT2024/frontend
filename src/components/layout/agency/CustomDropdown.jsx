@@ -63,7 +63,7 @@ const CustomDropdown = ({
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full p-2 border"
+            className="w-full p-2 border "
             placeholder="Tìm kiếm..."
           />
           {filteredOptions.map((option, index) => (

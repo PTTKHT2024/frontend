@@ -116,7 +116,7 @@ const Agency = () => {
       if (agencyId) {
         try {
           const response = await getAgencyById(agencyId);
-          setSelectedAgency(response.data.data);
+          setSelectedAgency(response.data.data.result);
         } catch (error) {
           console.error('Error fetching agency by ID:', error);
         }
@@ -132,8 +132,12 @@ const Agency = () => {
         agency.city?.toLowerCase().includes(selectedCity.toLowerCase())
       );
       setFilteredAgencies(filtered);
+      setNoAgenciesFound(filtered.length === 0);
+      console.log('Filtered Agencies:', filtered);
     } else {
       setFilteredAgencies(agencies); // No city selected, show all agencies
+      console.log('Filtered Agencies:', agencies);
+      setNoAgenciesFound(false);
     }
   }, [agencies, selectedCity]);
 
@@ -160,6 +164,9 @@ const Agency = () => {
   const handleAppointmentClick = () => {
     navigate('/user/appointment');
   };
+
+  const [noAgenciesFound, setNoAgenciesFound] = useState(false);
+
   return (
     <>
       <div className="hero mt-[120px]">
@@ -184,40 +191,48 @@ const Agency = () => {
 
         <div className="scrollbar flex container max-w-[1440px] max-h-[938px] overflow-y-auto px-[110px] mt-[110px]">
           <div className="location">
-            <div className="w-[800px] h-[938px] mr-[36px] ">
-              <MapContainer
-                center={[
-                  selectedAgency?.coordinates.latitude || 10.7594281,
-                  selectedAgency?.coordinates.longitude || 106.4392805,
-                ]}
-                zoom={15}
-                style={{ height: '100%', width: '100%', zIndex: 0 }}
-              >
-                <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                {filteredAgencies.map((agency) => (
-                  <Marker
-                    key={agency.id}
-                    position={[
-                      agency.coordinates.latitude,
-                      agency.coordinates.longitude,
-                    ]}
-                    icon={customIcon}
-                  >
-                    <Popup>
-                      <h2 className="text-[16px] font-bold">
-                        {agency.name_agency}
-                      </h2>
-                    </Popup>
-                  </Marker>
-                ))}
-              </MapContainer>
+            <div className="w-[800px] h-[938px] mr-[36px] overflow-hidden ">
+              {filteredAgencies.map((agency) => (
+                <MapContainer
+                  key={agency.id}
+                  center={[
+                    parseFloat(agency.coordinates.latitude),
+                    parseFloat(agency.coordinates.longitude),
+                  ]}
+                  zoom={15}
+                  style={{ height: '100%', width: '100%', zIndex: 0 }}
+                >
+                  <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  />
+                  {filteredAgencies.map((agency) => (
+                    <Marker
+                      key={agency.id}
+                      position={[
+                        parseFloat(agency.coordinates.latitude),
+                        parseFloat(agency.coordinates.longitude),
+                      ]}
+                      icon={customIcon}
+                    >
+                      <Popup>
+                        <h2 className="text-[16px] font-bold">
+                          {agency.name_agency}
+                        </h2>
+                      </Popup>
+                    </Marker>
+                  ))}
+                </MapContainer>
+              ))}
             </div>
           </div>
           <div className="overflow-y-auto w-[380px] overflow-x-hidden">
-            {filteredAgencies.map((agency, index) => (
+             {noAgenciesFound ? (
+            <div className="p-8 bg-white w-[380px] border border-red-500">
+              <p className="text-center font-bold">Không tìm thấy đại lý phù hợp</p>
+            </div>
+          ) : (
+            filteredAgencies.map((agency, index) => (
               <div
                 key={agency.id}
                 className="p-8 bg-[#fafafa] w-[380px] border border-gray-100 cursor-pointer"
@@ -256,7 +271,6 @@ const Agency = () => {
                           href={agency.web_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className=""
                         >
                           {agency.web_url}
                         </a>
@@ -306,14 +320,15 @@ const Agency = () => {
 
                     <button
                       onClick={handleAppointmentClick}
-                      className="bg-white text-mainTitleColor px-4 py-2 text-[12px] border border-black hover:bg-gray-200 "
+                      className="bg-white text-mainTitleColor px-4 py-2 text-[12px] border border-black hover:bg-gray-200"
                     >
                       ĐẶT HẸN DỊCH VỤ
                     </button>
                   </div>
                 </div>
               </div>
-            ))}
+            ))
+          )}
           </div>
         </div>
       </div>

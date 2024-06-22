@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getAgencyById } from '../../utils/AgencyApi';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import 'leaflet/dist/leaflet.css';
 
 // Custom icon for markers
