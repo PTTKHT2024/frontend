@@ -1071,7 +1071,7 @@ const ViewCar = () => {
                   <div className="flex w-full border-[2px] border-[#ccc] rounded-md overflow-hidden text-mainTitleColor text-base mb-3">
                     <label
                       className="w-1/2 pl-2 border-r-[2px] border-[#ccc]"
-                      htmlFor="specification.near_lamp"
+                      htmlFor="specification.luggage_capacity"
                     >
                       Khoang hành lý (L)
                     </label>
@@ -1081,8 +1081,8 @@ const ViewCar = () => {
                       <input
                         type="number"
                         className="w-1/2 px-2 outline-0 disabled:bg-[#f5f5f5]"
-                        name="specification.near_lamp"
-                        id="specification.near_lamp"
+                        name="specification.luggage_capacity"
+                        id="specification.luggage_capacity"
                         value={car.specification.luggage_capacity}
                         disabled
                         required

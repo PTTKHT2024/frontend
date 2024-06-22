@@ -3,12 +3,18 @@ import { BiLogoBlogger, BiMenuAltLeft } from 'react-icons/bi';
 import { BsListNested, BsReverseListColumnsReverse } from 'react-icons/bs';
 import { FaCar, FaLongArrowAltLeft } from 'react-icons/fa';
 import { HiOutlinePower, HiUsers } from 'react-icons/hi2';
-import { MdFeedback, MdWindow } from 'react-icons/md';
+import {
+  MdDateRange,
+  MdFeedback,
+  MdViewTimeline,
+  MdWindow,
+} from 'react-icons/md';
 import { PiPowerBold, PiUsersFill } from 'react-icons/pi';
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import useCheckRole from '../hooks/useCheckRole';
 import Loading from '../common/Loading';
 import { FaScrewdriverWrench } from 'react-icons/fa6';
+import { PiSteeringWheelFill } from 'react-icons/pi';
 
 const AdminLayout = () => {
   const role = useCheckRole();
@@ -116,6 +122,32 @@ const AdminLayout = () => {
             }
           >
             <HiUsers className="block h-5 w-5" />
+          </NavLink>
+
+          <NavLink
+            to="/admin/user"
+            className={({ isActive }) =>
+              `px-[16px] py-[12px] cursor-pointer  ${
+                isActive
+                  ? 'text-[#4379EE] border-l-[4px] border-[#4379EE]'
+                  : 'hover:bg-[#f5f5f5] text-mainTitleColor/[.4] hover:text-mainTitleColor'
+              }`
+            }
+          >
+            <MdDateRange className="block h-5 w-5" />
+          </NavLink>
+
+          <NavLink
+            to=""
+            className={({ isActive }) =>
+              `px-[16px] py-[12px] cursor-pointer  ${
+                isActive
+                  ? 'text-[#4379EE] border-l-[4px] border-[#4379EE]'
+                  : 'hover:bg-[#f5f5f5] text-mainTitleColor/[.4] hover:text-mainTitleColor'
+              }`
+            }
+          >
+            <PiSteeringWheelFill ers className="block h-5 w-5" />
           </NavLink>
 
           <NavLink
