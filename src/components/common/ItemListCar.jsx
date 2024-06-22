@@ -5,6 +5,7 @@ function formatPrice(price) {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
 
+
 const CarItem = ({
   id,
   img,
@@ -21,7 +22,10 @@ const CarItem = ({
   return (
     <div className="relative mt-[32px] cursor-pointer border rounded-lg overflow-hidden transition-all transform hover:shadow-xl min-w-[400px]">
       <div className="bg-white h-48 relative group z-2 w-full border-solid">
-        <Link className="flex items-center justify-center w-full h-full" TO="/">
+        <Link
+          className="flex items-center justify-center w-full h-full"
+          to={`/car-list/${id}`}
+        >
           {/* Initial image */}
           <img
             className="object-cover w-[80%] absolute h-[80%] object-center opacity-100 transition-opacity duration-200 ease-out group-hover:opacity-0 will-change-[opacity]"
@@ -37,7 +41,7 @@ const CarItem = ({
         </Link>
       </div>
       <div className="relative px-[24px] pb-[16px] flex flex-col justify-between w-full bg-white min-h-[350px] shadow-[0_4px_32px_transparent] transition-shadow duration-300 ease-in-out">
-        <Link TO="/" className="flex-1">
+        <Link to={`/car-list/${id}`} className="flex-1">
           <h2 className="uppercase font-semibold text-xl text-center leading-9 text-black">
             {name}
           </h2>
@@ -52,7 +56,7 @@ const CarItem = ({
           </p>
           <div className="flex flex-wrap mt-8 ml-4 text-base">
             <p className="relative flex items-center m-0 mr-6 text-gray-700 text-lg leading-5 mb-2 before:content-[''] before:inline-block before:w-1.5 before:h-1.5 before:bg-gray-700 before:mr-2">
-              {numberSeats}
+              {numberSeats} chỗ
             </p>
             <p className="relative flex items-center m-0 mr-6 text-gray-700 text-lg leading-5 mb-2 before:content-[''] before:inline-block before:w-1.5 before:h-1.5 before:bg-gray-700 before:mr-2">
               {uses}
@@ -75,7 +79,7 @@ const CarItem = ({
           <div className="ml-[24px]">
             <Link
               className="bg-primaryColor text-white px-5 py-3 text-center"
-              TO="/"
+              to="/"
             >
               <span className="font-semibold text-sm">DỰ TOÁN</span>
             </Link>
@@ -83,7 +87,7 @@ const CarItem = ({
           <div className="ml-[24px]">
             <Link
               className="bg-transparent text-black px-5 py-3 text-center border border-solid border-[#1A1A1A]"
-              TO="/"
+              to="/"
             >
               <span className="font-semibold text-sm">SO SÁNH</span>
             </Link>
@@ -95,3 +99,4 @@ const CarItem = ({
 };
 
 export default CarItem;
+export {formatPrice};

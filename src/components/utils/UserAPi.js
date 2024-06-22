@@ -47,9 +47,6 @@ export async function updateUserById(id, user, accessToken) {
     throw new Error(err.response ? err.response.data.message : err.message);
   }
 }
-const data = JSON.parse(localStorage.getItem('data'));
-const accessToken = data.access_token;
-console.log(accessToken);
 
 // export async function getAllUsers() {
 //   try {
@@ -80,7 +77,6 @@ console.log(accessToken);
 // }
 
 export async function getAllUsers(currentPage, pageSize) {
-  
   try {
     // Lấy dữ liệu từ localStorage và parse để lấy accessToken
     const data = JSON.parse(localStorage.getItem('data'));
@@ -117,7 +113,6 @@ export async function getAllUsers(currentPage, pageSize) {
   }
 }
 
-
 export async function deleteUserById(id, accessToken) {
   try {
     const res = await api.delete(`/users/${id}`, {
@@ -130,7 +125,3 @@ export async function deleteUserById(id, accessToken) {
     throw new Error(err.message);
   }
 }
-
-
-
-
