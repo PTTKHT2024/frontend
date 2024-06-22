@@ -1,84 +1,109 @@
-import React, { useState } from 'react';
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
-import HeaderDropdown from '../../common/HeaderDropdown'
-import Information from './information';
-import InfoDown from './infodown';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { FaAngleLeft, FaAngleDown, FaAngleUp } from 'react-icons/fa';
+import { useParams } from 'react-router';
+
+
+const api = axios.create({
+  baseURL: 'http://18.140.54.30/api/v1/cars',
+});
+
+const getCarById = async (id) => {
+  try {
+    const res = await api.get(`/cars/${id}`);
+    return { status: res.status, data: res.data };
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
 
 const Test = () => {
+  const [isGeneralInfoExpanded, setIsGeneralInfoExpanded] = useState(false);
+  const [isEngineFrameExpanded, setIsEngineFrameExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [selectedCarIndex, setSelectedCarIndex] = useState(0); 
+  const [carData, setCarData] = useState([]);
+  const params = useParams();
+  const [blog, setBlog] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
-  const [dropdownState, setDropDownState] = useState({
-    product: false,
-    technology: false,
-    service: false,
-    blog: false,
-    electric: false,
-    information: false,
-  });
+  useEffect(() => {
+    const fetchBlog = async () => {
+      try {
+        const res = await getCarById(params.id);
+        if (res.status === 200) {
+          setBlog(res.data.data);
+        }
+      } catch (err) {
+        console.error('Error fetching blog:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  const handleClickDropDown = (e) => {
-    const value = e.currentTarget.dataset.value;
-    setDropDownState({
-      product: false,
-      technology: false,
-      service: false,
-      blog: false,
-      electric: false,
-      information: false,
-      [value]: !dropdownState[value],
-    });
-  };
+    fetchBlog();
+  }, []);
 
-  const resetDropdownState = () => {
-    setDropDownState({
-      product: false,
-      technology: false,
-      service: false,
-      blog: false,
-      electric: false,
-      information: false,
-    });
-  };
+  if (!Array.isArray(carData) || carData.length === 0) {
+    return <div>Loading...</div>;
+  }
+  const selectedCar = carData[selectedCarIndex]; 
   return (
-    <>
-      <div className="py-16 px-0 w-[1142px] max-w-full mt-24 mx-auto mb-0">
-        <div className="border border-solid border-1px border-gray-600 min-h-52">
-          <div className="relative flex justify-between font-bold py-6 px-7 items-center cursor-pointer transition duration-300 ease-in-out border border-solid border-1px border-gray-600">
-            <ul className="block text-base mx-0 font-bold">
-              <li
-                className={`text-base flex items-center h-full cursor-pointer px-3 ${
-                  dropdownState.product && 'bg-[#f5f5f5]/[.9]'
-                }`}
-                onClick={handleClickDropDown}
-                data-value="product"
-              >
-                <span className="mr-1">Sản phẩm</span>
-                <MdOutlineKeyboardArrowDown
-                  className={`inline h-5 w-5 text-[#6b6b6b] transition-all duration-[300ms] justify-end rotate-0 ${
-                    dropdownState.product && 'rotate-180'
-                  }`}
-                />
-              </li>
-            </ul>
+    <div>
+      <h1>Car Information</h1>
+      <div>
+        <h2 onClick={() => setIsGeneralInfoExpanded(!isGeneralInfoExpanded)}>
+          General Information{' '}
+          {isGeneralInfoExpanded ? <FaAngleUp /> : <FaAngleDown />}
+        </h2>
+        {isGeneralInfoExpanded && (
+          <div>
+            <p>Make: {selectedCar.make}</p>
+            <p>Model: {selectedCar.model}</p>
+            <p>Year: {selectedCar.year}</p>
+            <p>Color: {selectedCar.color}</p>
           </div>
-        </div>
+        )}
       </div>
-      <div
-        className={`transition-all duration-[400ms] h-max w-[1140px] fixed top-96 bg-white z-30 ${
-          dropdownState.product
-            ? 'opacity-100 visible translate-y-0 bg-transparent'
-            : 'opacity-0 invisible -translate-y-[96px] bg-white'
-        }`}
-      >
-        <InfoDown onClick={handleClickDropDown}>
-          <Information
-            carTabsWidth={100}
-            all={true}
-            resetDropdownState={resetDropdownState}
-          />
-          <div className="mb-7"></div>
-        </InfoDown>
+
+      <div>
+        <h2 onClick={() => setIsEngineFrameExpanded(!isEngineFrameExpanded)}>
+          Engine and Frame{' '}
+          {isEngineFrameExpanded ? <FaAngleUp /> : <FaAngleDown />}
+        </h2>
+        {isEngineFrameExpanded && (
+          <div>
+            <p>Engine Type: {selectedCar.engineType}</p>
+            <p>Frame Number: {selectedCar.frameNumber}</p>
+          </div>
+        )}
       </div>
-    </>
+
+      <div>
+        <h2 onClick={() => setIsExpanded(!isExpanded)}>
+          Other Information {isExpanded ? <FaAngleUp /> : <FaAngleDown />}
+        </h2>
+        {isExpanded && (
+          <div>
+            <p>Price: {selectedCar.price}</p>
+            <p>Mileage: {selectedCar.mileage}</p>
+          </div>
+        )}
+      </div>
+      <div>
+        <h2>Select a Car</h2>
+        <select
+          onChange={(e) => setSelectedCarIndex(Number(e.target.value))}
+          value={selectedCarIndex}
+        >
+          {carData.map((car, index) => (
+            <option key={index} value={index}>
+              {car.make} {car.model}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
   );
 };
 
