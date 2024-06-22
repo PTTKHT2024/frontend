@@ -1,7 +1,6 @@
 import DOMPurify from 'dompurify';
 import { api } from './AuthApi';
 import { convertToHTML } from 'draft-convert';
-
 export const fileUploadRegex = /[^/]+$/;
 export const fileURL =
   'https://toyota-nestjs-uploader.s3.ap-southeast-1.amazonaws.com';

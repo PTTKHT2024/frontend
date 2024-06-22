@@ -86,6 +86,8 @@ import CarEdit from './components/admin/car/CarEdit';
 
 import Agency from './components/layout/agency/Agency';
 import AgencyDetails from './components/layout/agency/AgencyDetail';
+import SpecificationCar from './components/car/specification/main';
+
 function App() {
   return (
     <>
@@ -236,6 +238,9 @@ function App() {
             />
             <Route path="blog/:id" element={<BlogDetail />} />
           </Route>
+          <Route path="/specification" element={<SpecificationCarLayout />}>
+            <Route path="specificationcar/:id" element={<SpecificationCar />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
@@ -380,10 +385,24 @@ function InsuranceLayout() {
   );
 }
 
-const NewsLayout = () => {
-  const location = useLocation();
-  const isBlogDetailPage = location.pathname.includes('/news/blog/');
+function SpecificationCarLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <>
+      <Header />
+      <Outlet />
+      <ScrollToTopButton />
+      <Footer />
+    </>
+  );
+}
 
+function NewsLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <Header />
@@ -393,6 +412,6 @@ const NewsLayout = () => {
       <Footer />
     </>
   );
-};
+}
 
 export default App;
