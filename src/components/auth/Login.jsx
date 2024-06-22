@@ -36,7 +36,6 @@ const Login = ({ handleClickRegister, handleClickLogin }) => {
         window.dispatchEvent(new CustomEvent('localStorageChanged'));
         navigate('/');
         handleClickLogin();
-        // console.log(res.data.data);
       } else {
         setErrorMessage('Email hoặc mật khẩu không hợp lệ');
       }

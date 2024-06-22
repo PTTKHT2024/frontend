@@ -898,7 +898,7 @@ const Specification = ({ car, handleChangeInput }) => {
                       className="w-1/2 pl-2 border-r-[2px] border-[#ccc]"
                       htmlFor="specification.luggage_capacity"
                     >
-                      Khoang hành lý{' '}
+                      Khoang hành lý (L){' '}
                       <span className="text-primaryColor">*</span>
                     </label>
                     <input

@@ -1,5 +1,11 @@
 import './App.css';
-import { BrowserRouter, Route, Routes, Outlet } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Outlet,
+  useLocation,
+} from 'react-router-dom';
 import Home from './components/layout/home/Home';
 import MaintainService from './components/service/MaintainService/MaintainService';
 import Header from './components/common/Header';
@@ -55,6 +61,7 @@ import PureElectricTechnology from './components/electrification/PureElectricTec
 import Policy from './components/common/Policy';
 import TechHybrid from './components/electrification/tech-hybrid/main';
 import CarList from './components/car/CarList';
+import ViewCarDetail from './components/car/ViewCarDetail';
 import ViewBlog from './components/admin/blog/ViewBlog';
 import EditBlog from './components/admin/blog/EditBlog';
 import AddCar from './components/admin/car/AddCar';
@@ -64,8 +71,9 @@ import Profile from './components/user/Profile';
 import SummonManagement from './components/admin/summon/SummonManagement';
 import AddSummon from './components/admin/summon/AddSummon';
 import AllSummon from './components/admin/summon/AllSummon';
-import News from './components/news/News.';
+import News from './components/news/News';
 import ProductInsurance from './components/insurance/productInsurance';
+import BlogDetail from './components/news/BlogDetail';
 
 import IntroductionInsurance from './components/insurance/Introduction';
 import IndemnifyService from './components/insurance/IndemnifyService';
@@ -74,6 +82,13 @@ import ViewSummon from './components/admin/summon/ViewSummon';
 import UserManagement from './components/admin/user/UserManagement';
 import AddUser from './components/admin/user/AddUser';
 import EditUser from './components/admin/user/EditUser';
+import ViewCar from './components/admin/car/ViewCar';
+import CarEdit from './components/admin/car/CarEdit';
+
+import Agency from './components/layout/agency/Agency';
+import AgencyDetails from './components/layout/agency/AgencyDetail';
+import SpecificationCar from './components/car/specification/main';
+
 function App() {
   return (
     <>
@@ -89,6 +104,17 @@ function App() {
             <Route path="policy" element={<Policy />} />
             <Route path="test-drive" element={<Testdrive />} />
             <Route path="car-list" element={<CarList />} />
+
+            <Route path="agency">
+              <Route index element={<Agency />} />
+              <Route path=":id" element={<AgencyDetails />} />
+            </Route>
+
+            <Route path="car-list/:id" element={<ViewCarDetail />} />
+          </Route>
+
+          <Route path="/specification" element={<SpecificationCarLayout />}>
+            <Route path="specificationcar/:id" element={<SpecificationCar />} />
           </Route>
 
           <Route path="/service" element={<ServiceLayout />}>
@@ -113,7 +139,7 @@ function App() {
               <Route index element={<BlogManagement />} />
               <Route path="add" element={<AddBlog />} />
               <Route path="view/:id" element={<ViewBlog />} />
-              <Route path="edit/:id" element={<EditBlog />} />
+              <Route path="edit/:id" element={<CarEdit />} />
             </Route>
 
             <Route path="summon" element={<SummonManagement />}>
@@ -125,9 +151,10 @@ function App() {
             <Route path="car">
               <Route index element={<CarManagement />} />
               <Route path="add" element={<AddCar />} />
-              <Route path="view/:id" element={<ViewBlog />} />
-              <Route path="edit/:id" element={<EditBlog />} />
+              <Route path="view/:id" element={<ViewCar />} />
+              <Route path="edit/:id" element={<CarEdit />} />
             </Route>
+
             <Route path="user">
               <Route index element={<UserManagement />} />
               <Route path="add" element={<AddUser />} />
@@ -216,6 +243,7 @@ function App() {
               path="sup-information"
               element={<News categoryToShow="THÔNG TIN BỔ TRỢ" />}
             />
+            <Route path="blog/:id" element={<BlogDetail />} />
           </Route>
         </Routes>
       </BrowserRouter>
@@ -361,16 +389,33 @@ function InsuranceLayout() {
   );
 }
 
-function NewsLayout() {
+function SpecificationCarLayout() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
     <>
       <Header />
-      <Navbar datas={newsNavbarDatas} />
       <Outlet />
       <ScrollToTopButton />
+      <Footer />
+    </>
+  );
+}
+
+function NewsLayout() {
+  const location = useLocation();
+  const isBlogDetailPage = location.pathname.includes('/news/blog/');
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <>
+      <Header />
+      {!isBlogDetailPage && <Navbar datas={newsNavbarDatas} />}
+      <ScrollToTopButton />
+      <Outlet />
       <Footer />
     </>
   );

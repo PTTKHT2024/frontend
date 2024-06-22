@@ -17,6 +17,8 @@ export default {
       animation: {
         'slide-in': 'slideIn 2s ease-out forwards',
         'sweep-to-bottom': 'sweepToBottom 1.2s ease-in forwards infinite',
+        'sweep-to-right': 'sweepToRight 1.2s ease-out forwards',
+        'slide-up': 'slideUp 1s ease-in-out forwards',
       },
       keyframes: {
         slideIn: {
@@ -26,6 +28,14 @@ export default {
         sweepToBottom: {
           '0%': { top: '20%', opacity: 0 },
           '100%': { top: '70%', opacity: 1 },
+        },
+        sweepToRight: {
+          '0%': { width: '0%' },
+          '100%': { width: '100%' },
+        },
+        slideUp: {
+          '0%': { opacity: 0, transform: 'translateY(20%)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
         },
       },
       colors: {

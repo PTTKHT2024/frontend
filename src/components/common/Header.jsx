@@ -149,7 +149,7 @@ const Header = () => {
                   </li>
 
                   <li className="text-sm mr-5 flex items-center">
-                    <Link to={'/'}>Tìm Đại lý</Link>
+                    <Link to={'/agency'}>Tìm Đại lý</Link>
                   </li>
 
                   <li className="text-sm mr-5 flex items-center">
@@ -664,7 +664,7 @@ const Header = () => {
             <Link
               className="col-span-1 relative overflow-hidden group block h-[38vh]"
               onClick={resetDropdownState}
-              to={'electrified-car'}
+              to={'/electrification/electrified-car'}
             >
               <img
                 src="/imgs/electric/poster/electric_poster_1.jpg"

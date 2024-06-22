@@ -1,7 +1,6 @@
 import DOMPurify from 'dompurify';
 import { api } from './AuthApi';
 import { convertToHTML } from 'draft-convert';
-
 export const fileUploadRegex = /[^/]+$/;
 export const fileURL =
   'https://toyota-nestjs-uploader.s3.ap-southeast-1.amazonaws.com';
@@ -39,6 +38,15 @@ export const preparePayload = (car) => {
     },
   };
 };
+
+export const isFile = (file) => {
+  return file instanceof File;
+};
+
+export function getImageFileName(imgaeURL) {
+  const match = imgaeURL.match(fileUploadRegex);
+  return match[0];
+}
 
 export function createMarkup(html) {
   return {

@@ -6,6 +6,8 @@ import { createCar } from '../../utils/CarApi';
 import { fileUploadRegex, uploadFile } from '../../utils/UtilsFunction';
 import Toast from '../../common/Toast';
 import { useNavigate } from 'react-router';
+import { FaLongArrowAltLeft } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const AddCar = () => {
   const [car, setCar] = useState(carModel);
@@ -103,6 +105,12 @@ const AddCar = () => {
         message={message}
         status={status}
       />
+      <Link
+        className="fixed top-[100px] left-[90px] block h-max p-2 bg-[#f5f5f5] shadow hover:bg-slate-600 hover:text-white rounded-lg"
+        to="/admin/car"
+      >
+        <FaLongArrowAltLeft className="h-5 w-5" />
+      </Link>
       <form onSubmit={handleSubmit}>
         <div className="container">
           <div className="flex justify-between">

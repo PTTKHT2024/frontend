@@ -111,15 +111,24 @@ const AddUser = () => {
                 <label className="block text-sm font-medium text-gray-700">
                   Vai trò
                 </label>
-                <select
-                  value={role}
-                  onChange={(e) => setRole(e.target.value)}
-                  className="mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300 w-full"
-                  required
-                >
-                  <option value="USER">USER</option>
-                  <option value="ADMIN">ADMIN</option>
-                </select>
+                <div className="relative inline-block w-full">
+                  <select
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                    className="mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300 w-full appearance-none"
+                    required
+                  >
+                    <option value="USER">USER</option>
+                    <option value="ADMIN">ADMIN</option>
+                  </select>
+                  <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center ">
+                    <img
+                      src="/imgs/icon-arrow.png"
+                      alt="Arrow"
+                      className="h-5 w-5 mt-2"
+                    />
+                  </div>
+                </div>
               </div>
               <div className="flex justify-end">
                 <button

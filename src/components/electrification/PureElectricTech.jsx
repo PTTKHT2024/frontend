@@ -62,7 +62,7 @@ function PureElectricTechnology() {
           </div>
 
           <div className="h-[40%]">
-            <p className="text-white text-base mb-8">
+            <p className="text-white text-base mt-8">
               <Jumping>
                 Những mẫu xe thuần điện thúc đẩy hành trình chúng tôi hướng tới
                 tương lai bền vững hơn thông qua điện khí hoá. Với xe thuần
@@ -106,11 +106,11 @@ function PureElectricTechnology() {
             </div>
             <div className="w-1/2 overflow-hidden h-[637]">
               <ScaleOnScroll>
-                  <img
-                    src="/imgs/electrification/toyota-bev-tile-1-zero-fuel.jpg"
-                    alt=""
-                    className="w-full h-[637] object-cover"
-                  />
+                <img
+                  src="/imgs/electrification/toyota-bev-tile-1-zero-fuel.jpg"
+                  alt=""
+                  className="w-full h-[637] object-cover"
+                />
               </ScaleOnScroll>
             </div>
           </div>
@@ -119,11 +119,11 @@ function PureElectricTechnology() {
           <div className="flex items-center h-[637]">
             <div className="w-1/2 overflow-hidden h-[637]">
               <ScaleOnScroll>
-                  <img
-                    src="/imgs/electrification/toyota-bev-tile-2-how-it-works.jpg"
-                    alt=""
-                    className="w-full h-[637] object-cover"
-                  />
+                <img
+                  src="/imgs/electrification/toyota-bev-tile-2-how-it-works.jpg"
+                  alt=""
+                  className="w-full h-[637] object-cover"
+                />
               </ScaleOnScroll>
             </div>
             <div className="w-1/2 flex flex-col justify-center items-center text-left h-[637]">
