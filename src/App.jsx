@@ -1,5 +1,11 @@
 import './App.css';
-import { BrowserRouter, Route ,Routes ,Outlet ,useLocation} from 'react-router-dom';
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Outlet,
+  useLocation,
+} from 'react-router-dom';
 import Home from './components/layout/home/Home';
 import MaintainService from './components/service/MaintainService/MaintainService';
 import Header from './components/common/Header';
@@ -217,9 +223,7 @@ function App() {
               path="sup-information"
               element={<News categoryToShow="THÔNG TIN BỔ TRỢ" />}
             />
-            <Route path="blog/:id" element={<CommonLayout />}>
-              <Route index element={<BlogDetail />} />
-            </Route>
+            <Route path="blog/:id" element={<BlogDetail />} />
           </Route>
         </Routes>
       </BrowserRouter>
