@@ -1,5 +1,11 @@
 import './App.css';
-import { BrowserRouter, Route, Routes, Outlet } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Outlet,
+  useLocation,
+} from 'react-router-dom';
 import Home from './components/layout/home/Home';
 import MaintainService from './components/service/MaintainService/MaintainService';
 import Header from './components/common/Header';
@@ -64,8 +70,9 @@ import Profile from './components/user/Profile';
 import SummonManagement from './components/admin/summon/SummonManagement';
 import AddSummon from './components/admin/summon/AddSummon';
 import AllSummon from './components/admin/summon/AllSummon';
-import News from './components/news/News.';
+import News from './components/news/News';
 import ProductInsurance from './components/insurance/productInsurance';
+import BlogDetail from './components/news/BlogDetail';
 
 import IntroductionInsurance from './components/insurance/Introduction';
 import IndemnifyService from './components/insurance/IndemnifyService';
@@ -219,6 +226,7 @@ function App() {
               path="sup-information"
               element={<News categoryToShow="THÔNG TIN BỔ TRỢ" />}
             />
+            <Route path="blog/:id" element={<BlogDetail />} />
           </Route>
         </Routes>
       </BrowserRouter>
@@ -364,19 +372,19 @@ function InsuranceLayout() {
   );
 }
 
-function NewsLayout() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+const NewsLayout = () => {
+  const location = useLocation();
+  const isBlogDetailPage = location.pathname.includes('/news/blog/');
+
   return (
     <>
       <Header />
-      <Navbar datas={newsNavbarDatas} />
-      <Outlet />
+      {!isBlogDetailPage && <Navbar datas={newsNavbarDatas} />}
       <ScrollToTopButton />
+      <Outlet />
       <Footer />
     </>
   );
-}
+};
 
 export default App;
