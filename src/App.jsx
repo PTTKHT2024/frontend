@@ -83,6 +83,9 @@ import AddUser from './components/admin/user/AddUser';
 import EditUser from './components/admin/user/EditUser';
 import ViewCar from './components/admin/car/ViewCar';
 import CarEdit from './components/admin/car/CarEdit';
+
+import Agency from './components/layout/agency/Agency';
+import AgencyDetails from './components/layout/agency/AgencyDetail';
 function App() {
   return (
     <>
@@ -98,6 +101,11 @@ function App() {
             <Route path="policy" element={<Policy />} />
             <Route path="test-drive" element={<Testdrive />} />
             <Route path="car-list" element={<CarList />} />
+
+            <Route path="agency">
+              <Route index element={<Agency />} />
+              <Route path=":id" element={<AgencyDetails />} />
+            </Route>
           </Route>
 
           <Route path="/service" element={<ServiceLayout />}>
