@@ -123,3 +123,12 @@ export async function deleteUserById(id, accessToken) {
     throw new Error(err.message);
   }
 }
+
+export async function createFeedback(feedbackForm) {
+  try {
+    const res = await api.post('/feedbacks', feedbackForm);
+    return { status: res.status };
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}

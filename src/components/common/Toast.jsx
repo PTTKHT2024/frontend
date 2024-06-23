@@ -4,7 +4,7 @@ const Toast = ({ status, message, handleCloseToast }) => {
   return (
     <>
       <div
-        className={`fixed top-[5%] transition-all ease-in duration-300 right-[3%] z-30 ${
+        className={`fixed top-[5%] transition-all ease-in duration-300 right-[3%] z-50 ${
           message ? 'translate-x-0' : 'translate-x-[300px]'
         }`}
       >
