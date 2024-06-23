@@ -88,6 +88,7 @@ import CarEdit from './components/admin/car/CarEdit';
 import Agency from './components/layout/agency/Agency';
 import AgencyDetails from './components/layout/agency/AgencyDetail';
 import SpecificationCar from './components/car/specification/main';
+import FeedbackManagement from './components/admin/feedback/FeedbackManagement';
 
 function App() {
   return (
@@ -159,6 +160,10 @@ function App() {
               <Route index element={<UserManagement />} />
               <Route path="add" element={<AddUser />} />
               <Route path="edit/:id" element={<EditUser />} />
+            </Route>
+
+            <Route path="feedback">
+              <Route index element={<FeedbackManagement />} />
             </Route>
           </Route>
 

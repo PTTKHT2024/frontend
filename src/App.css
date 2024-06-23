@@ -52,3 +52,15 @@ body::-webkit-scrollbar-thumb {
   background-color: #ccc;
   border-radius: 30px;
 }
+
+.custom-scrollbar_1::-webkit-scrollbar {
+  width: 2px;
+}
+
+.custom-scrollbar_1::-webkit-scrollbar {
+  background-color: unset;
+}
+
+.custom-scrollbar_1::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+}
