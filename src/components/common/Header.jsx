@@ -186,9 +186,12 @@ const Header = () => {
                             className="p-2.5 cursor-pointer peer"
                             onClick={handleClickLogin}
                           >
-                            <span className="text-base text-nowrap peer-hover:text-primaryColor transition-colors duration-200 ">
+                            <Link
+                              to={'/user/profile'}
+                              className="text-base text-nowrap peer-hover:text-primaryColor transition-colors duration-200 "
+                            >
                               Trang thông tin
-                            </span>
+                            </Link>
                           </li>
                         )}
 

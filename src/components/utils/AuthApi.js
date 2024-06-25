@@ -55,3 +55,46 @@ export async function logout(accessToken) {
     throw new Error(err.message);
   }
 }
+
+export async function updateProfile(
+  password,
+  fullName = null,
+  phone = null,
+  newPassword = null
+) {
+  const datas = JSON.parse(localStorage.getItem('data'));
+  const accessToken = datas.access_token;
+
+  // Đảm bảo rằng accessToken đã được lấy thành công từ localStorage
+  if (!accessToken) {
+    throw new Error('Không tìm thấy accessToken trong localStorage');
+  }
+  // Tạo headers để gửi yêu cầu API
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+  const data = {
+    password: password,
+  };
+  if (fullName) {
+    data.fullName = fullName;
+  }
+  if (phone) {
+    data.phone = phone;
+  }
+  if (newPassword) {
+    data.newPassword = newPassword;
+  }
+  try {
+    const res = await api.patch('/auth/update-profile', data, { headers });
+    console.log('Profile updated successfully:', res.data);
+    return res.data;
+  } catch (error) {
+    console.error(
+      'Error updating profile:',
+      error.response ? error.response.data : error.message
+    );
+    throw error;
+  }
+}

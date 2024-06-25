@@ -4,28 +4,28 @@ import Header from '../common/Header';
 import Footer from '../common/Footer';
 import Tool from '../common/Tool';
 import ScrollToTopButton from '../common/ScrollToTopButton';
-import useIsActive from '../hooks/useIsActive';
+import useCheckRole from '../hooks/useCheckRole';
+import Loading from '../common/Loading';
 
 const UserLayout = () => {
+  const role = useCheckRole();
   const navigate = useNavigate();
-  const active = useIsActive();
 
   useEffect(() => {
-    if (!active) {
+    if (role !== null && role !== 'USER') {
+      navigate('/'); 
       alert('Vui lòng đăng nhập để sử dụng chức năng này');
-      navigate('/');
     }
-  }, [active, navigate]);
+  }, [role, navigate]);
 
-  if (!active) {
-    return null;
+  if (role === null) {
+    return <Loading />;
   }
   return (
     <>
       <Header />
       <Outlet />
       <ScrollToTopButton />
-      <Tool />
       <Footer />
     </>
   );
