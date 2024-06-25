@@ -89,6 +89,10 @@ import Agency from './components/layout/agency/Agency';
 import AgencyDetails from './components/layout/agency/AgencyDetail';
 import SpecificationCar from './components/car/specification/main';
 
+import Summon from './components/service/summon/main';
+import TestDrive from './components/admin/form/main';
+
+
 function App() {
   return (
     <>
@@ -123,6 +127,7 @@ function App() {
             <Route path="warranty" element={<Warranty />} />
             <Route path="repair" element={<RepairService />} />
             <Route path="inspect" element={<RepairService />} />
+            <Route path="summon" element={<Summon />} />
           </Route>
 
           <Route path="/electrification" element={<ElectrificationLayout />}>
@@ -139,7 +144,7 @@ function App() {
               <Route index element={<BlogManagement />} />
               <Route path="add" element={<AddBlog />} />
               <Route path="view/:id" element={<ViewBlog />} />
-              <Route path="edit/:id" element={<CarEdit />} />
+              <Route path="edit/:id" element={<EditBlog />} />
             </Route>
 
             <Route path="summon" element={<SummonManagement />}>
@@ -159,6 +164,10 @@ function App() {
               <Route index element={<UserManagement />} />
               <Route path="add" element={<AddUser />} />
               <Route path="edit/:id" element={<EditUser />} />
+            </Route>
+
+            <Route path="testdrive">
+              <Route index element={<TestDrive/>} />
             </Route>
           </Route>
 

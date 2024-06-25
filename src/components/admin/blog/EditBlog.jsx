@@ -18,6 +18,7 @@ import { convertFromHTML, convertToHTML } from 'draft-convert';
 
 const EditBlog = () => {
   const [blog, setBlog] = useState({
+    status:'',
     title: '',
     content: null,
     image: null,
