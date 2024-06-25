@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { BiLogoBlogger, BiMenuAltLeft } from 'react-icons/bi';
 import { BsListNested, BsReverseListColumnsReverse } from 'react-icons/bs';
 import { FaCar, FaLongArrowAltLeft } from 'react-icons/fa';
-import { HiOutlinePower, HiUsers } from 'react-icons/hi2';
+import { HiOutlinePower, HiUsers, HiMiniShoppingCart } from 'react-icons/hi2';
 import {
   MdDateRange,
   MdFeedback,
@@ -122,6 +122,19 @@ const AdminLayout = () => {
             }
           >
             <HiUsers className="block h-5 w-5" />
+          </NavLink>
+
+          <NavLink
+            to="/admin/purchase-histories"
+            className={({ isActive }) =>
+              `px-[16px] py-[12px] cursor-pointer  ${
+                isActive
+                  ? 'text-[#4379EE] border-l-[4px] border-[#4379EE]'
+                  : 'hover:bg-[#f5f5f5] text-mainTitleColor/[.4] hover:text-mainTitleColor'
+              }`
+            }
+          >
+            <HiMiniShoppingCart className="block h-5 w-5" />
           </NavLink>
 
           <NavLink
