@@ -68,7 +68,8 @@ const ViewCarDetail = () => {
 
   const filterCarsById = cars.filter(
     (car) =>
-      car.carModel.name === `${carID.carModel.name}` && car.name !== carID.name
+      car.carModel.name.toUpperCase().trim() ===
+        `${carID.carModel.name}`.toUpperCase().trim() && car.id !== carID.id
   );
 
   return (

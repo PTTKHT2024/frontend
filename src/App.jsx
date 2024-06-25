@@ -84,6 +84,7 @@ import AddUser from './components/admin/user/AddUser';
 import EditUser from './components/admin/user/EditUser';
 import ViewCar from './components/admin/car/ViewCar';
 import CarEdit from './components/admin/car/CarEdit';
+import ServiceManagement from './components/admin/form/ServiceManagement';
 
 import Agency from './components/layout/agency/Agency';
 import AgencyDetails from './components/layout/agency/AgencyDetail';
@@ -160,6 +161,7 @@ function App() {
               <Route path="add" element={<AddUser />} />
               <Route path="edit/:id" element={<EditUser />} />
             </Route>
+            <Route path="service" element={<ServiceManagement/>}/>
           </Route>
 
           <Route path="/user" element={<UserLayout />}>

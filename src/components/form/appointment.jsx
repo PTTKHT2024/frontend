@@ -1,31 +1,30 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-
+import { getAllAgencies } from '../utils/AgencyApi';
+import { submitForm } from '../utils/FormApi';
 const Appointment = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    licensePlate: '',
-    date: '',
-    serviceSupport: 'Chọn',
-    place: 'Chọn',
-    agent: 'Chọn',
-    timeSlot: 'Chọn khung giờ',
+    fullName_customer: '',
+    phone_customer: '',
+    number_plates: '',
+    appointment_date: '',
+    name_service: 'Chọn',
+    city_agency: 'Chọn',
+    name_agency: 'Chọn',
   });
 
+
   const [inputFilters, setInputFilters] = useState({
-    serviceSupport: '',
-    place: '',
-    agent: '',
-    timeSlot: '',
+    name_service: '',
+    city_agency: '',
+    name_agency: '',
   });
 
   const [dropdowns, setDropdowns] = useState({
-    serviceSupport: false,
-    place: false,
-    agent: false,
-    timeSlot: false,
+    name_service: false,
+    city_agency: false,
+    name_agency: false,
   });
 
   const [checkboxes, setCheckboxes] = useState({
@@ -34,120 +33,64 @@ const Appointment = () => {
   });
 
   const [isFormValid, setIsFormValid] = useState(false);
-  const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
 
-  const optionServices = ['Bảo hành', 'Bảo dưỡng', 'Kiểm tra'];
-  const optionPlaces = [
-    'Hồ Chí Minh',
-    'Hà Nội',
-    'An Giang',
-    'Bà Rịa - Vũng Tàu',
-    'Bắc Giang',
-    'Bắc Kạn',
-    'Bạc Liêu',
-    'Bắc Ninh',
-    'Bến Tre',
-    'Bình Định',
-    'Bình Dương',
-    'Bình Phước',
-    'Bình Thuận',
-    'Cà Mau',
-    'Cần Thơ',
-    'Cao Bằng',
-    'Đà Nẵng',
-    'Đắk Lắk',
-    'Đắk Nông',
-    'Điện Biên',
-    'Đồng Nai',
-    'Đồng Tháp',
-    'Gia Lai',
-    'Hà Giang',
-    'Hà Nam',
-    'Hà Tĩnh',
-    'Hải Dương',
-    'Hải Phòng',
-    'Hậu Giang',
-    'Hòa Bình',
-    'Hưng Yên',
-    'Khánh Hòa',
-    'Kiên Giang',
-    'Kon Tum',
-    'Lai Châu',
-    'Lâm Đồng',
-    'Lạng Sơn',
-    'Lào Cai',
-    'Long An',
-    'Nam Định',
-    'Nghệ An',
-    'Ninh Bình',
-    'Ninh Thuận',
-    'Phú Thọ',
-    'Phú Yên',
-    'Quảng Bình',
-    'Quảng Nam',
-    'Quảng Ngãi',
-    'Quảng Ninh',
-    'Quảng Trị',
-    'Sóc Trăng',
-    'Sơn La',
-    'Tây Ninh',
-    'Thái Bình',
-    'Thái Nguyên',
-    'Thanh Hóa',
-    'Thừa Thiên - Huế',
-    'Tiền Giang',
-    'Trà Vinh',
-    'Tuyên Quang',
-    'Vĩnh Long',
-    'Vĩnh Phúc',
-    'Nha Trang',
-    'Yên Bái',
-  ];
-  const optionAgents = [
-    'Đại lý 1',
-    'Đại lý 2',
-    'Đại lý 3',
-    'Đại lý 4',
-    'Đại lý 5',
-  ];
+  const optionServices = ['Bảo trì', 'Bảo dưỡng', 'Kiểm tra'];
 
-  const [selectedDate, setSelectedDate] = useState('');
+  const [agencies, setAgencies] = useState([]);
+  const [optionCities, setOptionCities] = useState([]);
+  const [optionAgencies, setOptionAgencies] = useState([]);
 
   useEffect(() => {
-    if (selectedDate) {
-      const timeSlots = [
-        '08:00 - 09:00',
-        '09:00 - 10:00',
-        '10:00 - 11:00',
-        '11:00 - 12:00',
-        '13:00 - 14:00',
-        '14:00 - 15:00',
-        '15:00 - 16:00',
-      ];
-      setAvailableTimeSlots(timeSlots);
+    const fetchAgencies = async () => {
+      try {
+        const res = await getAllAgencies();
+        const fetchedAgencies = res.data.data.result;
+        setAgencies(fetchedAgencies);
+        const cities = [
+          ...new Set(fetchedAgencies.map((agency) => agency.city)),
+        ];
+        setOptionCities(cities);
+      } catch (error) {
+        console.log('Không lấy được dữ liệu đại lý');
+      }
+    };
+    fetchAgencies();
+  }, []);
+  // const agency = agencies.find((a) => a.name_agency === formData.name_agency);
+  // const agencyId = agency ? agency.id : null;
+
+  const [selectedDate, setSelectedDate] = useState('');
+  useEffect(() => {
+    if (formData.city_agency !== 'Chọn') {
+      const filteredAgencies = agencies
+        .filter((agency) => agency.city === formData.city_agency)
+        .map((agency) => agency.name_agency);
+      setOptionAgencies(filteredAgencies);
+    } else {
+      setOptionAgencies([]);
     }
-  }, [selectedDate]);
+  }, [formData.city_agency, agencies]);
 
   useEffect(() => {
     const isValid =
-      formData.name.trim() !== '' &&
-      formData.phone.trim() !== '' &&
-      formData.licensePlate.trim() !== '' &&
-      formData.date.trim() !== '' &&
-      formData.timeSlot !== 'Chọn khung giờ' &&
-      formData.serviceSupport !== 'Chọn' &&
-      formData.place !== 'Chọn' &&
-      formData.agent !== 'Chọn' &&
+      formData.fullName_customer.trim() !== '' &&
+      formData.phone_customer.trim() !== '' &&
+      formData.number_plates.trim() !== '' &&
+      formData.appointment_date.trim() !== '' &&
+      formData.name_service !== 'Chọn' &&
+      formData.city_agency !== 'Chọn' &&
+      formData.name_agency !== 'Chọn' &&
       checkboxes.agreement1 &&
       checkboxes.agreement2;
 
     setIsFormValid(isValid);
   }, [formData, checkboxes]);
 
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    if (name === 'date') {
+    if (name === 'appointment_date') {
       setSelectedDate(value);
     }
   };
@@ -167,20 +110,29 @@ const Appointment = () => {
   };
 
   const handleDateClick = () => {
-    const dateInput = document.getElementById('date');
+    const dateInput = document.getElementById('appointment_date');
     dateInput.showPicker(); // Dùng cho trình duyệt hỗ trợ, nếu không thì dateInput.click()
   };
+
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
     setCheckboxes((prev) => ({ ...prev, [name]: checked }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isFormValid) {
-      console.log('Form submitted:', { ...formData, ...checkboxes });
-    } else {
-      console.log('Form is not valid.');
+    try {
+      const dataJSON = localStorage.getItem('data');
+      const data = JSON.parse(dataJSON);
+      const accessToken = data.access_token;
+      const response = await submitForm(
+        'service-orders',
+        formData,
+        accessToken
+      );
+      console.log('Service registration created:', response);
+    } catch (err) {
+      console.error('Failed to create service registration:', err.message);
     }
   };
 
@@ -203,6 +155,13 @@ const Appointment = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+  const getCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
 
   const renderDropdown = (type, options) => (
     <>
@@ -259,7 +218,10 @@ const Appointment = () => {
 
   return (
     <div className="mx-[40px] mt-[94px] pt-[60px] bg-[url('/imgs/appointment-background.png')] bg-no-repeat bg-top bg-center bg-fixed bg-cover min-h-screen">
-      <form className="h-[1300px] w-[1000px] bg-[#fff] p-[120px] left-0">
+      <form
+        onSubmit={handleSubmit}
+        className="h-[1300px] w-[1000px] bg-[#fff] p-[120px] left-0"
+      >
         <div className="block mb-[32px]">
           <h1 className="font-bold text-4xl text-[#1a1a1a] leading-[120%]">
             ĐẶT LỊCH HẸN DỊCH VỤ
@@ -273,13 +235,13 @@ const Appointment = () => {
               Dịch vụ <span className="text-primaryColor">*</span>
             </label>
           </div>
-          {renderDropdown('serviceSupport', optionServices)}
+          {renderDropdown('name_service', optionServices)}
         </div>
 
         {/* Biển số xe */}
         <div className="mb-8">
           <div className="mb-4">
-            <label className="text-lg font-bold" htmlFor="licensePlate">
+            <label className="text-lg font-bold" htmlFor="number_plates">
               Biển số xe <span className="text-primaryColor">*</span>
             </label>
           </div>
@@ -288,9 +250,9 @@ const Appointment = () => {
               placeholder="59D1-05494"
               type="text"
               className="text-gray-400 w-full h-full outline-0 text-mainTitleColor"
-              value={formData.licensePlate}
-              name="licensePlate"
-              id="licensePlate"
+              value={formData.number_plates}
+              name="number_plates"
+              id="number_plates"
               onChange={handleInputChange}
             />
           </div>
@@ -299,7 +261,7 @@ const Appointment = () => {
         {/* Họ và tên */}
         <div className="mb-8">
           <div className="mb-4">
-            <label className="text-lg font-bold" htmlFor="name">
+            <label className="text-lg font-bold" htmlFor="fullName_customer">
               Họ và tên <span className="text-primaryColor">*</span>
             </label>
           </div>
@@ -309,8 +271,8 @@ const Appointment = () => {
               type="text"
               className="text-gray-400 w-full h-full outline-0 text-mainTitleColor"
               value={formData.name}
-              name="name"
-              id="name"
+              name="fullName_customer"
+              id="fullName_customer"
               onChange={handleInputChange}
             />
           </div>
@@ -319,7 +281,7 @@ const Appointment = () => {
         {/* Số điện thoại */}
         <div className="mb-8">
           <div className="mb-4">
-            <label className="text-lg font-bold" htmlFor="phone">
+            <label className="text-lg font-bold" htmlFor="phone_customer">
               Số điện thoại <span className="text-primaryColor">*</span>
             </label>
           </div>
@@ -328,9 +290,9 @@ const Appointment = () => {
               placeholder="0325428387"
               type="text"
               className="text-gray-400 w-full h-full outline-0 text-mainTitleColor"
-              value={formData.phone}
-              name="phone"
-              id="phone"
+              value={formData.phone_customer}
+              name="phone_customer"
+              id="phone_customer"
               onChange={handleInputChange}
             />
           </div>
@@ -343,7 +305,7 @@ const Appointment = () => {
               Tỉnh/Thành phố <span className="text-primaryColor">*</span>
             </label>
           </div>
-          {renderDropdown('place', optionPlaces)}
+          {renderDropdown('city_agency', optionCities)}
         </div>
 
         {/* Đại lý */}
@@ -353,45 +315,34 @@ const Appointment = () => {
               Đại lý <span className="text-primaryColor">*</span>
             </label>
           </div>
-          {renderDropdown('agent', optionAgents)}
+          {renderDropdown('name_agency', optionAgencies)}
         </div>
 
         {/* Ngày hẹn */}
         <div className="mb-8">
           <div className="mb-4">
-            <label className="text-lg font-bold" htmlFor="date">
+            <label className="text-lg font-bold" htmlFor="appointment_date">
               Chọn ngày <span className="text-primaryColor">*</span>
             </label>
           </div>
           <div className="border-b border-[#ccc] pb-2 relative">
             <input
               type="date"
-              id="date"
-              name="date"
+              id="appointment_date"
+              name="appointment_date"
               className="outline-0 w-full h-full text-gray-400 text-mainTitleColor appearance-none"
               value={formData.date}
               onChange={handleInputChange}
+              min={getCurrentDate()}
             />
             <div
               className="absolute inset-0 cursor-pointer flex items-center justify-end"
               onClick={handleDateClick}
             >
-              <img src="/imgs/calendar.png" className="right-0 w-6 h-6 z-10" />
+              <img src="/imgs/calendar.png" className="right-0 w-6 h-6 z-5" />
             </div>
           </div>
         </div>
-
-        {/* Chọn khung giờ */}
-        {selectedDate && (
-          <div className="mb-8">
-            <div className="mb-4">
-              <label className="text-lg font-bold">
-                Chọn giờ <span className="text-primaryColor">*</span>
-              </label>
-            </div>
-            {renderDropdown('timeSlot', availableTimeSlots)}
-          </div>
-        )}
 
         {/* Điều khoản */}
         <div className="flex mb-2 mt-[68px]">
@@ -438,9 +389,8 @@ const Appointment = () => {
             type="submit"
             disabled={!isFormValid}
             className={`${
-              isFormValid ? 'opacity-100' : 'opacity-55'
+              isFormValid ? 'opacity_agency-100' : 'opacity_agency-55'
             } bg-primaryColor text-lg uppercase px-[44px] py-[15px] border-[#ccc] border font-bold tracking-widest mt-[30px] text-[#fff]`}
-            onClick={handleSubmit}
           >
             Xác nhận đặt lịch hẹn
           </button>
