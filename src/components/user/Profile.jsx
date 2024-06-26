@@ -30,6 +30,7 @@ const Profile = () => {
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
   const [accessToken, setAccessToken] = useState('');
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -46,7 +47,7 @@ const Profile = () => {
             const { id, fullName, phone, email } = userRes.data.data.user;
             setUserData({ id, fullName, phone, email });
 
-            // Lấy service orders
+            
             const ordersRes = await getAllServiceOrder(token);
             if (ordersRes.status === 200 && ordersRes.data) {
               const filteredOrders = ordersRes.data.data.result.filter(
@@ -58,7 +59,7 @@ const Profile = () => {
               setStatus('danger');
             }
 
-            // Lấy drive tests
+            
             const driveTestsRes = await getAllDriveTests(token);
             if (driveTestsRes.status === 200 && driveTestsRes.data) {
               const filteredDriveTests = driveTestsRes.data.data.result.filter(
@@ -101,7 +102,26 @@ const Profile = () => {
 
   const handlePasswordChangeSuccess = () => {
     setIsChangePasswordOpen(false);
-    // Thêm thông báo hoặc logic khác sau khi đổi mật khẩu thành công (nếu cần)
+  };
+
+  const handleOrderStatusUpdated = (updatedOrderId, newStatus) => {
+    setUserOrders((prevOrders) =>
+      prevOrders.map((order) =>
+        order.id === updatedOrderId ? { ...order, status: newStatus } : order
+      )
+    );
+    setSelectedSection('service-order');
+  };
+
+  const handleDriveTestStatusUpdated = (updatedTestDriveId, newStatus) => {
+    setUserDriveTests((prevTestDrives) =>
+      prevTestDrives.map((testDrive) =>
+        testDrive.id === updatedTestDriveId
+          ? { ...testDrive, status: newStatus }
+          : testDrive
+      )
+    );
+    setSelectedSection('test-drive');
   };
 
   const renderContent = () => {
@@ -144,16 +164,26 @@ const Profile = () => {
         );
       case 'service-order':
         return (
-          <ServiceOrderDetails userOrders={userOrders} loading={loading} />
+          <ServiceOrderDetails
+            userOrders={userOrders}
+            loading={loading}
+            accessToken={accessToken}
+            onOrderDeleted={handleOrderStatusUpdated}
+          />
         );
       case 'test-drive':
         return (
-          <DriveTestDetails userDriveTests={userDriveTests} loading={loading} />
+          <DriveTestDetails
+            userDriveTests={userDriveTests}
+            loading={loading}
+            accessToken={accessToken}
+            onDriveTestStatusUpdated={handleDriveTestStatusUpdated}
+          />
         );
 
       case 'exit':
-        navigate('/'); // Điều hướng về trang chủ
-        return null; // Hoặc bạn có thể return một component loading trong khi chờ chuyển hướng
+        navigate('/');
+        return null;
 
       default:
         return null;
@@ -162,70 +192,70 @@ const Profile = () => {
 
   return (
     <>
-      <section className="bg-white">
-        <div className="mt-sectionMargin_1 mx-[100px] ">
-          <div className="flex">
-            <div className="w-64 bg-gray-200 rounded-l-lg h-screen p-6 ">
-              <div className="flex items-center mb-8">
-                <span className="text-lg font-medium text-gray-800">
+      <section className="bg-white min-h-screen mt-[94px]">
+        <div className="container mx-auto py-12 px-4 md:px-0">
+          <div className="flex flex-col md:flex-row">
+            <div className="md:w-1/4 bg-gray-100 rounded-lg md:rounded-l-lg md:rounded-r-none shadow-md ">
+              <div className="flex text-center justify-center items-center mb-8 bg-primaryColor py-4 rounded-lg rounded-b-none md:rounded-t-lg md:rounded-r-none">
+                <span className="text-lg font-semibold text-white">
                   {userData.fullName}
                 </span>
               </div>
-              <ul>
-                <li>
-                  <span
+              <ul className="px-6 pb-6">
+                <li className="mb-2">
+                  <button
                     onClick={() => setSelectedSection('account')}
-                    className={`hover:bg-red-500 hover:text-white flex items-center  py-2 px-4 block text-gray-700 font-medium transition duration-300 ease-in-out transform hover:-translate-y-1 hover:cursor-pointer ${
+                    className={`flex items-center py-2 px-4 w-full text-gray-700 hover:bg-primaryColor hover:text-white rounded-lg transition duration-300 ${
                       selectedSection === 'account'
                         ? 'bg-red-500 text-white'
                         : ''
                     }`}
                   >
-                    <FaRegCircleUser />
-                    <i className="fas fa-user mr-2"></i> Tài Khoản
-                  </span>
+                    <FaRegCircleUser className="mr-2" />
+                    Tài Khoản
+                  </button>
                 </li>
-                <li>
-                  <span
+                <li className="mb-2">
+                  <button
                     onClick={() => setSelectedSection('service-order')}
-                    className={`hover:bg-red-500 hover:text-white flex items-center py-2 px-4 block text-gray-700 font-medium transition duration-300 ease-in-out transform hover:-translate-y-1 hover:cursor-pointer ${
+                    className={`flex items-center py-2 px-4 w-full text-gray-700 hover:bg-primaryColor hover:text-white rounded-lg transition duration-300 ${
                       selectedSection === 'service-order'
                         ? 'bg-red-500 text-white'
                         : ''
                     }`}
                   >
-                    <IoDocumentTextOutline />
-                    <i className="fas fa-list mr-2"></i> Dịch vụ
-                  </span>
+                    <IoDocumentTextOutline className="mr-2" />
+                    Dịch vụ
+                  </button>
                 </li>
-                <li>
-                  <span
+                <li className="mb-2">
+                  <button
                     onClick={() => setSelectedSection('test-drive')}
-                    className={`hover:bg-red-500 hover:text-white flex items-center py-2 px-4 block text-gray-700 font-medium transition duration-300 ease-in-out transform hover:-translate-y-1 hover:cursor-pointer ${
+                    className={`flex items-center py-2 px-4 w-full text-gray-700 hover:bg-primaryColor hover:text-white rounded-lg transition duration-300 ${
                       selectedSection === 'test-drive'
                         ? 'bg-red-500 text-white'
                         : ''
                     }`}
                   >
-                    <PiSteeringWheelFill />
-                    <i className="fas fa-history mr-2"></i> Đăng kí lái thử
-                  </span>
+                    <PiSteeringWheelFill className="mr-2" />
+                    Đăng kí lái thử
+                  </button>
                 </li>
                 <li>
-                  <span
+                  <button
                     onClick={() => setSelectedSection('exit')}
-                    className={`hover:bg-red-500 hover:text-white flex items-center py-2 px-4 block text-gray-700 font-medium transition duration-300 ease-in-out transform hover:-translate-y-1 hover:cursor-pointer ${
+                    className={`flex items-center py-2 px-4 w-full text-gray-700 hover:bg-primaryColor hover:text-white rounded-lg transition duration-300 ${
                       selectedSection === 'exit' ? 'bg-red-500 text-white' : ''
                     }`}
                   >
-                    <IoMdExit />
-                    <i className="fas fa-sign-out-alt mr-2"></i> Thoát
-                  </span>
+                    <IoMdExit className="mr-2" />
+                    Về trang chủ
+                  </button>
                 </li>
               </ul>
             </div>
 
-            <div className="flex-1 p-8 rounded-r-lg bg-gray-100">
+            <div className="md:w-3/4 bg-gray-100 rounded-lg md:rounded-r-lg md:rounded-l-none shadow-md p-8 md:ml-4 mt-4 md:mt-0">
               {renderContent()}
             </div>
           </div>

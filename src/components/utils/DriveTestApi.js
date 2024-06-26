@@ -9,3 +9,31 @@ export async function getAllDriveTests() {
     throw new Error(error.message);
   }
 }
+export async function deleteDriveTestRegistrationsById(id, accessToken) {
+  try {
+    const res = await api.delete(`/test-drive-registrations/${id}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return { status: res.status };
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}
+export async function updateStatusDriveTestById(id, status, accessToken) {
+  try {
+    const res = await api.patch(
+      `/test-drive-registrations/${id}`,
+      { status: status },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    return { status: res.status };
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}

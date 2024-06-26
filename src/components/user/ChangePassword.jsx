@@ -28,11 +28,12 @@ const ChangePasswordPopup = ({ accessToken, onClose, onSuccess }) => {
       const res = await updateProfile(oldPassword, null, null, newPassword);
 
       setMessage('Đổi mật khẩu thành công');
+      alert('Cập nhật thông tin thành công.!');
+      alert('Vui lòng đăng nhập lại để xem thay đổi.!');
 
-      // Gọi onSuccess() trước
       onSuccess();
 
-      // Sau đó thực hiện logout
+
       try {
         const logoutRes = await logout(accessToken);
 

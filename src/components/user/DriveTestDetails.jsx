@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import Paginator from '../common/Paginator';
 
-const DriveTestDetails = ({ userDriveTests, loading }) => {
-  const itemsPerPage = 5; // Số lượng item trên mỗi trang
-  const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
+import { FaTrashAlt } from 'react-icons/fa';
+import { updateStatusDriveTestById } from '../utils/DriveTestApi';
+const DriveTestDetails = ({
+  userDriveTests,
+  loading,
+  accessToken,
+  onDriveTestStatusUpdated,
+}) => {
+  const itemsPerPage = 5;
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // Tính tổng số trang dựa trên tổng số dữ liệu và số lượng trang
   const totalPages = Math.ceil(userDriveTests.length / itemsPerPage);
-
-  // Lấy danh sách order cho trang hiện tại
   const currentOrders = userDriveTests.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
@@ -21,13 +25,40 @@ const DriveTestDetails = ({ userDriveTests, loading }) => {
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   };
+
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
+  const handleDeleteDriveTest = async (testDriveId) => {
+
+    if (window.confirm('Bạn có chắc chắn muốn hủy đơn đăng ký lái thử này?')) {
+
+      try {
+        const res = await updateStatusDriveTestById(
+          testDriveId,
+          'delete',
+          accessToken
+        );
+        if (res.status === 200) {
+          alert('Hủy đơn đăng ký lái thử thành công!');
+          onDriveTestStatusUpdated(testDriveId, 'delete'); 
+        } else {
+          alert('Hủy đơn đăng ký lái thử thất bại. Vui lòng thử lại sau.');
+        }
+      } catch (error) {
+        console.error('Lỗi khi hủy đơn đăng ký lái thử:', error);
+        alert('Xảy ra lỗi khi hủy đơn đăng ký lái thử. Vui lòng thử lại sau.');
+      }
+    }
+  };
+
   return (
     <div>
-      <h2 className="text-3xl font-bold mb-6">Đăng ký lái thử</h2>
+      <div className="bg-primaryColor text-white py-3 px-6 rounded-t-lg mb-2 flex items-center">
+        <h2 className="text-2xl font-bold">Đăng kí lái thử </h2>
+      </div>
+
       {loading ? (
         <p>Đang tải danh sách đăng ký lái thử...</p>
       ) : userDriveTests.length > 0 ? (
@@ -50,6 +81,9 @@ const DriveTestDetails = ({ userDriveTests, loading }) => {
                 <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   Trạng thái
                 </th>
+                <th className="px-6 py-3 text-left text-xs font-semibold whitespace-nowrap text-gray-500 uppercase tracking-wider">
+                  Hành động
+                </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -67,8 +101,24 @@ const DriveTestDetails = ({ userDriveTests, loading }) => {
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {formatDate(testDrive.scheduledDate)}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td
+                    className={`px-6 py-4 whitespace-nowrap text-sm uppercase ${
+                      testDrive.status === 'success'
+                        ? 'text-green-500'
+                        : testDrive.status === 'delete'
+                        ? 'text-red-500'
+                        : 'text-gray-500'
+                    }`}
+                  >
                     {testDrive.status}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <button
+                      onClick={() => handleDeleteDriveTest(testDrive.id)}
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    >
+                      <FaTrashAlt />
+                    </button>
                   </td>
                 </tr>
               ))}

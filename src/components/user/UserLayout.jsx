@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router';
 import Header from '../common/Header';
 import Footer from '../common/Footer';
-import Tool from '../common/Tool';
 import ScrollToTopButton from '../common/ScrollToTopButton';
 import useCheckRole from '../hooks/useCheckRole';
 import Loading from '../common/Loading';

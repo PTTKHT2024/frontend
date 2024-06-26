@@ -3,7 +3,9 @@ import React from 'react';
 const AccountDetails = ({ userData }) => {
   return (
     <>
-      <h2 className="text-3xl font-bold mb-6">Tài khoản</h2>
+      <div className="bg-primaryColor text-white py-3 px-6 rounded-t-lg mb-2 flex items-center">
+        <h2 className="text-2xl font-bold">Tài khoản</h2>
+      </div>
       <div className="bg-white p-6 rounded-lg shadow-md">
         <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-2">

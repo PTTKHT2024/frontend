@@ -29,11 +29,13 @@ const EditProfilePopup = ({
         password,
         fullName,
         phone,
-        null, // Không cần newPassword ở đây
+        null, 
         accessToken
       );
 
       setMessage('Cập nhật thành công');
+      alert('Cập nhật thông tin thành công.!');
+      alert('Vui lòng đăng nhập lại để xem thay đổi.!');
 
       try {
         const logoutRes = await logout(accessToken);

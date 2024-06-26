@@ -1,21 +1,23 @@
-// ServiceOrderDetails.js
 import React, { useState } from 'react';
 import Paginator from '../common/Paginator';
+import { FaTrashAlt } from 'react-icons/fa';
+import { updateStatusServiceOrderById } from '../utils/ServiceOrderApi';
 
-const ServiceOrderDetails = ({ userOrders, loading }) => {
-  const itemsPerPage = 5; // Số lượng item trên mỗi trang
-  const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
+const ServiceOrderDetails = ({
+  userOrders,
+  loading,
+  accessToken,
+  onOrderDeleted,
+}) => {
+  const itemsPerPage = 5;
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // Tính tổng số trang dựa trên tổng số dữ liệu và số lượng trang
   const totalPages = Math.ceil(userOrders.length / itemsPerPage);
-
-  // Lấy danh sách order cho trang hiện tại
   const currentOrders = userOrders.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
 
-  // Hàm format ngày tháng từ định dạng ISO 8601 sang dd/MM/yyyy
   const formatDate = (isoDate) => {
     const date = new Date(isoDate);
     const day = date.getDate().toString().padStart(2, '0');
@@ -24,14 +26,38 @@ const ServiceOrderDetails = ({ userOrders, loading }) => {
     return `${day}/${month}/${year}`;
   };
 
-  // Xử lý khi người dùng thay đổi trang
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
+  const handleDeleteOrder = async (orderId) => {
+    if (window.confirm('Bạn có chắc chắn muốn huỷ dịch vụ này?')) {
+      try {
+        
+        const res = await updateStatusServiceOrderById(
+          orderId,
+          'delete',
+          accessToken
+        ); 
+
+        if (res.status === 200) {
+          alert('Huỷ dịch vụ thành công!');
+          onOrderDeleted(orderId, 'delete');
+        } else {
+          alert('Huỷ dịch vụ thất bại. Vui lòng thử lại sau.');
+        }
+      } catch (error) {
+        console.error('Lỗi khi huỷ dịch vụ:', error);
+        alert('Xảy ra lỗi khi huỷ dịch vụ. Vui lòng thử lại sau.');
+      }
+    }
+  };
+
   return (
     <div>
-      <h2 className="text-3xl font-bold mb-6">Dịch vụ</h2>
+      <div className="bg-primaryColor text-white py-3 px-6 rounded-t-lg mb-2 flex items-center">
+        <h2 className="text-2xl font-bold">Dịch vụ</h2>
+      </div>
       {loading ? (
         <p>Đang tải danh sách dịch vụ...</p>
       ) : userOrders.length > 0 ? (
@@ -58,6 +84,9 @@ const ServiceOrderDetails = ({ userOrders, loading }) => {
                   <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     Trạng thái
                   </th>
+                  <th className="px-6 py-3 text-left text-xs font-semibold whitespace-nowrap text-gray-500 uppercase tracking-wider">
+                    Hành động
+                  </th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -78,8 +107,24 @@ const ServiceOrderDetails = ({ userOrders, loading }) => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {order.agency.name_agency}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td
+                      className={`px-6 py-4 whitespace-nowrap text-sm uppercase ${
+                        order.status === 'success'
+                          ? 'text-green-500'
+                          : order.status === 'delete'
+                          ? 'text-red-500'
+                          : 'text-gray-500'
+                      }`}
+                    >
                       {order.status}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <button
+                        onClick={() => handleDeleteOrder(order.id)}
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                      >
+                        <FaTrashAlt />
+                      </button>
                     </td>
                   </tr>
                 ))}
