@@ -1,5 +1,4 @@
 import { api } from './AuthApi';
-
 export async function createANewUser(user, accessToken) {
   try {
     const res = await api.post('/users', user, {

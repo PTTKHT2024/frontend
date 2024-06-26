@@ -84,6 +84,7 @@ import AddUser from './components/admin/user/AddUser';
 import EditUser from './components/admin/user/EditUser';
 import ViewCar from './components/admin/car/ViewCar';
 import CarEdit from './components/admin/car/CarEdit';
+import ServiceManagement from './components/admin/form/ServiceManagement';
 
 import Agency from './components/layout/agency/Agency';
 import AgencyDetails from './components/layout/agency/AgencyDetail';
@@ -96,6 +97,9 @@ import TestDrive from './components/admin/form/main';
 import TestDrivePending from './components/admin/form/pending';
 import TestDriveApproved from './components/admin/form/approved';
 
+import PendingService from './components/admin/form/PendingService';
+import ApproveService from './components/admin/form/ApproveService';
+import ViewService from './components/admin/form/ViewService';
 function App() {
   return (
     <>
@@ -183,6 +187,12 @@ function App() {
               <Route index element={<TestDrive />} />
               <Route path="pending" element={<TestDrivePending />} />
               <Route path="approved" element={<TestDriveApproved />} />
+            </Route>
+            <Route path="service">
+              <Route index element={<ServiceManagement />} />
+              <Route path="pending" element={<PendingService />} />
+              <Route path="approved" element={<ApproveService />} />
+              <Route path="view" element={<ViewService />} />
             </Route>
           </Route>
 
