@@ -93,6 +93,8 @@ import FeedbackManagement from './components/admin/feedback/FeedbackManagement';
 import AllPurchaseHistories from './components/admin/goods/AllPurchaseHistories';
 import Summon from './components/service/summon/main';
 import TestDrive from './components/admin/form/main';
+import TestDrivePending from './components/admin/form/pending';
+import TestDriveApproved from './components/admin/form/approved';
 
 function App() {
   return (
@@ -178,6 +180,9 @@ function App() {
 
             <Route path="feedback">
               <Route index element={<FeedbackManagement />} />
+              <Route index element={<TestDrive />} />
+              <Route path="pending" element={<TestDrivePending />} />
+              <Route path="approved" element={<TestDriveApproved />} />
             </Route>
           </Route>
 
