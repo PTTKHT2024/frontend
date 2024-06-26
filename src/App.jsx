@@ -89,6 +89,8 @@ import Agency from './components/layout/agency/Agency';
 import AgencyDetails from './components/layout/agency/AgencyDetail';
 import SpecificationCar from './components/car/specification/main';
 
+import AllPurchaseHistories from './components/admin/goods/AllPurchaseHistories';
+
 function App() {
   return (
     <>
@@ -160,6 +162,9 @@ function App() {
               <Route path="add" element={<AddUser />} />
               <Route path="edit/:id" element={<EditUser />} />
             </Route>
+
+            <Route path="purchase-histories" element={<AllPurchaseHistories />} />
+
           </Route>
 
           <Route path="/user" element={<UserLayout />}>
