@@ -265,7 +265,7 @@ const AllPurchaseHistories = () => {
                         <span
                           className={`px-4 py-4 whitespace-nowrap text-sm font-medium uppercase text-center ${
                             goods.testDriveRegistration.status === 'success'
-                              ? 'text-green-600'
+                              ? 'text-green-500'
                               : 'text-orange-500'
                           }`}
                         >
