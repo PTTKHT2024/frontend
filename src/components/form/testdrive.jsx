@@ -5,16 +5,39 @@ import { getAllAgencies } from '../utils/AgencyApi';
 import { getCarList } from '../utils/CarApi';
 import { fileURL } from '../utils/UtilsFunction';
 import { submitForm } from '../utils/FormApi';
+import { Toast } from './appointment';
 
 const Testdrive = () => {
-  const [formData, setFormData] = useState({
-    name_customer: '',
-    phone_customer: '',
-    name_car: 'Chọn',
-    city_agency: 'Chọn',
-    name_agency: 'Chọn',
-    scheduledDate: '',
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState('');
+  const handleCloseToast = () => {
+    setMessage('');
+    setStatus('');
+  };
+  // const [formData, setFormData] = useState({
+  //   name_customer: '',
+  //   phone_customer: '',
+  //   name_car: 'Chọn',
+  //   city_agency: 'Chọn',
+  //   name_agency: 'Chọn',
+  //   scheduledDate: '',
+  // });
+  const [formData, setFormData] = useState(() => {
+    const savedFormData = localStorage.getItem('formData');
+    return savedFormData
+      ? JSON.parse(savedFormData)
+      : {
+          name_customer: '',
+          phone_customer: '',
+          name_car: 'Chọn',
+          city_agency: 'Chọn',
+          name_agency: 'Chọn',
+          scheduledDate: '',
+        };
   });
+  useEffect(() => {
+    localStorage.setItem('formData', JSON.stringify(formData));
+  }, [formData]);
 
   const [inputFilters, setInputFilters] = useState({
     name_car: '',
@@ -154,20 +177,49 @@ const Testdrive = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const dataJSON = localStorage.getItem('data');
-    const data = JSON.parse(dataJSON);
-    const accessToken = data.access_token;
-    console.log(formData)
+    // const dataJSON = localStorage.getItem('data');
+    // const data = JSON.parse(dataJSON);
+    // const accessToken = data.access_token;
+    // console.log(formData)
     try {
+      const dataJSON = localStorage.getItem('data');
+      const data = JSON.parse(dataJSON);
+      const accessToken = data.access_token;
       const response = await submitForm(
         'test-drive-registrations',
         formData,
         accessToken
       );
-      console.log('Test drive registration created:', response);
+      if (response.status === 201) {
+        setMessage('Đăng ký dịch vụ thành công');
+        setStatus('success');
+        setFormData({
+          name_customer: '',
+          phone_customer: '',
+          name_car: 'Chọn',
+          city_agency: 'Chọn',
+          name_agency: 'Chọn',
+          scheduledDate: '',
+        });
+        setSelectedCar(null);
+        setCheckboxes({
+          agreement1: false,
+          agreement2: false,
+          agreement3: false,
+        });
+      } else {
+        setMessage('Đăng ký dịch vụ thất bại');
+        setStatus('danger');
+      }
     } catch (err) {
-      console.error('Failed to create test drive registration:', err.message);
+      setMessage('Đăng ký dịch vụ thất bại');
+      setStatus('danger');
     }
+
+    setTimeout(() => {
+      setMessage('');
+      setStatus('');
+    }, 5000);
   };
 
   const dropdownRefs = useRef({});
@@ -332,194 +384,203 @@ const Testdrive = () => {
   };
 
   return (
-    <div className="mx-[40px] mt-[94px] pt-[60px] bg-[url('./imgs/appointment-background.png')] bg-no-repeat bg-top bg-center bg-fixed bg-cover min-h-screen">
-      <form className="h-[1300px] w-[1000px] bg-[#fff] p-[120px] left-0">
-        <div className="block mb-[32px]">
-          <h1 className="uppercase font-bold text-4xl text-[#1a1a1a] leading-[120%]">
-            Đăng kí lái thử
-          </h1>
-        </div>
+    <section>
+      <Toast
+        handleCloseToast={handleCloseToast}
+        message={message}
+        status={status}
+      />
+      <div className="mx-[40px] mt-[94px] pt-[60px] bg-[url('./imgs/appointment-background.png')] bg-no-repeat bg-top bg-center bg-fixed bg-cover min-h-screen">
+        <form className="h-[1300px] w-[1000px] bg-[#fff] p-[120px] left-0">
+          <div className="block mb-[32px]">
+            <h1 className="uppercase font-bold text-4xl text-[#1a1a1a] leading-[120%]">
+              Đăng kí lái thử
+            </h1>
+          </div>
 
-        {/* Họ và tên */}
-        <div className="mb-8">
-          <div className="mb-4">
-            <label className="text-lg font-bold" htmlFor="name_customer">
-              Họ và tên <span className="text-primaryColor">*</span>
-            </label>
-          </div>
-          <div className="border-b border-[#ccc] pb-2">
-            <input
-              placeholder="VD: Nguyễn Văn A"
-              type="text"
-              className="text-gray-400 w-full h-full outline-0"
-              value={formData.name_customer}
-              name="name_customer"
-              id="name_customer"
-              onChange={handleInputChange}
-            />
-          </div>
-        </div>
-
-        {/* Số điện thoại */}
-        <div className="mb-8">
-          <div className="mb-4">
-            <label className="text-lg font-bold" htmlFor="phone_customer">
-              Số điện thoại <span className="text-primaryColor">*</span>
-            </label>
-          </div>
-          <div className="border-b border-[#ccc] pb-2">
-            <input
-              placeholder="0325428387"
-              type="text"
-              className="text-gray-400 w-full h-full outline-0 text-mainTitleColor"
-              value={formData.phone_customer}
-              name="phone_customer"
-              id="phone_customer"
-              onChange={handleInputChange}
-            />
-          </div>
-        </div>
-
-        {/* Tên xe */}
-        <div className="mb-8">
-          <div className="mb-4">
-            <label className="text-lg font-bold">
-              Tên xe <span className="text-primaryColor">*</span>
-            </label>
-          </div>
-          {renderDropdownCar()}
-          {/*tên và hình ảnh xe */}
-          {selectedCar && (
-            <div className="mt-8 items-center mb-[32px] max-h-[250px] w-full">
-              <div className="uppercase text-2xl font-bold">
-                {selectedCar.name}
-              </div>
-              <img
-                src={`${fileURL}/${selectedCar.image}`}
-                alt={selectedCar.name}
-                className="w-[480px] h-[200px] object-contain"
+          {/* Họ và tên */}
+          <div className="mb-8">
+            <div className="mb-4">
+              <label className="text-lg font-bold" htmlFor="name_customer">
+                Họ và tên <span className="text-primaryColor">*</span>
+              </label>
+            </div>
+            <div className="border-b border-[#ccc] pb-2">
+              <input
+                placeholder="VD: Nguyễn Văn A"
+                type="text"
+                className="text-mainTitleColor w-full h-full outline-0"
+                value={formData.name_customer}
+                name="name_customer"
+                id="name_customer"
+                onChange={handleInputChange}
               />
             </div>
-          )}
-        </div>
-
-        {/* Tỉnh/Thành phố */}
-        <div className="mb-8">
-          <div className="mb-4">
-            <label className="text-lg font-bold">
-              Tỉnh/Thành phố <span className="text-primaryColor">*</span>
-            </label>
           </div>
-          {renderDropdown('city_agency', optionCities)}
-        </div>
 
-        {/* Đại lý */}
-        <div className="mb-8">
-          <div className="mb-4">
-            <label className="text-lg font-bold">
-              Đại lý <span className="text-primaryColor">*</span>
-            </label>
-          </div>
-          {renderDropdown('name_agency', optionAgencies)}
-        </div>
-
-        {/* Ngày hẹn */}
-        <div className="mb-8">
-          <div className="mb-4">
-            <label className="text-lg font-bold" htmlFor="scheduledDate">
-              Chọn ngày <span className="text-primaryColor">*</span>
-            </label>
-          </div>
-          <div className="border-b border-[#ccc] pb-2 relative">
-            <input
-              type="date"
-              id="scheduledDate"
-              name="scheduledDate"
-              className="outline-0 w-full h-full text-gray-400 text-mainTitleColor appearance-none"
-              value={formData.scheduledDate}
-              onChange={handleInputChange}
-              min={getCurrentDate()}
-            />
-            <div
-              className="absolute inset-0 cursor-pointer flex items-center justify-end"
-              onClick={handleDateClick}
-            >
-              <img src="./imgs/calendar.png" className="right-0 w-6 h-6" />
+          {/* Số điện thoại */}
+          <div className="mb-8">
+            <div className="mb-4">
+              <label className="text-lg font-bold" htmlFor="phone_customer">
+                Số điện thoại <span className="text-primaryColor">*</span>
+              </label>
+            </div>
+            <div className="border-b border-[#ccc] pb-2">
+              <input
+                placeholder="0325428387"
+                type="text"
+                className="w-full h-full outline-0 text-mainTitleColor"
+                value={formData.phone_customer}
+                name="phone_customer"
+                id="phone_customer"
+                onChange={handleInputChange}
+                pattern="^((\\+84)|0)[1-9]{1}[0-9]{8}$"
+                required
+              />
             </div>
           </div>
-        </div>
 
-        {/*Giấy phép lái xe*/}
-        <div className="flex mb-2 mt-[68px]">
-          <input
-            type="checkbox"
-            className="h-5 w-5 mr-2 accent-[#EB0A1E] cursor-pointer"
-            checked={checkboxes.agreement3}
-            name="agreement3"
-            id="agreement3"
-            onChange={handleCheckboxChange}
-          />
-          <label
-            className="line-clamp-1 text-base text-[#212529]"
-            htmlFor="agreement3"
-          >
-            Tôi đã có Giấy Phép Lái Xe hợp lệ
-          </label>
-        </div>
-        {/* Điều khoản */}
-        <div className="flex mb-2">
-          <input
-            type="checkbox"
-            className="h-5 w-5 mr-2 accent-[#EB0A1E] cursor-pointer"
-            checked={checkboxes.agreement1}
-            name="agreement1"
-            id="agreement1"
-            onChange={handleCheckboxChange}
-          />
-          <label
-            className="line-clamp-1 text-base text-[#212529]"
-            htmlFor="agreement1"
-          >
-            Tôi xác nhận rằng các đại lý Toyota có thể gửi cho tôi thêm thông
-            tin về các sản phẩm hoặc dịch vụ của Toyota.
-          </label>
-        </div>
-        <div className="flex mb-2">
-          <input
-            type="checkbox"
-            className="h-5 w-5 mr-2 accent-[#EB0A1E] cursor-pointer"
-            checked={checkboxes.agreement2}
-            name="agreement2"
-            id="agreement2"
-            onChange={handleCheckboxChange}
-          />
-          <label
-            className="line-clamp-1 text-base text-[#212529]"
-            htmlFor="agreement2"
-          >
-            Tôi đã đọc và đồng ý với các{' '}
-            <Link to={'/'} className="text-[#007bff]">
-              quy định và chính sách
-            </Link>{' '}
-            của Toyota Việt Nam.
-          </label>
-        </div>
+          {/* Tên xe */}
+          <div className="mb-8">
+            <div className="mb-4">
+              <label className="text-lg font-bold">
+                Tên xe <span className="text-primaryColor">*</span>
+              </label>
+            </div>
+            {renderDropdownCar()}
+            {/*tên và hình ảnh xe */}
+            {selectedCar && (
+              <div className="mt-8 items-center mb-[32px] max-h-[250px] w-full">
+                <div className="uppercase text-2xl font-bold">
+                  {selectedCar.name}
+                </div>
+                <img
+                  src={`${fileURL}/${selectedCar.image}`}
+                  alt={selectedCar.name}
+                  className="w-[480px] h-[200px] object-contain"
+                />
+              </div>
+            )}
+          </div>
 
-        {/* Submit */}
-        <div className="flex justify-left mt-[32px]">
-          <button
-            type="submit"
-            disabled={!isFormValid}
-            className={`${
-              isFormValid ? 'opacity_agency-100' : 'opacity_agency-55'
-            } bg-primaryColor text-lg uppercase px-[44px] py-[15px] border-[#ccc] border font-bold tracking-widest mt-[30px] text-[#fff]`}
-            onClick={handleSubmit}
-          >
-            Xác nhận đặt lịch hẹn
-          </button>
-        </div>
-      </form>
-    </div>
+          {/* Tỉnh/Thành phố */}
+          <div className="mb-8">
+            <div className="mb-4">
+              <label className="text-lg font-bold">
+                Tỉnh/Thành phố <span className="text-primaryColor">*</span>
+              </label>
+            </div>
+            {renderDropdown('city_agency', optionCities)}
+          </div>
+
+          {/* Đại lý */}
+          <div className="mb-8">
+            <div className="mb-4">
+              <label className="text-lg font-bold">
+                Đại lý <span className="text-primaryColor">*</span>
+              </label>
+            </div>
+            {renderDropdown('name_agency', optionAgencies)}
+          </div>
+
+          {/* Ngày hẹn */}
+          <div className="mb-8">
+            <div className="mb-4">
+              <label className="text-lg font-bold" htmlFor="scheduledDate">
+                Chọn ngày <span className="text-primaryColor">*</span>
+              </label>
+            </div>
+            <div className="border-b border-[#ccc] pb-2 relative">
+              <input
+                type="date"
+                id="scheduledDate"
+                name="scheduledDate"
+                className="outline-0 w-full h-full text-mainTitleColor appearance-none"
+                value={formData.scheduledDate}
+                onChange={handleInputChange}
+                min={getCurrentDate()}
+              />
+              <div
+                className="absolute inset-0 cursor-pointer flex items-center justify-end"
+                onClick={handleDateClick}
+              >
+                <img src="./imgs/calendar.png" className="right-0 w-6 h-6" />
+              </div>
+            </div>
+          </div>
+
+          {/*Giấy phép lái xe*/}
+          <div className="flex mb-2 mt-[68px]">
+            <input
+              type="checkbox"
+              className="h-5 w-5 mr-2 accent-[#EB0A1E] cursor-pointer"
+              checked={checkboxes.agreement3}
+              name="agreement3"
+              id="agreement3"
+              onChange={handleCheckboxChange}
+            />
+            <label
+              className="line-clamp-1 text-base text-[#212529]"
+              htmlFor="agreement3"
+            >
+              Tôi đã có Giấy Phép Lái Xe hợp lệ
+            </label>
+          </div>
+          {/* Điều khoản */}
+          <div className="flex mb-2">
+            <input
+              type="checkbox"
+              className="h-5 w-5 mr-2 accent-[#EB0A1E] cursor-pointer"
+              checked={checkboxes.agreement1}
+              name="agreement1"
+              id="agreement1"
+              onChange={handleCheckboxChange}
+            />
+            <label
+              className="line-clamp-1 text-base text-[#212529]"
+              htmlFor="agreement1"
+            >
+              Tôi xác nhận rằng các đại lý Toyota có thể gửi cho tôi thêm thông
+              tin về các sản phẩm hoặc dịch vụ của Toyota.
+            </label>
+          </div>
+          <div className="flex mb-2">
+            <input
+              type="checkbox"
+              className="h-5 w-5 mr-2 accent-[#EB0A1E] cursor-pointer"
+              checked={checkboxes.agreement2}
+              name="agreement2"
+              id="agreement2"
+              onChange={handleCheckboxChange}
+            />
+            <label
+              className="line-clamp-1 text-base text-[#212529]"
+              htmlFor="agreement2"
+            >
+              Tôi đã đọc và đồng ý với các{' '}
+              <Link to={'/'} className="text-[#007bff]">
+                quy định và chính sách
+              </Link>{' '}
+              của Toyota Việt Nam.
+            </label>
+          </div>
+
+          {/* Submit */}
+          <div className="flex justify-left mt-[32px]">
+            <button
+              type="submit"
+              disabled={!isFormValid}
+              className={`${
+                isFormValid ? 'opacity-100' : 'opacity-55'
+              } bg-primaryColor text-lg uppercase px-[44px] py-[15px] border-[#ccc] border font-bold tracking-widest mt-[30px] text-[#fff]`}
+              onClick={handleSubmit}
+            >
+              Xác nhận đăng ký lái thử
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
   );
 };
 

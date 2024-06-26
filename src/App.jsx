@@ -90,6 +90,9 @@ import Agency from './components/layout/agency/Agency';
 import AgencyDetails from './components/layout/agency/AgencyDetail';
 import SpecificationCar from './components/car/specification/main';
 
+import PendingService from './components/admin/form/PendingService';
+import ApproveService from './components/admin/form/ApproveService';
+import ViewService from './components/admin/form/ViewService';
 function App() {
   return (
     <>
@@ -161,7 +164,12 @@ function App() {
               <Route path="add" element={<AddUser />} />
               <Route path="edit/:id" element={<EditUser />} />
             </Route>
-            <Route path="service" element={<ServiceManagement/>}/>
+            <Route path="service">
+              <Route index element={<ServiceManagement />} />
+              <Route path="pending" element={<PendingService />} />
+              <Route path="approved" element={<ApproveService />} />
+              <Route path="view" element={<ViewService />} />
+            </Route>
           </Route>
 
           <Route path="/user" element={<UserLayout />}>
