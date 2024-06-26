@@ -91,6 +91,8 @@ import SpecificationCar from './components/car/specification/main';
 
 import Summon from './components/service/summon/main';
 import TestDrive from './components/admin/form/main';
+import TestDrivePending from './components/admin/form/pending';
+import TestDriveApproved from './components/admin/form/approved';
 
 
 function App() {
@@ -168,6 +170,8 @@ function App() {
 
             <Route path="testdrive">
               <Route index element={<TestDrive/>} />
+              <Route path="pending" element={<TestDrivePending/>}/>
+              <Route path="approved" element={<TestDriveApproved/>}/>
             </Route>
           </Route>
 
