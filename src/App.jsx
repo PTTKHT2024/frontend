@@ -88,6 +88,7 @@ import CarEdit from './components/admin/car/CarEdit';
 import Agency from './components/layout/agency/Agency';
 import AgencyDetails from './components/layout/agency/AgencyDetail';
 import SpecificationCar from './components/car/specification/main';
+import FeedbackManagement from './components/admin/feedback/FeedbackManagement';
 
 import AllPurchaseHistories from './components/admin/goods/AllPurchaseHistories';
 import Summon from './components/service/summon/main';
@@ -172,7 +173,11 @@ function App() {
             />
 
             <Route path="testdrive">
-              <Route index element={<TestDrive />} />
+              <Route index element={<TestDrive />} />{' '}
+            </Route>
+
+            <Route path="feedback">
+              <Route index element={<FeedbackManagement />} />
             </Route>
           </Route>
 

@@ -2,17 +2,24 @@ import React, { useState } from 'react';
 
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { createFeedback } from '../../utils/UserAPi';
+import Toast from '../../common/Toast';
 
 const ContactForm = () => {
-  const [serviceSupport, setServiceSupport] = useState('Chọn');
   const [serviceInput, setServiceInput] = useState('');
   const [isSelected, setIsSelected] = useState(false);
   const [input, setInput] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    description: '',
+    feedbackName: 'Chọn',
+    fullName_customer: '',
+    email_customer: '',
+    phone_customer: '',
+    feedbackContent: '',
   });
+  const [checkbox1, setCheckbox1] = useState(false);
+  const [checkbox2, setCheckbox2] = useState(false);
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState('');
+
   const options = [
     'Bán hàng',
     'Dịch vụ',
@@ -27,17 +34,57 @@ const ContactForm = () => {
   };
 
   const handleChangeServiceSupport = (e) => {
-    setServiceSupport(e.currentTarget.dataset.support);
+    setInput({ ...input, feedbackName: e.currentTarget.dataset.support });
   };
 
   const handleToggleInput = () => {
     setIsSelected(!isSelected);
   };
 
+  const handleSubmitForm = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await createFeedback(input);
+      if (res.status == 201) {
+        setStatus('success');
+        setMessage('Gửi yêu cầu thành công');
+        setInput({
+          feedbackName: 'Chọn',
+          fullName_customer: '',
+          email_customer: '',
+          phone_customer: '',
+          feedbackContent: '',
+        });
+        setCheckbox1(false);
+        setCheckbox2(false);
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus('danger');
+      setMessage('Gửi yêu cầu thất bại');
+    } finally {
+      setTimeout(() => {
+        handleCloseToast();
+      }, 5000);
+    }
+  };
+
+  const handleCloseToast = () => {
+    setMessage('');
+    setStatus('');
+  };
+
   return (
     <section className="container px-32">
+      <Toast
+        handleCloseToast={handleCloseToast}
+        message={message}
+        status={status}
+      />
+
       <div className="border-tabNavigate">
-        <form className="py-6 px-[90px]">
+        <form className="py-6 px-[90px]" onSubmit={handleSubmitForm}>
           <h3 className="uppercase font-bold text-lg text-center w-full mb-6">
             trao đổi với chúng tôi
           </h3>
@@ -53,13 +100,15 @@ const ContactForm = () => {
 
               <div className="relative border-b border-[#ccc] pb-2">
                 <div
-                  className="flex justify-between"
+                  className="flex justify-between cursor-pointer"
                   onClick={handleToggleInput}
                 >
                   <p
-                    className={serviceSupport === 'Chọn' ? 'text-gray-400' : ''}
+                    className={
+                      input.feedbackName === 'Chọn' ? 'text-gray-400' : ''
+                    }
                   >
-                    {serviceSupport}
+                    {input.feedbackName}
                   </p>
                   <MdOutlineKeyboardArrowDown className="h-6 w-6 text-black/[.4]" />
                 </div>
@@ -89,8 +138,8 @@ const ContactForm = () => {
                             handleToggleInput();
                           }}
                           key={index}
-                          className={`text-base text-[#212529] p-1.5 hover:bg-[#5897FB] hover:text-white ${
-                            option === serviceSupport
+                          className={`text-base text-[#212529] p-1.5 hover:bg-[#5897FB] hover:text-white cursor-pointer ${
+                            option === input.feedbackName
                               ? 'bg-[#5897FB] text-white'
                               : ''
                           }`}
@@ -105,7 +154,10 @@ const ContactForm = () => {
 
             <div className="mb-4">
               <div className="mb-4">
-                <label className="text-lg font-bold" htmlFor="name">
+                <label
+                  className="text-lg font-bold"
+                  htmlFor="fullName_customer"
+                >
                   Họ và tên <span className="text-primaryColor">*</span>
                 </label>
               </div>
@@ -113,12 +165,12 @@ const ContactForm = () => {
               <div className="border-b border-[#ccc] pb-2">
                 <input
                   type="text"
-                  className="text-gray-400 w-full h-full outline-0 text-mainTitleColor"
-                  value={input.name}
-                  name="name"
-                  id="name"
+                  className="w-full h-full outline-0 text-mainTitleColor"
+                  value={input.fullName_customer}
+                  name="fullName_customer"
+                  id="fullName_customer"
                   placeholder="Nguyễn Văn A"
-                  onChange={(e) => setInput(e)}
+                  onChange={handleInput}
                 />
               </div>
             </div>
@@ -126,7 +178,7 @@ const ContactForm = () => {
             <div className="flex justtify-between mb-4">
               <div className="w-3/6">
                 <div className="mb-4">
-                  <label className="text-lg font-bold" htmlFor="phone">
+                  <label className="text-lg font-bold" htmlFor="phone_customer">
                     Số điện thoại <span className="text-primaryColor">*</span>
                   </label>
                 </div>
@@ -134,19 +186,19 @@ const ContactForm = () => {
                 <div className="border-b border-[#ccc] pb-2">
                   <input
                     type="text"
-                    name="phone"
-                    id="phone"
-                    className="text-gray-400 w-full h-full outline-0 text-mainTitleColor"
-                    value={input.phone}
+                    name="phone_customer"
+                    id="phone_customer"
+                    className="w-full h-full outline-0 text-mainTitleColor"
+                    value={input.phone_customer}
                     placeholder="0123456789"
-                    onChange={(e) => setInput(e)}
+                    onChange={handleInput}
                   />
                 </div>
               </div>
 
               <div className="w-2/5 ml-auto">
                 <div className="mb-4">
-                  <label className="text-lg font-bold" htmlFor="email">
+                  <label className="text-lg font-bold" htmlFor="email_customer">
                     Email <span className="text-primaryColor">*</span>
                   </label>
                 </div>
@@ -154,12 +206,12 @@ const ContactForm = () => {
                 <div className="border-b border-[#ccc] pb-2">
                   <input
                     type="email"
-                    name="email"
-                    id="email"
-                    className="text-gray-400 w-full h-full outline-0 text-mainTitleColor"
-                    value={input.email}
+                    name="email_customer"
+                    id="email_customer"
+                    className="w-full h-full outline-0 text-mainTitleColor"
+                    value={input.email_customer}
                     placeholder="abc@gmail.com"
-                    onChange={(e) => setInput(e)}
+                    onChange={handleInput}
                   />
                 </div>
               </div>
@@ -167,11 +219,12 @@ const ContactForm = () => {
 
             <div className="mb-4">
               <textarea
-                className="w-full text-gray-400 outline-0 text-mainTitleColor border p-[2px]"
+                className="w-full outline-0 text-mainTitleColor border p-[2px]"
                 placeholder="Điền yêu cầu/ thắc mắc"
                 rows={4}
-                value={input.description}
-                onChange={(e) => setInput(e)}
+                name="feedbackContent"
+                value={input.feedbackContent}
+                onChange={handleInput}
               />
             </div>
 
@@ -181,6 +234,9 @@ const ContactForm = () => {
                 className="h-5 w-5 mr-2 accent-[#EB0A1E]"
                 name="checkbox-1"
                 id="checkbox-1"
+                checked={checkbox1}
+                onChange={(e) => setCheckbox1(e.target.checked)}
+                required
               />
               <label
                 className="line-clamp-1 text-base text-[#212529]"
@@ -197,6 +253,9 @@ const ContactForm = () => {
                 className="h-5 w-5 mr-2 accent-[#EB0A1E]"
                 name="checkbox-2"
                 id="checkbox-2"
+                checked={checkbox2}
+                onChange={(e) => setCheckbox2(e.target.checked)}
+                required
               />
               <label
                 className="line-clamp-1 text-base text-[#212529]"
