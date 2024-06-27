@@ -9,38 +9,40 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { Link } from 'react-router-dom';
+import { carModel } from '../model/CarModel';
+import { getCarList } from '../utils/CarApi';
+import { fileURL } from '../utils/UtilsFunction';
 
 const CarDiscoverTab = ({
   carTabsWidth = 80,
   all = false,
   resetDropdownState,
 }) => {
-  const [cars, setCars] = useState([
-    {
-      id: '',
-      name: '',
-      price: '',
-      capacity: 0,
-      engine: '',
-      numberOfSeats: 0,
-      license: '',
-      image: '',
-      hoverImage: '',
-      class: '',
-    },
-  ]);
+  const [cars, setCars] = useState([carModel]);
   const [isLoading, setIsLoading] = useState(true);
   const [carClass, setCarClass] = useState('Sedan');
 
-  useEffect(() => {
-    setCars(fakeData);
-    setTimeout(() => {
+  const fetchCars = async () => {
+    try {
+      const res = await getCarList(1, 1000);
+      if (res.status === 200) {
+        const tmp = [...res.data.data.result];
+        setCars(tmp);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
       setIsLoading(false);
-    });
+    }
+  };
+
+  useEffect(() => {
+    fetchCars();
+    setIsLoading(false);
   }, []);
 
   const tabs = useCallback(() => {
-    const tmp = new Set(cars.map((currentCar) => currentCar.class));
+    const tmp = new Set(cars.map((currentCar) => currentCar.carCategory.name));
     const uniqueTabs = [...tmp];
     return uniqueTabs;
   }, [cars]);
@@ -78,27 +80,27 @@ const CarDiscoverTab = ({
             className="mt-[56px] static tab-swiper"
           >
             {cars
-              .filter((car) => car.class === carClass)
+              .filter((car) => car.carCategory.name === carClass)
               .map((car) => (
                 <SwiperSlide className="w-screen px-[28px]" key={car.id}>
-                  <div>
+                  <Link to={`/car-list/${car.id}`}>
                     <div className="flex justify-between mb-2.5">
                       <span className="text-xs text-subInformationColor">
                         Động cơ {car.engine}
                       </span>
                       <span className="text-xs text-subInformationColor">
-                        Dung tích {car.engine} cc
+                        Dung tích {car.capacity} cc
                       </span>
                     </div>
 
                     <div className="w-full h-[105px] group relative">
                       <img
-                        src={car.image}
+                        src={`${fileURL}/${car.image}`}
                         className="object-cover w-full absolute top-0 h-[105px] object-center opacity-100 transition-opacity duration-200 ease-out group-hover:opacity-0 will-change-[opacity]"
                         loading="lazy"
                       />
                       <img
-                        src={car.hoverImage}
+                        src={`${fileURL}/${car.hover_image}`}
                         className="object-cover w-full absolute top-0 h-[105px] object-center opacity-0 transition-opacity duration-200 ease-out group-hover:opacity-100 will-change-[opacity]"
                       />
                     </div>
@@ -114,13 +116,13 @@ const CarDiscoverTab = ({
 
                     <p>
                       <span className="text-[12px] text-mainTitleColor pr-4 border-r border-[#ccc]">
-                        {car.numberOfSeats} chỗ
+                        {car.number_of_seats} chỗ
                       </span>
                       <span className="text-[12px] text-mainTitleColor pl-4">
-                        {car.license}
+                        {car.gearbox}
                       </span>
                     </p>
-                  </div>
+                  </Link>
                 </SwiperSlide>
               ))}
 

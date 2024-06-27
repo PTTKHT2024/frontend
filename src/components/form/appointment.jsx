@@ -161,13 +161,16 @@ const Appointment = () => {
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState('');
 
+  const dataJSON = localStorage.getItem('data');
+  const data = JSON.parse(dataJSON);
+
   const [formData, setFormData] = useState(() => {
     const savedFormData = localStorage.getItem('formData');
     return savedFormData
       ? JSON.parse(savedFormData)
       : {
-          fullName_customer: '',
-          phone_customer: '',
+          fullName_customer: data.user.fullName,
+          phone_customer: data.user.phone,
           number_plates: '',
           appointment_date: '',
           name_service: 'Chọn',
@@ -236,10 +239,10 @@ const Appointment = () => {
 
   useEffect(() => {
     const isValid =
-      formData.fullName_customer.trim() !== '' &&
-      formData.phone_customer.trim() !== '' &&
-      formData.number_plates.trim() !== '' &&
-      formData.appointment_date.trim() !== '' &&
+      formData.fullName_customer !== '' &&
+      formData.phone_customery !== '' &&
+      formData.number_platesy !== '' &&
+      formData.appointment_datey !== '' &&
       formData.name_service !== 'Chọn' &&
       formData.city_agency !== 'Chọn' &&
       formData.name_agency !== 'Chọn' &&
@@ -449,48 +452,6 @@ const Appointment = () => {
                 name="number_plates"
                 id="number_plates"
                 onChange={handleInputChange}
-              />
-            </div>
-          </div>
-
-          {/* Họ và tên */}
-          <div className="mb-8">
-            <div className="mb-4">
-              <label className="text-lg font-bold" htmlFor="fullName_customer">
-                Họ và tên <span className="text-primaryColor">*</span>
-              </label>
-            </div>
-            <div className="border-b border-[#ccc] pb-2">
-              <input
-                placeholder="VD: Nguyễn Văn A"
-                type="text"
-                className="w-full h-full outline-0 text-mainTitleColor"
-                value={formData.fullName_customer}
-                name="fullName_customer"
-                id="fullName_customer"
-                onChange={handleInputChange}
-              />
-            </div>
-          </div>
-
-          {/* Số điện thoại */}
-          <div className="mb-8">
-            <div className="mb-4">
-              <label className="text-lg font-bold" htmlFor="phone_customer">
-                Số điện thoại <span className="text-primaryColor">*</span>
-              </label>
-            </div>
-            <div className="border-b border-[#ccc] pb-2">
-              <input
-                placeholder="VD: 0325428387"
-                type="text"
-                className="w-full h-full outline-0 text-mainTitleColor"
-                value={formData.phone_customer}
-                name="phone_customer"
-                id="phone_customer"
-                onChange={handleInputChange}
-                pattern="^((\\+84)|0)[1-9]{1}[0-9]{8}$"
-                required
               />
             </div>
           </div>

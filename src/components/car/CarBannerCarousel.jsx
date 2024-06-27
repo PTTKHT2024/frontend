@@ -7,6 +7,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { Link } from 'react-router-dom';
+import { getCarList } from '../utils/CarApi';
+import { fileURL } from '../utils/UtilsFunction';
 
 const fakeData = [
   'https://www.toyota.com.vn/media/er0oxvhk/desktop_hero-banner-1600x680.jpg',
@@ -19,11 +21,25 @@ const fakeData = [
 ];
 
 const CarBannerCarousel = () => {
-  const [banners, setBanners] = useState([]);
+  const [cars, setCars] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const fetchCars = async () => {
+    try {
+      const res = await getCarList(1, 1000);
+      if (res.status === 200) {
+        const tmp = [...res.data.data.result].reverse();
+        setCars(tmp);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    setBanners(fakeData);
+    fetchCars();
     setIsLoading(false);
   }, []);
 
@@ -49,11 +65,11 @@ const CarBannerCarousel = () => {
           }}
           className="relative mt-[96px]"
         >
-          {banners.map((banner, index) => (
+          {cars.slice(1, 7).map((car, index) => (
             <SwiperSlide className="w-screen" key={index}>
               <img
-                src={banner}
-                alt={`banner ${index}`}
+                src={`${fileURL}/${car.poster}`}
+                alt={`car ${index}`}
                 className="w-screen"
                 loading="lazy"
               />
@@ -62,13 +78,13 @@ const CarBannerCarousel = () => {
                   className="flex py-3.5 px-5 bg-primaryColor text-white text-xs mr-5 font-semibold tracking-widest"
                   key={`link-${index}-1`}
                 >
-                  <Link to="#">MUA XE</Link>
+                  <Link to={`/car-list/${car.id}`}>MUA XE</Link>
                 </div>
                 <div
                   className="flex py-3.5 px-5 bg-primaryColor text-white text-xs font-semibold tracking-widest"
                   key={`link-${index}-2`}
                 >
-                  <Link to="#">KHÁM PHÁ NGAY</Link>
+                  <Link to="/car-list">KHÁM PHÁ NGAY</Link>
                 </div>
               </div>
             </SwiperSlide>

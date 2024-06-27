@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {getAllTestDrives} from '../../utils/TestDriveApi';
+import { getAllTestDrives } from '../../utils/TestDriveApi';
 import Paginator from '../../common/Paginator';
 import Toast from '../../common/Toast';
 
@@ -25,7 +25,11 @@ const TestDrive = () => {
   ]);
   const [filteredTestDrives, setFilteredTestDrives] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [TestDriveCategory, setTestDriveCategory] = useState('');
+  const [TestDriveCategory, setTestDriveCategory] = useState([
+    'success',
+    'fail',
+    'delete',
+  ]);
   const [currentPage, setCurrentPage] = useState(1);
   const [TestDrivesPerPage, setTestDrivesPerPage] = useState(10);
   const [message, setMessage] = useState('');
@@ -51,8 +55,8 @@ const TestDrive = () => {
     if (!TestDriveCategory) {
       setFilteredTestDrives(TestDrives);
     } else {
-      const filtered = TestDrives.filter(
-        (TestDrive) => TestDrive.TestDriveCategory.name === TestDriveCategory
+      const filtered = TestDrives.filter((TestDrive) =>
+        TestDriveCategory.includes(TestDrive.status)
       );
       setFilteredTestDrives(filtered);
     }
@@ -193,7 +197,7 @@ const TestDrive = () => {
                         {isLoading ? (
                           <span className="animate-pulse block w-full rounded-2xl h-5 bg-slate-400"></span>
                         ) : (
-                          <p className="text-sm text-gray-900">
+                          <p className="text-sm text-primaryColor font-medium">
                             {TestDrive.car.name}
                           </p>
                         )}
@@ -222,15 +226,15 @@ const TestDrive = () => {
                         {isLoading ? (
                           <span className="animate-pulse block w-full rounded-2xl h-5 bg-slate-400"></span>
                         ) : TestDrive.status === 'success' ? (
-                          <p className="text-sm text-green-500 font-bold uppercase">
+                          <p className="text-sm text-green-500 font-medium uppercase">
                             {TestDrive.status}
                           </p>
                         ) : TestDrive.status === 'fail' ? (
-                          <p className="text-sm text-gray-400 font-bold uppercase">
+                          <p className="text-sm text-orange-500 font-medium uppercase">
                             {TestDrive.status}
                           </p>
                         ) : TestDrive.status === 'delete' ? (
-                          <p className="text-sm text-red-500 font-bold uppercase">
+                          <p className="text-sm text-red-500 font-medium uppercase">
                             {TestDrive.status}
                           </p>
                         ) : null}

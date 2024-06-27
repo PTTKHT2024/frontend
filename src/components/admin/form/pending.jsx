@@ -4,7 +4,7 @@ import {
   deleteTestDriveById,
   getAllTestDrives,
   createANewTestDrive,
-  changeANewTestDrive
+  changeANewTestDrive,
 } from '../../utils/TestDriveApi';
 import { FaTrashAlt } from 'react-icons/fa';
 import Paginator from '../../common/Paginator';
@@ -32,12 +32,11 @@ const TestDrivePending = () => {
   ]);
   const [filteredTestDrives, setFilteredTestDrives] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [TestDriveCategory, setTestDriveCategory] = useState('');
+  const [TestDriveCategory, setTestDriveCategory] = useState('pending');
   const [currentPage, setCurrentPage] = useState(1);
   const [TestDrivesPerPage, setTestDrivesPerPage] = useState(10);
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState('');
-  
 
   const fetchTestDrives = async () => {
     setIsLoading(true);
@@ -60,7 +59,7 @@ const TestDrivePending = () => {
       setFilteredTestDrives(TestDrives);
     } else {
       const filtered = TestDrives.filter(
-        (TestDrive) => TestDrive.TestDriveCategory.name === TestDriveCategory
+        (TestDrive) => TestDrive.status === TestDriveCategory
       );
       setFilteredTestDrives(filtered);
     }
@@ -95,15 +94,24 @@ const TestDrivePending = () => {
     setStatus('');
   };
 
-  const calculateTotalPages = (filteredTestDrives, TestDrivesPerPage, TestDrives) => {
+  const calculateTotalPages = (
+    filteredTestDrives,
+    TestDrivesPerPage,
+    TestDrives
+  ) => {
     const totalTestDrives =
-      filteredTestDrives.length > 0 ? filteredTestDrives.length : TestDrives.length;
+      filteredTestDrives.length > 0
+        ? filteredTestDrives.length
+        : TestDrives.length;
     return Math.ceil(totalTestDrives / TestDrivesPerPage);
   };
 
   const indexOfLastTestDrive = currentPage * TestDrivesPerPage;
   const indexOfFirstTestDrive = indexOfLastTestDrive - TestDrivesPerPage;
-  const currentTestDrives = filteredTestDrives.slice(indexOfFirstTestDrive, indexOfLastTestDrive);
+  const currentTestDrives = filteredTestDrives.slice(
+    indexOfFirstTestDrive,
+    indexOfLastTestDrive
+  );
 
   // const handleStatusChange = async (id) => {
   //   try {
@@ -130,7 +138,7 @@ const TestDrivePending = () => {
         name_customer: 'Quách Phú Thuận',
         phone_customer: '0886332809',
         name_car: 'COROLLA ALTIS 1.8G',
-        city_agency: 'Hồ Chí Minh', 
+        city_agency: 'Hồ Chí Minh',
         name_agency: 'Toyota An Thành Fukushima',
         scheduledDate: '2024-12-16',
       };
@@ -156,7 +164,6 @@ const TestDrivePending = () => {
       });
     }
   };
-                          
 
   return (
     <section>

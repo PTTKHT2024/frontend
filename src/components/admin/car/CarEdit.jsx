@@ -678,15 +678,16 @@ const CarEdit = () => {
                         <span className="w-1/2 pl-2 border-r-[2px] border-[#ccc] flex items-center">
                           <label
                             className="cursor-pointer"
-                            htmlFor="number_of_seats"
+                            htmlFor="carCategory.name"
                           >
                             Kiểu dáng{' '}
                             <span className="text-primaryColor">*</span>
                           </label>
-                          {editedCar.number_of_seats != car.number_of_seats && (
+                          {editedCar.carCategory.name !=
+                            car.carCategory.name && (
                             <TbReload
                               className="inline-block ml-auto mr-2 cursor-pointer"
-                              data-name="number_of_seats"
+                              data-name="carCategory.name"
                               data-type="text"
                               onClick={handleResetField}
                             />
@@ -697,14 +698,14 @@ const CarEdit = () => {
                         ) : (
                           <>
                             <input
-                              type="number"
+                              type="text"
                               className={`w-1/2 px-2 outline-0 ${
-                                editedCar.number_of_seats !=
-                                  car.number_of_seats && 'bg-[#FFC107]/[.7]'
+                                editedCar.carCategory.name !=
+                                  car.carCategory.name && 'bg-[#FFC107]/[.7]'
                               }`}
-                              name="number_of_seats"
-                              id="number_of_seats"
-                              value={editedCar.number_of_seats}
+                              name="carCategory.name"
+                              id="carCategory.name"
+                              value={editedCar.carCategory.name}
                               onChange={handleChangeInput}
                               placeholder="Wigo E"
                               required

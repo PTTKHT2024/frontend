@@ -72,7 +72,7 @@ const Tool = () => {
           >
             <Link
               className="h-full w-full flex justify-center items-center"
-              to={'/test-drive'}
+              to={'/user/test-drive'}
             >
               <div className="h-full w-[48px] flex items-center justify-center">
                 <span

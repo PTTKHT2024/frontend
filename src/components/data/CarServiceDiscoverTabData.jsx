@@ -49,7 +49,7 @@ export const services = [
     image: 'imgs/service/s2_1.jpg',
     title: 'Xa đã qua sử dụng',
     class: 'DỊCH VỤ GIA TĂNG',
-    route: 'service/',
+    route: 'https://toyotasure.vn',
     description:
       'Với mục tiêu mang lại sự yên tâm và đảm bảo cho khách hàng mua và bán xe cũ, Toyota Việt Nam chính thức giới thiệu dịch vụ kinh doanh xe đã qua sử dụng chính hãng Toyota.',
   },
@@ -58,7 +58,7 @@ export const services = [
     image: 'imgs/service/s2_2.jpg',
     title: 'Bảo hiểm Toyota',
     class: 'DỊCH VỤ GIA TĂNG',
-    route: 'service/',
+    route: '/insurance/introduction-insurance',
     description:
       'Bảo hiểm Toyota cung cấp một sản phẩm bảo hiểm chuyên biệt chỉ dành riêng cho khách hàng của Toyota. ',
   },
@@ -67,7 +67,7 @@ export const services = [
     image: 'imgs/service/s2_3.jpg',
     title: 'Dịch vụ tài chính',
     class: 'DỊCH VỤ GIA TĂNG',
-    route: 'service/',
+    route: 'https://www.tfsvn.com.vn',
     description:
       'Công ty Tài chính Toyota Việt Nam cung cấp các dịch vụ tài chính và góp phần xây dựng một cuộc sống thịnh vượng cho khách hàng và cộng đồng.',
   },

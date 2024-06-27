@@ -1,23 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router';
 import Header from '../common/Header';
 import Footer from '../common/Footer';
 import ScrollToTopButton from '../common/ScrollToTopButton';
 import useCheckRole from '../hooks/useCheckRole';
 import Loading from '../common/Loading';
+import useIsActive from '../hooks/useIsActive';
 
 const UserLayout = () => {
-  const role = useCheckRole();
-  const navigate = useNavigate();
+  const data = localStorage.getItem('data');
 
-  useEffect(() => {
-    if (role !== null && role !== 'USER') {
-      navigate('/'); 
+  useLayoutEffect(() => {
+    if (!data) {
+      navigate('/');
       alert('Vui lòng đăng nhập để sử dụng chức năng này');
     }
-  }, [role, navigate]);
+  }, []);
 
-  if (role === null) {
+  if (data === null) {
     return <Loading />;
   }
   return (

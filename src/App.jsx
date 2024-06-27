@@ -113,7 +113,6 @@ function App() {
             <Route path="show-rooms" element={<VRShowroom />} />
             <Route path="appointment" element={<Appointment />} />
             <Route path="policy" element={<Policy />} />
-            <Route path="test-drive" element={<Testdrive />} />
             <Route path="car-list" element={<CarList />} />
 
             <Route path="agency">
@@ -179,7 +178,9 @@ function App() {
             />
 
             <Route path="testdrive">
-              <Route index element={<TestDrive />} />{' '}
+              <Route index element={<TestDrive />} />
+              <Route path="pending" element={<TestDrivePending />} />
+              <Route path="approved" element={<TestDriveApproved />} />
             </Route>
 
             <Route path="feedback">
@@ -188,6 +189,7 @@ function App() {
               <Route path="pending" element={<TestDrivePending />} />
               <Route path="approved" element={<TestDriveApproved />} />
             </Route>
+
             <Route path="service">
               <Route index element={<ServiceManagement />} />
               <Route path="pending" element={<PendingService />} />
@@ -199,6 +201,7 @@ function App() {
           <Route path="/user" element={<UserLayout />}>
             <Route path="profile" element={<Profile />} />
             <Route path="appointment" element={<Appointment />} />
+            <Route path="test-drive" element={<Testdrive />} />
           </Route>
 
           <Route path="/technology" element={<TechnologyLayout />}>
@@ -286,6 +289,9 @@ function App() {
 }
 
 function MainLayout() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <Header />

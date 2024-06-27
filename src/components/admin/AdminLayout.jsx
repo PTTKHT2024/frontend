@@ -138,7 +138,7 @@ const AdminLayout = () => {
           </NavLink>
 
           <NavLink
-            to="/admin/user"
+            to="/admin/service"
             className={({ isActive }) =>
               `px-[16px] py-[12px] cursor-pointer  ${
                 isActive
@@ -151,7 +151,7 @@ const AdminLayout = () => {
           </NavLink>
 
           <NavLink
-            to="/admin/service"
+            to="/admin/testdrive"
             className={({ isActive }) =>
               `px-[16px] py-[12px] cursor-pointer  ${
                 isActive

@@ -33,7 +33,7 @@ const TestDriveApproved = () => {
   ]);
   const [filteredTestDrives, setFilteredTestDrives] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [TestDriveCategory, setTestDriveCategory] = useState('');
+  const [TestDriveCategory, setTestDriveCategory] = useState('approve');
   const [currentPage, setCurrentPage] = useState(1);
   const [TestDrivesPerPage, setTestDrivesPerPage] = useState(10);
   const [message, setMessage] = useState('');
@@ -60,7 +60,7 @@ const TestDriveApproved = () => {
       setFilteredTestDrives(TestDrives);
     } else {
       const filtered = TestDrives.filter(
-        (TestDrive) => TestDrive.TestDriveCategory.name === TestDriveCategory
+        (TestDrive) => TestDrive.status === TestDriveCategory
       );
       setFilteredTestDrives(filtered);
     }
@@ -151,7 +151,7 @@ const TestDriveApproved = () => {
       const res = await createANewTestDrive(TestDrive, access_token);
     }
   };
-  
+
   const handleStatusChange1 = async (id) => {
     try {
       const dataJSON = localStorage.getItem('data');
@@ -265,10 +265,7 @@ const TestDriveApproved = () => {
                   Trạng thái
                 </th>
                 <th className=" py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                  Thao
-                </th>
-                <th className=" py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                  tác
+                  Thao tác
                 </th>
               </tr>
             </thead>
@@ -366,20 +363,23 @@ const TestDriveApproved = () => {
                             <span className="text-gray-400 hover:text-gray-800 p-2 rounded-lg bg-gray-200 inline-block cursor-pointer">
                               <IoIosWarning
                                 className="h-5 w-5"
-                                onClick={() => handleStatusChange1(TestDrive.id)}
+                                onClick={() =>
+                                  handleStatusChange1(TestDrive.id)
+                                }
                               />
+                            </span>
+                            <span
+                              className="text-red-600 hover:text-red-900 p-2 rounded-lg bg-red-200 inline-block cursor-pointer"
+                              onClick={() =>
+                                handleDeleteTestDrive(TestDrive.id)
+                              }
+                            >
+                              <FaTrashAlt className="h-5 w-5" />
                             </span>
                           </>
                         )}
                       </td>
-                      <td className=" py-4 whitespace-nowrap text-sm font-medium">
-                        <span
-                          className="text-red-600 hover:text-red-900 p-2 rounded-lg bg-red-200 inline-block cursor-pointer"
-                          onClick={() => handleDeleteTestDrive(TestDrive.id)}
-                        >
-                          <FaTrashAlt className="h-5 w-5" />
-                        </span>
-                      </td>
+                      {/* <td className=" py-4 whitespace-nowrap text-sm font-medium"></td> */}
                     </tr>
                   ) : null
                 )}

@@ -275,7 +275,7 @@ import {
 } from '../../utils/FormApi';
 import Toast from '../../common/Toast';
 import { BsCheckCircle } from 'react-icons/bs';
-import { FaTrashAlt } from 'react-icons/fa';
+import { FaLongArrowAltLeft, FaTrashAlt } from 'react-icons/fa';
 import Paginator from '../../common/Paginator';
 import { format } from 'date-fns';
 
@@ -410,6 +410,13 @@ const ApproveService = () => {
 
   return (
     <section>
+      <Link
+        className="fixed top-[100px] left-[90px] block h-max p-2 bg-[#f5f5f5] shadow hover:bg-slate-600 hover:text-white rounded-lg"
+        to="/admin/service"
+      >
+        <FaLongArrowAltLeft className="h-5 w-5" />
+      </Link>
+
       <Toast
         handleCloseToast={handleCloseToast}
         message={message}
@@ -507,7 +514,7 @@ const ApproveService = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-base text-gray-500">
                       <input
                         type="text"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 min-w-[130px]"
                         placeholder="Nhập giá tiền"
                         value={form.price_service || ''}
                         onChange={(e) => handleInputChange(e, form.id)}

@@ -29,8 +29,6 @@ const Header = () => {
     information: false,
   });
 
-  // console.log(role);
-
   const handleClickLogin = () => {
     setIsRegisterOpened(false);
     setIsLoginOpened(!isLoginOpend);

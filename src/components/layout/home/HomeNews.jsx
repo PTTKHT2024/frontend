@@ -60,8 +60,6 @@ const HomeNews = () => {
 
   const current = currentBlogs();
 
-  console.log(current);
-
   return (
     <section className="container mb-sectionMargin_1">
       <DiscoverTabSelect
@@ -77,7 +75,7 @@ const HomeNews = () => {
             {isLoading ? (
               ''
             ) : (
-              <Link>
+              <Link to={`/news/blog/${current[0].id}`}>
                 <img
                   src={`${fileURL}/${current[0].image}`}
                   alt=""
@@ -92,7 +90,11 @@ const HomeNews = () => {
 
           <div className="col-span-4 ">
             {current.slice(1).map((blog, index) => (
-              <Link key={blog.id} className="row-span-1 mb-3 block">
+              <Link
+                key={blog.id}
+                className="row-span-1 mb-3 block"
+                to={`/news/blog/${blog.id}`}
+              >
                 <img
                   src={`${fileURL}/${blog.image}`}
                   alt=""

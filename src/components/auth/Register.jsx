@@ -21,7 +21,6 @@ const Register = ({ handleClickLogin }) => {
 
   useEffect(() => {
     console.log(nameInputRef.current);
-    nameInputRef.current?.focus();
   }, [emailRegister]);
 
   const handleClickEmailRegister = () => {
@@ -123,7 +122,6 @@ const Register = ({ handleClickLogin }) => {
                     Tên của bạn?
                   </label>
                   <input
-                    ref={nameInputRef}
                     required
                     name="fullName"
                     value={registerForm.fullName}

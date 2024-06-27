@@ -22,18 +22,19 @@ const Testdrive = () => {
   //   name_agency: 'Chọn',
   //   scheduledDate: '',
   // });
+
+  const dataJSON = localStorage.getItem('data');
+  const data = JSON.parse(dataJSON);
+
   const [formData, setFormData] = useState(() => {
-    const savedFormData = localStorage.getItem('formData');
-    return savedFormData
-      ? JSON.parse(savedFormData)
-      : {
-          name_customer: '',
-          phone_customer: '',
-          name_car: 'Chọn',
-          city_agency: 'Chọn',
-          name_agency: 'Chọn',
-          scheduledDate: '',
-        };
+    return {
+      name_customer: data.user.fullName,
+      phone_customer: data.user.phone,
+      name_car: 'Chọn',
+      city_agency: 'Chọn',
+      name_agency: 'Chọn',
+      scheduledDate: '',
+    };
   });
   useEffect(() => {
     localStorage.setItem('formData', JSON.stringify(formData));
@@ -116,8 +117,8 @@ const Testdrive = () => {
 
   useEffect(() => {
     const isValid =
-      formData.name_customer.trim() !== '' &&
-      formData.scheduledDate.trim() !== '' &&
+      formData.name_customer !== '' &&
+      formData.scheduledDate !== '' &&
       formData.name_car !== 'Chọn' &&
       formData.city_agency !== 'Chọn' &&
       formData.name_agency !== 'Chọn' &&
@@ -390,54 +391,12 @@ const Testdrive = () => {
         message={message}
         status={status}
       />
-      <div className="mx-[40px] mt-[94px] pt-[60px] bg-[url('./imgs/appointment-background.png')] bg-no-repeat bg-top bg-center bg-fixed bg-cover min-h-screen">
+      <div className="mx-[40px] mt-[94px] pt-[60px] bg-[url('/imgs/appointment-background.png')] bg-no-repeat bg-top bg-center bg-fixed bg-cover min-h-screen">
         <form className="h-[1300px] w-[1000px] bg-[#fff] p-[120px] left-0">
           <div className="block mb-[32px]">
             <h1 className="uppercase font-bold text-4xl text-[#1a1a1a] leading-[120%]">
               Đăng kí lái thử
             </h1>
-          </div>
-
-          {/* Họ và tên */}
-          <div className="mb-8">
-            <div className="mb-4">
-              <label className="text-lg font-bold" htmlFor="name_customer">
-                Họ và tên <span className="text-primaryColor">*</span>
-              </label>
-            </div>
-            <div className="border-b border-[#ccc] pb-2">
-              <input
-                placeholder="VD: Nguyễn Văn A"
-                type="text"
-                className="text-mainTitleColor w-full h-full outline-0"
-                value={formData.name_customer}
-                name="name_customer"
-                id="name_customer"
-                onChange={handleInputChange}
-              />
-            </div>
-          </div>
-
-          {/* Số điện thoại */}
-          <div className="mb-8">
-            <div className="mb-4">
-              <label className="text-lg font-bold" htmlFor="phone_customer">
-                Số điện thoại <span className="text-primaryColor">*</span>
-              </label>
-            </div>
-            <div className="border-b border-[#ccc] pb-2">
-              <input
-                placeholder="0325428387"
-                type="text"
-                className="w-full h-full outline-0 text-mainTitleColor"
-                value={formData.phone_customer}
-                name="phone_customer"
-                id="phone_customer"
-                onChange={handleInputChange}
-                pattern="^((\\+84)|0)[1-9]{1}[0-9]{8}$"
-                required
-              />
-            </div>
           </div>
 
           {/* Tên xe */}
@@ -504,7 +463,7 @@ const Testdrive = () => {
                 className="absolute inset-0 cursor-pointer flex items-center justify-end"
                 onClick={handleDateClick}
               >
-                <img src="./imgs/calendar.png" className="right-0 w-6 h-6" />
+                <img src="/imgs/calendar.png" className="right-0 w-6 h-6" />
               </div>
             </div>
           </div>

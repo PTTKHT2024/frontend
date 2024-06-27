@@ -75,11 +75,11 @@ const UserManagement = () => {
   const getServiceTypeClass = (serviceName) => {
     switch (serviceName) {
       case 'Kiểm tra':
-        return 'text-blue-600'; 
+        return 'text-blue-600';
       case 'Bảo trì':
-        return 'text-green-600'; 
+        return 'text-green-600';
       default:
-        return 'text-gray-600'; 
+        return 'text-gray-600';
     }
   };
   return (
@@ -109,14 +109,14 @@ const UserManagement = () => {
             type="submit"
             className="mx-2 uppercase px-5 py-2 flex items-center rounded-md bg-[#349143] hover:bg-[#349143]/[.8] transition-all duration-200 ease-in font-bold text-white text-[15px] tracking-wider shadow-slate-400 shadow"
           >
-            Kiểm duyệt 
+            Kiểm duyệt
           </Link>
           <Link
             to={'/admin/service/view'}
             type="submit"
             className="uppercase px-5 py-2 flex items-center rounded-md bg-[#3abdc6] hover:bg-[#604CC3]/[.8] transition-all duration-200 ease-in font-bold text-white text-[15px] tracking-wider shadow-slate-400 shadow "
           >
-            Xem dịch vụ 
+            Xem dịch vụ
           </Link>
         </div>
       </div>
@@ -173,38 +173,38 @@ const UserManagement = () => {
               ) : paginatedForms.length > 0 ? (
                 paginatedForms.map((form, index) => (
                   <tr key={form.id}>
-                    <td className="px-6 py-4 whitespace-nowrap text-base text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {index + 1 + (currentPage - 1) * pageSize}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-base text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {form.user.fullName}
                     </td>
                     <td
-                      className={`px-6 py-4 whitespace-nowrap text-base font-bold ${getServiceTypeClass(
-                        form.name_service
-                      )}`}
+                      className={`px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-500`}
                     >
                       {form.name_service}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-base text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {form.agency.name_agency}
                     </td>
                     <td
-                      className={`px-6 py-4 whitespace-nowrap text-base font-bold ${
+                      className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${
                         form.status === 'success'
                           ? 'text-green-600'
-                          : 'text-gray-500'
+                          : form.status == 'delete'
+                          ? 'text-red-500'
+                          : 'text-gray-400'
                       } uppercase`}
                     >
                       {form.status}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-base text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {formatDate(form.createdAt)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-base text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {formatDate(form.updatedAt)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-base font-medium">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <Link
                         className="text-orange-600 hover:text-orange-900 p-2 rounded-lg bg-orange-200 inline-block"
                         to={`/admin/form/edit/${form.id}`}

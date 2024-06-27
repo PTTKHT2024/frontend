@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -8,7 +7,7 @@ import {
 } from '../../utils/FormApi';
 import Toast from '../../common/Toast';
 import { BsCheckCircle } from 'react-icons/bs';
-import { FaTrashAlt } from 'react-icons/fa';
+import { FaLongArrowAltLeft, FaTrashAlt } from 'react-icons/fa';
 import Paginator from '../../common/Paginator';
 import { format } from 'date-fns';
 
@@ -125,6 +124,13 @@ const PendingService = () => {
 
   return (
     <section>
+      <Link
+        className="fixed top-[100px] left-[90px] block h-max p-2 bg-[#f5f5f5] shadow hover:bg-slate-600 hover:text-white rounded-lg"
+        to="/admin/service"
+      >
+        <FaLongArrowAltLeft className="h-5 w-5" />
+      </Link>
+
       <Toast
         handleCloseToast={handleCloseToast}
         message={message}
@@ -191,32 +197,32 @@ const PendingService = () => {
               ) : paginatedForms.length > 0 ? (
                 paginatedForms.map((form, index) => (
                   <tr key={form.id}>
-                    <td className="px-6 py-4 whitespace-nowrap text-base text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {index + 1 + (currentPage - 1) * pageSize}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-base text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {form.user.fullName}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-base text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {form.user.email}
                     </td>
                     <td
-                      className={`px-6 py-4 whitespace-nowrap text-base font-bold ${getServiceTypeClass(
+                      className={`px-6 py-4 whitespace-nowrap text-sm font-bold ${getServiceTypeClass(
                         form.name_service
                       )}`}
                     >
                       {form.name_service}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-base text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {form.agency.name_agency}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-base text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {formatDate(form.createdAt)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-base text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {formatDate(form.updatedAt)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-base font-medium">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <span
                         className="mr-1 text-green-600 hover:text-green-900 p-2 rounded-lg bg-green-200 inline-block cursor-pointer"
                         onClick={() => handleApproveForm(form.id)}
